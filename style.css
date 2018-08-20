@@ -1,0 +1,51 @@
+body {
+	font-family: 'Roboto', 'sans-serif';
+	padding:0px;
+	background-color: #222f3e;
+}
+
+.content {
+	padding: 0.2em;
+	width: 60%;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #8395a7;
+	margin-top: 0px;
+	border-radius: 2px;
+}
+
+.section-card {
+	display:block;
+	background-color: #c8d6e5;
+	border-radius: 2px;
+	margin:2px;
+	padding: 0.1em 0.1em 0.1em 0.1em;
+}
+
+h1, h2, h3, h4 {
+	font-family: 'Noto Sans', 'sans-serif';
+	margin: 0.1em 0.1em 0.2em 0.1em;
+}
+
+table {
+	width: 90%;
+	margin-left: 5%;
+	margin-right: auto;
+	margin-bottom: 0.2em;
+}
+
+table, tr, td {
+	border-collapse: collapse;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #8395a7;
+	padding: 0.2em;
+}
+
+td.project-title:hover {
+	background-color: #d8e6f5;
+}
+
+tr.project-card {
+	display: none;
+}

@@ -1,0 +1,456 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=12pt]{scrartcl} % A4 paper and 11pt font size
+\newcommand{\bra}[1]{\left(#1\right)}
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{mathpazo} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm, amssymb} % Math packages
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{clrscode3e}
+\usepackage{tikz}
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\normalfont \bfseries} % Make all sections centered, the default font and small caps
+\usepackage{enumerate}
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{quest}[thm]{Question}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{defns}[thm]{Definitions}
+\newtheorem{con}[thm]{Construction}
+\newtheorem{alg}[thm]{Algorithm}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{exmps}[thm]{Examples}
+\newtheorem{notn}[thm]{Notation}
+\newtheorem{notns}[thm]{Notations}
+\newtheorem{addm}[thm]{Addendum}
+\newtheorem{exer}[thm]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{rems}[thm]{Remarks}
+\newtheorem{warn}[thm]{Warning}
+\newtheorem{sch}[thm]{Scholium}
+\newcommand{\Mod}[1]{\ (\text{mod}\ #1)}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\mC}{\mathcal{C}}
+\newcommand{\mS}{\mathcal{S}}
+\renewcommand{\P}{\mathbb{P}}
+\DeclareMathOperator{\Span}{Span}
+\DeclareMathOperator{\val}{val}
+\DeclareMathOperator{\comp}{comp}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\reg}{Reg}
+\DeclareMathOperator{\odd}{Odd}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\sbd}{sbd}
+\DeclareMathOperator{\capac}{cap}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\inp}[2]{\left\langle #1, #2 \right\rangle}
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+%\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{McGill University - Fall 2017} \\ [0pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Important Results - MATH 350 \\ % The assignment title
+\horrule{2pt} \\[0cm] % Thick bottom horizontal rule
+}
+
+\author{Ralph Sarkis 260729917} % Your name
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+\section{Introduction to graphs}
+\begin{lem}[Handshaking lemma]
+	For every graph $G = (V,E)$, the sum of the degrees of all the vertices is even.
+\end{lem}
+\begin{cor}
+	The number of vertices with odd degrees is even.
+\end{cor}
+\begin{prop}
+	For any two vertices, the existence of walk between them guarantees the existence of a trail which guarantees the existence of a path which guarantees the existence of a walk.
+\end{prop}
+\begin{cor}
+	For any graph $G$, the walk, trail and path relations are equivalence relations on $V(G)$.
+\end{cor}
+\begin{lem}
+	Let $G$ be a graph, $e \in E(G)$ is a cut edge if and only if there is no cycle in $G$ containing $e$.
+\end{lem}
+\subsection{From Assignments}
+\begin{prop}
+	Let $G = (V,E)$ be a simple graph with $|V| \geq 2$, then $\exists v,w \in V, \deg(v) = \deg(w)$.
+\end{prop}
+\begin{prop}
+	Let $G$ be a disconnected graph, the complement of $G$, $\overline{G}$ is connected.
+\end{prop}
+\begin{prop}
+	Let $G$ be a graph with minimum degree $k$, then $G$ contains a cycle of length $k$.
+\end{prop}
+\section{Trees}
+\begin{lem}
+	Every tree with at least two vertices has at least two leafs.
+\end{lem}
+\begin{cor}
+	Let $G$ be a graph. For any leafs $v \in V(G)$, $G$ is tree if and only if $G-v$ is a tree.
+\end{cor}
+\begin{prop}
+	A graph $G$ being a tree is equivalent to each of the following statements:\begin{enumerate}
+		\item $G$ is connected and contains no cycle
+		\item $\forall e \in E(G)$, $e$ is a cut-edge
+		\item $G$ is connected and every trail in $G$ is a path
+		\item Between any two vertices there is a unique path.
+		\item Maximal graph with respect to adding edges that has no cycle
+		\item $G$ is connected and $|V(G)| = |E(G)| + 1$
+		\item $G$ has no cycle and $|V(G)| = |E(G)| + 1$ 
+	\end{enumerate}
+\end{prop}
+\begin{lem}
+	For every rooted trees, there exists a unique out-rooted orientation.
+\end{lem}
+\begin{thm}[Cayley's formula]
+	We denote $t_n$ to be the number of labeled trees on $\{1,\dots, n\}$.
+	$$t_n = n^{n-2}$$
+\end{thm}
+\subsection{From Assignments}
+\begin{prop}
+	If a tree $T$ contains a vertex of degree $k$, then $T$ has at least $k$ leaves. 
+\end{prop}
+\section{Spanning Trees}
+\begin{prop}
+	If $G$ is connected, then $G$ has a spanning tree.
+\end{prop}
+\begin{prop}
+	Let $T$ be the spanning tree of a graph $G$ and $e \in E(G) \setminus E(T)$, take any edge $f$ in the fundamental cycle with respect to $T$ and $e$. Then, $T_p = (T+e)-f$ is a spanning tree.
+\end{prop}
+\begin{alg}[Kruskal]
+	Kruskal gives a greedy algorithm to find the shortest path spanning tree of a graph. Let $G = (V,E)$ be a graph and $w$ be a weight function on it.
+	\begin{codebox}
+		\Procname{$\proc{Kruskal}(G = (\id{V}, \id{E}), w)$}
+		\li Initialize $T = (V, \emptyset)$
+		\li \For \textbf{each} $e = \{u,v\}$ in $E$ sorted by increasing weight \textbf{do} \Do
+		\li \If $u \not\sim v$ \textbf{then}\Then
+		\li Add $e$ to $T$.
+		\End\End
+		\li \Return $\id{T}$
+	\end{codebox}
+\end{alg}
+\begin{alg}[Dijkstra]
+	Dijkstra gives a greedy algorithm to find the path of minimum between two vertices. Let $G= (V,E)$ be a graph, $w$ a weight function on it and $s$ and $t$ be source and target vertices.
+	\begin{codebox}
+		\Procname{$\proc{Dijkstra}(G = (\id{V}, \id{E}), w, s, t)$}
+		\li Initialize $T = (V, \emptyset)$
+		\li Initialize $\dist[u] = \infty$ for all $u \in V \setminus \{s\}$. Set $\dist[s] = 0$
+		\li Initialize $H = \{s\}$ a min-heap of vertices sorted by $\dist$
+		\li \While $H \neq \emptyset$ \textbf{do} \Do
+		\li Let $u = H.\id{remove\_min}()$
+		\li Add the edge of smallest weight connecting $u$ to $T$.
+		\li \For \textbf{each} neighbor $v$ of $u$ \textbf{do} \Do
+		\li Set $\dist[v] = \min\{\dist[v] , \dist[u] + w(\{u,v\})\}$
+		\End\End
+		\li \Return $\id{T}$
+	\end{codebox}
+\end{alg}
+\section{Euler Tours}
+\begin{thm}
+	A multigraph $G$ contains a closed Eulerian tour if and only if $G$ is connected and there is no vertices of odd degree.
+\end{thm}
+\begin{cor}
+	A multigraph $G$ contains an Eulerian tour if and only if it is connected and contains at most two vertices of odd degree.
+\end{cor}
+\begin{thm}[Ore's theorem]
+	Let $G = (V,E)$ be a graph with $n = |V| \geq 3$. Suppose that for every pair $u,w \in V$ such that $\{u,w\} \notin E$, $\deg(u) + \deg(w) \geq n$, then $G$ contains a Hamiltonian cycle.
+\end{thm}
+\begin{cor}
+	Let $G = (V,E)$ be a graph, then $\min_{v \in V} \deg(v) \geq \frac{n}{2}$ implies that $G$ contains a Hamiltonian cycle.
+\end{cor}
+\section{Bipartite Graphs}
+\begin{thm}
+	A graph $G$ is bipartite if and only if it has no odd cycle.
+\end{thm}
+\begin{thm}
+	Let $G = (V,E)$ be a graph, then the following are equivalent :
+	\begin{enumerate}
+		\item $G$ is bipartite
+		\item $G$ does not contain a closed walk of odd length
+		\item $G$ does not contain an odd cycle
+	\end{enumerate}
+\end{thm}
+\begin{prop}
+	Let $G$ be a simple graph. $G$ is bipartite if and only if it contains no induced cycle of odd length.
+\end{prop}
+\section{Matching in graphs}
+\begin{prop}
+	For any $k\geq 1$, a $(2^k)$-regular graph contains a 2-factor.
+\end{prop}
+\begin{lem}[Berge]
+	Let $G = (V,E)$ be a graph and $M$ be a matching in $G$. $M$ is maximum matching if and only if there is no $M$-augmenting paths.
+\end{lem}
+\begin{thm}[Konig]
+	Let $G$ be a bipartite graph, then $\tau(G) = \nu(G)$.
+\end{thm}
+\begin{thm}[Hall]
+	Let $G$ be a bipartite graph with bipartition $A$ and $B$, then there exists an $A$-covering matching in $G$ if and only if $\forall S \subseteq A, |N(S)| \geq |S|$.
+\end{thm}
+\begin{thm}
+	Every $(2k)$-regular graph has a 2-factor.
+\end{thm}
+\begin{cor}
+	Every $(2k)$-regular graph has $k$ disjoint 2-factors.
+\end{cor}
+\begin{prop}
+	Let $G=(V,E)$ be any graph, $\alpha(G) + \tau(G) = |V|$.
+\end{prop}
+\begin{prop}[Gallai]
+	Let $G=(V,E)$ be any graph, $\rho(G) + \nu(G) = |V|$.
+\end{prop}
+\begin{cor}
+	If $G$ is bipartite, $\alpha(G) = \rho(G)$.
+\end{cor}
+\begin{thm}[Tutte]
+	Let $G = (V,E)$ be any graph, then $G$ has a perfect matching if and only if for any subset of vertices $X$, $\odd(G-X) \leq |X|$.
+\end{thm}
+\begin{thm}[Petersen]
+	All 3-regular graphs containing no cut-edges have perfect matchings.
+\end{thm}
+\begin{cor}
+	A 3-regular graph $G$ has a perfect matching if and only if it has a 2-factor.
+\end{cor}
+\begin{lem}
+	Let $G = (V,E)$ be a graph with $|V|$ even. Then for any $X \subseteq V$, $\odd(G-X) \equiv |X| \mod{2}$.
+\end{lem}
+\begin{cor}
+	Let $G = (V,E)$ be a bipartite graph with parts $A$ and $B$. Suppose that $\forall S \subseteq A, |N_G(S)| \geq |S|$, then $G$ has an $A$-covering matching.
+\end{cor}
+\section{Ramsey Theory}
+\begin{lem}
+	\[R(k,\ell) \leq R(k-1, \ell) + R(k, \ell-1)\]
+\end{lem}
+\begin{lem}
+	\[R(k,\ell) \leq \binom{k+\ell-2}{k-1}\]
+\end{lem}
+\begin{cor}
+	$R(k) = R(k,k) < 4^k$
+\end{cor}
+\begin{thm}[Ramsey]
+	For any $k \in \N, R(k) < 4^k$, implying $R(k)$ is finite.
+\end{thm}
+\begin{thm}
+	For any $\ell$ and $k$, $R_{\ell}(k)$ is finite.
+\end{thm}
+\begin{thm}[Schur]
+	For any $\ell \in \N$, $\N^+$ is not $\ell$-colorable such that $x+y=z$ has no monochromatic solution.
+\end{thm}
+\section{Connectivity of Graphs}
+\begin{thm}[Menger]
+	Let $G$ be a simple and not complete graph, then \[\kappa(G) = \min_{C \mbox{ vertex cut}} |C|\]
+\end{thm}
+\begin{thm}[Ford-Fulkerson]
+	Let $G$ be a multigraph, then \[\kappa'(G) = \min_{F \mbox{ edge cut}} |F|\]
+\end{thm}
+\begin{lem}
+	Let $G=(V,E)$ be a simple graph. For any $u \neq w \in V$ such that $\{u,w\} \notin E$, we have $c_G(u,w) = P_G(u,w)$.
+\end{lem}
+\begin{lem}
+	Let $G=(V,E)$ be a multigraph. For any $u \neq w \in V$, we have $c'_G(u,w) = P'_G(u,w)$.
+\end{lem}
+
+\section{Networks}
+\begin{lem}
+	Let $D = (V,E)$ be a digraph and $s \neq t \in V$, then either there exists a directed path from $s$ to $t$ or there exists a subset $X \subseteq V$ with $\{s\} \subseteq X \subseteq V \setminus\{t\}$ such that $\partial^+(X) = \emptyset$.
+\end{lem}
+\begin{lem}
+	Let $D=(V,E)$ be a digraph, $s\neq t$ be vertices and $\phi$ be an $s,t$-flow of value $k$, then $\forall \{s\} \subseteq X \subseteq V\setminus\{t\}$, we have 
+	\[ \sum_{e \in \partial^+(X)}\phi(e) - \sum_{e \in \partial^-(X)}\phi(e) = k \]
+\end{lem}
+\begin{lem}
+	Let $D=(V,E)$ be a digraph, $s\neq t$ be vertices and $\phi$ be an integral $s,t$-flow of value $k$, then there exists a collection of paths $\{P_1, \dots, P_k\}$ all going from $s$ to $t$ such that every edge $e \in E$ belongs to at most $\phi(e)$ paths. 
+\end{lem}
+\begin{lem}
+	Let $(V,E,s,t,c)$ be a network, $\phi$ be an integral $c$-admissible $s,t$-flow and $P$ be an augmenting path for $\phi$. Then there exists a $c$-admissible $s,t$-flow $\psi$ with $\val(\psi) \geq \val(\phi) + 1$.
+\end{lem}
+\begin{thm}[Ford-Fulkerson]
+	Let $(V,E,s,t,c)$ be a network and $\Phi$ be the set of all $c$-admissible $s,t$-flows, then, we have the following:
+	\[ \max_{\phi \in \Phi} \val(\phi) = \min_{\{v\} \subseteq X \subseteq V \setminus \{t\}} \capac(X) \]
+\end{thm}
+
+\section{Proper Vertex Coloring}
+\begin{prop}
+	Let $G$ be a simple graph, recall that $\alpha(G)$ is the size of the largest independent set. We have $\chi(G) \geq \frac{|V(G)|}{\alpha(G)}$.
+\end{prop}
+\begin{thm}
+	For any $k \in \N$, there exists a graph $G_k$ simple graph with no triangles and $\chi(G_k) > k$.
+\end{thm}
+\begin{thm}
+	Let $G = (V,E)$ be a graph without triangles with $n = |V|$, then $\chi(G) \leq \sqrt{2n}$.
+\end{thm}
+\begin{thm}[Brooks]
+	Let $G$ be a connected loopless multigraph that is not complete nor an odd cycle, then $\chi(G) \leq \Delta(G)$.
+\end{thm}
+\begin{prop}
+	If $G$ is $d$-degenerate, then $\chi(G) \leq d+1$.
+\end{prop}
+\begin{thm}[Vizing]
+	If $G$ is a simple graph, then $\chi'(G) \leq \Delta(G)+1$. If $G$ is not simple, then denote $\mu(G)$ to be the maximum multiplicity of an edge in $G$, we have $\chi'(G) \leq \Delta(G)+\mu(G)$.
+\end{thm}
+\begin{thm}[Konig's line coloring]
+	If $G = (V,E)$ is a bipartite graph, then $\chi'(G) = \Delta(G)$.
+\end{thm}
+\begin{thm}[Shannon]
+	If $G$ is a loopless multigraph, $\chi'(G) \leq 3 \lceil \frac{\Delta(G)}{2} \rceil$.
+\end{thm}
+\subsection{From Assignments}
+\begin{prop}
+	Let $G$ be a simple graph and $\overline{G}$ be its complement, then $\chi(G)\chi(\overline{G}) \geq |V|$.
+\end{prop}
+\begin{prop}
+	Let $G$ be a simple graph such that for any two odd cycles $C_1$ and $C_2$, $V(C_1) \cap V(C_2) \neq \emptyset$, then $\chi(G) \leq 5$.
+\end{prop}
+\begin{prop}
+	Let $G$ be a 3-regular simple graph with a Hamiltonian cycle, then $\chi'(G) = 3$.
+\end{prop}
+\begin{prop}
+	\[ \chi'(K_n) = \begin{cases}n &\mbox{for odd }n\\n-1&\mbox{for even }n\end{cases}\]
+\end{prop}
+\section{Structural Graph Theory}
+\begin{thm}[Jordan's curve theorem]
+	Any continuous non self-intersecting loop in the plane divides the plane in exactly two regions.
+\end{thm}
+\begin{lem}
+	If the top and bottom regions of an edge are the same, then it must be a cut edge.
+\end{lem}
+\begin{thm}[Euler's formula]
+	Let $D$ be a drawing of $G = (V,E)$ a connected planar graph, then $|V| + \reg(D) - |E| = 2$, where $\reg(D)$ denotes the number of regions in $D$.
+\end{thm}
+\begin{cor}
+	If $e$ is a cut edge of $G$, then $e$ is surrounded by only one region in any drawing of $G$.
+\end{cor}
+\begin{prop}
+	Let $G$ be a planar graph and $D$ be an arbitrary plane drawing, then
+	\[ \sum_{R \mbox{ region in } D} \ell(R) = 2|E(G)| \]
+\end{prop}
+\begin{cor}
+	Let $G$ be a planar graph and $D_1$ and $D_2$ be two of its plane drawings, then
+	\[ \sum_{R \mbox{ region in } D_1} \ell(R) = \sum_{R \mbox{ region in } D_2} \ell(R)\]
+\end{cor}
+\begin{thm}
+	Let $G= (V,E)$ be a simple planar graph with $n = |V| \geq 3$, $m = |E|$ and $f = \reg(G)$, then $m \leq 3n-6$.
+\end{thm}
+\begin{cor}
+	$K_5$ is not planar.
+\end{cor}
+\begin{lem}
+	Let $G$ be a connected planar graph with $n \geq 3$ vertices. For any drawing $D$ and any region $R$ in $D$, $\ell(R) \geq 3$.
+\end{lem}
+\begin{lem}
+	$G$ is planar if and only if $G \sbd e$ is planar.
+\end{lem}
+\begin{prop}
+	$K_{3,3}$ is not planar.
+\end{prop}
+\begin{thm}[Kuratowski]
+	$G$ is planar if and only if $G$ contains no subdivision of $K_5$ or $K_{3,3}$.
+\end{thm}
+\begin{prop}
+	Let $G$ be a planar graph, $e \in E$ an edge and $G'$ be the contraction of $e$, then $G'$ is planar.
+\end{prop}
+\begin{thm}[Kuratowski-Wagner]
+	$G$ is planar if and only if $G$ does not contain $K_5$ nor $K_{3,3}$ as a minor.
+\end{thm}
+
+\section{Coloring of Planar Graphs}
+\begin{thm}
+	Every planar graph can be drawn using straight lines only.
+\end{thm}
+\begin{thm}[Four color theorem]
+	Let $G$ be a planar graph, then $\chi(G) \leq 4$.
+\end{thm}
+\begin{thm}[Six color theorem]
+	Let $G$ be a planar graph, then $\chi(G) \leq 6$.
+\end{thm}
+\begin{thm}[Five color theorem]
+	Let $G$ be a planar graph, then $\chi(G) \leq 5$.
+\end{thm}
+\begin{thm}
+	Let $G$ be a $K_5$ minor-free graph, then $\chi(G) \leq 4$.
+\end{thm}
+\begin{thm}
+	Let $G$ be a $K_4$ minor-free graph, then $\chi(G) \leq 4$.
+\end{thm}
+\begin{thm}
+	Let $G$ be a $K_3$ minor-free graph, then $\chi(G) \leq 2$.
+\end{thm}
+\begin{thm}
+	Let $G$ be a $K_4$ minor-free graph, then $m \leq 2n-3$, where $m = |E|$ and $n = |V|$.
+\end{thm}
+\subsection{From Assignments}
+\begin{prop}
+	Let $G$ be a simple triangle-free graph, then $\chi(G) \leq 4$.
+\end{prop}
+\begin{prop}
+	Let $G$ be an outerplanar graph, then $\chi(G) \leq 3$.
+\end{prop}
+\begin{prop}
+	A graph $G$ is outerplanar if and only if it does not contain $K_4$ nor $K_{3,3}$ as a minor.
+\end{prop}
+\begin{prop}
+	Let $H$ be a simple graph with maximum degree at most 3.  Show that every simple graph contains a subdivision of $H$ if and only if it contains $H$ as a minor.
+\end{prop}
+\begin{prop}
+	Let $G$ be a simple graph that contains $K_5$ as a minor, then $G$ contains a subdivision of of $K_5$ or a subdivision of $K_{3,3}$.
+\end{prop}
+
+\end{document}
