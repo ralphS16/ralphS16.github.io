@@ -1,7 +1,8 @@
 body {
 	font-family: 'Roboto', 'sans-serif';
+	color: #222f3e;
 	padding:0px;
-	background-color: #222f3e;
+	background-color: #c8d6e5;
 }
 
 .content {
@@ -9,7 +10,7 @@ body {
 	width: 60%;
 	margin-left: auto;
 	margin-right: auto;
-	background-color: #8395a7;
+	background-color: #c8d6e5;
 	margin-top: 0px;
 	border-radius: 2px;
 }
@@ -22,24 +23,42 @@ body {
 	padding: 0.1em 0.1em 0.1em 0.1em;
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3 {
 	font-family: 'Noto Sans', 'sans-serif';
+	font-weight: normal;
 	margin: 0.1em 0.1em 0.2em 0.1em;
+	color: #222f3e;
 }
-
+h4 {
+	margin-bottom: 0.3em;
+	font-weight: normal;
+	color: #222f3e;
+}
+a {
+	color: #0abde3;
+}
+a:visited {
+	color: #341f97;
+}
 table {
-	width: 90%;
-	margin-left: 5%;
+	width: 96%;
+	margin-left: 2%;
 	margin-right: auto;
 	margin-bottom: 0.2em;
 }
 
 table, tr, td {
 	border-collapse: collapse;
-	border-style: solid;
-	border-width: 2px;
+	border-style: solid none;
+	border-width: 1px;
 	border-color: #8395a7;
 	padding: 0.2em;
+}
+
+ul {
+	margin-top: 0.4em;
+	margin-bottom: 0.4em;
+	list-style-type: circle;
 }
 
 td.project-title:hover {

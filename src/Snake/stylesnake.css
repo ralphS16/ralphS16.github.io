@@ -1,0 +1,15 @@
+/* This is the stylesheet for the Snake Game*/
+
+canvas {
+	margin:0px auto;
+	background-color:#000;
+	border-radius: 5px;
+	display:table;
+	padding:4px;
+	border-collapse:separate;
+	border-spacing:4px;
+}
+
+p {
+	text-align: center;
+}
