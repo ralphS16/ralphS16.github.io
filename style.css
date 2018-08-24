@@ -15,7 +15,7 @@ body {
 	border-radius: 2px;
 }
 
-@media (min-resolution: 300dpi){
+@media (min-resolution: 200dpi){
 	.content {
 		width: 100%;
 	}
