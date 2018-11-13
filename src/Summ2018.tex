@@ -1,0 +1,736 @@
+\PassOptionsToPackage{table}{xcolor}
+\documentclass[serif]{beamer} %
+\usepackage{mathpazo}  
+%
+% Choose how your presentation looks.
+%
+% For more themes, color themes and font themes, see:
+% http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
+%
+
+\mode<presentation>
+{
+	\usetheme{default}      % or try Darmstadt, Madrid, Warsaw, ...
+	\usecolortheme{beaver} % or try albatross, beaver, crane, ...
+	\usefonttheme{default}  % or try serif, structurebold, ...
+	\setbeamertemplate{navigation symbols}{}
+	\setbeamertemplate{caption}[numbered]
+} 
+
+\usepackage[french]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{multirow}
+\title[Apprentissage Automatique]{Une introduction à l'apprentissage automatique}
+\author{Ralph Sarkis}
+\institute{SUMM - 2018}
+\date{14 janvier 2018}
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{quest}[thm]{Question}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{defns}[thm]{Definitions}
+\newtheorem{con}[thm]{Construction}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{exmps}[thm]{Examples}
+\newtheorem{notn}[thm]{Notation}
+\newtheorem{notns}[thm]{Notations}
+\newtheorem{addm}[thm]{Addendum}
+\newtheorem{exer}[thm]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{rems}[thm]{Remarks}
+\newtheorem{warn}[thm]{Warning}
+\newtheorem{sch}[thm]{Scholium}
+\begin{document}
+	
+	\begin{frame}
+	\titlepage
+\end{frame}
+
+% Uncomment these lines for an automatically generated outline.
+%\begin{frame}{Outline}
+%  \tableofcontents
+%\end{frame}
+
+\section{Introduction}
+
+\begin{frame}{Introduction}
+\begin{block}{De quoi parle-t-on ?}
+	\pause
+	\begin{itemize}
+		\item Champ d'étude de l'intelligence artificielle.
+		\item Algorithmes qui s'adaptent en fonction des données
+		\item Permet de résoudre des problèmes très complexes
+	\end{itemize}
+\end{block}
+\pause
+\begin{block}{Exemples}
+	Reconnaissance d'images, prédiction sur la bourse ou des évènements sportifs, jeux de stratégie, etc...
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Plan de la présentation}
+	\begin{itemize}
+		\pause
+		\item Jeu de Nim
+		
+		\small{\textit{Définition du jeu, explication et test de l'algorithme.}}
+		\vskip 0.5cm
+		\pause
+		\item Classifieurs linéaires
+		
+		\small{\textit{Étude complète d'un exemple et généralisation.}}
+		\vskip 0.5cm
+		\pause
+		\item Réseaux de neurones génératifs (GANs)
+		
+		\small{\textit{Description du modèle et illustration de son efficacité.}}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Plan de la présentation}
+\begin{center}
+	\begin{tikzpicture}
+	\pgfplotsset{ticks=none}
+	\begin{axis}[%
+	,xlabel=$Temps$
+	,axis x line = bottom,axis y line = left
+	,ymax=1.2
+	,ymin=0 % or enlarge y limits=upper
+	,legend style = {at = {(1.5,0.2)}}
+	]
+	\end{axis}
+	\end{tikzpicture}
+\end{center}
+\end{frame}
+\begin{frame}{Plan de la présentation}
+	\begin{center}
+	\begin{tikzpicture}
+	\pgfplotsset{ticks=none}
+	\begin{axis}[%
+	,xlabel=$Temps$
+	,axis x line = bottom,axis y line = left
+	,ymax=1.2
+	,ymin=0 % or enlarge y limits=upper
+	,legend style = {at = {(1.1,-0.1)}}
+	]
+	\addplot+[const plot, no marks, thick] coordinates {(0,1) (1,0.2) (2,1) (3,1)};
+	\legend{Fun}
+	\end{axis}
+	\end{tikzpicture}
+	\end{center}
+\end{frame}
+\begin{frame}{Plan de la présentation}
+\begin{center}
+	\begin{tikzpicture}
+	\pgfplotsset{ticks=none}
+	\begin{axis}[%
+	,xlabel=Temps
+	,axis x line = bottom,axis y line = left
+	,ymax=1.2
+	,ymin=0 % or enlarge y limits=upper
+	,legend style = {at = {(1.1,-0.1)}}
+	]
+	\addplot+[const plot, no marks, thick] coordinates {(0,1) (1,0.2) (2,1) (3,1)};
+	\addplot+[const plot, no marks, thick] coordinates {(0,0.1) (0.9,1.1) (2.1,0.4) (3,0.4)};
+	\legend{Fun, Utilité}
+	\end{axis}
+	\end{tikzpicture}
+\end{center}
+\end{frame}
+
+\section{Jeu de Nim}
+
+\begin{frame}
+	\tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}{Les règles du jeu de Nim}
+	\begin{itemize}
+		\item 2 joueurs s'affrontent.
+		\item Il y a 21 bâtons.
+		\item À son tour, un joueur choisit de retirer 1, 2 ou 3 bâtons.
+		\item Le joueur qui retire le dernier bâton perd la partie.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{C'est l'heure du duel!}
+\begin{center}
+	\begin{tikzpicture}
+	\foreach \x in {0,...,20}
+	\fill [black] (0.1+\x * 0.4,0.1) rectangle (0.3+\x * 0.4,1);
+	\end{tikzpicture}
+	
+	Il reste 21 bâtons.
+\end{center}
+\end{frame}
+\begin{frame}{C'est l'heure du duel!}
+\begin{center}
+	\begin{tikzpicture}
+	\foreach \x in {0,...,19}
+	\fill [black] (0.1+\x * 0.4,0.1) rectangle (0.3+\x * 0.4,1);
+	\end{tikzpicture}
+	
+	Il reste 20 bâtons.
+\end{center}
+\end{frame}
+\begin{frame}{C'est l'heure du duel!}
+\begin{center}
+	\begin{tikzpicture}
+	\foreach \x in {0,...,18}
+	\fill [black] (0.1+\x * 0.4,0.1) rectangle (0.3+\x * 0.4,1);
+	\end{tikzpicture}
+	
+	Il reste 19 bâtons.
+\end{center}
+\end{frame}
+\begin{frame}{C'est l'heure du duel!}
+\begin{center}
+	\begin{tikzpicture}
+	\foreach \x in {0,...,17}
+	\fill [black] (0.1+\x * 0.4,0.1) rectangle (0.3+\x * 0.4,1);
+	\end{tikzpicture}
+	
+	Il reste 18 bâtons.
+\end{center}
+\end{frame}
+\begin{frame}{C'est l'heure du duel!}
+\begin{center}
+	\begin{tikzpicture}
+	\foreach \x in {0,...,16}
+	\fill [black] (0.1+\x * 0.4,0.1) rectangle (0.3+\x * 0.4,1);
+	\end{tikzpicture}
+	
+	Il reste 17 bâtons.
+\end{center}
+\end{frame}
+\begin{frame}{C'est l'heure du duel!}
+\begin{center}
+	\begin{tikzpicture}
+	\foreach \x in {0,...,15}
+	\fill [black] (0.1+\x * 0.4,0.1) rectangle (0.3+\x * 0.4,1);
+	\end{tikzpicture}
+	
+	Il reste 16 bâtons.
+\end{center}
+\end{frame}
+\begin{frame}{C'est l'heure du duel!}
+\begin{center}
+	\begin{tikzpicture}
+	\foreach \x in {0,...,14}
+	\fill [black] (0.1+\x * 0.4,0.1) rectangle (0.3+\x * 0.4,1);
+	\end{tikzpicture}
+	
+	Il reste 15 bâtons.
+\end{center}
+\end{frame}
+\begin{frame}{C'est l'heure du duel!}
+\begin{center}
+	\begin{tikzpicture}
+	\foreach \x in {0,...,13}
+	\fill [black] (0.1+\x * 0.4,0.1) rectangle (0.3+\x * 0.4,1);
+	\end{tikzpicture}
+	
+	Il reste 14 bâtons.
+\end{center}
+\end{frame}
+\begin{frame}{C'est l'heure du duel!}
+\begin{center}
+	\begin{tikzpicture}
+	\foreach \x in {0,...,12}
+	\fill [black] (0.1+\x * 0.4,0.1) rectangle (0.3+\x * 0.4,1);
+	\end{tikzpicture}
+	
+	Il reste 13 bâtons.
+\end{center}
+\end{frame}
+\begin{frame}{C'est l'heure du duel!}
+\begin{center}
+	\begin{tikzpicture}
+	\foreach \x in {0,...,11}
+	\fill [black] (0.1+\x * 0.4,0.1) rectangle (0.3+\x * 0.4,1);
+	\end{tikzpicture}
+	
+	Il reste 12 bâtons.
+\end{center}
+\end{frame}
+\begin{frame}{C'est l'heure du duel!}
+\begin{center}
+	\begin{tikzpicture}
+	\foreach \x in {0,...,10}
+	\fill [black] (0.1+\x * 0.4,0.1) rectangle (0.3+\x * 0.4,1);
+	\end{tikzpicture}
+	
+	Il reste 11 bâtons.
+\end{center}
+\end{frame}
+\begin{frame}{C'est l'heure du duel!}
+\begin{center}
+	\begin{tikzpicture}
+	\foreach \x in {0,...,9}
+	\fill [black] (0.1+\x * 0.4,0.1) rectangle (0.3+\x * 0.4,1);
+	\end{tikzpicture}
+	
+	Il reste 10 bâtons.
+\end{center}
+\end{frame}
+\begin{frame}{C'est l'heure du duel!}
+\begin{center}
+	\begin{tikzpicture}
+	\foreach \x in {0,...,8}
+	\fill [black] (0.1+\x * 0.4,0.1) rectangle (0.3+\x * 0.4,1);
+	\end{tikzpicture}
+	
+	Il reste 9 bâtons.
+\end{center}
+\end{frame}
+\begin{frame}{C'est l'heure du duel!}
+\begin{center}
+	\begin{tikzpicture}
+	\foreach \x in {0,...,7}
+	\fill [black] (0.1+\x * 0.4,0.1) rectangle (0.3+\x * 0.4,1);
+	\end{tikzpicture}
+	
+	Il reste 8 bâtons.
+\end{center}
+\end{frame}
+\begin{frame}{C'est l'heure du duel!}
+\begin{center}
+	\begin{tikzpicture}
+	\foreach \x in {0,...,6}
+	\fill [black] (0.1+\x * 0.4,0.1) rectangle (0.3+\x * 0.4,1);
+	\end{tikzpicture}
+	
+	Il reste 7 bâtons.
+\end{center}
+\end{frame}
+\begin{frame}{C'est l'heure du duel!}
+\begin{center}
+	\begin{tikzpicture}
+	\foreach \x in {0,...,5}
+	\fill [black] (0.1+\x * 0.4,0.1) rectangle (0.3+\x * 0.4,1);
+	\end{tikzpicture}
+	
+	Il reste 6 bâtons.
+\end{center}
+\end{frame}
+\begin{frame}{C'est l'heure du duel!}
+\begin{center}
+	\begin{tikzpicture}
+	\foreach \x in {0,...,4}
+	\fill [black] (0.1+\x * 0.4,0.1) rectangle (0.3+\x * 0.4,1);
+	\end{tikzpicture}
+	
+	Il reste 5 bâtons.
+\end{center}
+\end{frame}
+\begin{frame}{C'est l'heure du duel!}
+\begin{center}
+	\begin{tikzpicture}
+	\foreach \x in {0,...,3}
+	\fill [black] (0.1+\x * 0.4,0.1) rectangle (0.3+\x * 0.4,1);
+	\end{tikzpicture}
+	
+	Il reste 4 bâtons.
+\end{center}
+\end{frame}
+\begin{frame}{C'est l'heure du duel!}
+\begin{center}
+	\begin{tikzpicture}
+	\foreach \x in {0,...,2}
+	\fill [black] (0.1+\x * 0.4,0.1) rectangle (0.3+\x * 0.4,1);
+	\end{tikzpicture}
+	
+	Il reste 3 bâtons.
+\end{center}
+\end{frame}
+\begin{frame}{C'est l'heure du duel!}
+\begin{center}
+	\begin{tikzpicture}
+	\foreach \x in {0,...,1}
+	\fill [black] (0.1+\x * 0.4,0.1) rectangle (0.3+\x * 0.4,1);
+	\end{tikzpicture}
+	
+	Il reste 2 bâtons.
+\end{center}
+\end{frame}
+\begin{frame}{J'ai gagné!}
+\begin{center}
+	\begin{tikzpicture}
+	\foreach \x in {0,...,0}
+	\fill [black] (0.1+\x * 0.4,0.1) rectangle (0.3+\x * 0.4,1);
+	\end{tikzpicture}
+	
+	Il reste 1 bâton.
+\end{center}
+\end{frame}
+
+\begin{frame}{La stratégie de l'IA}
+%L'IA joue plusieurs parties du jeu de Nim et elle devient plus intelligente après chaque partie.
+%\pause
+%\begin{enumerate}
+%	\item On commence avec 4 billes de chaque couleurs (rouge, vert et bleu) dans des boîtes numérotées de 1 à 20.
+%	\pause
+%	\item Au tour de l'IA, on tire au sort une bille dans la boîte correspondant au nombre de bâtons restants et on retire des bâtons selon la couleur de la bille\footnotemark.
+%	
+%	(blanc = 1, vert = 2, bleu = 3)
+%	\pause
+%	\item À la fin de la partie:
+%	\begin{itemize}
+%		\item Si l'IA a gagné: pour chaque bille pigée, on ajoute une bille de la même couleur dans la boîte de la bille originale.
+%		\item Si l'IA a perdu: on retire les billes pigées lors de cette partie.
+%	\end{itemize}
+%	 \only<3->{\footnotetext{Si la boîte est vide, l'IA abandonne.}}
+%\end{enumerate}
+\end{frame}
+
+\begin{frame}{Résultats}
+	\rowcolors{2}{gray!25}{white}
+	\begin{table}[]
+		\centering
+		\label{my-label}
+		\begin{tabular}{crrr}
+			\# boîte & \multicolumn{3}{c}{\# de billes dans la boîte} \\
+			& Blanc (1)      & Vert (2)      & Bleu (3)      \\
+			14&                13&               17&      27         \\
+			13&                36&               7&        11       \\
+			12&                8&               23&         2      \\
+			11&                5&               43&         5      \\
+			10&                49&               3&         0      \\
+			9&                0&               2&           27    \\
+			8&                1&               12&           59    \\
+			7&                5&               38&         0      \\
+			6&                42&               0&         2      \\
+			5&                0&               0&          0     \\
+			4&                1&               0&          108     \\
+			3&                2&               70&           1    \\
+			2&                42&               0&           1   
+		\end{tabular}
+	\end{table}
+\end{frame}
+
+\begin{frame}{Conclusion}
+	\begin{block}{Avantages}
+		\begin{itemize}
+			\pause
+			\item Très simple à implémenter.
+			\pause
+			\item Bonne intuition sur la stratégie et les résultats.	
+		\end{itemize}
+	\end{block}
+	\pause
+	\begin{block}{Inconvénients}
+	\begin{itemize}
+		\pause
+		\item L'algorithme ne converge pas tout le temps vers une stratégie optimale.
+		\pause
+		\item Elle demande beaucoup de ressources.		
+	\end{itemize}
+	\end{block}
+\end{frame}
+
+\section{Classifieurs linéaires}
+\begin{frame}
+	\tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}{Le problème}
+	\pause
+	\begin{block}{Formulation du problème}
+		En analysant les propriétés quantitatives d'objets divers, comment répartir ses objets dans des groupes avec des propriétés similaires.
+	\end{block}
+	\pause
+	\begin{block}{Et concrètement ?}
+		Une banque de données contient plusieurs milliers d'images et nous voulons les trier en deux catégories : les images de chats et les autres images.
+	\end{block}
+\end{frame}
+
+\begin{frame}{La solution}
+	L'apprentissage supervisé, une technique d'apprentissage automatiqe.
+	\pause
+	\begin{block}{En bref}
+		L'algorithme commence avec une liste d'exemple d'objets déjà classés, et il va l'utiliser pour apprendre à classer des nouveaux objets.
+	\end{block}
+\end{frame}
+
+\begin{frame}{L'implémentation}
+	\pause
+	\begin{block}{Un réseau artificiel de neurones}
+		\begin{itemize}
+			\pause
+			\item Inspiré du fonctionnement du cerveau.
+			\pause
+			\item Technique très populaire car démontrée très efficace.
+			\pause
+			\item Fonctionnement relativement simple.
+		\end{itemize}
+	\end{block}
+	\pause
+	Allons voir comment ça marche !
+\end{frame}
+
+\begin{frame}{Réseau de neurones}
+	\only<1>{On commence par les observations $x_1$, $x_2$ et $x_3$.}
+	\only<2>{Ensuite, les résultats $y_1$ and $y_2$.}
+	\only<3>{La couche cachée avec les neurones $z_1$, $z_2$, $z_3$ and $z_4$.}
+	\only<4>{Finalement, les liens entre les neurones.}
+	\begin{center}
+		\begin{tikzpicture}[scale=0.15]
+		\tikzstyle{every node}+=[inner sep=0pt]
+		\draw [black] (15.3,-15.9) circle (3);
+		\draw (15.3,-15.9) node {$x_1$};
+		\draw [black] (15.3,-26.3) circle (3);
+		\draw (15.3,-26.3) node {$x_2$};
+		\draw [black] (15.3,-36.7) circle (3);
+		\draw (15.3,-36.7) node {$x_3$};
+		\pause
+		\draw [black] (46.5,-20.9) circle (3);
+		\draw (46.5,-20.9) node {$y_1$};
+		\draw [black] (46.5,-31.9) circle (3);
+		\draw (46.5,-31.9) node {$y_2$};
+		\pause
+		\draw [black] (32.7,-9) circle (3);
+		\draw (32.7,-9) node {$z_1$};
+		\draw [black] (32.7,-20.9) circle (3);
+		\draw (32.7,-20.9) node {$z_2$};
+		\draw [black] (32.7,-31.9) circle (3);
+		\draw (32.7,-31.9) node {$z_3$};
+		\draw [black] (32.7,-43.8) circle (3);
+		\draw (32.7,-43.8) node {$z_4$};
+		\pause
+		\draw [black] (18.09,-14.79) -- (29.91,-10.11);
+		\fill [black] (29.91,-10.11) -- (28.98,-9.94) -- (29.35,-10.87);
+		\draw [black] (18.18,-16.73) -- (29.82,-20.07);
+		\fill [black] (29.82,-20.07) -- (29.19,-19.37) -- (28.91,-20.33);
+		\draw [black] (17.51,-17.93) -- (30.49,-29.87);
+		\fill [black] (30.49,-29.87) -- (30.24,-28.96) -- (29.56,-29.7);
+		\draw [black] (16.89,-18.45) -- (31.11,-41.25);
+		\fill [black] (31.11,-41.25) -- (31.11,-40.31) -- (30.26,-40.84);
+		\draw [black] (17.43,-24.18) -- (30.57,-11.12);
+		\fill [black] (30.57,-11.12) -- (29.65,-11.32) -- (30.36,-12.03);
+		\draw [black] (18.17,-25.41) -- (29.83,-21.79);
+		\fill [black] (29.83,-21.79) -- (28.92,-21.55) -- (29.22,-22.5);
+		\draw [black] (18.16,-27.22) -- (29.84,-30.98);
+		\fill [black] (29.84,-30.98) -- (29.24,-30.26) -- (28.93,-31.21);
+		\draw [black] (17.42,-28.43) -- (30.58,-41.67);
+		\fill [black] (30.58,-41.67) -- (30.38,-40.75) -- (29.67,-41.46);
+		\draw [black] (16.9,-34.16) -- (31.1,-11.54);
+		\fill [black] (31.1,-11.54) -- (30.26,-11.95) -- (31.1,-12.48);
+		\draw [black] (17.52,-34.68) -- (30.48,-22.92);
+		\fill [black] (30.48,-22.92) -- (29.55,-23.08) -- (30.22,-23.82);
+		\draw [black] (18.19,-35.9) -- (29.81,-32.7);
+		\fill [black] (29.81,-32.7) -- (28.9,-32.43) -- (29.17,-33.39);
+		\draw [black] (18.08,-37.83) -- (29.92,-42.67);
+		\fill [black] (29.92,-42.67) -- (29.37,-41.9) -- (28.99,-42.83);
+		\draw [black] (34.97,-10.96) -- (44.23,-18.94);
+		\fill [black] (44.23,-18.94) -- (43.95,-18.04) -- (43.3,-18.8);
+		\draw [black] (34.25,-11.57) -- (44.95,-29.33);
+		\fill [black] (44.95,-29.33) -- (44.97,-28.39) -- (44.11,-28.9);
+		\draw [black] (35.7,-20.9) -- (43.5,-20.9);
+		\fill [black] (43.5,-20.9) -- (42.7,-20.4) -- (42.7,-21.4);
+		\draw [black] (35.05,-22.77) -- (44.15,-30.03);
+		\fill [black] (44.15,-30.03) -- (43.84,-29.14) -- (43.22,-29.92);
+		\draw [black] (35.05,-30.03) -- (44.15,-22.77);
+		\fill [black] (44.15,-22.77) -- (43.22,-22.88) -- (43.84,-23.66);
+		\draw [black] (35.7,-31.9) -- (43.5,-31.9);
+		\fill [black] (43.5,-31.9) -- (42.7,-31.4) -- (42.7,-32.4);
+		\draw [black] (34.25,-41.23) -- (44.95,-23.47);
+		\fill [black] (44.95,-23.47) -- (44.11,-23.9) -- (44.97,-24.41);
+		\draw [black] (34.97,-41.84) -- (44.23,-33.86);
+		\fill [black] (44.23,-33.86) -- (43.3,-34) -- (43.95,-34.76);
+		\end{tikzpicture}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Réseau de neurones}
+	Comment calcule-t-on les activations dans les autres couches ?
+	\pause
+	\begin{block}{Propagation de l'information}
+		Chaque flèche dans le graphique représente un coefficient que l'on dénotera par $w$.
+	\end{block}
+	\pause
+	\begin{table}[]
+		\centering
+		\begin{tabular}{ll}
+			$w^{(\ell)}_{i,j}$ & $\begin{cases}\ell & \mbox{Numéro de la couche}\\
+				i & \mbox{Indice du neurone de la couche actuel}\\
+				j & \mbox{Indice du neurone de la couche précédente} \end{cases}$
+		\end{tabular}
+	\end{table}
+\end{frame}
+
+\begin{frame}{Exemples de coefficients}
+	\begin{center}
+		\begin{tikzpicture}[scale=0.15]
+		\tikzstyle{every node}+=[inner sep=0pt]
+		\draw [black] (15.3,-15.9) circle (3);
+		\draw (15.3,-15.9) node {$x_1$};
+		\draw [black] (15.3,-26.3) circle (3);
+		\draw (15.3,-26.3) node {$x_2$};
+		\draw [black] (15.3,-36.7) circle (3);
+		\draw (15.3,-36.7) node {$x_3$};
+		\draw [black] (46.5,-20.9) circle (3);
+		\draw (46.5,-20.9) node {$y_1$};
+		\draw [black] (46.5,-31.9) circle (3);
+		\draw (46.5,-31.9) node {$y_2$};
+		\draw [black] (32.7,-9) circle (3);
+		\draw (32.7,-9) node {$z_1$};
+		\draw [black] (32.7,-20.9) circle (3);
+		\draw (32.7,-20.9) node {$z_2$};
+		\draw [black] (32.7,-31.9) circle (3);
+		\draw (32.7,-31.9) node {$z_3$};
+		\draw [black] (32.7,-43.8) circle (3);
+		\draw (32.7,-43.8) node {$z_4$};
+		\draw [gray!30] (18.18,-16.73) -- (29.82,-20.07);
+		\fill [gray!30] (29.82,-20.07) -- (29.19,-19.37) -- (28.91,-20.33);
+		\draw [gray!30] (17.51,-17.93) -- (30.49,-29.87);
+		\fill [gray!30] (30.49,-29.87) -- (30.24,-28.96) -- (29.56,-29.7);
+		\draw [gray!30] (16.89,-18.45) -- (31.11,-41.25);
+		\fill [gray!30] (31.11,-41.25) -- (31.11,-40.31) -- (30.26,-40.84);
+		\draw [gray!30] (17.43,-24.18) -- (30.57,-11.12);
+		\fill [gray!30] (30.57,-11.12) -- (29.65,-11.32) -- (30.36,-12.03);
+		\draw [gray!30] (18.16,-27.22) -- (29.84,-30.98);
+		\fill [gray!30] (29.84,-30.98) -- (29.24,-30.26) -- (28.93,-31.21);
+		\draw [gray!30] (17.42,-28.43) -- (30.58,-41.67);
+		\fill [gray!30] (30.58,-41.67) -- (30.38,-40.75) -- (29.67,-41.46);
+		\draw [gray!30] (16.9,-34.16) -- (31.1,-11.54);
+		\fill [gray!30] (31.1,-11.54) -- (30.26,-11.95) -- (31.1,-12.48);
+		\draw [gray!30] (17.52,-34.68) -- (30.48,-22.92);
+		\fill [gray!30] (30.48,-22.92) -- (29.55,-23.08) -- (30.22,-23.82);
+		\draw [gray!30] (18.19,-35.9) -- (29.81,-32.7);
+		\fill [gray!30] (29.81,-32.7) -- (28.9,-32.43) -- (29.17,-33.39);
+		\draw [gray!30] (18.08,-37.83) -- (29.92,-42.67);
+		\fill [gray!30] (29.92,-42.67) -- (29.37,-41.9) -- (28.99,-42.83);
+		\draw [gray!30] (34.25,-11.57) -- (44.95,-29.33);
+		\fill [gray!30] (44.95,-29.33) -- (44.97,-28.39) -- (44.11,-28.9);
+		\draw [gray!30] (35.7,-20.9) -- (43.5,-20.9);
+		\fill [gray!30] (43.5,-20.9) -- (42.7,-20.4) -- (42.7,-21.4);
+		\draw [gray!30] (35.05,-22.77) -- (44.15,-30.03);
+		\fill [gray!30] (44.15,-30.03) -- (43.84,-29.14) -- (43.22,-29.92);
+		\draw [gray!30] (35.05,-30.03) -- (44.15,-22.77);
+		\fill [gray!30] (44.15,-22.77) -- (43.22,-22.88) -- (43.84,-23.66);
+		\draw [gray!30] (35.7,-31.9) -- (43.5,-31.9);
+		\fill [gray!30] (43.5,-31.9) -- (42.7,-31.4) -- (42.7,-32.4);
+		\draw [gray!30] (34.25,-41.23) -- (44.95,-23.47);
+		\fill [gray!30] (44.95,-23.47) -- (44.11,-23.9) -- (44.97,-24.41);
+		\draw [black] (18.09,-14.79) -- (29.91,-10.11);
+		\fill [black] (29.91,-10.11) -- (28.98,-9.94) -- (29.35,-10.87);
+		\draw (22.62,-11.92) node [above] {$w^{(1)}_{1,1}$};
+		\draw [black] (18.17,-25.41) -- (29.83,-21.79);
+		\fill [black] (29.83,-21.79) -- (28.92,-21.55) -- (29.22,-22.5);
+		\draw (22.77,-23.04) node [above] {$w^{(1)}_{2,2}$};
+		\draw [black] (34.97,-10.96) -- (44.23,-18.94);
+		\fill [black] (44.23,-18.94) -- (43.95,-18.04) -- (43.3,-18.8);
+		\draw (41.05,-14.46) node [above] {$w^{(2)}_{1,1}$};
+		\draw [black] (34.97,-41.84) -- (44.23,-33.86);
+		\fill [black] (44.23,-33.86) -- (43.3,-34) -- (43.95,-34.76);
+		\draw (41,-38.34) node [below] {$w^{(2)}_{2,4}$};
+		\end{tikzpicture}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Calcul des activations}
+On simplifie les formules avec la notation vectorielle.
+\begin{table}[]
+	\centering
+	\begin{tabular}{ll}
+		$\vec{z} = \sigma\left(W^{(1)}\cdot \vec{x}\right)$& \multirow{2}{*}{avec $W^{(\ell)} = (w^{(\ell)})_{i,j}$ et $\sigma(s) = \frac{1}{1+e^{-s}}$} \\
+		$\vec{y} = \sigma \left(W^{(2)}\cdot \vec{z}\right)$&
+	\end{tabular}
+\end{table}
+\pause
+\begin{block}{Exemple}
+	\[z_1 =\sigma \left( w^{(1)}_1 \cdot \vec{x}\right) = \sigma \left(w^{(1)}_{1,1}x_1 + w^{(1)}_{1,2}x_2 + w^{(1)}_{1,3}x_3\right) \]
+\end{block}
+\end{frame}
+
+\begin{frame}{Entraînement du réseau}
+	Au début, les coefficients sont arbitraires. Ensuite, le réseau classifie des observations déjà cataloguées et s'ajuste pour donner des meilleurs réponses.
+	\pause
+	\begin{block}{Fonction objectif}
+		\[ J(W, \vec{x}) = \sum_{i=1}^2 \frac{1}{2}(y_i-y_i^*)^2\]
+		\[ J(W) = \sum_{\vec{x}} J(W,\vec{x}) \]
+		\pause
+		Quand l'erreur $J$ est petite, on se rapproche de la solution.
+	\end{block}
+\end{frame}
+\begin{frame}{Algorithme du gradient}
+	On cherche donc à minimiser l'erreur en utilisant une technique d'optimisation simple.
+	\pause
+	\[ W \leftarrow W - \frac{\partial J}{\partial W} \]
+	\pause
+	Rincer et répéter.
+\end{frame}
+
+\begin{frame}{Conclusion}
+	\begin{block}{Avantages}
+		\begin{itemize}
+			\pause
+			\item Extrêmement efficace.
+			\pause
+			\item Applicable à de nombreux problèmes.
+		\end{itemize}
+	\end{block}
+	\pause
+	\begin{block}{Inconvénients}
+		\begin{itemize}
+			\pause
+			\item Besoin de beaucoup de données.
+			\pause
+			\item Aucune intuition sur le résultat.
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\section{GANs}
+\begin{frame}
+\tableofcontents[currentsection]
+\end{frame}
+\begin{frame}{L'inverse des classifieurs}
+	Les GANs (\textit{Generative Adversarial Networks}) sont des réseaux génératifs.
+	
+	On veut, à partir de données aléatoires, générer une observation qui ressemble aux éléments d'une classe précise.
+	
+	\begin{block}{Exemple}
+		Générer une image de chat, appliquer une texture réaliste à un modèle abstrait, etc.
+	\end{block}
+\end{frame}
+
+\begin{frame}{Comment ca marche ?}
+	Deux modèle se battent pour devenir meilleur.
+	\begin{center}
+		\includegraphics[scale=0.35]{GanDiagram}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Exemple 1: des chats}
+\begin{center}
+	\includegraphics[scale=0.38]{catgan1}
+	\footnotetext[2]{Images générée par Alexia Jolicoeur-Martineau, plus d'infos sur https://ajolicoeur.wordpress.com/cats/}
+\end{center}
+\end{frame}
+\begin{frame}{Exemple 2: des célébrités}
+	
+\end{frame}
+
+\begin{frame}
+\begin{center}
+	\Huge{Merci bien !}
+\end{center}
+	
+\end{frame}
+
+
+\end{document}
