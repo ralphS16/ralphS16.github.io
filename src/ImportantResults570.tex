@@ -1,0 +1,812 @@
+\documentclass[paper=a4, fontsize=12pt]{scrartcl} % A4 paper and 11pt font size
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{mathpazo} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm, amssymb} % Math packages
+\usepackage{pgf,tikz}
+\usetikzlibrary{positioning,matrix,arrows}
+\usepackage{float}
+\usepackage{tikz-cd}
+\usepackage{caption}
+\usepackage{stmaryrd}
+\usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{verbatim}
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\normalfont \bfseries} % Make all sections centered, the default font and small caps
+\usepackage{enumerate}
+\usepackage{pythonhighlight}
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+\allowdisplaybreaks
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{facts}[thm]{Facts}
+\newtheorem{fact}[thm]{Fact}
+\newtheorem{clm}[thm]{Claim}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{quest}[thm]{Question}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{defns}[thm]{Definitions}
+\newtheorem{con}[thm]{Construction}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{exmps}[thm]{Examples}
+\newtheorem{notn}[thm]{Notation}
+\newtheorem{notns}[thm]{Notations}
+\newtheorem{addm}[thm]{Addendum}
+\newtheorem{exer}[thm]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{rems}[thm]{Remarks}
+\newtheorem{warn}[thm]{Warning}
+\newtheorem{sch}[thm]{Scholium}
+
+\newcommand{\bra}[1]{\left(#1\right)}
+\newcommand{\sbra}[1]{\left[#1\right]}
+\newcommand{\Mod}[1]{\ (\text{mod}\ #1)}
+\newcommand{\op}[1]{#1^{\text{op}}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\one}{\mathbb{1}}
+\newcommand{\mC}{\mathcal{C}}
+\newcommand{\mO}{\mathcal{O}}
+\newcommand{\mR}{\mathcal{R}}
+\newcommand{\mS}{\mathcal{S}}
+\newcommand{\lp}{{\mathfrak{p}}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\E}{\mathbb{E}}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\aut}{Aut}
+\DeclareMathOperator{\gal}{Gal}
+\DeclareMathOperator{\var}{\textbf{var}}
+\DeclareMathOperator{\orb}{Orb}
+\DeclareMathOperator{\stab}{Stab}
+\DeclareMathOperator{\inn}{Inn}
+\DeclareMathOperator{\Ind}{Ind}
+\DeclareMathOperator{\Res}{Res}
+\DeclareMathOperator{\spn}{Span}
+\DeclareMathOperator{\out}{Out}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\rcf}{rcf}
+\DeclareMathOperator{\tors}{Tors}
+\DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Nat}{Nat}
+\DeclareMathOperator{\spec}{Spec}
+\DeclareMathOperator{\ann}{Ann}
+\DeclareMathOperator{\conjc}{Conj}
+\DeclareMathOperator{\syl}{Syl}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\inp}[2]{\left\langle #1, #2 \right\rangle}
+
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\title{	
+	\normalfont\normalsize 
+	{McGill University - Fall 2018} \\ [0pt] % Your university, school and/or department name(s)
+	\Huge Important Results - MATH 570\vspace{-10pt}% The assignment title
+}\author{Ralph Sarkis} % Your name
+\date{\vspace{-10pt}\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+\maketitle
+\section{Category Theory I}
+\begin{defn}[Category]
+	A category is a set of objects $C_0$ together with a set of morphisms $\Mor_{C}(A,B)$ for each ordered pair of objects $A, B\in C_0$ and an associative composition operation $\Mor_C(A,B) \times \Mor_C(B,C) \rightarrow \Mor_C(A,C)$ for each ordered triple of objects $A,B,C \in C_0$. We will denote $C_1$ to be the set of all morphisms of $C$.
+\end{defn}
+\begin{defn}[Covariant functor]
+	Let $C$ and $D$ be categories a covariant functor $F: C\rightsquigarrow D$ is a map $C_0 \rightarrow D_0$ and a map $\Mor_C(A,B) \rightarrow \Mor_D(F(A),F(B))$ for each ordered pair of objects $A, B\in C_0$.
+	\begin{itemize}
+		\item For any composable morphisms $f$ and $g$, $F(f\circ g) = F(f) \circ F(g)$.
+		\item For any object, $A \in C_0$, $F(1_A) = 1_{F(A)}$.
+	\end{itemize}
+\end{defn}
+
+\begin{defn}[Contravariant functor]
+	A contravariant functor $F: C\rightsquigarrow D$ is a map $C_0 \rightarrow D_0$ and a map $\Mor_C(A,B) \rightarrow \Mor_D(F(B),F(A))$ for each ordered pair of objects $A, B\in C_0$.
+	\begin{itemize}
+		\item For any composable morphisms $f$ and $g$, $F(f\circ g) = F(g) \circ F(f)$.
+		\item For any object, $A \in C_0$, $F(1_A) = 1_{F(A)}$.
+	\end{itemize}
+\end{defn}
+\begin{defn}[Full, faithfull and essentially surjective]
+	Let $F:C \rightsquigarrow D$ be a covariant functor.
+	\begin{itemize}
+		\item If the restriction $F_{A,B}:\Mor_C(A,B) \rightarrow \Mor_D(F(A), F(B))$ is injective for any $A,B \in C_0$, then we say $F$ is faithfull.
+		\item If $F_{A,B}$ is surjective for any $A,B \in C_0$, then $F$ is full.
+		\item If for any $X \in D$, there exists $Y \in C_0$ such that $D \cong F(Y)$, then $F$ is essentially surjective.
+	\end{itemize}
+\end{defn}
+\begin{defn}[Mor functors]\label{homfunc}
+	Let $C$ be a category and $A \in C_0$ one of its object. We define the covariant and contravariant $\Mor$ functors from $C$ to $\textbf{Set}$.
+	\begin{enumerate}
+		\item[A.] The functor $\Mor_C(A,-): C \rightsquigarrow \textbf{Set}$ sends an object $B\in C_0$ to the hom set $\Mor_C(A,B)$ and a morphism $f:B\rightarrow B'$ to the function $$\Mor_C(A,f): \Mor_C(A,B) \rightarrow \Mor_C(A,B') = g \mapsto f\circ g.$$
+		
+		\item[B.] The functor $\Mor_C(-,A): C \rightsquigarrow \textbf{Set}$ sends an object $B\in C_0$ to the hom set $\Mor_C(B,A)$ and a morphism $f:B\rightarrow B'$ to the function $$\Mor_C(f,A): \Mor_C(B',A) \rightarrow \Mor_C(B,A) = g \mapsto g\circ f.$$
+	\end{enumerate}
+\end{defn}
+\begin{defn}[Natural transformation]\label{defnattran}
+	Let $F,G : C \rightsquigarrow D$ be two covariant functors, a \textbf{natural transformation} $\phi: F \Rightarrow G$ is a map $\phi: C_0 \rightarrow D_1$ that satisfies $\phi(A) \in \Mor_D(F(A), G(A))$ for all $A \in C_0$ and makes the following diagram commute for any $f \in \Mor_C(A,B)$:
+	\begin{figure}[H]
+		\centering
+		\begin{tikzcd}
+			F(A) \arrow[d, "F(f)"'] \arrow[r, "\phi(A)"] & G(A) \arrow[d, "G(f)"] \\
+			F(B) \arrow[r, "\phi(B)"'] & G(B)
+		\end{tikzcd}
+	\end{figure}
+	For two contravariant functors, the vertical arrows are reversed. If each $\phi(A)$ is an isomorphism, then we have a natural isomorphism and we denote $F \cong G$.
+\end{defn}
+\begin{defn}[Adjoint functors]
+	Let $F:C\rightsquigarrow D$ and $G:D\rightsquigarrow C$ be covariant functors. We say that $(F,G)$ are an adjoint pair if  for any $A \in C_0$ and $B \in D_0$, we have an isomorphism $\phi_{A,B} : \Mor_D(FA, B) \leftrightarrow \Mor_C(A, GB)$. Such that for any $f \in \Mor_C(A,A')$ and $g \in \Mor_D(B,B')$, the following diagram commutes.
+	\begin{figure}[h]
+		\centering
+		\begin{tikzcd}
+			{\Mor_D(F(A),B')} \arrow[rr] &  & {\Mor_C(A, G(B'))} \arrow[ll, "{\phi_{A,B'}}"'] \\
+			{\Mor_D(F(A),B)} \arrow[u, "g\circ(-)"] \arrow[rr] &  & {\Mor)C(A,G(B))} \arrow[u, "G(g)\circ (-)"'] \arrow[ll, "{\phi_{A,B}}"'] \\
+			{\Mor_D(F(A'),B)} \arrow[u, "(-)\circ F(f)"] \arrow[rr] &  & {\Mor_C(A',G(B))} \arrow[u, "(-)\circ f"'] \arrow[ll, "{\phi_{A',B}}"']
+		\end{tikzcd}
+	\end{figure}
+\end{defn}
+\begin{defn}[Equivalence]
+	An equivalence of categories is a pair of covariant functors $F:C\rightsquigarrow D$ and $G:D \rightsquigarrow C$ such that $F\circ G \cong 1_{D}$ and $G \circ F \cong 1_{C}$. If the functors are contravariant, we say that the pair is an anti-equivalence of categories.
+\end{defn}
+
+\section{Modules}
+\begin{defn}[$R$-biadditive map]
+	Let $R$ be a ring, $A$ be a right $R$ module, $B$ be a left $R$-module and $H$ be an abelian group. An $R$-biadditive map $f: A\times B \rightarrow H$ is a map that satisfies the following for any $a, a' \in A$, $b,b' \in B$ and $r \in R$.
+	\begin{gather*}
+		f(a+a', b) = f(a,b) + f(a',b)\\
+		f(a,b+b') = f(a,b) + f(a,b')\\
+		f(a\cdot r, b) = f(a, r \cdot b)
+	\end{gather*}
+\end{defn}
+\begin{defn}[Tensor product]
+	Letting $R$, $A$ and $B$ be as above, we define the tensor product of $A$ and $B$ denoted $A \otimes_R B$. Define
+	$$G = \bigoplus_{(a,b) \in A \times B} \Z(a,b),$$
+	and let $N$ be the normal subgroup generated by all elements of the form 
+	$$(a+a', b)- (a,b)-(a',b) \quad \quad (a,b+b')-(a,b)-(a,b')\quad \quad (a\cdot r, b) - (a, r\cdot b),$$
+	for all $a,a' \in A$, $b,b' \in B$ and $r \in R$. The tensor product is the quotient $G/N$ and general elements of $A \otimes_R B$ are of the form $\sum_{i} a_i \otimes  b_i$, but this representation is not unique.
+\end{defn}
+\begin{prop}
+	Let $R$, $A$ and $B$ be as above, the map $\pi: A\times B \rightarrow A\otimes_R B = (a,b) \mapsto a \otimes b$ is $R$-biadditive and it has the universal property that for any abelian group $H$ and $R$-biadditive map $f:A\times B \rightarrow H$, there is a unique group homomorphism $g:A\otimes_R B\rightarrow H$ that makes the following diagram commute:
+	\begin{figure}[h]
+		\centering
+		\begin{tikzcd}
+			A\times B \arrow[rd, "f"'] \arrow[r, "\pi"] & A\otimes_R B \arrow[d, "g", dashed] \\
+			& H
+		\end{tikzcd}
+	\end{figure}
+\end{prop}
+\begin{proof}[Proof idea]
+	Define $g$ to be the only possible choice, namely $$g= \sum_i a_i \otimes b_i \mapsto  \sum_i f(a_i,b_i),$$ by passing to the free group $G$ defined above. Let $\tilde{g}(a,b) = f(a,b)$ and extend by linearity to get a homomorphism from $G$ to $H$. Find that the kernel contains $N$ and conclude that there is a unique homomorphism $A\otimes_R B\mapsto H$ with the first isomorphism theorem.
+\end{proof}
+\begin{prop}
+	Let $R$, $A$ and $B$ be as above and let $A'$ and $B'$ be right and left modules respectively with homomorphisms $f:A \rightarrow A'$ and $g: B\rightarrow B'$. Then, there is a unique group homomorphism $f\otimes g : A\otimes_R B \rightarrow A'\otimes_R B'$ such that
+	$$(f\otimes g)\bra{\sum_i a_i \otimes b_i} = \sum_i f(a_i)\otimes g(b_i).$$
+\end{prop}
+\begin{proof}[Proof idea]
+	Define $f\times g = (a,b) \mapsto f(a)\otimes g(b)$ and verify it is $R$-biadditive to conclude the existence and uniqueness of $f \otimes g$.
+\end{proof}
+\begin{cor}
+	Let $R$, $A$ and $B$ be as above but with the requirement that $A$ is a left $S$-module and the action of $R$ and $S$ on $A$ commute. Then, $A \otimes_R B$ is a left $S$-module.
+\end{cor}
+\begin{proof}[Proof idea]
+	For any $s \in S$, let $[s]$ denote the homomorphism taking $a$ to $s\cdot a$. Using the last proposition, we obtain a group homomorphism $[s] \otimes \text{id}$. Define the action of $s$ as the action of $[s] \otimes \text{id}$ and verify it makes $A\otimes_R B$ into a left $S$-module. The symmetric proof works when $B$ is a bimodule.
+\end{proof}
+\begin{defn}[$R$-algebra]
+	Let $R$ be a ring, an $R$-algebra is a ring $A$ with a homomorphism $i_A:R \rightarrow A$ such that the image of $R$ is in the center of $A$. A homomorphism of $R$-algebras $A$ and $B$ is a homomorphism of rings with the restriction that the image of $i_A$ is sent to the image of $i_B$.
+\end{defn}
+\begin{cor}
+	Let $R$ be a ring and $A$ and $B$ be $R$-algebras, then $A\otimes_R B$ is also an $R$-algebras.
+\end{cor}
+\begin{proof}
+	For any $s \in A$, let $[s] = a\mapsto sa$ and for any $t \in B$, let $[t] = b \mapsto tb$. For any $(s,t) \in A\times B$, we get an endomorphism of $A\otimes_R B$ denoted $[s]\otimes [t]$. From the universal property of $A\otimes_R B$, we get a unique homomorphism sending $\sum_i s_i \otimes t_i$ to $\sum_i [s_i]\otimes [t_i]$. Define multiplication by 
+	$$\bra{\sum_i s_i \otimes t_i}\bra{\sum_j a_j \otimes b_j} = \bra{\sum_i[s_i] \otimes [t_i]}\bra{\sum_j a_j \otimes b_j} = \sum_{i,j} s_ia_j \otimes t_i b_j,$$
+	and check that it makes $A\otimes_R$ into a ring. The homomorphism $i_{A\otimes_R B}$ sends $r$ to $i_A(r) \otimes 1 = 1 \otimes i_B(r)$, check that its image is in the center of the ring.
+\end{proof}
+\begin{cor}
+	Let $R$ be a ring and $M$ be an $R$-module, then $R \otimes_R M \cong M$.
+\end{cor}
+\begin{proof}[Proof idea]
+	We have the map $M \rightarrow R\otimes_R M$ that sends $m \mapsto 1 \otimes m$. Construct its inverse $r \otimes m \mapsto rm$ by first defining $(r,m) \mapsto rm$ and showing it is $R$-biadditive.
+\end{proof}
+\begin{cor}
+	Let $R$ be a commutative ring and $I$, $J$ be ideals, then 
+	$$R/I \otimes_R R/J \cong R/(I+J).$$
+\end{cor}
+\begin{proof}[Proof idea]
+	Define the map $R \rightarrow R/I \otimes_R R/J$ by $r \mapsto r \otimes 1$. Check it has kernel $(I+J)$ and use FIT to get the map $R/(I+J) \rightarrow R/I \otimes_R R/J$. Next, define the map $r \otimes s \mapsto rs$ in the other direction by using the universal property and show that they are inverses.
+\end{proof}
+\begin{thm}
+	Let $R$ and $S$ be rings and ${}_SA_R$ be a bimodule, the functors 
+	$$A \otimes_R (-) : {}_R\textbf{Mod} \rightsquigarrow {}_S\textbf{Mod} \quad \text{ and} \quad \Hom_S(A, -): {}_R\textbf{Mod} \rightsquigarrow {}_S\textbf{Mod}$$
+	form an adjoint pair.
+\end{thm}
+\begin{proof}[Proof idea]
+	We already checked that $A \otimes_R B$ sends left $R$-modules to left $S$-modules. Define $A \otimes_R (f)$ for $f:B\rightarrow B'$ to be $\text{id} \otimes f$. Then, check that this makes $A \otimes_R(-)$ into a covariant functor.
+	
+	The left $R$-module structure of $\Hom_S(A,B)$ when $B$ is a left $S$-module is given by the action $r\cdot f = a \mapsto f(a\cdot r)$. The functor sends a module homomorphism $f$ to the post composition $f\circ (-)$. Left to check that this is a covariant functor.
+	
+	Fix a left $R$-module $B$ and a left $S$-module $C$. Define the morphism $$\phi: \Hom_S(A \otimes_R B, C) \rightarrow \Hom_R(B, \Hom_S(A,C)).$$
+	It sends a morphism $f$ to $\phi(f) = b \mapsto f(-\otimes b)$. Need to check that this $\phi(f)(b)$ is a homomorphism of $S$-modules for any $b \in B$, that $\phi(f)$ is a homomorphism of $R$-modules for any $f$ in the L.H.S. and that $\phi$ is a homomorphism of groups.
+	
+	We now define the inverse $$\phi^{-1}:\Hom_R(B, \Hom_S(A,C))  \rightarrow \Hom_S(A \otimes_R B, C).$$ Let $g$ be in the L.H.S., we note that sending $(a,b) to g(b)(a)$ is an $R$-biadditive map and it yields a unique homomorphism of groups $A \otimes_R B \rightarrow C$, this map is $\phi^{-1}(g)$. We need to check $\phi^{-1}(g)$ is also a homomorphism of $S$-modules and that $\phi^{-1}$ is indeed the inverse of $\phi$.
+	
+	We got the desired isomorphisms of groups between the adjoint pairs, but it remains to check that they are natural.
+\end{proof}
+\begin{defn}
+	Let $k$ be a fields, $G$ be a group and $H < G$. If $V$ is a left $k[H]$-module, define $\Ind_H^GV = k[G] \otimes_{k[H]} V$. As seen above, this is a functor 
+	$$\Ind_H^G : {}_{k[H]}\textbf{Mod} \rightsquigarrow {}_{k[G]}\textbf{Mod}.$$
+	If $W$ is a left $k[G]$ module, define $\Res_H^GW$ to be $W$ but only viewed as a $k[H]$ module (forgetting the action of elements not in $H$). This is a functor in the opposite direction.
+\end{defn}
+\begin{cor}
+	The functors $(\Ind_H^G, \Res_H^G)$ form an adjoint pair.
+\end{cor}
+\begin{proof}[Proof idea]
+	This is just an application of the last theorem. Letting $R= k[H]$, $S = k[G]$, $A = k[G]$ and noting that $\Hom_{k[G]}(k[G], W) \cong W$.
+\end{proof}
+\section{Complex Representations of Finite Groups}
+\begin{defn}[Representation]
+	Let $G$ be a finite group, $V$ be a finite dimensional vector space over $\mathbb{C}$ and $\rho: G \rightarrow \aut(V)$ be a group homomorphism, $(\rho, V)$ is called a finite representation of $G$.
+\end{defn}
+\begin{defn}[Morphism of representation]
+	Let $(\rho, V)$ and $(\tau, W)$ be representations of a finite group $G$, a linear map $T: V_1 \rightarrow V_2$ is called a morphism of $\rho_1$ to $\rho_2$ if for any $g \in G$, $\rho_2(g) \circ T = T \circ \rho_1(g)$. We will denote $\Hom_G(V_1, V_2)$ to be the subspace of $\Hom(V_1, V_2)$ with linear maps satisfying this property.
+\end{defn}
+\begin{prop}
+	Denote $\textbf{Rep}(G)$ to be the category of representations we have just defined, it is equivalent to the category ${}_{\C[G]}\textbf{Mod}$.
+\end{prop}
+\begin{proof}[Proof idea]
+	We define two functors that compose to the identity functor.
+	
+	Given a $\C[G]$-modules $V$, define $G \rightarrow \aut(V)$ by sending $g$ to $\rho(g) = v \mapsto g \cdot v$ (where the product comes from the module structure). Verify that this is indeed a representation of $G$. Conversely, given the representation $(\rho, V)$, make $V$ into a $\C[G]$-module by letting $G$ act on it via $\rho$ and extend the action by linearity.
+	
+	Since the underlying sets of the objects do not change under the functors, morphisms are not modified either. However, we still need to verify that they are homomorphism in the target category.
+\end{proof}
+\begin{defn}[Character group]
+	For a group $G$, the character group of $G$, denoted $G^*$, is the set of group homomorphisms from $G$ to $\mathbb{C}^{\times}$.
+\end{defn}
+\begin{prop}
+	The following are properties of the character group.
+	\begin{enumerate}
+		\item $(H \times G)^{*} \cong H^* \times G^*$.
+		\item $(\Z/n\Z)^* \cong \Z/n\Z$.
+		\item If $G$ is finite and abelian, $G^* \cong G$.
+		\item For a general group $G$, $G^* = (G/G')^*$.
+	\end{enumerate}
+\end{prop}
+\begin{proof}[Proof idea]
+	\begin{enumerate}
+		\item[]
+		\item Define the map $\phi : (H \times G)^* \rightarrow H^* \times G^*$ with $f \mapsto (f(\cdot, 1), f(1, \cdot))$. Show that it is an isomorphism.
+		\item Observe that $f \in (\Z/n\Z)^*$ is only defined by where it sends the generator, and it must send it to a generator of the group of $n$th roots of unity (this group is isomorphic to $\Z/n\Z$).
+		\item Use the structure theorem and the two previous points.
+		\item Show that if $f \in G^*$, then $f([x,y]) = 1$ and so $G' \subseteq \ker(f)$, then the result follows from the first isomorphism theorem.
+	\end{enumerate}
+\end{proof}
+\begin{thm}
+	Let $(\rho, V)$ be a representation of $G$, there exists a inner product that is $G$-invariant (i.e. for all $v,w \in V$, $\inp{\rho(g)v}{\rho(g) w} = \inp{v}{w}$).
+\end{thm}
+\begin{proof}[Proof idea]
+	Take any inner product $(\cdot, \cdot)$ and let $\inp{u}{v} = \frac{1}{|G|}\sum_{g \in G}(\rho(g)u, \rho(g)v)$, verify that $\inp{\cdot}{\cdot}$ is $G$-invariant.
+\end{proof}
+\begin{thm}
+	Any representation decomposes as a sum of irreducible representations.
+\end{thm}
+\begin{proof}[Proof idea]
+	Argue by induction. If $U$ is a subrepresentation, then $U^{\perp}$ (w.r.t. a $G$-invariant inner product) is also a subrepresentation.
+\end{proof}
+\begin{thm}
+	Let $G$ be an abelian group, every representation of $G$ decomposes into a direct sum of $1$-dimensional representations.
+\end{thm}
+\begin{proof}[Proof idea]
+	First prove that $\rho(g)$ is diagonalizable. Then use the fact that commuting diagonalizable linear operator are simultaneously diagonalizable.
+\end{proof}
+\begin{lem}[Schur]
+	Let $(\rho, V)$ and $(\tau, W)$ be irreducible representations of $G$, we have the following: \[\Hom_G(V,W) \cong \begin{cases}0 & \rho \not\cong \tau\\ \mathbb{C} & \rho \cong \tau \end{cases}\]
+\end{lem}
+\begin{proof}[Proof idea]
+	Note that if $T \in \Hom_G(V,W)$, $\ker(T)$ and $\im(T)$ are subrepresentations, this implies $T$ is either trivial or an isomorphism. Now, look at an eigenspace of $T$ and show that it must be equal to the whole vector space.
+\end{proof}
+\begin{defn}
+	Let $(\rho, V)$ and $(\tau, W)$ be representations of $G$, $\sigma : G \rightarrow \aut(\Hom(V,W))$ is a new representation with $\sigma(g) T = \tau(g) \circ T \circ \rho(g^{-1})$.
+\end{defn}
+\begin{thm}
+	We get that for any $g \in G$, $\chi_{\sigma}(g) = \overline{\chi_{\rho}(g)}\chi_{\tau}(g)$.
+\end{thm}
+\begin{proof}[Proof idea]
+	No need to learn it.
+\end{proof}
+\begin{defn}
+	Let $(\rho, V)$ be a representation of $G$, define the projection operator as $\pi_{\rho} : V \rightarrow V$ with $\pi_{\rho} = \frac{1}{|G|} \sum_{g \in G} \rho(g)$.
+\end{defn}
+\begin{thm}
+	If $\rho = \rho_1^{a_1} \oplus \cdots \oplus \rho_t^{a_t}$ where $\rho_1$ is the trivial representation, then $$\pi_{\rho} = \text{Id}_{V_1^{a_1}} \oplus 0 \oplus \cdots \oplus 0$$
+	From this, we get the following:
+	\[ a_1 = \text{Tr}(\pi_{\rho}) = \frac{1}{|G|}\sum_{g \in G} \chi_{\rho}(g) = \inp{\chi_{\rho}}{\chi_1} \]
+\end{thm}
+\begin{proof}[Proof idea]
+	Note that $V^G = (V_1^{a_1})^G \oplus \cdots \oplus (V_1^{a_t})^G$ and that except for $i = 1$, $(V_i^{a_i})^G = \{0\}$ because it is a subrepresentation. The result follows.
+\end{proof}
+\begin{thm}
+	The characters of irreducible representations are orthogonal with respect to the $G$-invariant inner product.
+\end{thm}
+\begin{proof}[Proof idea]
+	Use $\dim(\Hom(V,W)^G) = \frac{1}{|G|}\sum_{g \in G} \chi_{\sigma}(g) = \inp{\chi_{\rho}}{\chi_{\tau}}$. Then use Schur's lemma.
+\end{proof}
+\begin{prop}
+	Here are some consequences of the last theorem.
+	\begin{enumerate}
+		\item A representation $\rho$ decomposes into an irreducible representation: $\rho = \rho_1^{a_1} \oplus \cdots \oplus \rho_t^{a_t}$.
+		\item $a_i = \inp{\chi_{\rho}}{\chi_{\rho_i}}$.
+		\item $\chi_{\rho}$ determines $\rho$ up to isomorphism.
+		\item $\rho^{\text{reg}} = \rho_1^{\dim(\rho_1)} \oplus \cdots \oplus \rho_t^{\dim(\rho_t)}$.
+		\item $\rho$ is irreducible if and only if $\norm{\chi_{\rho}} = 1$.
+		\item There exists finitely many irreducible characters (hence representations).
+	\end{enumerate}
+\end{prop}
+\begin{proof}[Proof idea]
+	\begin{enumerate}
+		\item[]
+		\item Done above.
+		\item Follows from orthogonality of the irreducible characters.
+		\item Follows from the last part.
+		\item Follows from the fact that $\chi_{\text{reg}}$ is 0 everywhere but on the identity. Also implies $|G| = \sum_i \dim(\rho_i)^2$, where the $\rho_i$'s are the irreducible representations.
+		\item Follows from orthonormality of the irreducible characters.
+		\item Since they are orthonormal, there cannot be more than the dimension of $\text{Class}(G)$.
+	\end{enumerate}
+\end{proof}
+\begin{defn}
+	We define a more general operator. Let $\alpha \in \text{Class}(G)$, we define the operator $A_{\rho} = \sum_{g \in G} \alpha(g)\rho(g)$.
+\end{defn}
+\begin{lem}
+	For two representations $\rho$ and $\tau$ of $G$, $A_{\rho \oplus \tau} = A_{\rho} \oplus A_{\tau}$.
+\end{lem}
+\begin{proof}[Proof idea]
+	Use the definitions.
+\end{proof}
+\begin{thm}
+	Let $\chi_{\rho_1}, \dots, \chi_{\rho_t}$ be the characters of all the irreducible representations of $G$, they form an orthonormal basis of $\text{Class}(G)$, in particular, $t = h(G)$.
+\end{thm}
+\begin{proof}[Proof idea]
+	Let $\beta \in \text{Class}(G)$ be a function orthogonal to all irreducible characters. Let $\alpha = \overline{\beta}$ and for an irreducible representation $\rho_i$, show that $A_{\rho_i} \equiv 0$. Using the last lemma, we get $A_{\rho^{\text{reg}}} \equiv 0$, which is equivalent to $\alpha = \overline{\beta} \equiv 0$.
+\end{proof}
+\begin{thm}
+	Let $H< G$ be groups and $(\rho, V)$ be a representation of $H$. The induced representation is constructed by taking $\Ind_H^GV$ as a $\C[G]$-module and looking at the corresponding representation. Its character can be calculated like so:
+	$$\Ind_H^G\chi(g) = \frac{1}{|H|}\sum_{\{b \in G \mid b^{-1}gb \in H\}} \chi(b^{-1}gb).$$
+\end{thm}
+\begin{proof}[Proof idea]
+	Writing $G = \amalg_{i=1}^d g_iH$ yields the decomposition $\Ind_H^GV \cong \oplus_{i=1}^d g_i \otimes V$. Observe how $G$ acts on this set and conclude that $\rho(g)$ is a matrix with $d$ square blocks of size $\dim(V)$. Only the diagonal blocks contribute to the matrix and they occur when $gg_i = g_ih$ for some $h$. We can conclude the formula by not only considering $g_i$'s and averaging over the size of $H$.
+\end{proof}
+\begin{cor}
+	If $H \lhd G$, then the formula can be written as 
+	$$\Ind_H^G\chi(g) =\begin{cases}0 & g \notin H\\
+	 \frac{1}{|H|}\sum_{b \in G} \chi(b^{-1}gb) & g \in H\end{cases}.$$
+\end{cor}
+\begin{thm}[Frobenius reciprocity]
+	Let $H< G$ be groups and $\inp{\cdot}{\cdot}_X$ denote the inner product of the class functions on $X \in \{H,G\}$. Let $\rho$ be a representation of $H$ and $\tau$ a representation of $G$, we have 
+	$$\inp{\Ind_H^G\rho}{\tau}_G = \inp{\rho}{\Res_H^G\tau}_H.$$
+\end{thm}
+\begin{proof}[Proof idea]
+	This is just a straightforward calculation with rearrangements in the sum.
+\end{proof}
+\begin{cor}
+	Let $\sigma$ be an irreducible representation of $H < G$. The representation $\Ind_H^G\sigma$ is irreducible if and only if for all $g \in G \setminus H$, $\sigma^g \not\cong \sigma$ where $\sigma^g = h \mapsto \sigma(g^{-1}hg)$.
+\end{cor}
+\begin{proof}[Proof idea]
+	Calculate the norm of $\Ind_H^G\chi_{\sigma}$ using Frobenius reciprocity to get $\frac{1}{|H|}\sum_{g \in G} \inp{\chi_{\sigma}}{\chi_{\sigma^g}}$. Next, show that $\sigma^g$ is always irreducible for $g \in G \setminus H$, to remove terms of the sum. The equivalence is now clear to see.
+\end{proof}
+\begin{defn}
+	A group $G$ is supersolvable if it has a composition series where each group is normal in $G$ and each quotient is cyclic.
+\end{defn}
+\begin{thm}[Blichfeldt]
+	Let $G$ be a supersolvable group and $\rho$ an irreducible representation of $G$, then there exists a subgroup $J < G$ and one-dimensional representation $\psi$ of $J$ such that $\rho \cong \Ind_J^G\psi$.
+\end{thm}
+\begin{defn}[Graded ring]
+	A ring $R$ is called graded if it decomposes as a direct sum of abelian groups $\{R_n \mid n \in \N\}$ such that for any $m,n$, $R_mR_n \subseteq R_{n+m}$.
+\end{defn}
+\begin{defn}[Tensor algebra]
+	Let $R$ be a commutative ring and $V$ an $R$-module. Denote $T^0(V) = R$, $T^1(V) = V$ and generally $T^n(V) = \bigotimes_R{}_{i=1}^n V$ and finally define $T^{\bullet}(V) = \bigoplus_{n \in \N} T^n(V)$ to be the tensor algebra of $V$. This is a graded $R$-algebra.
+\end{defn}
+\begin{defn}[Symmetric algebra]
+	In the same setting as above, let $I_0 = I_1 = 0$, let $I_2$ be the $R$-span of the elements $\{x \otimes y - y \otimes x \mid x,y \in V\}$ and generally let $I_n$ be the $R$-span of  
+	$$\{x_1 \otimes \cdots \otimes x_n - x_{\sigma(1)} \otimes \cdots \otimes x_{\sigma(n)} \mid \forall i, x_i \in V, \sigma \in S_n\}.$$
+	Define the symmetric algebra to be $\text{Sym}^{\bullet}(V) = \bigoplus_{n \in \N} T^n(V)/I_n$ and $\text{Sym}^n(V) = T^n(V)/I_n$.
+\end{defn}
+\begin{defn}[Exterior algebra]
+	In the setting of above, let $J_0 = J_1 = 0$ and let $J_n$ be the $R$-span of the elements of the elements $$\{x_1 \otimes \cdots \otimes x_n\mid \forall i, x_i \in V, \exists i <j, x_i = x_j\}.$$
+	Define the exterior algebra to be $\bigwedge^n V = \bigoplus_{n \in \N}T^n(V)/J_n$ and $\bigwedge^n V = T^n(V)/J_n$.
+\end{defn}
+\begin{prop}
+	In the setting of above, suppose $V$ is a free module of rank $V$, then 
+	$$\dim(\text{Sym}^n(V)) = \binom{n+d-1}{n} \quad \text{ and } \quad \dim(\bigwedge^n V) = \binom{d}{n}.$$
+\end{prop}
+\begin{prop}
+	Let $V$ be a representation of $G$ with character $\chi$, the representation $T^2(V)$ and $\text{Sym}^2(V)$ have characters $\chi^2$ and $\frac{1}{2}(\chi^2+ \chi(-^2))$.
+\end{prop}
+\begin{prop}
+	Let $\rho^{St,0}$ be the non-trivial irreducible representation of $S_n$ contained in $\rho^{St}$, then for any $1 \leq a \leq n-1$, $\bigwedge^a\rho^{St,0}$ is irreducible.
+\end{prop}
+\begin{prop}
+	Let $R$ be a commutative ring, $V$ and $W$ be $R$-modules, then there exists $R$-module isomorphisms between the $R$-$d$-multilinear  maps $V\rightarrow W$ and homomorphisms $T^d(V) \rightarrow W$, between $R$-$d$-multilinear symmetric maps $V\rightarrow W$ and homomorphisms $\text{Sym}^d(V)\rightarrow W$ and between $R$-$d$-multilinear antisymmetric maps $V\rightarrow W$ and homomorphisms $\bigwedge^d V \rightarrow W$.
+\end{prop}
+
+\section{Representations of $S_n$}
+\begin{defn}[Young]
+	Let $\lambda$ be a partition $(\lambda_1 \geq \cdots \geq \lambda_r)$ of $n$. A Young diagram associated to $\lambda$ consists of $r$ aligned rows of boxes where the $i$-th row has $\lambda_i$ boxes. A Young tableaux is a Young diagram filled with integers in $\{1,\dots, n\}$. The conjugate partition of $\lambda$ is the partition corresponding to the number of boxes in each column. The diagram corresponding to the conjugate partition is the original diagram flipped along the $y=-x$ line. The standard tableau is when the boxes are filled in order going from left to right and top to bottom.
+\end{defn}
+\begin{defn}[Young symmetrizer]
+	Let $\lambda$ be a partition of $n$, we define $P_{\lambda}$ and $Q_{\lambda}$ considering the standard tableau associated to $\lambda$:
+	\begin{align*}
+	P_{\lambda} &= \{\sigma \in S_n \mid \sigma \text{preserves every row of the tableau}\}\\ Q_{\lambda} &= \{\sigma \in S_n \mid \sigma \text{preserves every column of the tableau}\}.
+	\end{align*}
+	The Young symmetrizer of $\lambda$ is denoted $c_{\lambda} = a_{\lambda}b_{\lambda}$ where $a_{\lambda}$ and $b_{\lambda}$ are elements of the group ring $\C[S_n]$ defined by 
+	$$a_{\lambda} = \sum_{\sigma \in P_{\lambda}} \sigma \quad \quad b_{\lambda} = \sum_{\sigma \in Q_{\lambda}}.$$
+\end{defn}
+\begin{lem}
+	Let $\lambda$ be a partition of $n$, then the following holds:
+	\begin{enumerate}
+		\item For any $p \in P_{\lambda}$, $a_{\lambda}p = pa_{\lambda} = a_{\lambda}$ and $pc_{\lambda} = c_{\lambda}$.
+		\item For any $q \in Q_{\lambda}$, $qb_{\lambda} = b_{\lambda}q = \text{sgn}(q)b$ and $c_{\lambda}q = \text{sgn}(q)c_{\lambda}.$
+		\item For any $x \in \C[S_n]$ such that for any $p \in P_{\lambda}$ and $q\in Q_{\lambda}$, $pxq= \text{sgn}(q)x$, we have $x = kc_{\lambda}$ with $k \in \C$.		
+	\end{enumerate}
+\end{lem}
+\begin{lem}
+	Let $T$ be a Young tableau and $g \in S_n$. Denote $gT$ to be the tableau obtained after multiplying every element in $T$ by $g$ on the left. Suppose no pair of distinct integers appear in the same row of $T$ and the same column of $gT$, then $g \in PQ$.
+\end{lem}
+\begin{cor}
+	For any $z \in \C[S_n]$, we have $c_{\lambda}zc_{\lambda} \in \C c_{\lambda}$. In particular, $c_{\lambda}^2 = n_{\lambda}c_{\lambda}$ for some $n_{\lambda} \in \C$.
+\end{cor}
+\begin{lem}
+	Let $G$ be a finite group and $W$ be isomorphic to a subrepresentation of $\C[G]$. There exists $\phi \in \C[G]$ such that $W \cong \C[G]\phi$ and $\phi^2 = \phi$.
+\end{lem}
+\begin{thm}
+	For any partition $\lambda$ of $n$, $V_{\lambda} = \C[S_n]c_{\lambda}$ is an irreducible representation.
+\end{thm}
+\begin{prop}
+	Let $\lambda$ be a partition of $n$, then $n_{\lambda} = \frac{n!}{\dim(V_{\lambda})}$.
+\end{prop}
+\begin{lem}
+	If $\lambda < \mu$ in the lexicographic order of partition on $n$, then $c_{\lambda}\C[G]c_{\mu} = 0$ and $c_{\lambda}c_{\mu} = 0$.
+\end{lem}
+\begin{thm}
+	Let $\lambda \neq \mu$ be partitions of $n$, then $V_{\lambda} \not\cong V_{\mu}$.
+\end{thm}
+\begin{cor}
+	All irreducible representations of $S_n$ are isomorphic to $V_{\lambda}$ for some partition $\lambda$ of $n$.
+\end{cor}
+\begin{defn}[Hook length]
+	In a Young diagram, a hook associated to a box is the set of boxes either below or to the right of this box (including the initial box). The hook length is the size of this set.	
+\end{defn}
+\begin{prop}
+	Let $\lambda$ be a partition of $n$, then 
+	$$\dim(V_{\lambda}) = \frac{n!}{\prod_{\text{$h$ is a hook}} \text{(hook length of $h$)}}.$$
+\end{prop}
+
+\section{Category Theory II}
+\begin{defn}[Hom functors]
+	Let $C$ be a category and $A$ one of its objects. We associate to $A$ a covariant functor $h_A = \Mor_C(A,-) : C \rightsquigarrow \textbf{Sets}$ and a contravariant functor $h^A = \Mor_C(-,A): C\rightsquigarrow \textbf{Sets}$.
+\end{defn}
+\begin{lem}[Yoneda]
+	Let $F: C\rightsquigarrow \textbf{Sets}$ be a covariant functor and $\Nat(h_A, F)$ be the set of natural transformations from $h_A$ to $F$. There is a natural bijection $\Nat(h_A, F) \leftrightarrow F(A)$ given by 
+	\begin{align*}
+		\phi &\mapsto \phi_A(\text{id}_A) &&\forall \phi \in \Nat(h_A, F)\\
+		u &\mapsto \{\phi_B = f \mapsto F(f)(u) \mid \forall B \in C_0\} && \forall u \in F(A).
+	\end{align*}
+\end{lem}
+\begin{cor}
+	For any objects $A, B$ of a category $C$, $h_A \cong h_B$ if and only if $A \cong B$.
+\end{cor}
+\begin{defn}[Representable functor]
+	A functor $C\rightsquigarrow \textbf{Sets}$ is called representable if there exists an object $X\in C$ such that this functor is naturally isomorphic to $\Mor_C(X,-)$ and covariant or it is naturally isomorphic to $\Mor_C(-,X)$ and contravariant.
+\end{defn}
+\begin{thm}
+	Let $F: C\rightsquigarrow D$ be a covariant functor, there exists a functor $G:D\rightsquigarrow C$ such that $(F,G)$ is an equivalence of categories if and only if $F$ is fully faithful and essentially surjective.
+\end{thm}
+\begin{thm}[Morita]
+	Let $R$ be a ring and $n \in \N$ be non-zero. The functor $F: {}_R\textbf{Mod} \rightsquigarrow {}_{M_n(R)}\textbf{Mod}$ defined by sending a module $M$ to $M^n$ and a morphism $f$ to $f^n = (f, \dots, f)^t$ is an equivalence of categories.
+\end{thm}
+\begin{defn}[Division algebra]
+	A ring $R$ is called a division ring if every non-zero element is a unit. The center of $R$ is a field, so we also say that $R$ is a division algebra over this field. 
+\end{defn}
+\begin{prop}
+	Any division algebra over $\R$ is either $\R$, $\C$ or $\mathbb{H}$, the Hamilton quaternions.
+\end{prop}
+\begin{thm}
+	Any finite division ring is a field.
+\end{thm}
+\begin{defn}[Universal property]\footnote{This is a rough and not too formal definition, but encapsulates what is needed to know in this course.}
+	Let $C$ be a category, $X$ an object and $J$ a commutative diagram in $C$. We say that $X$ satisfies an initial property if for any object $Y$ that can fit in the diagram $J$ in the place of $X$, there is a unique morphism $f: X\rightarrow Y$ such that we can fit both $X$ and $Y$ in the diagram $J$, add the morphism $f$ and obtain a commutative diagram. We say that $X$ satisfies a terminal property if the direction of the unique morphism is reversed.
+	
+	An object satisfies a universal property if it satisfies a initial property or a terminal property.
+\end{defn}
+\begin{defn}[Directed/injective system]
+	Let $C$ be a category, $I$ be a poset, $\{X_i\mid \}$ be a set of objects of $C$ and $\{f_{ij} \mid \forall i\leq j\}$ be such that $f_{ij} \in \Mor_C(X_i, X_j)$, $f_{ii} = \text{id}_{X_i}$ and $f_{jk} \circ f_{ij} = f_{ik}$ for any $i\leq j\leq k \in I$. It can also be defined as a covariant functor from the category representing the poset $I$ to $C$.
+\end{defn}
+\begin{defn}[Cocone]
+	Let $I$ be a poset and $F:I\rightsquigarrow C$ be a directed system. A cocone of $F(I)$ is a an object $X$ along with morphisms $e_i: F(i) \rightarrow X$ such that for any $i\leq j \in I$, $e_j \circ f_{ij} = e_i$.
+	
+	Let $X, \{e_i\}$ and $Y, \{d_i\}$ be cocones of the directed system. A morphism of cocones is a morphism $m : X \rightarrow Y$ such that for any $i \in I$, $m \circ e_i = d_i$. This yields the category of cocones of the directed system.
+\end{defn}
+\begin{defn}[Direct limit]
+	Given a directed system as above, the direct limit of this system, if it exists, is an object $X \in C$ and morphisms $e_i: X_i \rightarrow X$ that form an initial object in the category of cocones of this system. We denote the limit $\varinjlim X_i = X$.
+\end{defn}
+\begin{prop}
+	In the category of \textbf{Sets}, the direct limit of any directed system $\{X_i\},\{f_{ij}\}$ exists.
+\end{prop}
+\begin{proof}[Proof idea]
+	Let $S$ be the disjoint union of the $X_i$'s, formally $S = \amalg_{i \in I} \{i\} \times X_i$ and $\sim$ be the equivalence relation given by the symmetric extension of $(i,x) \sim (j, f_{ij}(x))$ for all $i\leq j \in I$. We claim that $\varinjlim X_i = S/\sim$ with morphisms $e_i: X_i \rightarrow S/\sim$ defined by sending $x$ to $[(i,x)]$. Left to check this is an initial cocone.
+\end{proof}
+\begin{defn}[Direct sum/Coproduct]
+	Let $I$ be a discrete poset (no distinct elements are comparable) and $\{X_i\}$ form a directed system. The directed limit of this system is called the direct sum or coproduct of the $X_i$'s. It is often denoted $\bigoplus_{i \in I} X_i$ or $\amalg_{i \in I} X_i$.
+\end{defn}
+\begin{prop}
+	In the category  of ${}_R\textbf{Mod}$ for a ring $R$, direct sums exist for any set of objects $\{X_i\}$ ex.
+\end{prop}
+\begin{proof}[Proof idea]
+	Define $X = \bigoplus_{i \in I} X_i$ as the set of functions from $I$ into the disjoint union of the $X_i$'s such that $f(i) \in X_i$ and for all but finitely many $i \in I$, $f(i) = 0_{X_i}$. Check that this is a module and that with the morphisms $e_i :X_i \rightarrow X$ given by $x \mapsto a$ with $a_i = x$ and $a_j= 0$ for $j \neq i$, it forms an initial cocone.
+\end{proof}
+\begin{prop}
+	In the category of ${}_R\textbf{Mod}$, the direct limit of any directed system $\{X_i\},\{f_{ij}\}$ exists.
+\end{prop}
+\begin{proof}[Proof idea]
+	Let the $e_i$'s be defined as above, $W \subseteq \bigoplus_{i \in I} X_i$ be the $R$-module generated by all elements of the form $e_i(x)-e_j(f_{ij}(x))$ and let $L = \bra{\bigoplus_{i \in I}X_i}/W$. The maps $d_i: X_i \rightarrow L$ are defined by $d_i = \pi \circ e_i$ where $\pi$ is the quotient map from $\bigoplus_{i \in I}X_i$ to $L$. Left to show this yields an initial cocone.
+\end{proof}
+\begin{prop}
+	The directed system $F:\N \rightarrow \textbf{FiniteSets}$ with $F(i) = \{1,\dots, i\}$ and $F(i\leq j)$ being the inclusion map has no direct limit in \textbf{FiniteSets}.
+\end{prop}
+\begin{defn}[Pushout]
+	Let $C$ be a category with morphism $f:A\rightarrow B$ and $g:A \rightarrow C$. We call the direct limit of the following diagram (where identity morphisms are omitted) the pushout of the diagram.
+	\begin{figure}[H]
+		\centering
+		\begin{tikzcd}
+			A \arrow[r, "f"] \arrow[d, "g"'] & B \\
+			C & 
+		\end{tikzcd}
+	\end{figure}
+\end{defn}
+\begin{cor}
+	Pushouts exist in \textbf{Sets} and ${}_R\textbf{Mod}$ for a ring $R$.
+\end{cor}
+\begin{prop}[Amalgamated product]
+	In \textbf{Grp}, the pushout of the diagram as above exists and it is called the amalgamated product and is denoted $B \ast_A C$.
+\end{prop}
+\begin{proof}[Proof idea]
+	The underlying set is the set of all finite length words in the disjoint union of $B$ and $C$ where we mod the equivalence relation generated by the following requirements: 
+	\begin{enumerate}
+		\item If for some $i$, $x_i$ and $x_{i+1}$ are in the same group and $y = x_i\cdot x_{i+1}$, then $x_1 \cdots x_n \sim x_1\cdots x_{i-1}yx_{i+1}\cdots x_n$.
+		\item If for some $i$, $x_i = 1$, then $x_1\cdots x_n \sim x_1\cdots x_{i-1}x_{i+1}\cdots x_n$.
+		\item For every $i$ and $a \in A$, if $x_i \in B$, $y = x_if(a)$ and $z = g^{-1}(a)x_{i+1}$, then $x_1\cdots x_n \sim x_1\cdots x_{i-1}yzx_{i+2}\cdots x_n$.
+		\item For every $i$ and $a \in A$, if $x_i \in C$, $y = x_ig(a)$ and $z = f^{-1}(a)x_{i+1}$, then $x_1\cdots x_n \sim x_1\cdots x_{i-1}yzx_{i+2}\cdots x_n$.
+	\end{enumerate}
+	The multiplication is word concatenation. The maps $e_X: X\rightarrow B\ast_A C$ are defined for $X \in \{A,B,C\}$ by $a \mapsto f(a) \sim g(a)$, $b\mapsto b$ and $c \mapsto c$ respectively. Left to check this is the pushout.
+	
+	Observe that when $A = \{1\}$ this corresponds to the free product.
+\end{proof}
+\begin{defn}[Projective/inverse system]
+	Let $I$ be a poset and $C$ a category, a projective system is a contravariant functor $F:I \rightsquigarrow C$.
+\end{defn}
+\begin{defn}[Cone]
+	Let $I$ be a poset and $F:I\rightsquigarrow C$ be an inverse system. A cone of $F(I)$ is a an object $X$ along with morphisms $e_i: X\rightarrow F(i)$ such that for any $i\leq j \in I$, $f_{ij}\circ e_j = e_i$.
+	
+	Let $X, \{e_i\}$ and $Y, \{d_i\}$ be cones of the inverse system. A morphism of cones is a morphism $m : X \rightarrow Y$ such that for any $i \in I$, $e_i\circ m = d_i$. This yields the category of cones of the inverse system.
+\end{defn}
+\begin{defn}[Inverse limit]
+	Given an inverse system as above, the inverse limit of this system, if it exists, is an object $X \in C$ and morphisms $e_i: X \rightarrow X_i$ that form a terminal object in the category of cones of this system. We denote the limit $\varprojlim X_i = X$.
+\end{defn}
+\begin{defn}
+	The inverse limits for discrete systems are called direct products, they are denoted $\prod_{i \in I} X_i$.
+\end{defn}
+\begin{prop}
+	Direct products of any sets $\{X_i\}$ exist in \textbf{Sets}.
+\end{prop}
+\begin{proof}[Proof idea]
+	The elements of $\prod_{i \in I} X_i$ are functions $f: I  \rightarrow \amalg_{i \in i} X_i$ such that $f(i) \in X_i$. With the projection functions $p_i : \prod_{i \in I} X_i \rightarrow X = f \mapsto f(i)$, we obtain a terminal cone of the system.
+\end{proof}
+\begin{prop}
+	The inverse limit of any inverse system $\{X_i\}, \{f_{ij}\}$ exists in \textbf{Sets}.
+\end{prop}
+\begin{proof}[Proof idea]
+	Let $X$ be the set of elements $f \in \prod_{i \in I}X_i$ that satisfy $f(i) = f_{ij}(f(j))$ for every $i\leq j$. With the restrictions of the projection maps to $X$, we get a terminal cone of the system.
+\end{proof}
+\begin{prop}
+	The inverse limit of any inverse system $\{R_i\}, \{f_{ij}\}$ exists in \textbf{Rings}.
+\end{prop}
+\begin{proof}[Proof idea]
+	The underlying set and the projection maps are the same as for the inverse limits in \textbf{Sets}, we just need to check that $\prod_{i \in I} R_i$ is a ring under coordinate-wise addition and multiplication.
+\end{proof}
+\begin{prop}
+	The inverse limit of any inverse system $\{M_i\}, \{f_{ij}\}$ exists in ${}_R\textbf{Mod}$ for any ring $R$.
+\end{prop}
+\begin{proof}[Proof idea]
+	The underlying set and the projection maps are the same as for the inverse limits in \textbf{Sets}, we just need to check that $\prod_{i \in I} M_i$ is a module under coordinate-wise addition and the action $r\cdot f = f(r\cdot -)$.
+\end{proof}
+\begin{defn}[Pullback]
+	Let $C$ be a category with morphism $f:A\rightarrow C$ and $g:B \rightarrow C$. We call the inverse limit of the following diagram (where identity morphisms are omitted) the pullback of the diagram.
+	\begin{figure}[H]
+		\centering
+		\begin{tikzcd}
+			& A \arrow[d, "f"] \\
+			B \arrow[r, "g"'] & C
+		\end{tikzcd}
+	\end{figure}
+\end{defn}
+\begin{defn}[Completion of a ring]
+	Let $R$ be a ring and $I \lhd R$ and denote $I^n$ to be the ideal generated by all products of $n$ elements of $I$. We have an inverse system indexed by $\N$ with $F(n) = R/I^n$ and $F(n \leq m)$ being the canonical quotient map $R/I^m \rightarrow R/I^n$. The completion of the ring $R$ relative to $I$ is the inverse limit of this system, it is denoted $R^{\wedge I}$ and has the following underlying set:
+	\[\{(\dots, r_{n+1}, r_n, \dots, r_1) \mid \forall n \in \N, r_n \in R/I^n, r_{n+1} \equiv r_n \Mod{I^n}.\]
+	We also have a natural map $R\rightarrow R^{\wedge I}$ given by $r \mapsto (\dots, r,r,r)$.
+\end{defn}
+\begin{thm}[Krull]
+	Let $R$ be a Noetherian domain and $I \neq R$ be an ideal of $R$. The natural map $R\rightarrow R^{\wedge I}$ is injective.
+\end{thm}
+\begin{defn}[Power series]
+	Let $A$ be a commutative ring and $R = A[x_1, \dots, x_n]$ be the ring of polynomials in $n$ variables over $A$ and let $I = \langle x_1, \dots, x_n \rangle$, then $R^{\wedge I} = A\llbracket x_1, \dots, x_n\rrbracket$, the ring of power series of $n$ variables over $A$.
+\end{defn}
+\begin{defn}[$p$-adic]
+	Let $p$ be prime, the ring of $p$-adic numbers denoted $\Z_p$ is the completion of $\Z$ relative to $p\Z$.
+\end{defn}
+
+\section{Commutative Algebra}
+In the following $R$ denotes a commutative ring.
+\begin{defn}[Multiplicative set]
+	We say that a subset $S\subseteq R$ is multiplicative if $1 \in S$ and $S$ is closed under multiplication.
+\end{defn}
+\begin{defn}[Localization of rings]
+	Let $S$ be a multiplicative set in $R$. The localization of $R$ at $S^{-1}$ is $R[S^{-1}]$ is a ring where all the elements of $S$ are invertible. Let $R_S = \{\frac{r}{s} \mid r \in R, s\in S\}$ and $\sim$ be the equivalence relation with $\frac{r}{s} \sim \frac{r'}{s'}$ for all $r,r' \in R$, $s, s' \in S$ such that there exists $s'' \in S$ with $s''(s'r-sr') = 0$. We let $R[S^{-1}] = R_S/\sim$ and addition and multiplication be defined as usual for fractions, this yields a commutative ring.
+\end{defn}
+\begin{prop}
+	Let $\ell:R\rightarrow R[S^{-1}] = r \mapsto \frac{r}{1}$. This is a homomorphism with the universal property that for any homomorphism $f:R\rightarrow B$ into a commutative ring with $f(S) \subseteq B^{\times}$, there is a unique map $F:R[S^{-1}] \rightarrow B$ such that $f = F\circ \ell$.
+\end{prop}
+\begin{defn}[Localization of modules]
+	Let $M$ be an $R$-module and $S$ a multiplicative set of $R$. The localization of $M$ at $S$ is a $R[S^{-1}]$-module given by $M[S^{-1}] = R[S^{-1}] \otimes_R M$.
+\end{defn}
+\begin{prop}
+	Let $M_S = \{\frac{m}{s} \mid m \in M, s \in S\}$ and $\sim$ be the equivalence relation with $\frac{m}{s} \sim \frac{m'}{s'}$ for all $m,m' \in M$, $s,s' \in S$ such that there exists $s'' \in S$ with $s''(s'm- sm') = 0$. Putting the obvious module structure on $M_S/\sim$ we get a $R[S^{-1}]$ module isomorphic to $M[S^{-1}]$.
+\end{prop}
+\begin{defn}[Localization at an ideal]
+	Let $\lp$ a prime ideal of $R$, then $R-\lp$ is a multiplicative set and we denote $R_{\lp} = R[(R-\lp)^{-1}]$ and $M_{\lp} = M[(R-\lp)^{-1}]$.
+\end{defn}
+\begin{defn}[SES]
+	A short exact sequence is a sequence of modules and morphisms\\
+	\begin{figure}[H]
+		\begin{tikzcd}
+			0 \arrow[r] & A \arrow[r, "f"] & B \arrow[r, "g"] & C \arrow[r] & 0
+		\end{tikzcd}
+	\end{figure}
+	such that the image of every map is the kernel of the following one.
+\end{defn}
+\begin{defn}[Exact functor]
+	Let $F:C\rightarrow D$ be a covariant additive functor between additive full subcategories of ${}_R\textbf{Mod}$ closed under taking kernels and quotients. We say that $F$ is exact if the image under $F$ of a SES in $C$ is an SES in $D$.
+\end{defn}
+\begin{prop}
+	Localization is an exact functor.
+\end{prop}
+\begin{prop}
+	Let $S$ be a multiplicative set of $R$, there is a bijection between the prime ideals of $R[S^{-1}]$ and the prime ideals of $R$ that do not intersect $S$.
+\end{prop}
+\begin{proof}[Proof idea]
+	Recall the map $\ell: R \rightarrow R[S^{-1}]$. For any $I \lhd R[S^{-1}]$, denote $I^c = \ell^{-1}(I)$, this is an ideal of $R$ and if $I$ is prime, then $I^c$ is a prime ideal not intersecting $S$. For any $I \lhd R$, denote $I^e = I[S^{-1}]$, this is an ideal of $R[S^{-1}]$ and if $I$ is prime and does not intersect $S$, then $I^e$ is prime or $I^e = R[S^{-1}]$. Finally, we can show $I^{ec} = I$ and $I^{ce} = I$ which yields the desired bijection and also implies $I^e$ is a proper ideal.
+\end{proof}
+\begin{defn}[Local ring]
+	We say that $R$ is local if it has a unique maximal ideal.
+\end{defn}
+\begin{cor}
+	Let $\lp$ be a prime ideal of $R$, then $R_{\lp}$ is a local ring.
+\end{cor}
+\begin{defn}[Spectrum]
+	The spectrum of $R$ is $\spec(R) = \{[\lp] \mid \lp \text{ a prime ideal of } R\}$.
+\end{defn}
+\begin{lem}
+	A homomorphism of rings $f:R\rightarrow S$ induces a function $f^{*}: \spec(S) \rightarrow \spec(R) = [\lp] \mapsto [f^{-1}(\lp)]$.
+\end{lem}
+\begin{defn}[Radical]
+	Let $I$ be an ideal of $R$, its radical is denoted $\sqrt{I}$ and it is the ideal $\{r \in R \mid \exists n \in \N, r^n \in I\}$. We say that $I$ is radical if $I = \sqrt{I}$. It is clear that a prime ideal is radical and the radical of any ideal is radical.
+\end{defn}
+\begin{defn}[Topology on $\spec(R)$]
+	For any ideal $I$ of $R$, define $V(I) = \{[\lp] \in \spec(R) \mid I \subseteq \lp\}$. We assign a topology on $\spec(R)$ by letting $\{V(I) \mid I \lhd R\}$ be the set of all closed sets.
+\end{defn}
+\begin{prop}
+	The object defined above is indeed a topology. Namely,
+	\begin{enumerate}
+		\item There exists ideals $I$ and $J$ such that $\emptyset = V(I)$ and $\spec(R) = V(J)$.
+		\item For any ideals $I$ and $J$, $V(I) \cup V(J) = V(IJ)$ is closed.
+		\item For any ideals $\{I_{\alpha}\}$, $\cap_{\alpha} V(I_{\alpha}) = V(\sum_{\alpha} I_{\alpha})$ is closed.
+	\end{enumerate}
+\end{prop}
+\begin{lem}
+	Let $I$ be an ideal of $R$, then $\sqrt{I} = \cap \{\lp \mid I \subseteq \lp \text{ is prime}\}$.
+\end{lem}
+\begin{cor}
+	For any ideals $I, J \lhd R$, $V(I) = V(J)$ if and only if $\sqrt{I} = \sqrt{J}$.
+\end{cor}
+\begin{prop}
+	If $\lp$ is a prime ideal, then $V(\lp)$ is the closure of $\{[\lp]\}$.
+\end{prop}
+\begin{prop}
+	Let $f:R\rightarrow S$ be a ring homomorphism, the induced map $f^*$ is continuous in the topology we defined.
+\end{prop}
+\begin{proof}[Proof idea]
+	Let $I$ be an ideal of $R$, we claim that $(f^{*})^{-1}(V(I)) = V(\langle f(I) \rangle)$. $\lp$ is a prime ideal containing $f(I)$ $\Leftrightarrow$ $f^{-1}(\lp)$ contains $I$ $\Leftrightarrow$ $f^*[\lp] \in V(I)$ $\Leftrightarrow$ $\lp \in (f^{*})^{-1}(V(I))$.
+\end{proof}
+\begin{prop}
+	Let $f \in R$, we denote $D(f) = \{[\lp] \mid f \notin \lp\} = \spec(R) - V(f)$.
+\end{prop}
+\begin{prop}
+	The function $\ell^*: \spec(R[\langle f\rangle^{-1}]) \rightarrow \spec(R)$ is a homeomorphism onto $D(f)$.
+\end{prop}
+\begin{defn}
+	Let $X$ be a topological space, we define the category $T_X$ where the objects are open sets and for any open sets $U, V$ $\Mor_{T_X}(U,V) = \{i_{U,V}\}$ if $U\subseteq V$ and $\Mor_{T_X}(U,U) = \emptyset$ otherwise.
+\end{defn}
+\begin{defn}[Sheaf]
+	Let $X$ be a topological space, a sheaf $\mO$ of commutative rings on $X$ is a contravariant functor $\mO: T_X \rightsquigarrow \textbf{Rings}$ (we denote $\mO(i_{U,V}) = res_{VU}$ or $|_{U}$) such that the following holds:
+	\begin{enumerate}
+		\item $\mO(\emptyset) = 0$.
+		\item If $U = \cup_i U_i$ and $s \in \mO(U)$ is such that $s|_{U_i} = 0$ for all $i$, then $s = 0$.
+		\item If $U = \cup U_i$ and for all $i$, $s_i \in \mO(U_i)$ are elements such that for all $i,j$, $s_i|_{U_i \cap U_j} = s_j|_{U_i \cap U_j}$, then there exists an element $s \in \mO(U)$ such that $s|_{U_i} = s_i$ for all $i$.
+	\end{enumerate}
+\end{defn}
+\begin{defn}[Ringed space]
+	A ringed space is a topological space $X$ along with a sheaf of rings $O_X$.
+\end{defn}
+\begin{defn}[Stalk]
+	Given $x \in X$ a point in a ringed space, the stalk or germs of functions at $x$ is the ring $\mO_{X,x} = \varinjlim \{\mO_{X}(U) \mid x \in U\}$. Elements of this ring are pairs $(U,f)$ where $U$ is an open set containing $x$ and $f \in \mO_X(U)$ under the equivalence relation $(U,f) \sim (V,g)$ whenever $f|_{U \cap V} = g|_{U \cap V}$. Addition and multiplication is defined by 
+	\[(U_1, f_1) \square (U_2, f_2) = (U_1 \cap U_2, f_1|_{U_1 \cap U_2} \square f_2|_{U_1 \cap U_2}.\]
+\end{defn}
+\begin{defn}[Locally ringed space]
+	A locally ringed space is a ringed space such that the stalk at any point is a local ring.
+\end{defn}
+\begin{prop}
+	We can make $\spec(R)$ into a ringed space.
+\end{prop}
+\begin{proof}[Proof idea]
+	For any open set $U$, define $\mO(U)$ to be the functions $f$ on $U$ with the property that for any $[\lp] \in U$, $f([\lp]) \in R_{\lp}$ and there exists an open set $V \subseteq U$ containing $[\lp]$ and elements $r,s \in R$ where $s \notin \mathfrak{q}$ for any $[\mathfrak{q}] \in V$ and $f([\mathfrak{q}]) = \frac{r}{s} \in R_{\mathfrak{q}}$ for all $[\mathfrak{q}]\in V$. Need to check that this is indeed a sheaf of rings.
+\end{proof}
+\begin{lem}
+	The sheaf $\mO$ defined as above makes $\spec(R)$ into a locally ringed space, namely, the stalk at $[\lp]$ is a local ring for any prime ideal $\lp$.
+\end{lem}
+\begin{proof}
+	We claim that $\mO_{[\lp]} \cong R_{\lp}$ which is a local ring.
+\end{proof}
+\begin{prop}
+	Let $f \in R$, then $\mO(D(f)) = R[f^{-1}]$.
+\end{prop}
+\begin{cor}
+	$\mO(\spec(R)) = R$.
+\end{cor}
+\begin{defn}[Morphism of sheaves]
+	A morphism of sheaves $\phi: \mO \rightarrow \mathcal{P}$ is a natural transformation between the two functors.
+\end{defn}
+\begin{defn}[Morphism of ringed spaces]
+	Let $(X, \mO_X)$ and $(Y, \mO_Y)$ be ringed spaces and $f:X\rightarrow Y$ is a continuous map. We can define a new sheaf on $Y$ $f_*\mO_X = U \mapsto \mO_X(f^{-1}(U))$. A morphism of ringed spaces is $f$ along with a morphism of sheafs $f^{\sharp} : \mO_Y \rightsquigarrow f_*\mO_X$. If $X$ and $Y$ are locally ringed spaces, $(f, f^{\sharp})$ is a morphism of locally ringed spaces if the induced ring homomorphisms $f^{\sharp}: \mO_{Y, f(x)} \rightarrow \mO_{X,x}$ is a local homomorphism. Namely, the preimage of the maximal ideal is maximal.
+\end{defn}
+\begin{defn}[Affine schemes]
+	An affine scheme is a locally ringed space isomorphic to $(\spec(R), \mO)$ for some ring $R$. The category of affine schemes is a full subcategory of the category of locally ringed spaces.
+\end{defn}
+\begin{thm}
+	The category of commutative rings is anti-equivalent to the category of affine schemes.
+\end{thm}
+\end{document}

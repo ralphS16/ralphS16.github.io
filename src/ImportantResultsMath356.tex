@@ -1,0 +1,600 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=12pt]{scrartcl} % A4 paper and 11pt font size
+\newcommand{\bra}[1]{\left(#1\right)}
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{mathpazo} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm, amssymb} % Math packages
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{clrscode3e}
+\usepackage{tikz}
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\normalfont \bfseries} % Make all sections centered, the default font and small caps
+\usepackage{enumerate}
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{quest}[thm]{Question}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{defns}[thm]{Definitions}
+\newtheorem{con}[thm]{Construction}
+\newtheorem{alg}[thm]{Algorithm}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{exmps}[thm]{Examples}
+\newtheorem{notn}[thm]{Notation}
+\newtheorem{notns}[thm]{Notations}
+\newtheorem{addm}[thm]{Addendum}
+\newtheorem{exer}[thm]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{rems}[thm]{Remarks}
+\newtheorem{warn}[thm]{Warning}
+\newtheorem{sch}[thm]{Scholium}
+\newcommand{\Mod}[1]{\ (\text{mod}\ #1)}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\mC}{\mathcal{C}}
+\newcommand{\borel}{\mathcal{B}(\R)}
+\newcommand{\mS}{\mathcal{S}}
+\newcommand{\Perp}{\perp\!\!\!\perp}
+
+\renewcommand{\P}{\mathbb{P}}
+\DeclareMathOperator{\Span}{Span}
+\DeclareMathOperator{\vari}{Var}
+\DeclareMathOperator{\cov}{Cov}
+\DeclareMathOperator{\corr}{Corr}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\inp}[2]{\left\langle #1, #2 \right\rangle}
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+%\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{McGill University - Fall 2017} \\ [0pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Important Results - MATH 356 \\ % The assignment title
+\horrule{2pt} \\[0cm] % Thick bottom horizontal rule
+}
+
+\author{Ralph Sarkis 260729917} % Your name
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+\section{Probability Basics}
+\begin{prop}
+	\begin{itemize}
+		\item[]	
+		\item $\P(\emptyset) = 0$ because $\P(\emptyset) = \P\bra{\bigcup_{i \in \N} \emptyset} = \sum_{i \in \N}\P(\emptyset)$ using countable additivity.
+		\item If $A_i \in \mS$ for $i = 1, \dots, n$ with $A_i \cap A_j$ for all $i \neq j$, we have $\P\bra{\bigcap_{i =1}^nA_i} = \sum_{i =1}^n \P(A_i)$ (finite additivity)
+		\item $\forall A \in \mS, \P(A) \in [0,1]$, the proof of that also shows that $\P(A^c) = 1 - \P(A)$
+		\item If $A, B \in \mS$ and $A \subseteq B$, we have $\P(B\setminus A) = \P(B) - P(A)$, in particular, we have $\P(A) \leq \P(B)$ which is called monotonicity
+		\item Let $A,B \in \mS$, we have $\P(A \cup B) = \P(A) + \P(B) - \P(A\cap B)$ (finite sub-additivity)
+		\item Let $A_i \in \mS$ for $i = 1, \dots, n$, the Inclusion-Exclusion formula says the following:
+		$$\P\bra{\bigcup_{i=1}^n A_i} = \sum_{i=1}^n \P(A_i) -\sum_{\substack{i_1,i_2 = 1\\i_1<i_2}}^n \P\bra{A_{i_1} \cap A_{i_2}} + \cdots + (-1)^{n+1}\P\bra{\bigcap_{i=1}^nA_i}$$
+	\end{itemize}
+\end{prop}
+\begin{thm}[Bonferonni's inequality]
+	Let $A_i \in \mS$ for $i = 1, \dots, n$, we have the following inequality:
+	\[
+	\sum_{i=1}^n\P(A_i) - \sum_{\substack{i_1,i_2 = 1\\i_1<i_2}}^n \P\bra{A_{i_1} \cap A_{i_2}} \leq \P\bra{\bigcup_{i=1}^n A_i} \leq \sum_{i=1}^n\P(A_i)
+	\]
+\end{thm}
+\begin{prop} Let $\mS$ be a $\sigma$-field and $\P$ a probability distribution.
+	\begin{itemize}
+		\item Continuity from below : If $A_n \in \mS$ for $n \in \N$ and $A_n \uparrow A$, then, the sequence $\P(A_n)$ is monotonically increasing and $\lim_{n\rightarrow \infty} \P(A_n) = \P(A)$.
+		\item Continuity from above : If $A_n \in \mS$ for $n \in \N$ and $A_n \downarrow A$, then, the sequence $\P(A_n)$ is monotonically decreasing and $\lim_{n\rightarrow \infty} \P(A_n) = \P(A)$.
+		\item Countable sub-additivity : If $A_n \in \mS$ for $n \in \N$, we have $\P\bra{\bigcup_{n \in \N}A_n} \leq \sum_{n=1}^{\infty}\P(A_n)$.
+	\end{itemize}
+\end{prop}
+\section{Conditional Probability}
+\begin{defn}[Conditional probability]
+	Let $(\Omega, \mS, \P)$ be a probability space and $H \in \mS$ such that $\P(H) > 0$. Then, for every $A \in \mS$, we define the conditional probability of $A$ given $H$ by $$\P(A \vert H) = \frac{\P(A \cap H)}{\P(H)}$$
+	If $\P(H) = 0$, then $\P(A \vert H)$ is undefined.
+\end{defn}
+\begin{thm}[The multiplication rule]
+	If $A_i \in \mS$ for $i \in \{1, \dots, n\}$ and $\P\bra{\bigcap_{i=1}^{n-1}A_i} > 0$, then 
+	$$\P\bra{\bigcap_{i=1}^{n}A_i} = \P(A_1)\P(A_2 \vert A_1)\P(A_3 \vert A_1 \cap A_2) \cdots \P\bra{A_n \;\middle\vert\; \bigcap_{j=1}^{n-1}A_j}$$
+\end{thm}
+\begin{thm}[Total probability and Bayes' rule]
+	Let $\{H_i \mid i \geq 1\}$ be a partition of $\Omega$, namely, they are disjoint sets whose union is equal to $\Omega$, such that $\forall i \geq 1, \P(H_i) > 0$. Then, the total probability rule states that $\forall A \in \mS$, $\P(A) = \sum_{i=1}^{\infty} \P(A \vert H_i)\P(H_i)$. In particular, Bayes' rule can be derived : 
+	$$\P(H_i \vert A) = \frac{\P(A \vert H_i)\P(H_i)}{\sum_{j=1}^{\infty} \P(A \vert H_j) \P(H_j)}$$
+\end{thm}
+\begin{defn}[Lack of memory]
+	Let $(\Omega, \mS, \P)$ be a discrete probability space with $\Omega = \N$ and $\mS = \mathcal{P}(\Omega)$. We say that $\P$ is memoryless if for any $m,k\in \N$, we have $\P\bra{\{k+m\} \mid \{m,m+1,\dots\}} = f(k)$. One can show that $\P$ must be a geometric distribution. Moreover, in the continuous case, $\P$ must be an exponential distribution.
+\end{defn}
+\section{Random Variables}
+\begin{defn}[PMF]
+	Let $\P$ be a discrete distribution on some discrete probability space. The function $f : \Omega \rightarrow [0,1]$ defined with $f(\omega) = \P(\{\omega\})$ is called the probability mass function. It has the property that $\sum_{\omega \in \Omega} f(\omega) = 1$. Moreover, if a function has this property, then it is the PMF of some discrete distribution.
+\end{defn}
+We now give some examples of discrete distributions which we will use often because they describe what we usually study with probability. Note that we most often work with the probability space $(\Omega, \mS, \P)$ and denote the PMF with $f$.
+\begin{defn}[Discrete Uniform]
+	If $|\Omega| = n < \infty$ and the PMF of $\P$ is $f(\omega) = \frac{1}{n}$, $\P$ is called the discrete uniform distribution. Let's verify that $f$ is indeed a PMF.
+	\[ \sum_{\omega \in \Omega} f(\omega) = \sum_{\omega \in \Omega} \frac{1}{n} = n \cdot \frac{1}{n} = 1\]
+	This distribution is used to describe experiences where each sample point happens as often as the others. For example, a fair coin/dice, three dices, etc...
+\end{defn}
+\begin{defn}[Dirac]
+	If the PMF of $\P$ is such that there exists a sample point $\omega_0 \in \Omega$ such that $f(\omega_0) = 1$, we call $\P$ a Dirac distribution. We can infer that all the other sample points have probability zero. Let's verify that $f$ is indeed a PMF.
+	\[ \sum_{\omega \in \Omega} f(\omega) = \sum_{\omega \in \Omega \setminus\{\omega_0\}}0 + f(\omega_0) = 1 \]
+	This distribution is used when only one possible outcome happens all the time.
+\end{defn}
+\begin{defn}[Bernoulli]
+	If $\Omega = \{0,1\}$ and there is a number $p \in (0,1)$ such that $f(0) = 1-p$ and $f(1) = 1$, we call $\P$ the Bernoulli distribution and denote it $B(p)$. Let's verify that $f$ is indeed a PMF.
+	\[\sum_{\omega \in \Omega}f(\omega) = f(1) + f(0) = p+ 1-p = 1\]
+	This distribution is used when the experience has two outcomes, where one has probability $p$ of happening. We often call this outcome the success and the other outcome the failure, so the experience has probability $p$ of succeeding.
+\end{defn}
+\begin{defn}[Binomial]
+	If $\Omega = \{0,\dots, n\}$ for $n > 0$ and there is a number $p \in (0,1)$ such that $f(k) = \binom{n}{k}p^k(1-p)^{n-k}$ for every $k \in \Omega$, we call $\P$ the Binomial distribution and denote it $B(n,p)$. Let's verify that $f$ is indeed a PMF\footnote{We will use the binomial formula}.
+	\[ \sum_{\omega \in \Omega} f(\omega) = \sum_{k=0}^n \binom{n}{k}p^k(1-p)^{n-k} =  (p + (1-p))^n = 1\]
+	This distribution is used to describe the probability of having $k$ successes in $n$ independent Bernoulli trials. In particular $B(1,p) = B(p)$. A concrete example of that is the probability of getting 4 heads when flipping 5 weighted coins that fall on head 75\% of the time.  
+\end{defn}
+\begin{defn}[Poisson]
+	If $\Omega = \N$ and there is a number $\lambda > 0$ such that $f(k) = e^{-\lambda}\frac{\lambda^k}{k!}$ for every $k \in \N$, we call $\P$ the Poisson distribution and denote it $P(\lambda)$. Let's verify that $f$ is indeed a PMF\footnote{We use the Taylor expansion of the function $e^x$}.
+	\[ \sum_{\omega \in \Omega}f(\omega) = e^{-\lambda}\sum_{k=0}^n\frac{\lambda^k}{k!} = e^{-\lambda}e^{\lambda} = 1 \]
+	This distribution models the number of rare events occurring in a certain period when we know that the rare events have a constant rate and occur independently from the last time since the last event. It can also be viewed as the limit of $B(n, \frac{\lambda}{n})$ as $n \rightarrow \infty$.
+\end{defn}
+\begin{defn}[Geometric]
+	If $\Omega = \N$ and there is a number $p \in (0,1)$ such that $f(k) = (1-p)^kp$ for every $k \in \N$, we call $\P$ the Geometric distribution and denote it $G(p)$. Let's verify that $f$ is indeed a PMF\footnote{We use the formula of the geometric series}.
+	\[\sum_{\omega \in \Omega} f(\omega) = \sum_{k=0}^{\infty} (1-p)^kp = p\sum_{k=0}^{\infty} (1-p)^k = p\frac{1}{1-(1-p)} = 1\]
+	This distribution models the number of failed Bernoulli trials before the first success.
+\end{defn}
+Although the PMF gives all the information needed for a discrete distribution, it is not enough for a continuous distribution. Hence, we will explore a new notion.
+\begin{defn}[CDF]
+	Consider the probability space $(\R, \mathcal{B}(\R), \Q)$. The cumulative distribution function $F$ of $\Q$ is defined as $F : \R \rightarrow [0,1]$ and $F(x) = Q((-\infty,x])$. It has three important properties : 
+	\begin{itemize}
+		\item $F$ is non-decreasing on $\R$.
+		\item $\lim_{x\rightarrow -\infty}F(x) = 0$ and $\lim_{x\rightarrow \infty}F(x) = 1$
+		\item $F$ is right continuous.
+	\end{itemize}
+	Moreover, if some function $F$ satisfies these three properties, then it is the cumulative distribution function for some distribution on $(\R, \mathcal{B}(\R))$.
+\end{defn}
+In order to study their CDFs, we will look at discrete distributions on the space $(\R, \mathcal{B}(\R))$.
+\begin{exmp}
+	\begin{itemize}
+		\item[]
+		\item Consider the distribution $B(n,p)$ on $(\R, \mathcal{B}(\R))$, here is its CDF.
+		\[F(x) = \P((-\infty,x]) = \sum_{k\leq x} f(k) = \sum_{k\leq x} \binom{n}{k}p^k(1-p)^{n-k}\]
+		Here are some values : $x < 0 \implies F(x) = 0$, $0\leq x \leq 1 \implies F(x) = (1-p)^n$, $1 \leq x \leq 2 \implies F(x) = (1-p)^n + np(1-p)^{n-1}$, etc...
+		\item Consider the distribution $P(\lambda)$ on $(\R, \mathcal{B}(\R))$, here is its CDF.
+		\[ F(x) = \P((-\infty,x]) = \sum_{k\leq x}f(k) = \sum_{k\leq x} e^{-\lambda}\frac{\lambda^k}{k!}\]
+		Here are some values : $x < 0 \implies F(x) = 0$, $0 \leq x \leq 1 \implies F(x) = e^{-\lambda}$, $1 \leq x \leq 2 \implies F(x) = e^{-\lambda} + \lambda e^{-\lambda}$, etc...
+		\item Consider the distribution $G(p)$ on $(\R, \mathcal{B}(\R))$, here is its CDF.
+		\[F(x) = \P((-\infty,x]) = \sum_{k\leq x}f(k) = \sum_{k\leq x} (1-p)^kp\]
+		Here are some values : $x < 0 \implies F(x) = 0$, $0\leq x \leq 1 \implies F(x) = p$, $1 \leq x \leq 2 \implies F(x) = p(1-p)$, etc...
+	\end{itemize}
+\end{exmp}
+The CDF does not give more information than the PMF for discrete distributions, so we will look at continuous distribution. The simplest example being the uniform distribution.
+\begin{defn}[Continuous uniform]
+	Let $\Q$ be a distribution on $(\R, \mathcal{B}(\R))$ and $a<b$ be two real numbers such that the CDF of $\Q$ is the following :
+	\[ F(x) = \begin{cases}		0 &x<0\\ \frac{x-a}{b-a} & x \in [a,b]\\ 1 & x>b	\end{cases}\]
+	We call $\Q$ the uniform distribution on $[a,b]$ and we denote it $U(a,b)$. Let's verify that $F$ is indeed a CDF. It is clearly non-decreasing since each part is non-decreasing and $\forall x \in [a,b], \frac{x-a}{b-a} \in [0,1]$. Moreover, we have $\lim_{x\rightarrow -\infty} F(x) = 0$ and $\lim_{x\rightarrow \infty} F(x) = 1$ since $x \leq a \implies F(x) = 0$ and $x \geq b \implies F(x) = 1$. Lastly, we want to show that it is right continuous, inside the intervals, this is clear but we need to check at $x = a $ and $x = b$\footnote{This is not really a proof since we are using only one sequence to show the limit but it can be refined}. 
+	\begin{align*}
+	\lim_{x\rightarrow a^+}F(x) &= \lim_{n\rightarrow \infty} F(a+\frac{1}{n}) = \lim_{n\rightarrow \infty} \frac{1}{n}\frac{1}{b-a} = 0 = F(a)\\
+	\lim_{x\rightarrow b^+}F(x) &= \lim_{n\rightarrow \infty} F(b+\frac{1}{n}) = 1 = F(b)
+	\end{align*}
+\end{defn}
+We will now look at other continuous distributions and their definitions.
+\begin{defn}[Continuous distribution]
+	Consider the space $(\R, \mathcal{B}(\R), \Q)$ and the CDF $F$. We say that $\Q$ is a continuous distribution if $F$ is a absolutely continuous, namely,$\exists f : \R \rightarrow [0,\infty)$ such that $\forall x \in \R, F(x) = \int_{-\infty}^{x}f(t)dt$. We call $f$ the probability density function (PDF). Here are some properties of $\Q$.
+	\begin{itemize}
+		\item $\int_{-\infty}^{\infty}f(t)dt = 1$
+		\item $\forall a \leq b, \Q((a,b]) = F(b)-F(a) = \int_a^bf(t)dt$
+		\item $F$ is continuous everywhere and differentiable almost everywhere. Also, $F'(x) = f(x)$ at almost every $x$ and at every $x$ where $f$ is continuous.
+	\end{itemize}
+\end{defn}
+\begin{exmps}
+	\begin{itemize}\item[]
+		\item For $U(a,b)$, the PDF is $f(x) = \frac{1}{b-a}$ for $x \in [a,b]$ and $f(x) = 0$ everywhere else.
+		\item The Gaussian distribution (also called normal) is denoted $N(0,1)$ and has the following CDF and PDF.
+		\begin{align*}
+		F(x) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^xe^{\frac{-t^2}{2}}dt \quad \quad f(t) = \frac{1}{\sqrt{2\pi}}e^{\frac{-t^2}{2}}
+		\end{align*}
+	\end{itemize}
+\end{exmps}
+We will use these distribution to talk about random variables.
+\begin{defn}[RV]
+	Let $\Omega$ be a simple space and $\mS$ be a $\sigma$-field on $\Omega$. A function $X : \Omega \rightarrow \mS$ is called a random variable if $\forall B \in \mathcal{B}(\R), X^{-1}(B) \in \mS$.
+\end{defn}
+Note that the notion of probability is not part of this definition and if $\Omega$ is discrete and $\mS = 2^{\Omega}$, any function from $\Omega$ to $\R$ is a random variable. An equivalent definition is that $\forall x \in \R, \{X \leq x\} = \{\omega \in \Omega \mid X(\omega) < x\} \in \mS$ Using this definition, it is easy to show that if $X$ is a RV, $aX + b$, $e^X$ and other simple transformations of $X$ are RVs. More generally, if $g$ is a Borel function (i.e: $g: \R \rightarrow \R$ and $\forall B \in \mathcal{B}(\R), g^{-1}(B) \in \borel$) then $g \circ X$ is a RV as well.
+
+Now, we introduce the notion of probability in RVs.
+\begin{defn}[Distribution of RV]
+	Given a probability space $(\Omega, \mS, \P)$ and a RV $X$. Define the following set function $\Q : \borel \rightarrow \R$ by $B \mapsto \P(X^{-1}(B))$. The CDF of $\Q$ is also the CDF of $X$ and it can be written as $F(X) = \P(X \leq x)$. If $g$ is a Borel function, we have $\Q_{g \circ X}(B) = \Q_X(g^{-1}(B))$.
+\end{defn}
+We now turn to expectation and variance of a RV.
+\begin{defn}[Discrete expectation]
+	If $X$ is a discrete RV on $(\Omega, \mS, \P)$ and $X \in \{x_n \mid n \in \N\}$ with PMF $f_X$. The expectation of $X$, denoted $\E[X]$, is defined if $\sum_{n=0}^{\infty}|x_n|f_X(x_n) < \infty$ and we have $\E[X] = \sum_{n=0}^{\infty}x_nf_X(x_n)$.
+\end{defn}
+\begin{prop}
+	Here are some properties of the expectation. Let $X$ and $Y$ be RVs with $\E[|X|] < \infty$ and $\E[|Y|] < \infty$, then the following holds.
+	\begin{itemize}
+		\item Let $a,b \in \R$, then $\E[aX + bY] = a\E[X] + b\E[Y]$ (linearity).
+		\item If $X \geq Y$, then $\E[X] \geq \E[Y]$ (monotonicity).
+		\item If $\E[X^2]$ and $\E[Y^2]$ also exist, then $|\E[XY]| \leq \E[|XY|] \leq \sqrt{\E[X^2]\E[Y^2]}$.
+	\end{itemize}
+\end{prop}
+Let's calculate the expectations for various discrete RVs we know. We will assume that the expectation exists to avoid some computations.
+\begin{exmps}
+	We will work in the discrete probability space $(\Omega, \mS, \P)$ and we will denote $f$ to be the PMF of the RV.
+	\begin{itemize}
+		\item Let $X$ be a Dirac RV with $f(x_0) = 1$, then $\E[X] = x_0$.
+		\item Let $X$ be a Bernoulli RV ($X \in \{0,1\}$) with parameter $p \in (0,1)$, then $\E[X] = 0\cdot (1-p) + 1\cdot p = p$. 
+		\item Let $X$ be a Binomial RV ($X \in \{0,n\}$) with parameter $n > 0$ and $p \in (0,1)$, we get the following.
+		\begin{align*}
+		\E[X] 	&= \sum_{k=0}^n k\cdot \binom{n}{k}p^k(1-p)^{n-k}
+		&&\mbox{(definition of expectation)}\\
+		&= \sum_{k=1}^n k\cdot \binom{n}{k}p^k(1-p)^{n-k} &&\mbox{(since first term is $0$)}\\
+		&= np\sum_{k=1}^nk \frac{(n-1)!}{(n-k)!k!}p^{k-1}(1-p)^{n-k} &&\mbox{(factoring $np$)}\\
+		&= np\sum_{k=1}^n \frac{(n-1)!}{(n-1-(k-1))!(k-1)!}p^{k-1}(1-p)^{n-1-(k-1)} &&\mbox{(developping stuff)}\\
+		&= np\sum_{j=0}^n \frac{(n-1)!}{(n-1-j)!j!}p^{j}(1-p)^{n-1-j} &&\mbox{(putting $j = k-1$)}\\
+		&= np &&\mbox{(using the sum of PMF $=1$)}
+		\end{align*}
+		\item Let $X$ be a Poisson RV ($X \in \N$) with parameter $\lambda > 0$, we get the following.
+		
+		\begin{align*}
+		\E[X] &= \sum_{k=0}^{\infty} k\cdot e^{-\lambda}\frac{\lambda^k}{k!}
+		&&\mbox{(definition of expectation)}\\
+		&= \sum_{k=1}^{\infty} k\cdot e^{-\lambda}\frac{\lambda^k}{k!}
+		&&\mbox{(since the fisrt term is $0$)}\\
+		&= \lambda e^{-\lambda} \sum_{k=1}^{\infty} \frac{\lambda^{k-1}}{(k-1)!}
+		&&\mbox{(factoring $\lambda e^{-\lambda}$ and simplifying)}\\
+		&= \lambda e^{-\lambda} \sum_{j=0}^{\infty} \frac{\lambda^{j}}{(j)!}
+		&&\mbox{(set $j = k-1$)}\\
+		&= \lambda e^{-\lambda} e^{\lambda}
+		&&\mbox{(using Taylor expansion of $e^x$)}\\
+		&= \lambda
+		&&\mbox{(simplifying)}
+		\end{align*}
+		
+		\item Let $X$ be a Geometric RV ($X \in \N$) with parameter $p \in (0,1)$, we get the following.
+		\begin{align*}
+		\E[X] &= \sum_{k=0}^n k\cdot (1-p)^kp
+		&&\mbox{(definition of expectation)}\\
+		&= \sum_{k=1}^n k\cdot (1-p)^kp &&\mbox{(since first term is $0$)}\\
+		&= \sum_{j = 0}^n (j+1)\cdot (1-p)^{j+1}p &&\mbox{(set $j = k-1$)}\\
+		&= (1-p)\sum_{j = 0}^n j\cdot (1-p)^{j}p + (1-p)\sum_{j = 0}^n (1-p)^{j}p &&\mbox{(develop the sum)}\\
+		&= (1-p)\E[X] + (1-p) &&\mbox{(using the sum of PMF of $G(p)$)}
+		\end{align*}
+		Solving this for $\E[X]$ gives us $\E[X] = \frac{1-p}{p}$.
+	\end{itemize}
+\end{exmps}
+\begin{defn}[Moments]
+	If $\E[X^k]$ is defined, it is called the $k$-th moment of $X$.
+\end{defn}
+\begin{defn}[Variance]
+	If the second moment of $X$ is defined, the variance of $X$ is also defined like so;
+	\[ \E[(X - \E[X])^2] = \E[X^2] - \E[X]^2 \]
+\end{defn}
+\begin{prop}
+	Let $X$ be a RV with $\vari(X) = \sigma < \infty$, then $\vari(aX + b) = a^2\sigma$.
+\end{prop}
+\begin{defn}[MGF]
+	If $\exists s_0>0$ such that $\forall s \in (-s_0, s_0), M(s) = \E[e^{sX}]$ is defined, then, the Moment Generating function is defined as $\E[e^{sX}]$, denoted $M(s)$. If $M(s)$ exists, then $\E[X^k]$ exists for all $k \geq 0$ and $M^{(k)}(0) = \E[X^k]$.
+\end{defn}
+\begin{prop}
+	If $X$ is a continuous RV with a defined MGF $M(s)$, assume that for any $s \in \R$, $M(2s) = M(s)^4$, $\E[X] = 0$ and $\vari(X) = 1$, then $X$ is a $N(0,1)$ RV.
+\end{prop}
+Let's calculate the MGF and variance for the same discrete RVs as above. Once again, we assume that they exist 
+\begin{exmps}
+	\begin{itemize}
+		\item[]
+		\item Let $X$ be Dirac RV with $f(x_0) = 1$. Then $M(s) = \E[e^{sX}] = e^{sx_0}$. We indeed get \[M'(0) = x_0e^{sx_0}\vert_{s=0} = x_0 = \E[X]\] Moreover, we have \[\E[X^2] = M''(0) = x_0^2e^{sx_0}\vert_{s=0} = x_0^2\] We can then calculate the variance\footnote{Note that the variance of a RV is $0$ if and only if it is a Dirac RV} \[ \vari(X) = \E[X^2]-\E[X]^2 = x_0^2 - x_0^2 = 0\]
+		\item Let $X$ be a Bernoulli RV with parameter $p \in (0,1)$, we find its MGF:
+		\[M(s) = \E[e^{sX}] = e^{s\cdot 0}(1-p) + e^{s\cdot 1}(p) = (1-p) + pe^s\]
+		Indeed, we find $M'(0) = pe^s\vert_{s=0} = p = \E[X]$. Moreover, we have 
+		\[\E[X^2] = M''(0) = pe^s\vert_{s=0} = p\]
+		We can then calculate the variance
+		\[\vari(X) = \E[X^2]-\E[X]^2 = p-p^2 = p(1-p)\]
+		\item Let $X$ be a Binomial RV with parameter $n > 0$ and $p \in (0,1)$. We find its MGF:
+		\begin{align*}
+		M(s) = \E[e^{sX}] &= \sum_{k=0}^n e^{sk} \binom{n}{k} \cdot p^k(1-p)^{n-k} \\&= \sum_{k=0}^n \binom{n}{k} \cdot (pe^s)^k(1-p)^{n-k}\\ 
+		&= (pe^s + 1-p)^n&&\mbox{(using the binomial formula)}
+		\end{align*}
+		Indeed, we get
+		\[M'(0) = n(pe^s + 1-p)^{n-1}(pe^s)\vert_{s=0} = np = \E[X]\]
+		Moreover, we have
+		\begin{align*}
+		\E[X^2] &= M''(0) \\&= n p e^s (p (e^s - 1) + 1)^{n - 2} (p (n e^s - 1) + 1) \vert_{s=0} \\&= np(p(n-1)+1)
+		\end{align*}
+		So we can find the variance:
+		\[ \vari(X) = \E[X^2]-\E[X]^2 = np(p(n-1)+1) - (np)^2 = np(1-p)\]
+		\item Let $X$ be a Poisson RV with parameter $\lambda > 0$. We can find its MGF.
+		\begin{align*}
+		M(s) = \E[e^{sX}] &= \sum_{k=0}^{\infty} e^{sk} e^{-\lambda}\cdot \frac{\lambda^k}{k!}\\
+		&= e^{-\lambda}\sum_{k=0}^{\infty} \cdot \frac{(e^s\lambda)^k}{k!}\\
+		&= e^{-\lambda}e^{e^s\lambda} &&\mbox{(using the Taylor expansion of $e^x$)}\\
+		&= e^{\lambda(e^s-1)}
+		\end{align*}
+		Indeed, we have $M'(0) = \lambda e^s e^{\lambda(e^s-1)} \vert_{s=0} = \lambda$. Moreover, we have 
+		\begin{align*}
+		\E[X^2] = M''(0) &= (\lambda e^s + 1)(\lambda e^s e^{\lambda(e^s-1)}) \vert_{s=0}\\
+		&= \lambda^2 + \lambda
+		\end{align*}
+		So we can find the variance
+		\begin{align*}
+		\vari(X) = \E[X^2]-\E[X]^2 = \lambda^2+\lambda -\lambda^2 = \lambda 
+		\end{align*}
+		\item Let $X$ be a Geometric RV with parameter $p > 0$. We find its MGF:
+		\begin{align*}
+		M(s) = \E[e^{sX}] &= \sum_{k=0}^{\infty} e^{sk}\cdot(1-p)^kp\\
+		&=p\sum_{k=0}^{\infty} (e^{s}(1-p))^k\\
+		&= p \cdot \frac{1}{1-(e^{s}(1-p))}
+		\end{align*}
+		Indeed, we have
+		\[M'(0) = p\cdot \frac{(1-p)e^s}{(1-e^s(1-p))^2}\vert_{s=0} = \frac{1-p}{p} \]
+		Moreover, we have 
+		\[\E[X^2] = M''(0) = \frac{p(p - 1) e^s ((p - 1) e^s - 1)}{((p - 1) e^s + 1)^3} \vert_{s=0} = \frac{(p-1)(p-2)}{p^2}\]
+		So we can find the variance :
+		\begin{align*}
+		\vari(X) = \E[X^2]-\E[X]^2 = \frac{(p-1)(p-2)}{p^2} -\bra{\frac{1-p}{p}}^2 = \frac{1-p}{p^2}
+		\end{align*}
+	\end{itemize}
+\end{exmps}
+
+\section{Inequalities and Estimates}
+\begin{prop}
+	Let $X \in \N$ be a discrete RV, then $$\E[X] = \sum_{i=1}^{\infty}\P(X \geq i)$$
+\end{prop}
+\begin{prop}
+	Let $X \in \R^+$ be a continuous and nonnegative RV, then $$\E[X] = \int_{0}^{\infty}\P(X > t)dt$$
+\end{prop}
+\begin{defn}
+	For $t > 0$, $\P(X> t)$ is called the tail probability. This section is all about deriving inequalities and estimates on it.
+\end{defn}
+First, we derive some sufficient (but not necessary) conditions for the existence of moments and generating functions (it works for any RV $X$).
+\begin{prop}
+	If there exists $\delta > 0$ and $C > 0$ such that for any $t \in [0,\infty)$, $P(|X| > t) \leq \frac{C}{t^{1+\delta}}$, then \[ \E[|X|] \leq \int_{0}^{\infty}\frac{C}{t^{1+\delta}}dt < \infty \]
+\end{prop}
+\begin{prop}
+	Fix $k \in \N$, if there exists $\delta > 0$ and $C > 0$ such that for any $t \in [0,\infty)$, $P(|X|^k > t) \leq \frac{C}{t^{1+\frac{\delta}{k}}}$, then \[ \E[|X|^k] \leq \int_{0}^{\infty}\frac{C}{t^{1+\frac{\delta}{k}}}dt < \infty \]
+\end{prop}
+\begin{prop}
+	If there exists $\delta > 0$ and $C > 0$ such that for any $t \in [0,\infty)$, $P(|X| > t) \leq Ce^{-\delta t}$, then for any $s \in (-\delta, \delta)$, we have \[ \E[e^{sX}] \leq \int_{0}^{\infty}tCe^{-\frac{\delta}{|s|}}dt < \infty \]
+\end{prop}
+\begin{thm}
+	Let $X$ be a RV and $h$ be a Borel function with $h \geq 0$. Assume that $\E[h \circ X]$ exists, then for any $t > 0$, we have
+	\[ \P(h(X) > t) \leq \frac{\E[h(X)]}{t} \]
+\end{thm}
+From this theorem, we can derive three important inequalities.
+\begin{thm}[Markov's inequality]
+	If $X$ is a RV with $\E[|X|^k] <\infty$, then for any $t > 0$,
+	\[ \P(|X| > t) = \P(|X|^k > t^k) \leq \frac{\E[|X|^k]}{t^k} \]
+\end{thm}
+\begin{thm}[Chebyshev's inequality]
+	If $X$ is a RV with $\E[|X|^2] <\infty$, then for any $t > 0$,
+	\[ \P(|X-\E[X]| > t) = \P(|X-\E[X]|^2 > t^2) \leq \frac{\vari(X)}{t^2} \]
+\end{thm}
+\begin{thm}[Chernoff's bound]
+	If $X$ is a RV with $\E[e^{s|X|}] <\infty$, then for any $t > 0$,
+	\[ \P(|X| > t) = \P(e^{s|X|} > e^{st}) \leq e^{-st}\E[e^{s|X|}] \]
+\end{thm}
+
+\section{Multiple Random Variables}
+\subsection{Distributions}
+\begin{defn}[Joint CDF]
+	The joint CDF of a RV $(X,Y)$ is defined to be $F_{(X,Y)}(x,y) = \P( X \leq x, Y \leq y)$.
+\end{defn}
+\begin{prop}
+	For a fixed $x \in \R$, the following holds.
+	\begin{itemize}
+		\item $\lim_{y \rightarrow \infty} F_{(X,Y)}(x,y) = F_X(x)$
+		\item $\lim_{y \rightarrow -\infty} F_{(X,Y)}(x,y) = 0$
+		\item $\lim_{x,y \rightarrow \infty} F_{(X,Y)}(x,y) = 1$
+		\item $\lim_{\varepsilon\rightarrow 0^+} F_{(X,Y)}(x,y+\varepsilon) = F_{(X,Y)}(x,y)$
+	\end{itemize}
+\end{prop}
+\begin{defn}[Joint and marginal PMF]
+	Let $X \in \{x_i \mid i \in \N\}$ and $Y \in \{y_j \mid j \in \N\}$ be discrete RVs, the joint PMF is defined to be $f_{(X,Y)}(x_i,y_j) = \P(X = x_i, Y = y_i)$. We can retrieve the marginal PMF of $X$ by fixing $x$ and summing over the possible values of $Y$. \[f_X(x_i) = \sum_{j = 0}^{\infty}f_{(X,Y)}(x_i,y_j)\]
+\end{defn}
+\begin{defn}[Joint and marginal PDF]
+	We say that $(X,Y)$ is a continuous multivariate RV if there exists a nonnegative function $f_{(X,Y)}$ such that for any $(x,y) \in \R^2$, we have
+	\[ F_{(X,Y)}(x,y) = \int_{-\infty}^x \int_{-\infty}^y f_{(X,Y)}(u,v)dvdu \]
+	This function is called the joint PDF and we can retrieve the marginal PDF for $X$ by fixing some $x$ and integrating for $y$ on $\R$.
+	\[ f_X(x) = \int_{\R} f_{(X,Y)}(x,y)dy \]
+\end{defn}
+\subsection{Transformations}
+\begin{defn}
+	Let $X$ and $Y$ be discrete RVs and $g: \R^2 \rightarrow \R$ be a Borel function, then $g(X,Y)$ is a RV taking values in $\{z_k \mid k \in \N\}$. We define its PMF like so:
+	\[ \P(g(X,Y) = z_k) = \sum_{\{(i,j) \mid g(x_i,y_j) = z_k\}}\P(X = x_i, Y = y_j) \]
+\end{defn}
+\begin{defn}
+	Let $(X,Y)$ be a continuous RV and $g: \R^2 \rightarrow R$ be a Borel function, then $g(X,Y)$ is also a RV with the following CDF:
+	\[ \P(g(X,Y) \leq z) = \int\int_{\{(x,y) \mid g(x,y) \leq z\}}f_{(X,Y)}(x,y)dydx \]
+\end{defn}
+\begin{prop}
+	Let $(X,Y)$ be a continuous RV and $f_1, f_2: \R \rightarrow \R$ be two Borel functions with $U = f_1(X,Y)$ and $V = f_2(X,Y)$. If $(f_1,f_2)^{-1} = (g_1,g_2)$ is the unique inverse, $g_1$ and $g_2$ have continuous partial derivatives and $\det \frac{\partial(g_1, g_2)}{\partial(u,v)} \neq 0$, then $(U,V)$ is a continuous RV and the PDF is defined like so:
+	\[f_{(U,V)}(u,v) = f_{(X,Y)}(g_1(u,v),g_2(u,v))\left|\det \frac{\partial(g_1, g_2)}{\partial(u,v)} \right|\] 
+\end{prop}
+\begin{exmps}
+	Here are two common transformations we have seen multiple times.
+	\begin{itemize}
+		\item If $f_1(x,y)=x+y$ and $f_2(x,y) = x-y$, then $f_{(U,V)}(u,v) =f_{(X,Y)}\bra{\frac{u+v}{2}, \frac{u-v}{2}}\cdot \frac{1}{2}$.
+		\item If $f_1(x,y) = \sqrt{x^2+y^2}$ and $f_2 = \arctan\frac{y}{x}$, then $f_{(U,V)}(u,v) =uf_{(X,Y)}\bra{-u\cos v, -u \sin v}$.
+	\end{itemize}
+\end{exmps}
+\begin{prop}[Consequences of independence]
+	Let $X$ and $Y$ be RVs, $X \Perp Y$, i.e. $F_{(X,Y)}(x,y) = F_X(x)F_Y(y)$ and $f,g : \R\rightarrow\R$ be Borel functions, then the following holds.
+	\begin{itemize}
+		\item $f_{(X,Y)}(x,y) = f_X(x)f_Y(y)$
+		\item $M_{(X,Y)}(s,t) = M_X(s)M_Y(t)$
+		\item $f(X) \Perp g(Y)$
+		\item $\E[f(X)g(Y)] = \E[f(X)] \E[g(Y)]$
+		\item If the second moments are defined for both $X$ and $Y$, then $\vari(X+Y) = \vari(X) + \vari(Y)$
+	\end{itemize}
+\end{prop}
+\begin{defn}[i.i.d. sequence]
+	Let $\{X_i \mid i \in \N\}$ be a sequence of RVs, we say that they are independent and identically distributed if the sequence is an independent family and $\forall i \in \N, F_{X_1} = F_{X_i}$.
+\end{defn}
+\begin{exmps}
+	We calculated the sum of notable independent sequences of RVs.
+	\begin{itemize}
+		\item Let $X_i$ be independent $B(n_i, p)$ RVs, then $\sum_{i=0}^m X_i$ is a $B(\sum_{i=0}^m n_i, p)$ RV.
+		\item Let $X_i$ be independent $P(\lambda_i)$ RVs, then $\sum_{i=0}^m X_i$ is a $P(\sum_{i=0}^m \lambda_i)$ RV.
+		\item Let $X_i$ be i.i.d. $\exp(\lambda)$ RVs, then $\sum_{i=0}^m X_i$ is a $\Gamma(m, \lambda)$ RV.
+		\item Let $X_i$ be i.i.d. $N(m,\sigma^2)$ RVs, then $\sum_{i=0}^m X_i$ is a $N(nm, n\sigma^2)$ RV.
+	\end{itemize}
+\end{exmps}
+\subsection{Covariance and Correlation}
+Let $X$ and $Y$ be RVs, we give the following definitions and formal consequences.
+\begin{defn}[Covariance]
+\[ \cov(X,Y) = \E[(X-\E[X])(Y-\E[Y])] = \E[XY] - \E[X]\E[Y] \]
+\end{defn}
+\begin{prop}
+	\[ |\cov(X,Y)| \leq \sqrt{\vari(X)\vari(Y)}\]
+\end{prop}
+\begin{defn}[Correlation]
+	\[ \corr(X,Y) = \frac{\cov(X,Y)}{\sqrt{\vari(X)\vari(Y)}} \]
+\end{defn}
+\begin{prop}
+	\[ \corr(X,Y) = 1 \Leftrightarrow \exists c > 0, Y = cX \]
+\end{prop}
+\begin{prop}
+	\[ X \Perp Y \implies \cov(X,Y) = 0 = \corr(X,Y)\]
+\end{prop}
+\begin{prop}
+	Let $\{X_i \mid i \in \N\}$ be an uncorrelated sequence of variables such that $\E[X_i] = m$ and $\vari(X_i) = \sigma^2$ for any $i$, with $m \in \R$ and $\sigma \in (0,\infty)$. Let $S_n = \sum_{i=0}^n X_i$ and $\overline{S_n} = \frac{S_n}{n}$, the following holds.
+	\begin{itemize}
+		\item For any $n \in \N$, $\E[\overline{S_n}] = m$ and $\vari(\overline{S_n}) = \frac{\sigma^2}{n}$.
+		\item For any $\varepsilon > 0$ and $n \in \N$, $\P(|\overline{S_n} - m| > \varepsilon) \leq \frac{\sigma^2}{n\varepsilon^2}$.
+	\end{itemize}
+\end{prop}
+
+\section{Conditional Distribution}
+\begin{defn}[Conditional CDF]
+	Let $X$ and $Y$ be RVs, the conditional CDF of $X$ given $Y = y$ is defined like so:
+	\[F_{X\mid Y}(x \mid y) = \lim_{\varepsilon\rightarrow 0} \P(X \leq x \mid Y \in (y-\varepsilon,y+\varepsilon)) = \lim_{\varepsilon\rightarrow 0} \frac{\P(X \leq x, Y \in (y-\varepsilon,y+\varepsilon))}{\P(Y \in (y-\varepsilon,y+\varepsilon))}\]
+\end{defn}
+\begin{rem}
+	Let $X \in \{x_i \mid i \in \N\}$ and $Y \in \{y_j \mid j \in \N\}$ be discrete RVs, $F_{X \mid Y}(x \mid y)$ is only defined if $y \in \{y_j \mid j \in \N\}$. Also, the conditional PMF is defined by $f_{X \mid Y}(x_i \mid y_i) = \P(X = x_i \mid Y = y_j)$.
+\end{rem}
+\begin{defn}[Discrete conditional expectation]
+	If $\sum_{i=0}^{\infty} |x_i|f_{X\mid Y}(x_i \mid y) < \infty$ for any $y \in \{y_j \mid j \in \N\}$, then we can define the conditional expectation which is a RV:
+	\[ \E[X \mid Y](\omega) = \sum_{i=0}^{\infty} |x_i|f_{X\mid Y}(x_i \mid Y(\omega)) \]
+\end{defn}
+\begin{prop}
+	\[ \E[\E[X\mid Y]] = \E[X] \]
+\end{prop}
+\begin{prop}
+	If $X \Perp Y$, then $\forall \omega \in \Omega, \E[X \mid Y](\omega) = \E[X]$.
+\end{prop}
+\begin{prop}
+	Let $(X,Y)$ be a continuous RV with joint PDF $f_{(X,Y)}$ and marginal PDFs $f_X$ and $f_Y$, then we have the following formulas:
+	\begin{align*}
+		F_{X \mid Y}(x \mid y) &= \int_{-\infty}^x \frac{f_{(X,Y)}(u,y)}{f_Y(y)}du\\
+		f_{X \mid Y}(x \mid y) &= \frac{f_{(X,Y)}(x,y)}{f_Y(y)}
+	\end{align*}
+\end{prop}
+\begin{defn}[Continuous conditional expectation]
+	If $\int_{\R}|x|f_{X \mid Y}(x\mid y)dx < \infty$ for any $y \in \R$, then $\E[X \mid Y](\omega) = \int_{\R}xf_{X \mid Y}(x \mid Y(\omega))dx$.
+\end{defn}
+\begin{defn}[Conditional variance]
+	Let $(X,Y)$ be a RV with $\E[X^2] < \infty$ and assume that for every $\omega \in \Omega$, $\E[X^2\mid Y](\omega)$ and $\E[X\mid Y](\omega)$ are defined. The conditional variance is defined by $\vari(X\mid Y)(\omega) = \E[X^2\mid Y](\omega) - \bra{\E[X \mid Y](\omega)}^2$.
+\end{defn}
+\begin{prop}
+	In the same setting as last definition, we have the following.
+	\[ \vari(X) = \vari(\E[X\mid Y]) + \E[\vari(X \mid Y)] \]
+\end{prop}
+
+\section{Asymptotics}
+Throughout this section, we will consider a sequence of RVs $\{X_i \mid i \in \N\}$ with DFs $\{F_i \mid i \in \N\}$ and a RV $X$ with DF $F$.
+\begin{defn}[Convergence in distribution]
+	If for all continuous points $x$ in $F$ we have $\lim_{n\rightarrow \infty} F_n(x) = F(x)$, then we say that $X_n \rightarrow X$ in distribution.
+\end{defn}
+\begin{thm}
+	If $\forall n, X_n,X \in \N$ then, $X_n \rightarrow X$ in distribution if and only if for all $k \in \N$, we have $\lim_{n\rightarrow \infty} \P(X_n = k) = \P(X = k)$.
+\end{thm}
+\begin{thm}
+	If $\forall n$,$X_n$ is continuous with PDF $f_n$ and $X$ is continuous with PDF $f$ and for almost every $x\in \R$, we have $\lim_{n\rightarrow \infty} f_n(x) = f(x)$, then, $X_n \rightarrow X$ in distribution.
+\end{thm}
+\begin{prop}
+	If $X_n \rightarrow X$ in distribution and $a,b \in \R$, then $aX_n+b \rightarrow aX+b$ in distribution.
+\end{prop}
+\begin{defn}[Convergence in probability]
+	If for every $\varepsilon > 0$, we have $\lim_{n\rightarrow \infty}\P(|X_n-X| > \varepsilon) = 0$, then we say that $X_n \rightarrow X$ in probability.
+\end{defn}
+\begin{prop}
+	If $X_n \rightarrow X$, $X_n \rightarrow X'$ and $Y_n \rightarrow Y$ in probability then the following holds.
+	\begin{itemize}
+		\item $X_n \rightarrow X$ in distribution.
+		\item $\P(X = X') = 1$.
+		\item $X_n + Y_n \rightarrow X+Y$ and $X_n - Y_n \rightarrow X-Y$ and $X_nY_n \rightarrow XY$ in probability.
+	\end{itemize}
+\end{prop}
+\begin{thm}[Slutsky]
+	If $X_n \rightarrow X$ in distribution and $Z_n \rightarrow c$  in probability (where $c\in \R$ is viewed as a Dirac RV at $c$), then $X_n +Y_n \rightarrow X + c$ and $X_nY_n \rightarrow cX$ in distribution.
+\end{thm}
+\begin{prop}
+	If $X_n \rightarrow c$ in distribution and $g: \R \rightarrow \R$ is a Borel function, the following holds.
+	\begin{itemize}
+		\item $X_n \rightarrow c$ in probability.
+		\item $g(X_n) \rightarrow g(c)$ in distribution.
+		\item $\lim_{n\rightarrow \infty} \E[g(X_n)] = g(c)$
+	\end{itemize}
+\end{prop}
+In the following, we denote $S_n = \sum_{i=0}^n X_i$ and $\overline{S_n} = \frac{S_n}{n}$ to be the partial sum of the RVs and the rescaled partial sum respectively.
+\begin{defn}
+	We say that the sequence $\{X_i \mid i \in \N\}$ obeys the weak law of large numbers (WLLN) if $\frac{S_n -\E[S_n]}{n} \rightarrow 0$ in probability. Equivalently, $\overline{S_n} - \E[\overline{S_n}] \rightarrow 0$ in probability.
+\end{defn}
+\begin{thm}[WLLN-I]
+	If $\{X_i\}$ is uncorrelated and the second moments are bounded (i.e. $\sup_{i \in \N}\E[X_i^2] = M < \infty$), then the sequence obeys WLLN.
+\end{thm}
+\begin{thm}[WLLN-II]
+	If $\{X_i\}$ is pairwise independent and identically distributed with $\E[X_i] = m$ for any $i$, then the sequence obeys WLLN.
+\end{thm}
+\begin{thm}[Central Limit Theorem]
+	If $\{X_i\}$ is i.i.d. with $\E[X_i] = m$ and $\vari(X_i) = \sigma^2$, then $\frac{S_n -mn}{\sqrt{n\sigma^2}} \rightarrow X$ in distribution where $X$ a $N(0,1)$ RV.
+\end{thm}
+\end{document}

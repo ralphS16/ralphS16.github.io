@@ -1,0 +1,900 @@
+\documentclass{scrartcl}
+
+\newcommand{\bra}[1]{\left(#1\right)}
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+\microtypecontext{spacing=nonfrench}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{mathpazo}
+\usepackage{amsmath,amsthm,amssymb}
+\usetikzlibrary{shapes}
+\usetikzlibrary{positioning}
+% Set up the images/graphics package
+\usepackage{graphicx,float}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{.}}
+
+
+% Small sections of multiple columns
+\usepackage{multicol}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{quest}[thm]{Question}
+\newtheorem{claim}{Claim}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{defns}[thm]{Definitions}
+\newtheorem{con}[thm]{Construction}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{jk}[thm]{Joke}
+\newtheorem{exmps}[thm]{Examples}
+\newtheorem{notn}[thm]{Notation}
+\newtheorem{notns}[thm]{Notations}
+\newtheorem{addm}[thm]{Addendum}
+\newtheorem{exer}[thm]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{ans}[thm]{Answer}
+\newtheorem{rems}[thm]{Remarks}
+\newtheorem{warn}[thm]{Warning}
+\newtheorem{sch}[thm]{Scholium}
+
+% MACROS
+\newcommand{\Mod}[1]{\ (\text{mod}\ #1)}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\mC}{\mathcal{C}}
+\newcommand{\mG}{\mathcal{G}}
+\newcommand{\mP}{\mathcal{P}}
+\renewcommand{\P}{\mathbb{P}}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\aut}{Aut}
+\DeclareMathOperator{\gal}{Gal}
+\DeclareMathOperator{\orb}{Orb}
+\DeclareMathOperator{\stab}{Stab}
+\DeclareMathOperator{\inn}{Inn}
+\DeclareMathOperator{\spn}{Span}
+\DeclareMathOperator{\out}{Out}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\arr}{Arr}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\rcf}{rcf}
+\DeclareMathOperator{\tors}{Tors}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\ann}{Ann}
+\DeclareMathOperator{\syl}{Syl}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\inp}[2]{\left\langle #1, #2 \right\rangle}
+\newcommand{\id}{\text{id}}
+\newcommand{\gln}{\text{GL}_n}
+\newcommand{\op}[1]{#1^{\text{op}}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%DOCUMENT STARTS HERE: try to read the few defined environments to keep the same style. Voluntary contribution to this project is extremely encouraged and I think it will increase the quality of its content. If you want to include a diagram, you can upload an image to the project and someone who is comfortable with tikz (or use this : https://tikzcd.yichuanshen.de/ to make commutative diagrams) can translate it. Let us attempt to be succinct and write the results we cover without any superfluous explanations as we can already find them in the other set of notes.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Category Theory - Important Results}
+\author{Ralph Sarkis} %Please add your name when you contribute to this file
+\date{\today}  % if the \date{} command is left out, the current date will be used
+\begin{document}
+
+\maketitle
+\begin{abstract}
+This is a record of the important results we cover during the lectures we will have in the summer 2018. We will try to go over two sets of lecture notes by Mariusz Wodzicki. Our goal is to introduce the concept of categories and build enough familiarity with them to be able to see other mathematical concepts we know in a more categorical point of view.
+\end{abstract}
+
+\section{Review}
+In this section, we will review some concepts that will be helpful in the study of category theory.
+\subsection{Operations on sets}
+We give formal definitions of common set operators, giving a bit of a taste of the language we will use.
+\begin{defn}[Union of sets]
+    Let $X$ be a set, we can define the \textbf{union} operator like so:
+    \[\bigcup= A \mapsto \{x \in X \mid \exists S \in A, x \in S\}: \mP(\mP(X)) \rightarrow \mP(X) \]
+\end{defn}
+\begin{defn}[Intersection of sets]
+    Let $X$ be a set, we can define the \textbf{intersection} operator like so:
+    \[\bigcap= A \mapsto \{x \in X \mid \forall S \in A, x \in S\}: \mP(\mP(X)) \rightarrow \mP(X) \]
+\end{defn}
+\begin{defn}[Difference of sets]
+    Let $X$ be a set, we an define the \textbf{difference} operator like so:
+    \[ \setminus= (S,T) \mapsto \{x \in X\mid x \in S \wedge x \notin T\}: \mP(X) \times \mP(X) \rightarrow \mP(X) \]
+\end{defn}
+\begin{defn}[Cartesian product]
+    Let $(X_i)_{i \in I}$, where $I$ is some index set, be a family of sets, the Cartesian product of these sets is 
+    \[\prod_{i \in I}X_i = \{ (x_i)_{i \in I} \mid \forall i \in I, x_i \in X_i \}.\]
+    We can also see each element as a function $f:I\rightarrow \cup_{i\in I}X_i$ such that $f(i) \in X_i$ for all $i \in I$.
+\end{defn}
+
+If a family of set is closed under the three first operations, we call it a ring of sets.
+\begin{defn}[Ring of sets]
+A non-empty family of sets $R$ is called a \textbf{ring} of sets if for any two elements $r$ and $r'$, we have $r \cup r', r\cap r', r \setminus r' \in R$.
+\end{defn}
+
+\subsection{Classes vs. Sets}
+Several times in our coverage of category theory, we will need to use the concept of a class. It is very similar to that of a set and has one simple difference. While a set can contain another set, classes cannot contain other classes. This difference is necessary because some collections of objects can simply not form a set. Famous examples include the class of ordinal numbers which, by the Burali-Forti paradox, cannot be a set and the class of all sets that do not contain themselves which, by the Russel paradox, cannot be a set.
+
+\section{Introduction to categories}
+\subsection{Basic definitions}
+\begin{defn}[Oriented graph]
+    An \textbf{oriented graph} $G$ consists of a class of nodes $G_0$, a class of arrows $G_1$ along with two functions $s,t:G_1 \rightarrow G_0$, so that each arrow $f \in G_1$ has a source $s(f)$ and a target $t(f)$.
+\end{defn}
+\begin{rem}
+The nodes can also be called vertices or objects while arrows are also known as morphisms in the context of categories. 
+\end{rem}
+\begin{defn}[Paths]
+    A \textbf{path} in an oriented graph $G$ is a sequence of arrows $(f_1, \dots, f_k)$ that are \textbf{composable} in the sense that $t(f_i) = s(f_{i-1})$ for $i=2,\dots, k$. We will denote $G_k$ to be the class of paths of length $k$ and we often refer to $G_2$ simply as the class of composable arrows.
+\end{defn}
+\begin{rem}
+    Note that the notation indicating the direction of the path does not translate well to what we usually think of as a path in a graph. The reason is that the arrows are more linked to the composition of functions than paths in graphs.
+\end{rem}
+\begin{defn}[Category]
+    An oriented graph $C$ along with a map $\circ: C_2 \rightarrow C_1$ is a \textbf{category} if for any $(f,g,h) \in C_3$, we have $f\circ(g\circ h) = (f\circ g)\circ h$, namely, composition is associative.
+\end{defn}
+\begin{defn}[Unital category]
+    A category $C$ is called \textbf{unital} if it is equipped with a map $u: C_0 \rightarrow C_1$ (for $A \in C_0$, we denote $u(A) = \id_A$) such that for any arrow $f: A\rightarrow B$, we have $f \circ \id_A = \id_B \circ f = f$.
+\end{defn}
+\begin{defn}[Hom sets]
+    Let $C$ be a category and $A,B \in C_0$, we denote 
+    \[ \Hom_{C}(A,B) = \{f \in C_1 \mid s(f) = A \wedge t(f) = B\}. \]
+\end{defn}
+\begin{defn}[Small and discrete]
+    A category $C$ is called \textbf{small} if the class of objects and morphisms is not proper (it is a set). It is called \textbf{discrete} if there are no morphisms and \textbf{discrete unital} if there are no morphisms other than the identity morphisms.
+\end{defn}
+\begin{defn}[Subcategory]
+    Let $C$ be a category, a category $C'$ is a \textbf{subcategory} of $C$ if:
+    \begin{enumerate}
+        \item The objects and morphisms of $C'$ are objects and morphisms of $C$ (i.e.: $C'_0 \subseteq C_0$ and $C'_1 \subseteq C_1$).
+        \item For every morphism $f \in C'_1$, $s(f), t(f) \in C'_0$.
+        \item For every pair of composable arrows $(f,g) \in C'_2$, $f\circ_{C'} g = f \circ_{C} g \in C'_1$.
+    \end{enumerate}
+    If we are working with unital categories we have the additional requirement that for any $A \in C'_0$, $u_{C'}(A) \in C'_1$. One can show that since composition is the same as in $C$, the identity must be the same.
+\end{defn}
+\begin{defn}[Full and wide]
+    A subcategory $C'$ of $C$ is called \textbf{full} if for any objects $A,B \in C'_0$, we have $\Hom_{C'}(A,B)  = \Hom_{C}(A,B)$. It is called \textbf{wide} if $C'_0 = C_0$.
+\end{defn}
+\begin{defn}[Covariant functor]\label{defcovfunc}
+    Let $C$ and $D$ be categories, a \textbf{covariant functor} $F: C \rightsquigarrow D$ is a pair of maps $F_0:C_0 \rightarrow D_0$ and $F_1:C_1 \rightarrow D_1$ that are defined such that the following diagrams commute (where $F_2$ is induced by the definition of $F_1$ with $(f,g) \mapsto (F_1(f), F_1(g))$).
+    \begin{figure}[h]
+    \centering
+    \begin{tikzcd}
+    C_0 \arrow[d, "F_0"'] & C_1 \arrow[d, "F_1"'] \arrow[l, "s"'] \arrow[r, "t"] & C_0 \arrow[d, "F_0"'] \\
+    D_0 & D_1 \arrow[l, "s"] \arrow[r, "t"'] & D_0
+    \end{tikzcd}
+    \qquad 
+    \begin{tikzcd}
+    C_2 \arrow[d, "\circ_C"'] \arrow[r, "F_2"] & D_2 \arrow[d, "\circ_D"'] \\
+    C_1 \arrow[r, "F_1"'] & D_1
+    \end{tikzcd}
+    \end{figure}
+    
+    If we are working with unital categories, we may want to talk about a \textbf{unital} functor which requires this additional diagram to commute.
+    \begin{figure}[h]
+        \centering
+        \begin{tikzcd}
+        C_0 \arrow[d, "u_C"'] \arrow[r, "F_0"] & D_0 \arrow[d, "u_D"'] \\
+        C_1 \arrow[r, "F_1"'] & D_1
+        \end{tikzcd}
+    \end{figure}
+    %TODO: Give all the conditions with the algebraic notation.
+\end{defn}
+\begin{defn}[Contravariant functor]\label{defcontrafunc}
+    Let $C$ and $D$ be categories, a \textbf{contravariant functor} $F: C \rightsquigarrow D$ is similar to a covariant functor except for the first diagram which changes a bit (see below) and the definition of $F_2$ which becomes: $(f,g) \mapsto (F_1(g), F_1(f))$.
+    \begin{figure}[h]
+    \centering
+    \begin{tikzcd}
+    C_0 \arrow[d, "F_0"'] & C_1 \arrow[d, "F_1"'] \arrow[l, "s"'] \arrow[r, "t"] & C_0 \arrow[d, "F_0"'] \\
+    D_0 & D_1 \arrow[l, "t"] \arrow[r, "s"'] & D_0
+    \end{tikzcd}
+\end{figure}
+\end{defn}
+\newpage
+\begin{exmp}[Hom functors]\label{homfunc}
+    Let $C$ be a category and $A \in C_0$ one of its object. We define the covariant and contravariant $\Hom$ functors from $C$ to $\textbf{Set}$.
+    \begin{enumerate}
+        \item[A.] The functor $\Hom_C(A,-): C \rightsquigarrow \textbf{Set}$ sends an object $B\in C_0$ to the hom set $\Hom_C(A,B)$ and a morphism $f:B\rightarrow B'$ to the function $$\Hom_C(A,f): \Hom_C(A,B) \rightarrow \Hom_C(A,B') = g \mapsto f\circ g.$$ Let us check that this is a covariant functor. We show the commutativity of the three squares in definition \ref{defcovfunc}:
+        \begin{enumerate}
+            \item[1.] For $f \in C_1$, $\Hom_C(A,s(f)) = s(\Hom_C(A,f))$ follows from the definition.
+            \item[2.] For $f \in C_1$, $\Hom_C(A,t(f)) = t(\Hom_C(A,f))$ follows from the definition.
+            \item[3.] For $(f_1,f_2) \in C_2$, we claim that $\Hom_C(A,f_1\circ f_2) = \Hom_C(A,f_1)\circ \Hom_C(A,f_2)$. In the L.H.S., an element $g \in \Hom_C(A,s(f_1\circ f_2))$ is mapped to $(f_1 \circ f_2) \circ g$ and in the R.H.S., an element $g \in \Hom_C(A,s(f_2)$ is mapped to $f_1\circ (f_2 \circ g)$. Since $s(f_1 \circ f_2) = s(f_2)$, we see that the two maps are the same.
+        \end{enumerate}
+        \item[B.] The functor $\Hom_C(-,A): C \rightsquigarrow \textbf{Set}$ sends an object $B\in C_0$ to the hom set $\Hom_C(B,A)$ and a morphism $f:B\rightarrow B'$ to the function $$\Hom_C(f,A): \Hom_C(B',A) \rightarrow \Hom_C(B,A) = g \mapsto g\circ f.$$ Let us check that this is a contravariant functor. We show the commutativity of the three squares in definition \ref{defcontrafunc}:
+        \begin{enumerate}
+            \item[1.] For $f \in C_1$, $\Hom_C(s(f),A) = s(\Hom_C(A,f))$ follows from the definition.
+            \item[2.] For $f \in C_1$, $\Hom_C(t(f),A) = t(\Hom_C(f,A))$ follows from the definition.
+            \item[3.] For $(f_1,f_2) \in C_2$, we claim that $\Hom_C(f_1\circ f_2,A) = \Hom_C(f_2,A)\circ \Hom_C(f_1,A)$. In the L.H.S., an element $g \in \Hom_C(t(f_1\circ f_2),A)$ is mapped to $g\circ (f_1 \circ f_2)$ and in the R.H.S., an element $g \in \Hom_C(t(f_1),A)$ is mapped to $(g\circ f_1) \circ f_2$. Since $t(f_1 \circ f_2) = t(f_1)$, we see that the two maps are the same.
+        \end{enumerate}
+    \end{enumerate}
+\end{exmp}
+\begin{defn}[Full, faithfull and essentially surjective]
+Let $F:C \rightsquigarrow D$ be a functor, then:
+\begin{itemize}
+    \item If the restriction $F_{A,B}:\Hom_C(A,B) \rightarrow \Hom_D(F(A), F(B))$ is injective for any $A,B \in C_0$, then we say $F$ is faithfull.
+    \item If $F_{A,B}$ is surjective for any $A,B \in C_0$, then $F$ is full.
+    \item If for any $X \in D$, there exists $Y \in C_0$ such that $D \cong F(Y)$, then $F$ is essentially surjective.
+\end{itemize}    
+\end{defn}
+
+\begin{defn}[Diagram]
+    Let $C$ be a category. A \textbf{diagram} in $C$ is functor $F:D \rightarrow C$ where $D$ is usually a small or even finite category. We usually draw diagrams by partially drawing the image of $D$ as a graph where objects are vertices and morphisms are arrows. All the diagrams we have drawn up to this definition define the domain of the functor implicitly. For example, if we talk about a commutative square in $C$, the domain of this diagram can be drawn like so:
+    \begin{figure}[H]
+        \centering
+        \begin{tikzcd}
+\cdot \arrow[r] \arrow[d] \arrow[rd] & \cdot \arrow[d] \\
+\cdot \arrow[r] & \cdot
+\end{tikzcd}
+    \end{figure}
+\end{defn}
+\begin{rem}
+    It follows trivially from this definition that functors preserve commutative diagrams.
+\end{rem}
+
+\begin{defn}[Natural transformation]\label{defnattran}
+Let $F,G : C \rightsquigarrow D$ be two covariant functors, a \textbf{natural transformation} $\phi: F \Rightarrow G$ is a map $\phi: C_0 \rightarrow D_1$ that satisfies $\phi(A) \in \Hom_D(F(A), G(A))$ for all $A \in C_0$ and makes the following diagram commute for any $f \in \Hom_C(A,B)$:
+\begin{figure}[H]
+    \centering
+    \begin{tikzcd}
+    F(A) \arrow[d, "F(f)"'] \arrow[r, "\phi(A)"] & G(A) \arrow[d, "G(f)"] \\
+    F(B) \arrow[r, "\phi(B)"'] & G(B)
+    \end{tikzcd}
+\end{figure}
+For two contravariant functors, the vertical arrows are reversed.
+\end{defn}
+\begin{exmp}
+Let \textbf{CRing} denote the category of commutative rings, where objects are commutative rings, morphisms are ring homomorphisms, and composition is the usual composition of functions. Let \textbf{Grp} denote the category of groups, where objects are groups, morphisms are group homomorphisms, and composition is the usual composition of functions.
+
+Fix some $n \in \N$, we define the functor $\gln:\textbf{CRing} \rightsquigarrow \textbf{Grp}$ by 
+\begin{align*}
+    R &\mapsto \gln(R) \mbox{ for any commutative ring $R$ and} \\
+    f &\mapsto \gln(f) \mbox{ for any ring homomorphism $f$}
+\end{align*}
+The map $\gln(f)$ is just the extension of $f$ on $\gln(R)$ by applying $f$ to every element of the matrices. The second functor is $(-)^{\times}:\textbf{CRing} \rightsquigarrow \textbf{Grp}$ which sends a commutative ring $R$ to its group of units $R^{\times}$ under multiplication and a ring homomorphism $f$ to $f^{\times}$, its restriction on $R^{\times}$. Checking these mappings define two covariant functors is left as an (simple) exercise, but one might expect these to be functors as they play nicely with the structure of the objects involved.
+
+The natural transformation between these two functors is $\det:\gln \Rightarrow (-)^{\times}$ which maps a commutative ring $R$ to $\det_R$, the function calculating the determinant of a matrix in $\gln(R)$. The first thing to check is that $\det_R \in \Hom_{\textbf{Grp}}(\gln(R), R^{\times})$ which is clearly the case because the determinant of an invertible matrix is always a unit. The second thing is to verify that the following diagram commutes for any $f\in \Hom_{\textbf{CRing}}(R,S)$:
+\begin{figure}[H]
+    \centering
+    \begin{tikzcd}
+\text{GL}_n(R) \arrow[r, "\det_R"] \arrow[d, "\text{GL}_n(f)"'] & R^{\times} \arrow[d, "f^{\times} = f\mid_{R^{\times}}"] \\
+\text{GL}_n(S) \arrow[r, "\det_S"'] & S^{\times}
+\end{tikzcd}
+\end{figure}
+We will check the claim for $n=2$, but the general proof should only involve more notation to write the bigger expressions. We can rewrite the diagram as $f^{\times} \circ \det_R =  \det_S \circ \text{GL}_2(f)$ and show it holds as follows. Let $\begin{bmatrix}a&b\\c&d\end{bmatrix} \in \text{GL}_2(R)$, we have 
+\begin{align*}
+    (\det{}_S \circ \text{GL}_2(f))\left( \begin{bmatrix}a&b\\c&d\end{bmatrix} \right)&= 
+    \det{}_S\left(\begin{bmatrix}f(a)&f(b)\\f(c)&f(d)\end{bmatrix}\right)\\
+    &= f(a)f(d)-f(b)f(c)\\
+    &= f(ad-bc)\\
+    &= f^{\times}(ad-bc)\\
+    &= (f^{\times}\circ \det{}_R)\left( \begin{bmatrix}a&b\\c&d\end{bmatrix}\right).
+\end{align*}
+We conclude that the diagram commutes and that $\det$ is indeed a natural transformation.
+\end{exmp}
+\begin{defn}[Vertical composition]
+    Let $F,G,H: C\rightsquigarrow D$ be parallel functors and $\phi:F\Rightarrow G$ and $\psi:G\Rightarrow H$ be two natural transformations. Then the \textbf{vertical composition} of $\phi$ and $\psi$, denoted $\psi\cdot \phi:F\Rightarrow H$ is defined by $(\psi \cdot \phi)(A) = \psi(A) \circ \phi(A)$ for all $A \in C_0$. If $f: A\rightarrow B$ is a morphism in $C$, then we have the following diagram that commutes by naturality of $\phi$ and $\psi$:
+    \begin{figure}[h]
+        \centering
+        \begin{tikzcd}
+            F(A) \arrow[r, "\phi(A)"] \arrow[d, "F(f)"'] & G(A) \arrow[r, "\psi(A)"] \arrow[d, "G(f)"'] & H(A) \arrow[d, "H(f)"'] \\
+            F(B) \arrow[r, "\phi(B)"'] & G(B) \arrow[r, "\psi(B)"'] & H(B)
+        \end{tikzcd}
+    \end{figure}
+    
+    This shows that $\psi \cdot \phi$ is a natural transformation from $F$ to $H$. We call this vertical composition as opposed to horizontal composition that we introduce in definition \ref{horizcomp}. 
+\end{defn}
+\begin{defn}[Opposite category]
+    Let $C$ be a category, we denote the \textbf{opposite category} $\op{C}$ and define it by 
+    \[ \op{C}_0 = C_0, \op{C}_1 = C_1, \op{s} = t, \op{t} = s,\]
+    with the correspondence defined by $\op{f}\op{\circ}\op{g} = \op{(g\circ f)}$. This canonically leads to the following contravariant functor $\op{(-)}_C: C \rightsquigarrow \op{C}$ which sends an object $A$ to $\op{A}$ and a morphism $f$ to $\op{f}$. Note that the $\op{}$ notation here is just used to distinguish elements in $C$ and $\op{C}$ although the class of objects and morphisms are the same.
+\end{defn}
+\begin{rem}
+    The last definition helps us define the contravariant functors as covariant functors. Formally, let $F:C\rightsquigarrow D$ be a contravariant functor, we can see $F$ as covariant functor from $\op{C}$ to $D$ or from $C$ to $\op{D}$ via the compositions $F\circ \op{(-)}_{\op{C}}$ and $\op{(-)}_{D}\circ F$ respectively.
+\end{rem}
+\begin{defn}[Opposite of a functor]
+    Let $F:C \rightsquigarrow D$ be a covariant functor, then the \textbf{opposite} of this functor $\op{F}: \op{C}\rightsquigarrow \op{D}$ is defined by $\op{F} =\op{(-)}_{D}\circ F\circ \op{(-)}_{\op{C}}$.
+\end{defn}
+\begin{defn}[Opposite functor]
+    The \textbf{opposite functor} $\op{(-)}:\textbf{Cat} \rightsquigarrow \textbf{Cat}$ sends a category or a functor to its opposite. It is a covariant functor.
+\end{defn}
+\begin{defn}[Monomorphism]
+    Let $C$ be a category, a morphism $f \in C_1$ is said to be a \textbf{monomorphism} if for any two morphisms $g,h \in C_1$ with $t(g) = t(h) = s(f)$, $f \circ g = f\circ h$ implies $g = h$.
+\end{defn}
+\begin{defn}[Epimorphism]
+    Let $C$ be a category, a morphism $f \in C_1$ is said to be an \textbf{epimorphism} if for any two morphisms $g,h \in C_1$ with $s(g) = s(h) = t(g)$, $g\circ f = h\circ f$ implies $g = h$.
+\end{defn}
+\begin{prop}
+Let $C$ be a category and $f:A\rightarrow B$ a morphism, if there exists $f': B\rightarrow A$ such that $f'\circ f = \id_A$, then $f$ is a monomorphism.
+\end{prop}
+\begin{proof}
+If $f\circ g = f\circ h$, then $f'\circ f \circ g = f'\circ f \circ h$ implying $g = h$.
+\end{proof}
+\begin{prop}
+Let $C$ be a category and $(f_1, f_2) \in C_2$, if $f_1 \circ f_2$ is a monomorphism, then $f_2$ is a monomorphism.
+\end{prop}
+\begin{proof}
+Let $g,h \in C_1$ be such that $f_2\circ g = f_2\circ h$, we immediately get that $(f_1\circ f_2)\circ g = (f_1 \circ f_2) \circ h$. Since $f_1\circ f_2$ is a monomorphism, this implies $g = h$.
+\end{proof}
+\begin{rem}
+    The two dual propositions for epimorphisms also hold and are straightforward to prove.
+\end{rem}
+\begin{exmp}[Monomorphisms in the categories we know]
+\begin{enumerate}\item[]
+    %TODO: Add more examples
+    \item Inside the category \textbf{Mon} where objects are monoids and morphims are monoid homomorphisms, the monomorphisms correspond exactly to injective homomorphims as shown below.
+    \begin{itemize}
+        \item Let $f:M\rightarrow M'$ be an injective homomorphims and $g_1,g_2:N\rightarrow M$ be two parallel homomorphisms. Suppose that $f\circ g_1 = f\circ g_2$, then for all $x \in N$, $f(g_1(x)) = f(g_2(x))$, so by injectivity of $f$, $g_1(x) = g_2(x)$. We conclude that $g_1 = g_2$ and since $g_1$ and $g_2$ were arbitrary, $f$ is a monomorphism.
+        \item Let $f:M\rightarrow M'$ be a monomorphism. Let $x,y \in M$ and define $p_x :\N \rightarrow M$ by $k\mapsto x^k$ and similarly for $p_y$. It is trivial to show that $p_x$ and $p_y$ are homomorphism. If $f(x) = f(y)$, then by the homomorphism property, we get for all $k \in \N$:
+        \[f(p_x(k))= f(x^k) = f(x)^k  = f(y)^k = f(y^k) = f(p_y(k)).\]
+        In other words, we get $f\circ p_x = f \circ p_y$, so $p_x = p_y$ and $x = y$. We conclude that $f$ is injective.
+    \end{itemize}
+\end{enumerate}
+\end{exmp}
+\begin{exmp}[Epimorphisms in the categories we know]
+\begin{enumerate}\item[]
+    %TODO: Add more examples
+    \item Inside the category \textbf{Mon} an epimorphism is not necessarily surjective. For example, the inclusion homomorphism $i:\N \rightarrow \Z$ is clearly not surjective but it is an epimorphism. Indeed, let $g,h: \Z\rightarrow M$ be two monoid homomorphisms satisfying $g \circ i = h\circ i$. In particular, we have $g(n) = h(n)$ for any $n \in \N\subset \Z$. It is left to show that also $g(-n) = h(-n)$, but if it were not the case for some $n$, $g(n)$ would have two left inverses $g(-n)$ and $h(-n)$ which is not possible. We conclude that $g = h$ and $i$ is an epimorphism.
+\end{enumerate}
+\end{exmp}
+\begin{defn}[Isomorphism]
+    Let $C$ be a category, a morphism $f:A\rightarrow B$ is said to be an \textbf{isomorphism} if there exists a morphism $f^{-1}: B\rightarrow A$ such that $f\circ f^{-1} = \id_B$ and $f^{-1}\circ f = \id_A$.
+\end{defn}
+\begin{prop}
+    Let $C$ be a category and $f \in C_1$ be an isomorphism, then $f$ is a monomorphism and an epimorphism.
+\end{prop}
+\begin{proof}[Proof idea]
+    If the compositions with $f$ and two other morphisms are equal, compose with $f^{-1}$ to obtain equality of the morphisms.
+\end{proof}
+\begin{defn}[Natural isomorphism]
+    Let $\phi: F\rightarrow G$ be a natural transformation of functors $F,G: C \rightsquigarrow D$. If for every $A \in C_0$, $\phi(A)$ is an isomorphism in $G$, we say that $\phi$ is a \textbf{natural isomorphism} and we may write $\phi: F \cong G$.
+\end{defn}
+\begin{defn}[Equivalence of categories]
+    %TODO
+\end{defn}
+\begin{defn}[Subobject]
+    %TODO
+\end{defn}
+\begin{defn}[Quotient object]
+    %TODO
+\end{defn}
+\begin{defn}[Initial object]
+    Let $C$ be a category, an object $A \in C_0$ is said to be \textbf{initial} if for any $B \in C_0$, $|\Hom_C(A,B)| = 1$, namely there are no two parallel morphisms with source $A$ and every object has a morphism coming from $A$.
+\end{defn}
+\begin{defn}[Terminal object]
+    Let $C$ be a category, an object $A \in C_0$ is said to be \textbf{terminal} if for any $B \in C_0$, $|\Hom_C(B,A)| = 1$, namely there are no two parallel morphisms with target $A$ and every object has a morphism going to $A$.
+\end{defn}
+\begin{defn}[Zero object]
+    If an object is initial and terminal, we say it is a zero object and usually denote it $0$.
+\end{defn}
+
+\begin{exmps}
+    We give examples of categories where initial and terminal objects may or may not exist.
+    \begin{enumerate}
+        \item $\exists$ terminal, $\nexists$ initial: Let \textbf{Sets'} denote the categories where objects are finite sets (excluding the empty set) and morphisms are surjective functions. Clearly, $\{1\}$ is final as any set can only map into $\{1\}$ by sending all their elements to $1$. Suppose that a set $S$ were initial, then it could be mapped surjectively to any other set $T$, implying that $|S| \geq |T|$ for any $T$. However, no finite number can be bigger than any other finite number, so we have a contradiction.
+        \item  $\nexists$ terminal, $\exists$ initial: The category \textbf{GrpI} where the objects are groups and the morphisms are injective homomorphisms only contains an initial object $\{1\}$. Indeed, an injective homomorphism $G \rightarrow H$ can be seen as subgroup of $H$ isomorphic to $G$. The identity group $\{1\}$ can only be isomorphic to the the identity subgroup as any other element has degree more than 1, so $\{1\}$ is initial. Moreover, a group $G$ cannot be terminal as $G \times (\Z/2\Z)$ cannot be isomorphic to any subgroup of $G$.
+        \item $\nexists$ terminal, $\nexists$ initial: Let $G$ be a non trivial group. The category $G*$ has a single object $*$ with $\hom_{G*}(*, *) = G$ and the composition rule being the multiplication in $G$. The only object $*$ cannot be initial nor trivial as $|\hom_{G*}(*,*)| > 1$.
+        \item $\exists$ terminal, $\exists$ initial: Let $X$ be a topological space where $\tau$ is the collection of open sets (recall that it must contain $\emptyset$ and $X$). We consider the category $T_X$ where objects are the open sets and for any two open sets $U, V \in \tau$, 
+    	\[\hom_{T_X}(U,V) = \begin{cases}i_{U,V} & U \subseteq V\\ \emptyset & U \not\subseteq V\end{cases}\]
+    	Note that the composition rule can easily be inferred. Since the empty set is contained in every open set, it is an initial object. Since the full set $X$ contains every open set, it is a terminal object. No other set can be initial as it cannot be contained in $\emptyset$ nor be terminal as it cannot contain $X$. Moreover, note that the two objects are  not isomorphic as $\hom_{T_X}(X, \emptyset) = \emptyset$.
+    \end{enumerate}
+    
+\end{exmps}
+The following gives alternate definitions for initial and terminal objects which have the advantage of being completely categorical, making no use of sets. They use the concept of representable functors which will be seen more in depth later.
+\begin{prop}
+    Let $C$ be a category and $\star: C\rightarrow \textbf{Set}$ be a functor sending objects to the singleton $\{1\}$ and morphisms to $\id_{\{1\}}$. An object $A \in C_0$ is initial if and only if the functor $\Hom_C(A,-)$ is naturally isomorphic to $\star$.
+\end{prop}
+\begin{proof}
+    ($\Rightarrow$) Suppose that $A$ is initial, then there is a natural transformation $\eta$ from $\hom_C(A, -)$ to $\star$ that sends any object $X$ to the only function between $\hom_C(A,X)$ and $\{1\}$. Since the $\hom_C(A,X)$ is also a singleton, this function is an isomorphism for all $X$ and we conclude that $\eta$ is a natural isomorphism.
+    
+    ($\Leftarrow$) Suppose that there is a natural isomorphism $\eta: \hom_C(A,-)\Rightarrow \star$, then there are isomorphisms between $\{1\}$ and $\hom_C(A,X)$ for all objects $X \in C_0$. This means that there is a unique morphism from $A$ to $X$ and that $A$ is initial.
+\end{proof}
+\begin{prop}
+    Let $C$ be a category and $\star$ be as above. An object $A \in C_0$ is terminal if and only if the functor $\Hom_C(-,A)$ is naturally isomorphic to $\star$.
+\end{prop}
+\begin{proof}
+    The proof is basically a copy of the last proof.
+\end{proof}
+
+\begin{prop}
+    Let $C$ be a category, $A$ and $B$ are two initial (this also works for terminal) objects of $C$, then $A \cong B$.
+\end{prop}
+\begin{proof}
+    Let $f$ be the single element in $\hom_C(A,B)$ and $f'$ be the single element in $\hom_C(B,A)$. We claim that $f$ and $f'$ are inverses, thus that $A \cong B$. Since the identity morphisms are the only elements of $\hom_C(A,A)$ and $\hom_C(B,B)$, and $f' \circ f$ and $f\circ f'$, respectively, are elements of these sets, they must be the identities.
+\end{proof}
+
+\begin{defn}[Product]
+    Let $C$ be a category and $A,B \in C_0$. A \textbf{product} of $A$ and $B$ is an object denoted $A \times B$ along with two morphisms $p_1: A\times B \rightarrow A$ and $p_2:A\times B \rightarrow B$ (they are called projections) such that for any object $V$ and morphisms $f:V\rightarrow A$ and $g:V\rightarrow B$, there exists a unique morphism $h:V\rightarrow A\times B$ such that this diagram commutes:
+    \begin{figure}[h]
+        \centering
+        \begin{tikzcd}
+ & V \arrow[d, "h",dotted] \arrow[ld, "f"'] \arrow[rd, "g"] &  \\
+A & A\times B \arrow[l, "p_1"] \arrow[r, "p_2"'] & B
+\end{tikzcd}
+    \end{figure}
+\end{defn}
+\begin{exmp}
+    Inside \textbf{Set}, the Cartesian products with the usual projection maps are products. Inside \textbf{Grp}, the direct products with the usual projection maps are products.
+\end{exmp}
+
+\begin{defn}[Coproducts]
+     Let $C$ be a category and $A,B \in C_0$. A \textbf{coproduct} of $A$ and $B$ is an object denoted $A \amalg B$ along with two morphisms $i_1: A \rightarrow A\times B$ and $i_2: B \rightarrow A\times B$ (they are called canonical injections) such that for any object $V$ and morphisms $f:A\rightarrow V$ and $g:B\rightarrow V$, there exists a unique morphism $h: A\times B\rightarrow V$ such that this diagram commutes:
+     \begin{figure}[h]
+        \centering
+        \begin{tikzcd}
+ & V &  \\
+A \arrow[ru, "f"] \arrow[r, "i_1"'] & A\times B \arrow[u, "h", dotted] & B \arrow[lu, "g"'] \arrow[l, "i_2"]
+\end{tikzcd}
+     \end{figure}
+\end{defn}
+
+\begin{defn}[Pullback]
+    Let $C$ be a category and $f:A\rightarrow C$ and $g:B\rightarrow C$ be in $C_1$. A \textbf{pullback} of $f$ and $g$ is an object denoted $A \times_C B$ along with two morphisms $p_1: A \times_C B \rightarrow A$ and $p_2: A \times_C B \rightarrow B$ such that this diagram commutes: 
+    \begin{figure}[h]
+        \centering
+        \begin{tikzcd}
+A\times_C B \arrow[d, "p_1"'] \arrow[r, "p_2"] & B \arrow[d, "g"] \\
+A \arrow[r, "f"'] & C
+\end{tikzcd}
+    \end{figure}
+    and for any object $V$ and morphisms $s:V\rightarrow A$ and $t:V\rightarrow B$, there exists a unique morphism $h:V\rightarrow A\times_C B$ that makes this diagram commute:
+    \begin{figure}[h]
+        \centering
+        \begin{tikzcd}
+V \arrow[rdd, "s"', bend right] \arrow[rrd, "t", bend left] \arrow[rd, "h", dotted] &  &  \\
+ & A\times_C B \arrow[d, "p_1"'] \arrow[r, "p_2"] & B \arrow[d, "g"] \\
+ & A \arrow[r, "f"'] & C
+\end{tikzcd}
+    \end{figure}
+\end{defn}
+
+\begin{defn}[Pushout]
+    %TODO
+\end{defn}
+\begin{exmp}[Pushouts in \textbf{Grp}]
+    Let $f:A\rightarrow B$ and $g:A\rightarrow C$ be group homomorphism. We construct the pushout $X$. We let $X$ be the group generated by all elements in $B \amalg C$ subject to the following relations for all generators $x,y,z \in X$:
+    \begin{itemize}
+        \item If $x,y$ in the same group and $z=(xy)^{-1}$, then $xyz = 1$.
+        \item If $x = f(a)$ and $y = g(a)^{-1}$, then $xy = 1$ or $x = g(a)$ and $y = f(a)^{-1}$.
+    \end{itemize}
+    We already have the other arrows of the square being the inclusion maps $B\rightarrow X$ and $C\rightarrow X$. We just need to check commutativity but the second relation helps with that. %TODO Finish check that is a pushout.
+    For any other $M$ in a square, define $q:X \rightarrow M$ by sending a generator to the image of the generator under the arrows of the square with $M$. Look at what $\Z_2 \ast \Z_2$ is $\{x, y, xy, yx, xyx, ...\}$.
+\end{exmp}
+
+\begin{quest}
+    Is the pullback object always a subobject of the product ? Is the pushout object always a subobject of the coproduct or quotient object of the product ? Why are these terms used ?
+\end{quest}
+
+\begin{defn}[Equalizer]
+    Let $C$ be a category, $X,Y \in C_0$ and $f,g \in \Hom_C(X,Y)$ be distinct. The equalizer of $f$ and $g$ is an object $E$ and a morphism $e: E\rightarrow X$ such that $f\circ e = g \circ e$ and this universal property is satisfied: if $o: O\rightarrow X$ is such that $f\circ o = g \circ o$, then there exists a unique morphism $u:O\rightarrow E$ such that $e\circ u= o$. In picture, we have 
+    \begin{figure}[H]
+        \centering
+        \begin{tikzcd}
+E \arrow[r, "e"] & X \arrow[r, "f", bend left] \arrow[r, "g"', bend right] & Y \\
+O \arrow[u, "u", dashed] \arrow[ru, "o"'] &  & 
+\end{tikzcd}
+    \end{figure}
+\end{defn}
+\begin{defn}[Co-equalizer]
+    Let $C$ be a category, $X,Y \in C_0$ and $f,g \in \Hom_C(X,Y)$ be distinct. The co-equalizer of $f$ and $g$ is an object $D$ and a morphism $d: Y\rightarrow D$ such that $d\circ f = d \circ g$ and this universal property is satisfied: if $o: X\rightarrow O$ is such that $o\circ f = o \circ g$, then there exists a unique morphism $u:D\rightarrow O$ such that $u\circ d= o$. In picture, we have
+    \begin{figure}[H]
+        \centering
+        \begin{tikzcd}
+X \arrow[r, "f", bend left] \arrow[r, "g"', bend right] & Y \arrow[r, "d"] \arrow[rd, "o"'] & D \arrow[d, "u", dashed] \\
+ &  & O
+\end{tikzcd}
+    \end{figure}
+\end{defn}
+
+
+
+\begin{defn}[Equivalence]
+    A functor $F:C\rightsquigarrow D$ is an equivalence of categories if there exists a functor $G:D\rightsquigarrow C$ such that $FG\cong \id_{C}$ and $GF \cong \id_{D}$, where $\cong$ denote natural isomorphism. 
+\end{defn}
+\begin{thm}
+    A functor $F:C\rightsquigarrow D$ is an equivalence of categories if and only if $F$ is fully faithfull and essaentially surjective.
+\end{thm}
+
+\subsection{More on natural transformations}
+\begin{defn}[The left action of functors]
+    Let $F,F':C\rightsquigarrow D$, $G:D\rightsquigarrow E$ be functors and $\phi:F\Rightarrow F'$ be a natural transformation. The functor $G$ acts on $\phi$ by sending it to $G\phi = A \mapsto G(\phi(A)) : C_0 \rightarrow E_1$. One can verify that this is a natural transformation from $G\circ F$ to $G\circ F'$ by verifying the diagram commutes for any $C_1 \ni f:A\rightarrow B$.
+    \begin{figure}[h]
+        \centering
+        \begin{tikzcd}
+        (G\circ F)(A) \arrow[d, "(G\circ F)(f)"'] \arrow[r, "G\phi(A)"] & (G\circ F')(A) \arrow[d, "(G\circ F')(f)"] \\
+        (G\circ F)(B) \arrow[r, "G\phi(B)"] & (G\circ F')(B)
+        \end{tikzcd}
+    \end{figure}
+    
+    If we remove all applications of $G$, the diagram commutes by naturality of $\phi$. Since functors preserve commuting diagrams, we get that $G\phi$ is a natural transformation.
+\end{defn}
+\begin{prop}
+    The previous definition constitutes a left action, namely, $\id_D\phi = \phi$ and $G_1(G_2\phi)= (G_1 \cdot G_2)\phi$.
+\end{prop}
+\begin{proof}
+    
+\end{proof}
+\begin{defn}[The right action of functors]
+    Let $F,F':C\rightsquigarrow D$, $G:E\rightsquigarrow C$ be functors and $\phi:F\Rightarrow F'$ be a natural transformation. The functor $G$ acts on $\phi$ by sending it to $\phi G = A \mapsto \phi(G(A)) : E_0 \rightarrow D_1$. One can verify that this is a natural transformation from $F\circ G$ to $F'\circ G$ by verifying the diagram commutes for any $E_1 \ni f:A\rightarrow B$.
+    \begin{figure}[H]
+        \centering
+        \begin{tikzcd}
+        (F\circ G)(A) \arrow[d, "(F\circ G)(f)"'] \arrow[r, "\phi G(A)"] & (F'\circ G)(A) \arrow[d, "(F'\circ G)(f)"] \\
+        (F\circ G)(B) \arrow[r, "\phi G(B)"] & (F'\circ G)(B)
+        \end{tikzcd}
+    \end{figure}
+    It follows by naturality of $\phi$; change $f$ in the diagram of definition \ref{defnattran} with the morphism $G(f):G(A) \rightarrow G(B)$.
+\end{defn}
+\begin{prop}
+    The previous definition constitutes a right action, namely, $\phi\id_C = \phi$ and $(\phi G_1)G_2 = \phi (G_1 \cdot G_2)$.
+\end{prop}
+\begin{proof}
+    
+\end{proof}
+\begin{prop}
+    The two actions commute. Namely, if we let $F,F':C\rightsquigarrow D$, $G: D\rightsquigarrow E$, $H: E'\rightsquigarrow C$ be functors and $\phi:F \Rightarrow F'$ be a natural transformation, then we have $G(\phi E) = (G\phi) E$.
+\end{prop}
+\begin{proof}
+
+\end{proof}
+We will refer to these two actions as the biaction of functors on natural transformations and they will motivate the definition of another way to compose natural transformations. 
+\begin{figure}[h]
+    \centering
+    \begin{tikzcd}
+ & \  \arrow[dd, "\phi"] &  & \  \arrow[dd, "\psi"] &  \\
+C \arrow[rr, "F", bend left=80] \arrow[rr, "F'"', bend right=80] &  & D \arrow[rr, "G", bend left=80] \arrow[rr, "G'"', bend right=80] &  & E \\
+ & \  &  & \  & 
+\end{tikzcd}
+\end{figure}
+Consider the following diagram to be the setting of this definition, with $F,F',G$ and $G'$ being functors and $\phi$ and $\psi$ being natural transformations. With the two previous actions, we are able to construct four new transformations: 
+\begin{align*}
+    G\phi&: G\circ F \Rightarrow G\circ F'\\
+    \psi F&: G\circ F \Rightarrow G'\circ F\\
+    G'\phi&: G'\circ F \Rightarrow G'\circ F'\\
+    \psi F'&: G\circ F' \Rightarrow G'\circ F'
+\end{align*}
+Observe that to go from $G \circ F$ to $G' \circ F'$, we have two paths yielding the following diagram:
+\begin{figure}[h]
+    \centering
+    \begin{tikzcd}
+ & G\circ F' \arrow[rd, "\psi F'"] &  & \  \\
+G\circ F \arrow[ru, "G\phi"] \arrow[rd, "\psi F"'] &  & G'\circ F' &  \\
+ & G'\circ F \arrow[ru, "G'\phi"'] &  & \ 
+\end{tikzcd}
+\end{figure}
+\begin{prop}
+    The diagram above commutes.
+\end{prop}
+\begin{proof}
+For a fixed element $c \in C_0$ we know that $a := F(c)$ and $b := F'(c)$ are two different elements of the category $D$ and that we have an arrow $f := \phi(c)$ from $a$ to $b$ given by the natural transformation $\phi$.
+But as $\psi$ is a natural transformation $G \Rightarrow G'$, we know that the following diagram commutes:
+\begin{figure}[h]
+    \centering
+\begin{tikzcd}
+ & G(b) \arrow[rd, "\psi b"] &  \\
+G (a) \arrow[ru, "G f"] \arrow[rd, "\psi a"'] &  & G'(b) \\
+ & G'(a) \arrow[ru, "G'f"'] & 
+\end{tikzcd}
+\end{figure}
+
+Replacing $a$, $b$ and $f$ by their values we obtain what we wanted.
+\end{proof}
+
+
+%%%%
+\begin{defn}[Horizontal composition]\label{horizcomp}
+    In the setting described above, we define the \textbf{horizontal composition} of $\psi$ and $\phi$ by $\psi \diamond \phi = \psi F' \cdot G\phi = G'\phi\cdot \psi F$.
+\end{defn}
+\begin{prop}
+    Horizontal composition is associative. Namely, if we let $F,F':C_1 \rightsquigarrow C_2$, $G,G':C_2\rightsquigarrow C_3$ and $H,H':C_3\rightsquigarrow C_4$ be functors and $\phi: F\Rightarrow F'$, $\psi:G\Rightarrow G'$ and $\eta: H\Rightarrow H'$ be natural transformations, then we have $\eta \diamond (\psi \diamond \phi)= (\eta \diamond \psi)\diamond \phi$.
+\end{prop}
+\begin{proof}
+
+\end{proof}
+
+
+%%%%
+\begin{prop}[Interchange identity]
+    Let $F,F',F'': C\rightsquigarrow D$ and $G,G',G'': D\rightsquigarrow E$ be functors and $\phi:F\Rightarrow F'$, $\phi':F'\Rightarrow F''$, $\psi:G\Rightarrow G'$ and $\psi':G'\Rightarrow G''$ be natural transformations. Using $\cdot$ to denote vertical composition, the \textbf{interchange identity} holds:
+    \[(\psi' \cdot \psi) \diamond (\phi' \cdot \phi) = (\psi' \diamond \phi') \cdot (\psi \diamond \phi)\]
+\end{prop}
+\begin{proof}
+The idea is to use the commutativity of $\psi ' \circ \phi$ to switch from the LHS to the RHS of the equation.
+To make things clearer we first draw out the diagrams
+The LHS of the equation can be seen as the following diagram:
+\begin{figure}[h]
+    \centering
+\begin{tikzcd}
+ & G'\circ F \arrow[rd, "G' \phi"] &  & G''\circ F' \arrow[rd, "G'' \phi '"] &  \\
+G\circ F \arrow[ru, "\psi F"] \arrow[rd] &  & G'\circ F' \arrow[ru, "\psi ' F'"] \arrow[rd] &  & G''\circ F'' \\
+ & G\circ F' \arrow[ru] &  & G'\circ F'' \arrow[ru] & 
+\end{tikzcd}
+\end{figure}
+
+While the RHS would correspond to the following:
+\begin{figure}[h]
+    \centering
+\begin{tikzcd}
+ &  & G''\circ F \arrow[rd, "G'' \phi"] &  &  \\
+ & G'\circ F \arrow[ru, "\psi ' F"] &  & G''\circ F' \arrow[rd, "G'' \phi '"] &  \\
+G\circ F \arrow[ru, "\psi F"] \arrow[rd] &  &  &  & G''\circ F'' \\
+ & G\circ F' \arrow[rd] &  & G'\circ F'' \arrow[ru] &  \\
+ &  & G \circ F'' \arrow[ru] &  & 
+\end{tikzcd}
+\end{figure}
+
+Joining the two diagrams, we obtain this huge one
+\begin{figure}[h]
+    \centering
+\begin{tikzcd}
+ &  & G''\circ F \arrow[rd, "G'' \phi"] &  &  \\
+ & G'\circ F \arrow[ru, "\psi ' F"] \arrow[rd, "G' \phi"] & 1 & G''\circ F' \arrow[rd, "G'' \phi '"] &  \\
+G\circ F \arrow[ru, "\psi F"] \arrow[rd] &  & G'\circ F' \arrow[ru, "\psi ' F'"] \arrow[rd] &  & G''\circ F'' \\
+ & G\circ F' \arrow[rd] \arrow[ru] &  & G'\circ F'' \arrow[ru] &  \\
+ &  & G \circ F'' \arrow[ru] &  & 
+\end{tikzcd}
+\end{figure}
+\end{proof}
+
+These definitions lead us to the first example of a 2-category.
+\begin{defn}[2-cateory]
+    A \textbf{2-category} consists of a class of objects $C_0$, a class of morphisms between objects $C_1$ and a class of 2-morphisms between parallel morphisms $C_2$ that satisfy the following conditions:
+    \begin{enumerate}
+        \item The objects and morphisms form a category under composition of morphisms.
+        \item For two objects $A,B \in C_0$, the morphisms from $C$ to $D$ and the 2-morphisms between them form a category under vertical composition.
+        \item If we consider 2-cells (two parallel morphisms with a 2-morphism between them) as morphisms, we get a category under horizontal composition.
+        \item The interchange identity hold for horizontal and vertical composition.
+    \end{enumerate}
+\end{defn}
+
+\begin{exmp}
+    \begin{enumerate}
+    \item[]
+        \item The 2-category of categories with functors and natural transformations as we just have proved.
+        %TODO: An example with vector spaces over some field and fixed with a basis, linear transformation and changes of basis.
+    \end{enumerate}
+\end{exmp}
+
+\begin{quest}
+    Is the vertical composition of two natural isomorphisms also a natural isomorphism ? What about horizontal composition ?
+\end{quest}
+
+%%%%
+\begin{defn}[Identity transformation]
+    Let $F:C\rightsquigarrow D$ be a functor, the identity natural transformation from $F$ to itself is defined by $\id_F= A \mapsto \id_{F(A)}: C_0 \rightarrow D_1$ when the objects in the range of $F$ all have an identity morphism.
+\end{defn}
+\begin{prop}
+    Let $F,F':C\rightsquigarrow D$, $G:B\rightsquigarrow C$ and $H:D\rightsquigarrow E$ be functors and $\phi:F\Rightarrow F'$ be a natural transformation. Suppose that $C$ and $E$ are unital, then the following equations hold:
+    \begin{enumerate}
+        \item $\phi G = \phi \diamond \id_G$
+        \item $H\phi = \id_H \diamond \phi$
+        \item $\id_{\id_D} \diamond \phi = \phi = \phi \diamond \id_{\id_C}$
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+\begin{enumerate}
+    \item[]
+    \item For any $x \in B_0$, we have the following:\begin{align*}
+        (\phi \diamond \id_G)(x) &= \phi(G(x)) \circ F(\id_G(x)) &&\mbox{(def of $\diamond$)}\\
+        &= \phi G(x) \circ F(\id_{G(x)})  &&\mbox{(def of $\id_G$)}\\
+        &= \phi G(x) \circ \id_{F(G(x))} &&\mbox{(functors preserve $\id$ morphisms)}\\
+        &= \phi G(x) &&\mbox{(def of $\id$ morphisms)}
+    \end{align*}
+    Thus, we conclude that $\phi \diamond \id_G = \phi G$.
+    \item For any $x \in C_0$, we have the following:\begin{align*}
+        (\id_H \diamond \phi)(x) &= \id_H(F'(x)) \circ H(\phi(x)) &&\mbox{(def of $\diamond$)}\\
+        &= \id_{H(F'(x))} \circ H\phi(x)  &&\mbox{(def of $\id_H$)}\\
+        &= H\phi(x) &&\mbox{(def of $\id$ morphisms)}
+    \end{align*}
+    Thus, we conclude that $\id_H \diamond \phi = H\phi$.
+    \item By swapping $G$ for $\id_C$ and $H$ for $\id_D$ in the two previous equations, we get the result we want.
+\end{enumerate}
+\end{proof}
+
+\subsection{On our way to the Yoneda lemma}
+\begin{defn}[Category of arrows]
+    Let $C$ be a category, $\arr(C)$ is the category of arrows of $C$. Its objects are morphisms in $C$ and its morphisms are commutative squares $\phi$. In other words, if $f$ and $g$ are morphisms in $C$ and there exists maps $\phi_s$ and $\phi_t$ such that this diagram commutes
+    \begin{figure}[h]
+        \centering
+        \begin{tikzcd}
+s(f) \arrow[r, "f"] \arrow[d, "\phi_s"'] & t(f) \arrow[d, "\phi_t"] \\
+s(g) \arrow[r, "g"'] & t(g)
+\end{tikzcd},
+    \end{figure}
+    
+    \noindent then this square is a morphism from $f$ to $g$. It is denoted by $\phi$ or $(\phi_s, \phi_t)$.
+\end{defn}
+\begin{defn}[Source functor]
+    Let $C$ be a category, the \textbf{source functor} is $S:\arr{C}\rightsquigarrow C$ defined by:
+    \begin{align*}
+        S_0(f) = s(f), \forall f \in C_1 = \arr(C)_0\\
+        S_1((\phi_s,\phi_t)) = \phi_s \forall (\phi_s,\phi_t) \in \arr(C)_1
+    \end{align*}
+\end{defn}
+\begin{defn}[Target functor]
+    Let $C$ be a category, the \textbf{target functor} is $T:\arr{C}\rightsquigarrow C$ defined by:
+    \begin{align*}
+        T_0(f) = t(f), \forall f \in C_1 = \arr(C)_0\\
+        T_1((\phi_s,\phi_t)) = \phi_t \forall (\phi_s,\phi_t) \in \arr(C)_1
+    \end{align*}
+\end{defn}
+\begin{defn}[Tautological natural transformation]
+    Let $C$ be a category, the \textbf{tautological natural transformation} is $\tau: S \Rightarrow T$ defined by $\tau(f) = f$ for all $f\in C_1 = \arr(C)_0$. Note that we see the input as an object of $\arr(C)$ and the output as a morphism of $C$.
+\end{defn}
+
+\begin{defn}[Arr functor]
+    The \textbf{Arr functor} is a functor $\textbf{Cat}\rightsquigarrow \textbf{Cat}$ that sends a category $C$ to its category of arrows and a functor $F:C \rightsquigarrow D$ to the functor $\arr(F): \arr(C) \rightsquigarrow \arr(D)$ defined by
+    \begin{align*}
+        \arr(F)_0 &= f \mapsto F(f)\\
+        \arr(F)_1 &= (\phi_s,\phi_t) \mapsto (F(\phi_s),F(\phi_t))
+    \end{align*}
+\end{defn}
+\begin{prop}
+    The correspondences $S = C\mapsto S_C$ and $T = C\mapsto T_C$ where $S_C$ is the source functor and $T_C$ is the target functor define natural transformations $\arr \mapsto \id_{\textbf{Cat}}$.
+\end{prop}
+\begin{proof}
+    %TODO
+\end{proof}
+
+\begin{defn}[Representable functors]
+    A covariant functor $F: C\rightarrow \textbf{Set}$ is said to be representable if there is an object $X \in C_0$ such that $F$ is naturally isomorphic to $\hom_C(X,-)$. If $F$ is contravariant, then we require it to be naturally isomorphic to $\hom_C(-,X)$.
+\end{defn}
+\begin{exmp}
+    The functor $(-)^{\times}: \textbf{Ring} \rightsquigarrow \textbf{Set}$ is represented by $\Z[x,x^{-1}]$ because any unit of $R^{\times}$ corresponds to the unique homomorphism from $\Z[x,x^{-1}]$ to $R$ sending $x$ to that unit and every homomorphisms from $\Z[x,x^{-1}]$ to $R$ must send $x$ to a unit.
+\end{exmp}
+\begin{exmp}
+    The forgetful functor has a left adjoint implies it is representable. Look at what happens on a set with one element. Need to define forgetful functor and adjoint. %TODO
+\end{exmp}
+%TODO def adjoint \begin{tikzcd}
+%{\Mor_D(F(A),B')} \arrow[rr] &  & {\Mor_C(A, G(B'))} \arrow[ll, "{\phi_{A,B'}}"'] \\
+%{\Mor_D(F(A),B)} \arrow[u, "g\circ(-)"] \arrow[rr] &  & {\Mor)C(A,G(B))} \arrow[u, "G(g)\circ (-)"'] \arrow[ll, "{\phi_{A,B}}"'] \\
+%{\Mor_D(F(A'),B)} \arrow[u, "(-)\circ F(f)"] \arrow[rr] &  & %{\Mor_C(A',G(B))} \arrow[u, "(-)\circ f"'] \arrow[ll, "{\phi_{A',B}}"']
+%\end{tikzcd}
+
+\begin{exmp}[Cayley's theorem with the Yoneda Lemma]
+Cayley's theorem states that any group is isomorphic to the subgroup of a permutation group. We will use the Yoneda lemma to show that.
+
+Recall the first part of the Yoneda lemma which states that for a category $C$, a functor $F:C \rightsquigarrow \textbf{Sets}$ and an object $A$. We have $$\text{Nat}(\Hom(A, -), F) \cong F(A).$$Moreover, we know the explicit maps, namely, a natural transformation $\varphi$ in the L.H.S. is mapped to $\varphi_A(\id_A)$ and an element $u \in F(A)$ is mapped to the natural transformation $\{\varphi_B = f \mapsto F(f)(u) \mid B \in C_0\}$.
+
+Let us apply this to $C$ being the category associated to a group $G$ (i.e.: there is one object $\star$, $\Hom(\star, \star) = G$ and the composition law follows the group operation). Note that any functor $F: C\rightsquigarrow \textbf{Sets}$ sends $\star$ to a set $S$ and any $g \in G$ to a permutation of $S$, otherwise $g\circ g^{-1} = 1$ cannot be satisfied.
+
+To use the Yoneda lemma, our only choice for $A$ is $\star$ and we will choose $F = \Hom(\star, -)$. The Yoneda correspondence becomes
+$$ \text{Nat}(\Hom(\star, -), \Hom(\star,-)) \cong \Hom(\star, \star).$$
+We already know what the R.H.S. is $G$, but we have to do a bit of work to understand the L.H.S. First, observe that a natural transformation $\varphi: \Hom(\star, -) \Rightarrow \Hom(\star, -)$ is just one morphism $\varphi_{\star}: \Hom(\star, \star) \rightarrow \Hom(\star, \star)$. Namely, it is a map from $G$ to $G$. Second, recalling that $\Hom(\star, g) = g \circ (-)$ and that $\star$ is the only object in $C_0$, we get that $\varphi_{\star}$ must only satisfy one diagram.
+\begin{figure}[H]
+    \centering
+    \begin{tikzcd}
+G \arrow[d, "g \circ(-)"'] \arrow[r, "\varphi_{\star}"] & G \arrow[d, "g\circ (-)"] \\
+G \arrow[r, "\varphi_{\star}"'] & G
+\end{tikzcd}
+\end{figure}
+This is equivalent to $\varphi_{\star}(g \cdot h) = g \cdot \varphi_{\star}(h)$, and we get that each $\varphi_{\star}$ is a $G$-equivariant map, denote these maps $\Hom_G(G,G)$. We obtain
+$$\Hom_G(G,G) \cong G.$$
+Now, it is easy to check that $\Hom_G(G,G)$ is a subgroup of $\Sigma_G$ (the group of permutations of the set $G$) and that the correspondence is in fact an isomorphism of groups. Cayley's theorem follows.
+
+Let us check that $\Hom_G(G,G) < \Sigma_G$. Let $f$ be a $G$-equivariant map. For any $g\in G$, we have $f(g) = f(g\cdot 1) = g \cdot f(1)$. Thus, $f$ is determined only by where it sends the identity. Additionally, since $g \cdot f(1)$ ranges over $G$ when $g$ ranges over $G$, for any choice of $f(1)$, $f$ is bijective. Finally, if $f$ and $f'$ are both $G$-equivariant map, then $$(f\circ f')(g\cdot h) = f(f'(g\cdot h)) = f(g \cdot f'(h)) = g\cdot (f\circ f')(h),$$
+hence $f\circ g$ is $G$-equivariant. With the facts that $f^{-1}$ is just the $G$-equivariant map sending $1$ to $f(1)^{-1}$ and $\id$ is $G$-equivariant, it follows that $\Hom_G(G,G)$ is a subgroup of $\Sigma_G$.
+
+The final check is that the Yoneda correspondence $G\rightarrow \Hom_G(G,G)$ sending $g$ to $(-)\cdot g$ is a group homomorphism (isomorphism follows because it is a bijection). It is clear that it sends the identity to the identity and for any $g, h \in G$
+$$(-)\cdot gh = ((-) \cdot g)\cdot h = ((-)\cdot h) \circ ((-)\cdot g),$$ so this is a group homomorphism. 
+\end{exmp}
+
+\section{Limits}
+\begin{defn}[Cones]
+    Let $F: J \rightsquigarrow C$ be a diagram in $C$ and $X \in C_0$. A cone from $X$ to $F$ is a family $\{\psi_Y : X \rightarrow F(Y)\}_{Y \in J_0}$ such that for any morphism $f: Y \rightarrow Z$ in $J$, $F(f) \circ \psi_Y = \psi_X$, i.e.: the following diagram commutes.
+    \begin{figure}[h]
+        \centering
+        \begin{tikzcd}
+ & X \arrow[ld, "\psi_Y"'] \arrow[rd, "\psi_Z"] &  \\
+F(Y) \arrow[rr, "F(f)"] &  & F(Z)
+\end{tikzcd}
+    \end{figure}
+\end{defn}
+\begin{defn}[Morphism of cones]
+    Let $F:J\rightsquigarrow C$ be a diagram in $C$ and $\{\psi_Y: A \rightarrow F(Y)\}_{Y \in J_0}$ and $\{\phi_Y: B\rightarrow F(Y)\}_{Y \in J_0}$ be two cones to $F$. A morphism of cones from $A$ to $B$ is a morphism $g:A\rightarrow B$ in $C$ such that for any $Y$, we have $\psi_Y \circ g = \phi_Y$, i.e.: the following diagram commutes.
+    \begin{figure}[h]
+        \centering
+        \begin{tikzcd}
+A \arrow[rr, "g"'] \arrow[rd, "\psi_Y"'] &  & B \arrow[ld, "\phi_Y"] \\
+ & F(Y) & 
+\end{tikzcd}
+    \end{figure}
+\end{defn}
+\begin{defn}[Limit]
+    Let $F:J \rightsquigarrow C$ be a diagram in $C$, the limit of $F$ (or $J$) denoted $\varprojlim F$ (or $\varprojlim J$), if it exists, is the terminal object of the category of cones to $F$.
+\end{defn}
+%TODO: Define cocones and colimits
+\begin{rem}
+    Observe that products arises as limits of diagrams where the domain is discrete unital, i.e.: it has no morphisms but the identities.
+\end{rem}
+\begin{prop}
+    Suppose that a category $C$ has arbitrary products and equalizers then $C$ has arbitrary limits.
+\end{prop}
+\begin{proof}
+    Let $F: J\rightsquigarrow C$ be a diagram, we claim that the the limit of $F$ is the equalizer of 
+    \[u_1, u_2: \prod_{X \in J_0} F(X) \rightarrow \prod_{a \in J_1} F(t(a)),\]
+    where $u_1$ and $u_2$ are defined below. This equalizer and the products it involves exists by our hypothesis.
+    
+    For any $X \in J_0$ and $a \in J_1$, we have the following projections \[\pi_X:\prod_{X \in J_0}F(X)\rightarrow F(X) \quad \quad \pi_a:\prod_{a \in J_1} F(t(a)) \rightarrow F(t(a)).\]
+    Moreover, note that $\prod_{X \in J_0}F(X)$ has two different ways to project to $F(t(a))$ for all $a \in J_1$. The first one being via $\pi_{t(a)}$, we get a unique morphism $u_1:\prod_{X \in J_0} F(X) \rightarrow \prod_{a \in J_1}F(t(a))$ that satisfies $\pi_a \circ u_1 = \pi_{t(a)}$. For the second one, note that $F(a) \circ \pi_{s(a)}$ is also a projection to $F(t(a))$, thus we get a unique morphism $u_2:\prod_{X \in J_0} F(X) \rightarrow \prod_{a \in J_1}F(t(a))$ that satisfies $\pi_a \circ u_2 = F(a) \circ \pi_{s(a)}$.
+    
+    Let $e:E\rightarrow \prod_{X\in J_0} F(X)$ be the equalizer of $u_1$ and $u_2$ and for any $X \in J_0$, let $\psi_X = \pi_X \circ e$. For any $f: Y \rightarrow Z$ in $J$, we have 
+    \begin{align*}
+        F(f) \circ \psi_Y &= F(f) \circ \pi_Y \circ e\\ 
+        &= \pi_f \circ u_2 \circ e\\ 
+        &= \pi_f \circ u_1 \circ e\\
+        &= \pi_Z \circ e = \psi_Z,
+    \end{align*}
+    so we indeed obtain a cone from $E$ to $F$. Next, for any other cone $\{\phi_X: O \rightarrow F(X)\}_{X \in J_0}$, we get a unique morphism $p: O\rightarrow \prod_{X \in J_0}$ such that $\pi_X \circ p = \phi_X$ (by universality of the product). We claim that both $u_1 \circ p$ and $u_2 \circ p$ make the following diagram commute for all $a \in J_1$.
+    \begin{figure}[H]
+        \centering
+        \begin{tikzcd}
+O \arrow[r, "u_i \circ p"] \arrow[rd, "\phi_{t(a)}"'] & \prod_{a \in J_1} F(t(a)) \arrow[d, "\pi_a"] \\
+ & F(t(a))
+\end{tikzcd}
+    \end{figure}
+    We have the following derivations.
+    \[
+        \pi_a \circ u_1 \circ p = \pi_{t(a)} \circ p = \phi_{t(a)}
+    \]
+    \begin{align*}
+        \pi_a \circ u_2 \circ p &= F(a) \circ \pi_{s(a)} \circ p\\
+        &= F(a) \circ \phi_{s(a)}\\
+        &= \phi_{t(a)}
+    \end{align*}
+    By universality of the product of the $F(t(a))$'s, we obtain $u_1 \circ p = u_2 \circ p$ and by universality of the equalizer, we get a unique morphism $n: O\rightarrow E$ such that $e \circ n = p$. Furthermore, for any $X \in J_0$, we have \[\psi_X \circ n = \pi_X \circ e \circ n = \pi_X \circ p = \phi_X,\]
+    so $n$ is also a morphism of cones $(O, \phi_X)\rightarrow (E, \psi_X)$. Since any other morphism of cones $m$ needs to satisfy $e \circ m = p$, we see that $n$ is unique. We conclude that $E$ is indeed the limit of $F$.
+\end{proof}
+\begin{rem}
+    The same proof yields a more general statement: For any cardinal $\kappa$, if a category $C$ has products of size $\kappa$ and equalizers, then it has limits of any diagram with at most $\kappa$ objects and morphisms. 
+\end{rem}
+
+
+\section{Monads}
+\begin{defn}[$\sigma$-algebra]
+\end{defn}
+\begin{defn}[Measurable spaces]
+    A measurable space is a set $X$ along with a $\sigma$-algebra of $X$. A function between two measurable spaces $(X,\Sigma_X)$ and $(Y,\Sigma_Y)$ (which is just a function $f:X\rightarrow Y$ is said to be measurable if the preimage of any measurable set is measurable. The category \textbf{Mes} has measurable spaces as its objects and measurable functions as its morphisms.
+\end{defn}
+
+\begin{defn}[Giry Monad]
+    We define the monad $\mG: \textbf{Mes} \rightsquigarrow\textbf{Mes}$. It sends $(X, \Sigma_X)$ to the set of probability measures on $\Sigma$ with the smallest $\sigma$-algebra that makes $e_A$ measurable for all $A \in \Sigma_X$, where
+    \[e_A: \mG(X) \rightarrow [0,1] = p \mapsto p(A),\]
+    and $[0,1]$ has the usual Borel $\sigma$-algebra. For a morphism $f: (X,\Sigma_X) \rightarrow (Y, \Sigma_Y)$, $\mG(f)$ sends a measure to its image measure (or push-forward), namely,
+    \[\mG(f): \mG(X) \rightarrow \mG(Y) = p \mapsto p\circ f^{-1}.\]
+    It remains to define the two natural transformations $\mu: \mG^2 \Rightarrow \mG$ and $\eta: \text{id}_{\textbf{Mes}} \Rightarrow \mG$. For the former, if $(X,\Sigma_X)$ is measurable and $\Omega \in \mG^2(X)$, we define
+    \[\mu_X(\Omega) : \Sigma_X \rightarrow [0,1] = A \mapsto \int_{p \in \mG(X)} e_A(p)d\Omega.\]
+    For the latter, we define 
+    \[\eta_X(x) : \Sigma_X \rightarrow [0,1] = \delta_x := A \mapsto \begin{cases}1&x \in A\\0&x \notin A\end{cases}.\]
+\end{defn}
+%TODO: Check this is a monad.
+\begin{defn}
+    Let $(X, \Sigma_X)$ and $(Y,\Sigma_Y)$ be measurable spaces, a \textbf{Markov kernel} is a map $f: X \times \Sigma_Y \rightarrow [0,1]$ such that for any $B \in \Sigma_Y$, $f(\cdot, B): X \rightarrow [0,1]$ is $\Sigma_X$-measurable ($[0,1]$ has the usual Borel $\sigma$-algebra) and for any $x \in X$, $f(x,\cdot)$ is a probability measure on $\Sigma_Y$. We define the compositions of two Markov kernels $f: X \times \Sigma_Y \rightarrow [0,1]$ and $g: Y \times \Sigma_Z \rightarrow [0,1]$ as 
+    \[g \circ f : X \times \Sigma_Z \rightarrow [0,1] = (x, C) \mapsto \int_{y \in Y} g(y,C)f(x,dy).\]
+    In words, $(x,C)$ is mapped to the average of $g(y,C)$ weighted by the measure $f(x,\cdot)$.
+\end{defn}
+\begin{prop}
+    The category of Markov kernels is the Kleisli category of the Giry monad.
+\end{prop}
+\begin{proof}
+    Recall that in the Giry monad, morphisms are measurable functions $f:X \rightarrow \mG(Y) \subseteq \Sigma_Y \rightarrow [0,1]$. We see that $f$ is the curried version of a Markov kernel $f: X\times \Sigma_Y \rightarrow [0,1]$. Moreover, the condition that $f(x,\cdot)$ is a probability measure is satisfied because $f(x) \in \mG(Y)$ (the set probability measures on $\Sigma_Y$) and the condition that $f(\cdot, B)$ is $\Sigma_X$-measurable is satisfied because \[f(\cdot,B)^{-1}(M) = \{x \in X \mid f(x)(B) \in M\} = f^{-1}(N), \qquad N \subseteq \{p \in \mG(Y) \mid p(B) \in M\},\]
+    and since $N$ and $f$ are measurable, so is $f$.
+    
+    It remains to show that composition of Markov kernels corresponds to the Kleisli composition. Let $f: X\rightarrow \mG(Y)$ and $g: Y \rightarrow \mG(Y)$ are Kleisli morphisms, then recall that we have
+    \[g \circ_K f = \mu_Z \circ \mG(g) \circ f = x \mapsto (C \mapsto \int_{z \in \mG(Z)} e_C(z) f(x)(g^{-1}(dz))\]
+    With some rearrangements, namely uncurrying $f$ and the composition as well as writing $e_C(z)$ as $z(C)$, we obtain:
+    \[g \circ_K f = (x,C) \mapsto \int_{z \in \mG(Z)} z(C) f(x, g^{-1}(dz)).\]
+    This is clearly the formula for Markov kernel composition modulo the change of variable $z = g(y)$.
+\end{proof}
+\begin{rem}
+    Recall that the Kleisli category of the power set monad $\mP: \textbf{Sets} \rightarrow \textbf{Sets}$ is the category \textbf{Rel} of sets with relations as morphisms. The Giry monad is, in some sense, imitating the behavior of the power set for measurable spaces, thus we can think of Markov kernels as measurable relations or probabilistic relations.
+\end{rem}
+\end{document}
+

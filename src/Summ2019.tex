@@ -1,0 +1,316 @@
+\PassOptionsToPackage{table}{xcolor}
+\documentclass{beamer} %
+\usefonttheme[onlymath]{serif}
+\usepackage{mathpazo}  
+%
+% Choose how your presentation looks.
+%
+% For more themes, color themes and font themes, see:
+% http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
+%
+
+\mode<presentation>
+{
+	\usetheme{default}      % or try Darmstadt, Madrid, Warsaw, ...
+	\usecolortheme{beaver} % or try albatross, beaver, crane, ...
+	\usefonttheme{default}  % or try serif, structurebold, ...
+	\setbeamertemplate{navigation symbols}{}
+	\setbeamertemplate{caption}[numbered]
+} 
+
+\usepackage[french]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{multirow}
+\title[P vs. NP]{How to prove \textbf{P} = \textbf{NP}?}
+\author{Ralph Sarkis}
+\institute{SUMM - 2019}
+\date{11 Janvier 2019}
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{quest}[thm]{Question}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{defns}[thm]{Definitions}
+\newtheorem{con}[thm]{Construction}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{exmps}[thm]{Examples}
+\newtheorem{notn}[thm]{Notation}
+\newtheorem{notns}[thm]{Notations}
+\newtheorem{addm}[thm]{Addendum}
+\newtheorem{exer}[thm]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{rems}[thm]{Remarks}
+\newtheorem{warn}[thm]{Warning}
+\newtheorem{sch}[thm]{Scholium}
+\begin{document}
+	
+	\begin{frame}
+	\titlepage
+\end{frame}
+
+% Uncomment these lines for an automatically generated outline.
+%\begin{frame}{Outline}
+%  \tableofcontents
+%\end{frame}
+
+\section{Introduction}
+
+\begin{frame}{Introduction}
+\begin{block}{What are we talking about?}
+	\pause
+	\begin{itemize}
+		\item Most famous open problem in theoretical computer science.
+		\item Roughly translates to: If the solution to a problem can be verified easily, then can it be found easily?
+		\item Has way too many theoretical and practical applications.
+	\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Outline}
+	\begin{itemize}
+		\pause
+		\item Formal definitions
+		
+		\small{\textit{Computational models, Turing machines and complexity classes.}}
+		\vskip 0.5cm
+		\pause
+		\normalsize
+		\item Upper bounds: algorithms and reductions.
+		
+		\small{\textit{NP-hardness, Cook-Levin and examples.}}
+		\vskip 0.5cm
+		\pause
+		\normalsize
+		\item Lower bounds: three barriers.
+		
+		\small{\textit{Relativizing proofs, natural proofs and algebrizing proofs.}}
+	\end{itemize}
+\end{frame}
+\begin{frame}{Origins of the question}
+	\pause
+	\begin{block}{Hilbert's 10th problem}
+		Given a polynomial with integer coefficients in several variables: Find an algorithm that will determine whether it has integer roots or not.
+	\end{block}
+	
+	\pause
+	Emil Leon Post thought this was unsolvable and developed computability theory.
+\end{frame}
+\begin{frame}{Models of computation}
+	Rigorous definition of an algorithm, often with notions of resources and efficiency.
+	\pause
+	\begin{block}{Examples}
+		Turing machines, $\lambda$-calculus, finite state machines, RAM-model (modern computers), etc...
+	\end{block}
+\end{frame}
+\begin{frame}{Turing machine}
+	Defined as a 5-tuple $(Q, \Sigma, \Gamma, \delta, q_0)$ where
+	\begin{enumerate}
+		\item $Q$ is a set of states with distinct accept and reject states,
+		\item $\Sigma$ (a finite set of symbols) is the input alphabet,
+		\item $\Gamma \supseteq \Sigma$ (a finite set of symbols) is the tape alphabet,
+		\item $\delta: Q \times \Gamma \rightarrow Q \times \Gamma \times \{L, R\}$ is the transition function, and
+		\item $q_0$ is the initial state.
+	\end{enumerate}
+\end{frame}
+\begin{frame}{Turing machine}
+	\begin{block}{Running a TM}
+		\begin{enumerate}
+			\pause
+			\item Start with input $w \in \Sigma^*$ on tape, head on first symbol and at state $q_0$.
+			\pause
+			\item At each step, follow the transition rule to change state, write on tape and move left or right.
+			\pause
+			\item Run previous step until accept or reject state is reached.
+		\end{enumerate}
+	\end{block}
+	\pause
+	A TM computes a function $f:\Sigma^* \rightarrow \Sigma^*$ if for any input $w$, it halts with $f(w)$ written on the tape.
+\end{frame}
+\begin{frame}{Resources of a TM}
+	\begin{block}{Time}
+		We say that $M$ runs in time $T(n)$ if for any input of size $n$, the number of steps that $M$ needs before halting is at most $T(n)$.
+	\end{block}
+	\pause
+	\begin{block}{Space}
+		We say that $M$ runs in space $S(n)$ if for any input of size $n$, the maximum number of cells of the tape used is at most $S(n)$.
+	\end{block}
+\end{frame}
+\begin{frame}{Complexity classes}
+	A complexity class is a set of functions $f: \Sigma^* \rightarrow \Sigma^*$ with \textquotedblleft similar\textquotedblright needs in terms of resources.
+	\pause
+	\begin{block}{Computable}
+		A function $f$ is computable if there exists a TM that computes $f$ (no restriction on the resources).
+	\end{block}
+	\pause
+	\begin{block}{\textbf{P}}
+		A function $f$ is in \textbf{P} if there exists a TM that computes $f$ in time $T(n)$ for some polynomial $T$.
+	\end{block}
+	\pause
+	\begin{block}{\textbf{NP}}
+		A function $f$ is in \textbf{NP} if there exists a TM that, given $w,x \in \Sigma^*$, can say whether $f(x) = w$ in time $T(n)$ for some polynomial $T$.
+	\end{block}
+\end{frame}
+\begin{frame}{Complexity classes}
+	Complexity zoo.
+\end{frame}
+
+
+\begin{frame}{Examples}
+	\begin{block}{Multiplication}
+		Given two numbers $a, b \in \mathbb{N}$, output $a\cdot b$.
+	\end{block}
+	\pause
+	\begin{block}{Factorization}
+		Given a number $x \in \mathbb{N}$, output primes $p_1, \dots, p_n$ such that $p_1 \cdots p_n = n$.
+	\end{block}
+	\pause
+	\begin{block}{Sudoku}
+		Given a Sudoku board, output the solved board.
+	\end{block}
+	\pause
+	\begin{block}{Bitcoin mining}
+		Given the data for a block, output a nonce that satisfies the mining requirement.
+	\end{block}
+\end{frame}
+\begin{frame}{Reductions}
+	We say that a problem $A$ reduces to a problem $B$ if an algorithm that solves $B$ can be used to define an algorithm that solves $A$.
+	
+	
+	\vspace{10pt}
+	\pause
+	We write $A\leq B$ because $B$ is at least as hard as $A$.
+	
+	\vspace{10pt}
+	\pause
+	When interested in polytime reductions, we write $A \leq_{p} B$.
+\end{frame}
+\begin{frame}{Cook-Levin}
+	\begin{block}{Satisfiability (SAT)}
+		Given a boolean formula $\phi$ in $n$ variables, decide whether there are values of $x_1, \dots, x_n$ such that $\phi(x_1, \dots, x_n)$.
+	\end{block}
+	\pause
+	\begin{block}{Theorem}
+		Any problem in \textbf{NP} has a polytime reduction to SAT.
+	\end{block}
+	\vspace{10pt}
+	\pause
+	Thus, if there exists an polytime algorithm for SAT, then $\textbf{P} = \textbf{NP}$.
+\end{frame}
+\begin{frame}{\textbf{NP}-hardness}
+	\begin{block}{}
+		If SAT reduces to a problem $X$, then $X$ is also \textbf{NP}-hard, hence solving $X$ in polytime implies $\textbf{P} = \textbf{NP}$.
+	\end{block}
+	\pause
+	\begin{block}{Examples}
+		Traveling salesperson problem, solving an $n\times n\times n$ Rubik's cube optimally, finding a valid move in an $n\times n$ checkers board.
+	\end{block}
+\end{frame}
+\begin{frame}{Diagonalization}
+	\begin{block}{Some functions are not computable}
+		The number of TM is countable because each TM has a finite description $(Q, \Sigma, \Gamma, \delta, q_0)$.
+		
+		\pause \vspace{10pt}
+		The number of languages is uncountable (cardinality of $\mathcal{P}(\Sigma^*)$).
+	\end{block}
+	\pause
+	\vspace{20pt}
+	Unfortunately, this kind of proof relativizes.
+\end{frame}
+\begin{frame}{Oracles}
+	An oracle is a black box that can solve a particular problem in a single step.
+	
+	\pause
+	\vspace{10pt}
+	We write $\textbf{P}^L$ to denote the set of languages that can be decided in polytime with a TM that has access to an oracle for $L$.
+	
+	\pause
+	\vspace{10pt}
+	We say that a proof relativizes if it works whether or not oracles are allowed.
+\end{frame}
+\begin{frame}{Relativizing proofs}
+	\begin{block}{\textbf{P} vs. \textbf{NP} has contradicting relativizations}
+		\pause
+		Baker, Gill and Solovay showed there are languages $A,B$ such that 
+		\begin{align*}
+			\textbf{P}^A &= \textbf{NP}^A\\
+			\textbf{P}^B &\neq \textbf{NP}^B
+		\end{align*}
+	\end{block}
+	\pause
+	Thus, no relativizing proofs can lead to a solution.
+\end{frame}
+\begin{frame}{Circuits}
+	\begin{block}{Definition}
+		A directed acyclic graphs where each vertex is either an input with in-degree 0 or a gate computing AND, OR, or NOT of its inputs. One vertex is the output of the circuit. 
+	\end{block}
+	\pause
+	\begin{block}{Resources}
+		The size of a circuit is the number of edges and the depth of a circuit is the maximal length of path ending in the output gate.
+	\end{block}
+	\pause \vspace{10pt}
+	\textbf{P/poly} denotes the set of languages that can be decided by a circuit of polynomial size.
+\end{frame}
+\begin{frame}{Natural proofs}
+	\[\textbf{NP} \not\subseteq \textbf{P/poly} \implies \textbf{P} \neq \textbf{NP}\]
+	
+	\pause
+	\begin{block}{Strategy}
+		\pause
+		\begin{enumerate}
+			\item Find some property $X$ of functions that SAT (or some other \textbf{NP} problem) satisfies.
+			\pause
+			\item Show that no function in \textbf{P/poly} has property $X$.
+		\end{enumerate}
+	\end{block}
+\end{frame}
+\begin{frame}{Natural proofs}
+	We say this is a natural proof if:
+	\begin{enumerate}
+		\pause
+		\item \textquotedblleft Many\textquotedblright functions satisfy $X$. (Largeness)
+		\pause
+		\item Easy to verify if a function satisfies $X$. (Constructivity)
+	\end{enumerate}
+	
+	\pause \vspace{10pt}
+	Razbarov and Rudich showed that natural proof will inevitably fail.
+\end{frame}
+\begin{frame}{Algebrization}
+	Similar to relativization, but we allow low-degree extension of oracles in finite fields.
+\end{frame}
+\begin{frame}{Reasons to believe $\textbf{P} = \textbf{NP}$}
+	\begin{itemize}
+		\pause
+		\item All these barriers to prove $\textbf{P} \neq \textbf{NP}$.
+		\pause
+		\item We might find an $O(n^d)$ algorithm with $d$ huge.
+		\pause
+		\item We could prove existence of such an algorithm.
+		\pause
+		\item Upper bounders have been way more successful than lower bounders.
+	\end{itemize}
+\end{frame}
+\begin{frame}{Reasons to believe $\textbf{P} \neq \textbf{NP}$}
+	\begin{itemize}
+		\pause
+		\item No one has been able to solve \textbf{NP-complete} problems in polytime.
+		\pause
+		\item If $\textbf{P} = \textbf{NP}$, then $\textbf{P} = \textbf{PH}$ and \textbf{PH} includes so many harder problems (e.g.: proving theorems).
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Thank you !}
+	Merci !
+\end{frame}
+\end{document}
