@@ -1,0 +1,23 @@
+<html>
+<h1>Chapter 1: #1.1.9</h1>
+<p>
+<ol type="a">
+  <li>0 is clearly the identity in this group. Let $x,y \in G$ and denote $x = a+b\sqrt{2}$ and $y = c+d\sqrt{2}$ so $x+y = (a+b) + (c+d)\sqrt{2} \in G$.
+Also, $a+b\sqrt{2} + (-a)+(-b)\sqrt{2} = 0$ so the inverse of any element is in $G$. Lastly, addition is associative in $G$ because it is associative in $\Q$.
+</li>
+  <li>1 is clearly the identity in this group. Let $x,y \in G$ and denote $x = a+b\sqrt{2}$ and $y = c+d\sqrt{2}$, note that we cannot have $a=b=0$ nor $c=d=0$,
+ we have $x\cdot y = ac + 2bd + (ad+bc)\sqrt{2} \in G$. Also, for the inverses, we write the following
+ $$ \frac{1}{a+b\sqrt{2}} = \frac{a-b\sqrt{2}}{a^2-2b^2} = \frac{a}{a^2-2b^2}+\frac{-b\sqrt{2}}{a^2-2b^2}$$
+ so the inverse is in $G$. Lastly, we show associativity:
+ \begin{align*}
+\left((a+b\sqrt{2})(c+d\sqrt{2})\right)(e+f\sqrt{2}) &amp;=(ac + 2bd + (ad+bc)\sqrt{2})(e+f\sqrt{2}) \\
+&amp;= (ac+2bd)(e) + 2(ad+bc)(f) + \left((ac+2bd)(f)+(ad+bc)(e)\right)\sqrt{2}\\
+&amp;= ace + 2adf + 2bcf + 2bed + \left(acf + aed + bce + 2bdf \right)\sqrt{2}\\
+&amp;= (a)(ce+2df) + 2(b)(cf+ed) + \left((a)(cf+ed) + (b)(ce + 2df)\right)\sqrt{2}\\
+&amp;= (a+b\sqrt{2})(ce + 2df + (cf + ed)\sqrt{2})\\
+&amp;= (a+b\sqrt{2})\left((c+d\sqrt{2})(e+f\sqrt{2})\right)
+ \end{align*}
+  </li>
+</ol>
+</p>
+</html>

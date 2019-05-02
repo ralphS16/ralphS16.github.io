@@ -1,0 +1,22 @@
+<html>
+<h1>Chapter 1: #1.6.25</h1>
+<p><ol type="a">
+<li> When applying the transformation to $\begin{pmatrix}1\\0\end{pmatrix}$ and $\begin{pmatrix}0\\1\end{pmatrix}$, we get 
+$\begin{pmatrix}\cos\theta\\\sin\theta\end{pmatrix}$ and $\begin{pmatrix}-\sin\theta\\\cos\theta\end{pmatrix}$ respectively which are the 
+counter-clockwise rotations of the original vectors by an angle of $\theta$. Since these two vectors generate the plane 
+and matrix multiplication is a linear transformation, we are done.
+</li>
+<li>
+By part a., it is clear that $\varphi(r)$ has order $n$ (we need to rotate by $\frac{2\pi}{n}$ $n$ times to get to $2\pi$). Also, 
+we can compute $\varphi(s)^2 = I$, so $\varphi(s)$ has order 2. Finally, one can check that $\varphi(r)\varphi(s) = \varphi(s)\varphi(r)^{-1}$ 
+to conclude that all the relations of $D_{2n}$ are satisfied, so $\varphi$ is indeed a homomorphism.
+</li>
+<li>
+Suppose that $I_2 = \varphi(r^is^j) = \varphi(r)^i\varphi(s)^j$. The L.H.S. is the identity transformation and the R.H.S. is 
+$j$ flips around that line $x=y$ followed by $i$ counter-clockwise rotations of an angle of $\theta$. For them to be equal, 
+we must have $j = 0\ (\text{mod } 2)$ flips and $i = 0\ (\text{mod } n)$ rotations. Hence, $\varphi(r^is^j) = I_2$ if and only if 
+$r^is^j = 1$, proving $\varphi$ is injective.
+</li>
+</ol>
+</p>
+</html>

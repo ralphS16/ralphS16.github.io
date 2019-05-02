@@ -1,0 +1,36 @@
+<html>
+<h1>Chapter 1: #1.14</h1>
+<p><ol type="a">
+<li>Let $M = (Q,\Sigma, \delta, q_0, F)$ be a deterministic finite automaton that recognizes the language $B$. 
+More formally, swapping the accepting states means constructing a new DFA $M' = (Q, \Sigma, \delta, q_0, Q \setminus F)$, 
+we need to show that $M'$ recognizes $B^c$. Let $w$ be a string in $B^c$, since the transition function of $M$ and $M'$
+are the same, the ending state of both machines after processing $w$ must be the same, call it $q^*$. Since $M$ recognizes $B$, 
+$q^*$ cannot be in $F$, so it is in $Q \setminus F$. This is the set of accepting state in $M'$, so $w$ is accepted by $M'$. 
+On the other hand, if $w \in B$, $q^*$ must be in $F$ so it is not in $Q \setminus F$ implying that $M'$ does not accept it. 
+We can conclude that $M'$ recognizes $B^c$. Since, we started with an arbitrary DFA and an arbitrary language, we have shown 
+that the regular languages are closed under complement.
+</li>
+<li>Consider the following NFA with the alphabet $\Sigma = \{\texttt{a}, \texttt{b}\}$ :</br>
+<svg width="400" height="200" version="1.1" xmlns="http://www.w3.org/2000/svg">
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="60.5" cy="103.5" rx="30" ry="30"/>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="186.5" cy="103.5" rx="30" ry="30"/>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="186.5" cy="103.5" rx="24" ry="24"/>
+	<polygon stroke="black" stroke-width="1" points="9.5,103.5 30.5,103.5"/>
+	<polygon fill="black" stroke-width="1" points="30.5,103.5 22.5,98.5 22.5,108.5"/>
+	<polygon stroke="black" stroke-width="1" points="90.5,103.5 156.5,103.5"/>
+	<polygon fill="black" stroke-width="1" points="156.5,103.5 148.5,98.5 148.5,108.5"/>
+	<text x="117.5" y="94.5" font-family="Courier New" font-size="20">&#949;</text>
+	<path stroke="black" stroke-width="1" fill="none" d="M 47.275,76.703 A 22.5,22.5 0 1 1 73.725,76.703"/>
+	<text x="42.5" y="27.5" font-family="Courier New" font-size="20">a,b</text>
+	<polygon fill="black" stroke-width="1" points="73.725,76.703 82.473,73.17 74.382,67.292"/>
+	<path stroke="black" stroke-width="1" fill="none" d="M 173.275,76.703 A 22.5,22.5 0 1 1 199.725,76.703"/>
+	<text x="168.5" y="27.5" font-family="Courier New" font-size="20">a,b</text>
+	<polygon fill="black" stroke-width="1" points="199.725,76.703 208.473,73.17 200.382,67.292"/>
+</svg></br>
+It recognizes the language $\Sigma_{\varepsilon}^*$ but if we swap the accept states, the resulting NFA will also recognize $\Sigma_{\varepsilon}^*$. 
+We cannot determine if the class of languages recognized by NFA's is closed under complement from this result. However, it is 
+a theorem that DFA's are equivalent to NFA's, so this class is indeed closed under complement.
+</li>
+</ol>
+</p>
+</html>

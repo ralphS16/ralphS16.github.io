@@ -1,0 +1,23 @@
+<html>
+<h1>Chapter 1: #1.31</h1>
+<p>Let $M_1 = (Q_1, \Sigma, \delta_1, q_0^1, F_1)$ be a DFA recognizing $A$ and $M_2 = (Q_1, \Sigma, \delta_2, q_0^2, F_2)$ be 
+a DFA recognizing $B$. We construct a new DFA that recognizes the perfect shuffle of $A$ and $B$. Let $M = (Q, \Sigma, \delta, q_0, F)$, 
+with $Q = Q_1 \times Q_2 \times \{q_A, q_B\}$, $q_0 = (q_0^1,q_0^2,q_A)$, $F = F_1 \times F_2 \times \{q_A\}$ and $\delta$ defined 
+as follows:
+\[\forall x \in \Sigma, r \in Q_1, s \in Q_2, \delta((r,s,q_A), x) = (\delta_1(r,x),s,q_B) \\
+\forall x \in \Sigma, r \in Q_1, s \in Q_2, \delta((r,s,q_B), x) = (r,\delta_2(s,x),q_A)\] 
+</p>
+<p>Informally, what this machine does is simulate $M_1$ and $M_2$ at the same time, keeping the state in both machines in memory and reading the 
+input to move in one of the machine while alternating between each machine at each character. We will show that $M$ indeed 
+recognizes the perfect shuffle of $A$ and $B$. First note that if the number of characters is odd, the machine will end in a 
+state of the form $(r,s,q_B)$ with $r\in Q_1$ and $s\in Q_2$, so it will reject. Hence, we only consider inputs 
+of even lengths. Let $w = x_1y_1\cdots x_ky_k$ with $x_i,y_i \in \Sigma$. 
+On input $w$, by the definition of the transition function, $M$ will end its computation on $(q_x, q_y, q_A)$, where 
+$q_x$ is the end state of $M_1$ on input $x_1\cdots x_k$ and $q_y$ is the end state of $M_2$ on input $y_1\cdots y_k$. Since 
+$M$ accepts if and only if $q_x \in F_1$ and $q_y \in F_2$, it is clear to see that it accepts if and only if 
+$x_1\cdots x_k \in A$ and $y_1\cdots y_k \in B$ (equivalently when $w$ is in the perfect shuffle). 
+</p>
+<p>Since for any two regular languages, we can construct a DFA recognizing their perfect shuffle, the class of regular 
+languages is closed under this operation.
+</p>
+</html>

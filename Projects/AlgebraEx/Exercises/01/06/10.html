@@ -1,0 +1,19 @@
+<html>
+<h1>Chapter 1: #1.6.10</h1>
+<p><ol type="a">
+<li>It suffices to check that the domain and image of the functions are correct since all the maps are bijective. The map $\varphi(\sigma)$ is 
+of type $(\Delta \rightarrow \Omega) \circ (\Delta \rightarrow \Delta) \circ (\Omega \rightarrow \Delta)$, so it is indeed from $\Omega$ to itself.
+</li>
+<li>We define $\varphi^{-1}:S_{\Omega}\rightarrow S_{\Delta}$ by $\varphi^{-1}(\sigma) = \theta^{-1}\circ \sigma \circ \theta$ for all $\sigma \in S_{\Omega}$. 
+Now, for any $\sigma \in S_{\Delta}$, we have
+$$\varphi^{-1}(\varphi(\sigma)) = \theta^{-1}\circ \varphi(\sigma)\circ \theta = \theta^{-1}\circ \theta \circ \sigma \circ \theta^{-1} \circ \theta = \sigma$$
+and for any $\sigma \in S_{\Omega}$, we have 
+$$\varphi(\varphi^{-1}(\sigma)) = \theta \circ \varphi^{-1}(\sigma) \circ \theta^{-1}  = \theta \circ \theta^{-1}\circ \sigma \circ \theta \circ \theta^{-1} = \sigma.$$
+Thus, $\varphi^{-1}$ is a two-sided inverse, and we get that $\varphi$ is bijective.
+</li>
+<li>
+$$ \varphi(\sigma) \circ \varphi(\tau) = \theta\circ \sigma \circ \theta^{-1}\circ \theta\circ \tau \circ \theta^{-1} = \theta\circ \sigma\circ \tau \circ \theta^{-1} = \varphi(\sigma \circ \tau)$$
+</li>
+</ol>
+</p>
+</html>

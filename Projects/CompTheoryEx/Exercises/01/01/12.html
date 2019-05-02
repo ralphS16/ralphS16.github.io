@@ -1,0 +1,46 @@
+<html>
+<h1>Chapter 1: #1.12</h1>
+<p>Consider a string $s$ in the language, the substring $\texttt{ab}$ cannot occur and there is at least one $\texttt{b}$. 
+Thus, we know that it will start with a $\texttt{b}$ and may have an $\texttt{a}$ at some point followed by only $\texttt{a}$'s. 
+More succinctly, it described by the regular expression $\texttt{b(bb)*(aa)*}$. Here is a DFA with five states that recognizes 
+this language.</br>
+<svg width="700" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg">
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="60.5" cy="103.5" rx="30" ry="30"/>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="186.5" cy="103.5" rx="30" ry="30"/>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="60.5" cy="223.5" rx="30" ry="30"/>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="60.5" cy="223.5" rx="24" ry="24"/>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="186.5" cy="223.5" rx="30" ry="30"/>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="329.5" cy="223.5" rx="30" ry="30"/>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="329.5" cy="223.5" rx="24" ry="24"/>
+	<polygon stroke="black" stroke-width="1" points="9.5,103.5 30.5,103.5"/>
+	<polygon fill="black" stroke-width="1" points="30.5,103.5 22.5,98.5 22.5,108.5"/>
+	<polygon stroke="black" stroke-width="1" points="90.5,103.5 156.5,103.5"/>
+	<polygon fill="black" stroke-width="1" points="156.5,103.5 148.5,98.5 148.5,108.5"/>
+	<text x="117.5" y="94.5" font-family="Courier New" font-size="20">a</text>
+	<path stroke="black" stroke-width="1" fill="none" d="M 173.275,76.703 A 22.5,22.5 0 1 1 199.725,76.703"/>
+	<text x="168.5" y="27.5" font-family="Courier New" font-size="20">a,b</text>
+	<polygon fill="black" stroke-width="1" points="199.725,76.703 208.473,73.17 200.382,67.292"/>
+	<polygon stroke="black" stroke-width="1" points="306.519,204.216 209.481,122.784"/>
+	<polygon fill="black" stroke-width="1" points="209.481,122.784 212.395,131.757 218.823,124.097"/>
+	<text x="263.5" y="154.5" font-family="Courier New" font-size="20">b</text>
+	<path stroke="black" stroke-width="1" fill="none" d="M 215.676,216.595 A 247.55,247.55 0 0 1 300.324,216.595"/>
+	<polygon fill="black" stroke-width="1" points="300.324,216.595 293.297,210.3 291.587,220.153"/>
+	<text x="252.5" y="203.5" font-family="Courier New" font-size="20">a</text>
+	<path stroke="black" stroke-width="1" fill="none" d="M 300.254,230.106 A 258.582,258.582 0 0 1 215.746,230.106"/>
+	<polygon fill="black" stroke-width="1" points="215.746,230.106 222.822,236.346 224.456,226.481"/>
+	<text x="251.5" y="254.5" font-family="Courier New" font-size="20">a</text>
+	<polygon stroke="black" stroke-width="1" points="90.5,223.5 156.5,223.5"/>
+	<polygon fill="black" stroke-width="1" points="156.5,223.5 148.5,218.5 148.5,228.5"/>
+	<text x="117.5" y="244.5" font-family="Courier New" font-size="20">a</text>
+	<polygon stroke="black" stroke-width="1" points="186.5,193.5 186.5,133.5"/>
+	<polygon fill="black" stroke-width="1" points="186.5,133.5 181.5,141.5 191.5,141.5"/>
+	<text x="191.5" y="169.5" font-family="Courier New" font-size="20">b</text>
+	<path stroke="black" stroke-width="1" fill="none" d="M 48.868,195.932 A 119.823,119.823 0 0 1 48.868,131.068"/>
+	<polygon fill="black" stroke-width="1" points="48.868,131.068 41.889,137.416 51.516,140.123"/>
+	<text x="27.5" y="169.5" font-family="Courier New" font-size="20">b</text>
+	<path stroke="black" stroke-width="1" fill="none" d="M 70.015,131.895 A 144.927,144.927 0 0 1 70.015,195.105"/>
+	<polygon fill="black" stroke-width="1" points="70.015,195.105 76.64,188.388 66.88,186.208"/>
+	<text x="78.5" y="169.5" font-family="Courier New" font-size="20">b</text>
+</svg>
+</p>
+</html>

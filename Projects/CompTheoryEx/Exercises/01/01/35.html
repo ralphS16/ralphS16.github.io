@@ -1,0 +1,23 @@
+<html>
+<h1>Chapter 1: #1.35</h1>
+<p>Let $M = (Q, \Sigma, \delta, q_0, F)$ be a DFA that recognizes $A$, we will construct an NFA $M'$ that recognizes $A/B$. 
+The idea is that $M'$ will simulate $M$ and at the end of the input, it will use $\varepsilon$-transitions to go to every 
+state that could be reached from the current state by consuming some $x \in B$ (it is actually a copy of the states that have 
+no other transitions).
+Formally, we have $M' = (Q\times \{0,1\}, \Sigma, \delta', (q_0,0), F\times \{1\})$, where $\delta'$ is defined as follows:
+<ol>
+<li>For all $q \in Q$, $x\in \Sigma$, $\delta'((q,0),x) = \{(\delta(q,x),0)\}$ and $\delta'((q,1),x) = \emptyset$.
+</li>
+<li>For all $q \in Q$, $\delta'((q,0),\varepsilon) = \{(r,1) \mid \mbox{ there exists $x \in B$ such that $\delta(q,x) = r$}\}$.
+</li>
+</ol>
+Note that we understand $\delta(q,x)$ for $q \in Q$ and $x \in \Sigma^*$ as $\delta(\delta(\cdots \delta(q,x_1),x_2),\cdots)$.
+</p>
+<p>If $w \in A/B$, then there exists $x \in B$ such that $wx \in A$. By the definition of $M'$, there is a branch of computation 
+on input $w$ where the final state is the same as the final state of $M$ on input $wx$ (which is an accepting state). Thus, $M'$ 
+accepts $w$.
+</p>
+<p>If $M'$ accepts $w$, look at the last $\varepsilon$-transition, it corresponds to some $x \in B$ that takes $M$ from the last 
+state after $w$ to an accepting state. In other words, $wx$ is accepted by $M$, so $w \in A/B$.
+</p>
+</html>

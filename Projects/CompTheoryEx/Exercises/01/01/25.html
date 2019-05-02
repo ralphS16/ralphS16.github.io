@@ -1,0 +1,27 @@
+<html>
+<h1>Chapter 1: #1.25</h1>
+<p>A finite state transducer is a 5-tuple $(Q,\Sigma, \Gamma, \delta, q_0)$, where 
+<ol type="1">
+<li>$Q$ is a finite set called the states,
+</li>
+<li>$\Sigma is a finite set called the input alphabet,
+</li>
+<li>$\Gamma$ is a finite set called the output alphabet,
+</li>
+<li>$\delta : Q \times \Sigma \rightarrow Q \times \Gamma$ is the transition function, and
+</li>
+<li>$q_0$ is the start state.
+</li>
+</ol>
+</p>
+<p>We give a formal definition of computation. A $\textsf{FST}$ $M = (Q,\Sigma, \Gamma, \delta, q_0)$ 
+outputs $y=y_1\cdots y_n$ on input $x=x_1\cdots x_n$ if a sequence of states $r_0, \dots, r_n$ in $Q$ 
+exists with two conditions:
+<ol type="1">
+<li>$r_0 = q_0$, and 
+</li>
+<li>For $i = 0, \dots, n-1$, $\delta(r_i, x_{i+1}) = (r_{i+1}, y_{i+1})$.
+</li>
+</ol>
+</p>
+</html>

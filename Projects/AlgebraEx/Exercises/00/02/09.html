@@ -1,0 +1,17 @@
+<html>
+<h1>Preliminaries: #0.2.9</h1>
+<p>My Python code:</p>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;font-size:1.3em;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #f92672">import</span> <span style="color: #f8f8f2">math</span>
+
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">gcd</span><span style="color: #f8f8f2">(a,b):</span>
+    <span style="color: #f8f8f2">r</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">a</span><span style="color: #f92672">%</span><span style="color: #f8f8f2">b</span>
+    <span style="color: #f8f8f2">q</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">math</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">floor(a</span><span style="color: #f92672">/</span><span style="color: #f8f8f2">b)</span>
+    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">r</span> <span style="color: #f92672">==</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">:</span>
+        <span style="color: #f8f8f2">g,x,y</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">b,</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span><span style="color: #ae81ff">1</span>
+    <span style="color: #66d9ef">else</span><span style="color: #f8f8f2">:</span>
+        <span style="color: #f8f8f2">g,x,y</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">gcd(b,r)</span>
+        <span style="color: #f8f8f2">x,y</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">y,</span> <span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">q</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">y</span><span style="color: #f92672">+</span><span style="color: #f8f8f2">x</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">g,x,y</span>
+</pre></div>
+
+</html>

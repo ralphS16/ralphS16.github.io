@@ -1,0 +1,128 @@
+<html>
+<h1>Chapter 1: #1.1.36</h1>
+<p>
+From Proposition 2, we know that $\forall x,y \in G, xy = x \Leftrightarrow y = 1, xy = y \Leftrightarrow x = 1$. Since we know 1 is the indentity and it is unique, we can construct this table with possible values separated by commas.
+</p>
+<table>
+  <tr>
+    <th>$\star$</th>
+    <th>$1$</th>
+    <th>$a$</th>
+    <th>$b$</th>
+    <th>$c$</th>
+  </tr>
+  <tr>
+    <th>$1$</th>
+    <td>$1$</td>
+    <td>$a$</td>
+    <td>$b$</td>
+    <td>$c$</td>
+  </tr>
+  <tr>
+    <th>$a$</th>
+    <td>$a$</td>
+    <td>$1$,$b$,$c$</td>
+    <td>$1$,$c$</td>
+    <td>$1$,$b$</td>
+  </tr>
+  <tr>
+    <th>$b$</th>
+    <td>$b$</td>
+    <td>$1$,$c$</td>
+    <td>$1$,$a$,$c$</td>
+    <td>$1$,$a$</td>
+  </tr>
+  <tr>
+    <th>$c$</th>
+    <td>$c$</td>
+    <td>$1$,$b$</td>
+    <td>$1$,$a$</td>
+    <td>$1$,$a$,$b$</td>
+  </tr>
+</table>
+<p>
+By 1.1.31, we know that $G$ has an element of order 2, without loss of generality, we assume it is $a$. Then, the $a$ column (and row) is completely determined because you cannot have 2 equal entries in the same column (or row) as stated by the cancellation laws. We can also remove some possibilities using the cancellation laws and we obtain this table.
+</p>
+<table>
+  <tr>
+    <th>$\star$</th>
+    <th>$1$</th>
+    <th>$a$</th>
+    <th>$b$</th>
+    <th>$c$</th>
+  </tr>
+  <tr>
+    <th>$1$</th>
+    <td>$1$</td>
+    <td>$a$</td>
+    <td>$b$</td>
+    <td>$c$</td>
+  </tr>
+  <tr>
+    <th>$a$</th>
+    <td>$a$</td>
+    <td>$1$</td>
+    <td>$c$</td>
+    <td>$b$</td>
+  </tr>
+  <tr>
+    <th>$b$</th>
+    <td>$b$</td>
+    <td>$c$</td>
+    <td>$1$,$a$</td>
+    <td>$1$,$a$</td>
+  </tr>
+  <tr>
+    <th>$c$</th>
+    <td>$c$</td>
+    <td>$b$</td>
+    <td>$1$,$a$</td>
+    <td>$1$,$a$</td>
+  </tr>
+</table>
+<p>
+If $b^2 = a$ then $b^3 \neq 1$ which means $|b| = 4$, so this is not possible. We use the same argument for $c$ and end up with this table.
+</p>
+<table>
+  <tr>
+    <th>$\star$</th>
+    <th>$1$</th>
+    <th>$a$</th>
+    <th>$b$</th>
+    <th>$c$</th>
+  </tr>
+  <tr>
+    <th>$1$</th>
+    <td>$1$</td>
+    <td>$a$</td>
+    <td>$b$</td>
+    <td>$c$</td>
+  </tr>
+  <tr>
+    <th>$a$</th>
+    <td>$a$</td>
+    <td>$1$</td>
+    <td>$c$</td>
+    <td>$b$</td>
+  </tr>
+  <tr>
+    <th>$b$</th>
+    <td>$b$</td>
+    <td>$c$</td>
+    <td>$1$</td>
+    <td>$a$</td>
+  </tr>
+  <tr>
+    <th>$c$</th>
+    <td>$c$</td>
+    <td>$b$</td>
+    <td>$a$</td>
+    <td>$1$</td>
+  </tr>
+</table>
+<p>
+Since this table is symmetric, $G$ is abelian.
+</p>
+</html>
+  
+

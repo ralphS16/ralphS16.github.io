@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Definite Calculations</title>
+		<link rel="stylesheet" href="style3df.css" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+	</head>
+	<body>
+		<script>
+			function calcul() {
+				var it = document.getElementById("iter").value;
+				var r = document.getElementById("rad").value;
+				if (r>0) {
+					var volume = 4*Math.PI*(Math.pow(r,3))/3 + Math.PI*Math.pow(r,3)*(Math.pow(5/8,it)-1)/(5/8-1);
+					var area = 4*Math.PI*(Math.pow(r,2)) + Math.PI*6*Math.pow(r,2)*(Math.pow(5/4,it)-1)/(5/4-1);
+					document.getElementById("vol").value = Math.floor(volume*100)/100;
+					document.getElementById("aer").value = Math.floor(area*100)/100;
+				} else {
+					document.getElementById("vol").value = 0;
+					document.getElementById("aer").value = 0;
+				}
+			}
+		</script>
+		<main>
+			<header>
+				<nav>
+					<ul>
+						<li><a href="index.html">The Fractal</a></li>
+						<li><a href="3drep.html">3D Representation</a></li>
+						<li><a href="defcalculations.html" class="active">Definite Calculations</a></li>
+						<li><a href="infcalc.html">Infinite Calculations</a></li>
+						<li><a href="conclusion.html">Conclusion</a></li>
+					</ul>
+				</nav>
+			</header> 
+			<section>
+				<table class="tg">
+				  <tr class="bup bdown bold">
+					<th class="tg-by3v"><i>n</i></th>
+					<th class="tg-by3v">Radius of added spheres</th>
+					<th class="tg-by3v">Number of added spheres</th>
+					<th class="tg-by3v">Volume of added spheres</th>
+					<th class="tg-by3v">Aera of added spheres</th>
+				  </tr>
+				  <tr class="shade">
+					<td class="tg-kr94">0</td>
+					<td class="tg-kr94">$$R_{ini}$$</td>
+					<td class="tg-kr94">1</td>
+					<td class="tg-kr94">$$\frac{4\pi \cdot R^{3}}{3}$$</td>
+					<td class="tg-kr94">$$4\pi \cdot R^{2}$$</td>
+				  </tr>
+				  <tr>
+					<td class="tg-kr94">1</td>
+					<td class="tg-kr94">$$\frac{R}{2}$$</td>
+					<td class="tg-kr94">$$6$$</td>
+					<td class="tg-kr94">$$6 \cdot 5^{0} \cdot \frac{4\pi \cdot (\frac{R}{2})^{3}}{3}$$</td>
+					<td class="tg-kr94">$$6 \cdot 4\pi \cdot (\frac{R}{2})^{2}$$</td>
+				  </tr>
+				  <tr class="shade">
+					<td class="tg-kr94">2</td>
+					<td class="tg-kr94">$$\frac{R}{2^{2}}$$</td>
+					<td class="tg-kr94">$$6 \cdot 5^{1} $$</td>
+					<td class="tg-kr94">$$6 \cdot 5^{1} \cdot \frac{4\pi \cdot (\frac{R}{2^{2}})^{3}}{3}$$</td>
+					<td class="tg-kr94">$$6 \cdot 5^{1} \cdot 4\pi \cdot (\frac{R}{2^{2}})^{2}$$</td>
+				  </tr>
+				  <tr>
+					<td class="tg-kr94">3</td>
+					<td class="tg-kr94">$$\frac{R}{2^{3}}$$</td>
+					<td class="tg-kr94">$$6 \cdot 5^{2} $$</td>
+					<td class="tg-kr94">$$6 \cdot 5^{2} \cdot \frac{4\pi \cdot (\frac{R}{2^{3}})^{3}}{3}$$</td>
+					<td class="tg-kr94">$$6 \cdot 5^{2} \cdot 4\pi \cdot (\frac{R}{2^{3}})^{2}$$</td>
+				  </tr>
+				  <tr class="shade">
+					<td class="tg-kr94">4</td>
+					<td class="tg-kr94">$$\frac{R}{2^{4}}$$</td>
+					<td class="tg-kr94">$$6 \cdot 5^{3} $$</td>
+					<td class="tg-kr94">$$6 \cdot 5^{3} \cdot \frac{4\pi \cdot (\frac{R}{2^{4}})^{3}}{3}$$</td>
+					<td class="tg-kr94">$$6 \cdot 5^{3} \cdot 4\pi \cdot (\frac{R}{2^{4}})^{2}$$</td>
+				  </tr>
+				  <tr>
+					<td class="tg-kr94">5</td>
+					<td class="tg-kr94">$$\frac{R}{2^{5}}$$</td>
+					<td class="tg-kr94">$$6 \cdot 5^{4} $$</td>
+					<td class="tg-kr94">$$6 \cdot 5^{4} \cdot \frac{4\pi \cdot (\frac{R}{2^{5}})^{3}}{3}$$</td>
+					<td class="tg-kr94">$$6 \cdot 5^{4} \cdot 4\pi \cdot (\frac{R}{2^{5}})^{2}$$</td>
+				  </tr>
+				  <tr class="bdown shade">
+					<td class="tg-kr94">6</td>
+					<td class="tg-kr94">$$\frac{R}{2^{6}}$$</td>
+					<td class="tg-kr94">$$6 \cdot 5^{5} $$</td>
+					<td class="tg-kr94">$$6 \cdot 5^{5} \cdot \frac{4\pi \cdot (\frac{R}{2^{6}})^{3}}{3}$$</td>
+					<td class="tg-kr94">$$6 \cdot 5^{5} \cdot 4\pi \cdot (\frac{R}{2^{6}})^{2}$$</td>
+				  </tr>
+				</table>
+				<p> 
+					The rule to find the volume of the fractal until iteration <i>i</i> will be : $$\frac{4\pi \cdot R^{3}}{3} + \sum_{n=1}^{i} \frac{24\pi \cdot 5^{n-1} \cdot R^{3}}{3\cdot2^{3n}}$$
+				</p>
+				<p> 
+					The rule to find the surface area of the fractal until iteration <i>i</i> will be : $$4\pi \cdot R^{2} + \sum_{n=1}^{i} 24\pi \cdot 5^{n-1} \cdot \frac{R^{2}}{2^{2n}} $$
+				</p>
+				<form name="idealgas">
+					<p style="text-align : center;">
+						Give the number of iteration and the initial radius and it will calculate the volume and the surface area of the fractal at that iteration. </br>
+						i: <input type="number" id="iter" onchange="calcul();" value="0"> iterations</br>
+						r: <input type="number" id="rad" onchange="calcul();" value="0"> units</br>
+						Volume: <input type="text" id="vol" readonly value="0"> units<sup>3</sup></br>
+						Aera: <input type="text" id="aer" readonly value="0"> units<sup>2</sup></br>
+					</p>
+				</form>
+			</section>
+			<footer>
+				Integral Calculs / 3D Fractal Project / Arnaud Déziel-Richer &amp; Ralph Gabriel Sarkis
+			</footer>
+		</main>
+	</body>
+</html>

@@ -1,0 +1,35 @@
+<html>
+<h1>Chapter 1: #1.36</h1>
+<p>Let $M = (Q, \Sigma, \delta, q_0, F)$ be a DFA that recognizes $A$. We will construct an 
+NFA $M' = (Q\cup \{q_{\varepsilon}\}, \Sigma, \delta', \{q_{\varepsilon}\}, F')$ by modifying $M$ in three ways.
+<ol>
+	<li> We add an initial state $q_{\varepsilon}$ with the following transition function:
+	$$ \forall s \in \Sigma, \delta'(q_{\varepsilon},s) = \emptyset, \delta'(q_{\varepsilon},\varepsilon) = F$$
+	</li><li> The new transition function reverses all the arrows. Formally, we have the following : 
+	$$ \forall q \in Q, s \in \Sigma, \delta'(q, s) = \{r \in Q \mid \delta(r,s) = q\}$$ 
+	</li><li> The start state becomes the only accepting state, that is, $F' = \{q_0\}$.</li>
+</ol>
+We claim that this recognizes $A^{\mathcal{R}}$.
+</p>
+<p>
+Let $w = w_1w_2\cdots w_n \in A$ and denote $(q_0, q_1, \dots, q_n)$ to be the sequence of 
+states that $M$ goes through while processing $w$. Observe that we have $\delta(q_i,w_{i+1}) = q_{i+1}$ 
+for all $i \in \{0, \dots, n-1\}$. Suppose $M$ accepts $w$, this is equivalent to $q_n \in F$ and $q_n \in 
+\delta'(q_{\varepsilon}, \varepsilon)$. Since we also have the following sequence of memberships:
+$$
+\begin{align*}
+	q_{n-1} &amp;\in \delta'(q_n, w_n)\\
+	\Leftrightarrow q_{n-2} &amp;\in \delta'(q_{n-1}, w_{n-1})\\
+	&amp;\vdots\\
+	\Leftrightarrow q_{0} &amp;\in \delta'(q_1, w_1).
+\end{align*}$$
+This shows that when $M'$ processes $w^{\mathcal{R}}$, there is a branch of computation that ends in the state $q_0$, so it 
+accepts the input.
+</p>
+<p>Now suppose that $M'$ accepts $w^{\mathcal{R}}$ with a branch of computation going through $q_{\varepsilon},q_n,q_{n-1},\dots, q_0$, 
+in that order. Then it means $q_n \in F$ and $\delta(q_i,w_{i+1}) = q_{i+1}$ 
+for all $i \in \{0, \dots, n-1\}$. Therefore, $(q_0, q_1, \dots, q_n)$ is the sequence of states in the computation of $M$ processing 
+$w$, and $M$ accepts $w$. We conclude that $M'$ recognizes exactly $A^{\mathcal{R}}$.
+</p>
+</html>
+

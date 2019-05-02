@@ -1,0 +1,22 @@
+<html>
+<h1>Preliminaries: #0.3.16</h1>
+<p>
+My Python code (you need to define the $\gcd$ function as in 0.2.9):
+</p>
+<!-- HTML generated using hilite.me --><div style="background: #272822; overflow:auto;width:auto;border:solid gray;font-size:1.3em;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #66d9ef">def</span> <span style="color: #a6e22e">mod</span><span style="color: #f8f8f2">(a,n):</span>
+    <span style="color: #75715e">#returns the integer 0&lt;= c &lt; n such that a = c (mod n)</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">a</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">(a</span><span style="color: #f92672">/</span><span style="color: #f8f8f2">n)</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">n</span>
+
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">add</span><span style="color: #f8f8f2">(a,b,n):</span>
+    <span style="color: #75715e">#adds a and b in the ring Z/nZ (returns a+b (mod n))</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">mod(a</span><span style="color: #f92672">+</span><span style="color: #f8f8f2">b,n)</span>
+
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">mult</span><span style="color: #f8f8f2">(a,b,n):</span>
+    <span style="color: #75715e">#returns a*b (mod n)</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">mod(a</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">b,</span> <span style="color: #f8f8f2">n)</span>
+
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">inverse</span><span style="color: #f8f8f2">(a,n):</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">mod(int(gcd(n,a)[</span><span style="color: #ae81ff">2</span><span style="color: #f8f8f2">]),n)</span>
+</pre></div>
+
+</html>

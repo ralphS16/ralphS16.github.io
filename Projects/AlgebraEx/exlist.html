@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Abstract Algebra  D&amp;F Exercises </title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        messageStyle: 'none',
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+          processEscapes: true
+        },
+        TeX: {
+          Macros: {
+            Z: "\\mathbb{Z}",
+            R: "\\mathbb{R}",
+            N: "\\mathbb{N}",
+            Q: "\\mathbb{Q}",
+            F: "\\mathbb{F}",
+            C: "\\mathbb{C}",
+			vector: ["\\begin{pmatrix}#1\\\\#2\\end{pmatrix}", 2],
+			},
+        },
+        "HTML-CSS": { availableFonts: ["mathpazo"] }
+      });
+    </script>
+    <script type="text/javascript">
+      function loadex(c, s, n) {
+        let formatCh = ("0" + c).slice(-2); // keep 2 numbers for the folder name
+        let formatSe = ("0" + s).slice(-2);
+        let formatNu = ("0" + n).slice(-2);
+        let path = "./Exercises/" + formatCh + "/" + formatSe + "/" + formatNu + ".html"
+        $("#exo").load(path);
+
+        MathJax.Hub.queue.Push(["Typeset",MathJax.Hub]); // works when I put 2
+        MathJax.Hub.queue.Push(["Typeset",MathJax.Hub]);
+      }
+      function loadabout() {
+        $("#exo").load("about.html");
+      }
+    </script>
+    <script type="application/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?..."></script>
+    <script>
+    $(function(){
+      $("#list").load("list.html");
+    });
+    </script>
+  </head>
+  <body>
+    <div id="exo">
+    </div>
+    <div id="list">
+    </div>
+    <div id="about"><a onclick="loadabout()" href="#">About</a></div>
+
+  </body>
+</html>

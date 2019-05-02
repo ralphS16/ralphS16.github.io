@@ -1,0 +1,57 @@
+<html>
+<h1>Preliminaries: #0.2.1</h1>
+<ol type="a">
+    <li>
+      Since 13 is prime, we can immediately see that $\gcd{(20,13)} = 1$. However, in order to find integers $x,y$ such that $20x + 13y = 1$, we will use the Euclidean algorithm.
+      \begin{align*}
+        20 &amp;=(1)13 + 7\\
+        13 &amp;=(1)7 + 6\\
+        7 &amp;=(1)6 + 1\\
+        6 &amp;=(6)1 + 0\\
+      \end{align*}
+      From this, we confirm that the greatest common divisor is 1. We will reverse the algorithm to find $x$ and $y$.
+      \begin{align*}
+        1 &amp;=7 - (1)6\\
+        1 &amp;=7 - (1)(13-(1)7) = (2)7-(1)13\\
+        1 &amp;=(2)(20-(1)13) - (1)13 = (2)20 - (3)13\\
+      \end{align*}
+      We have found that $x = 2$ and $y=-3$.
+    </li>
+    <li>
+      It is easier to have $a$ be the biggest number, so we set $a = 372$ and $b=69$.
+      \begin{align*}
+        372 &amp;=(5)69 + 27\\
+        69 &amp;=(2)27 + 15\\
+        27 &amp;=(1)15 + 12\\
+        15 &amp;=(1)12 + 3\\
+        12 &amp;=(4)3 + 0\\
+      \end{align*}
+      We get that $\gcd{(372,69)} = 3$, we can reverse the algorithm to find $x$ and $y$.
+      \begin{align*}
+        3 &amp;=15 - (1)12\\
+        3 &amp;=15 - (1)(27-(1)15) = (2)15-(1)27\\
+        3 &amp;=(2)(69-(2)27)-(1)27 = (2)69 - (5)27\\
+        3 &amp;=(2)69 -(5)(372-(5)69) = (27)69-(5)372\\
+      \end{align*}
+      We have found that $x=-5$ and $y=27$.
+    </li>
+    <li> We use the Euclidean algorithm once again.
+      \begin{align*}
+        792 &amp;=(2)275 + 242\\
+        275 &amp;=(1)242 + 33\\
+        242 &amp;=(7)33 + 11\\
+        33 &amp;=(3)11 + 0\\
+      \end{align*}
+      We get that $\gcd{(792,275)} = 11$, we can reverse the algorithm to find $x$ and $y$.
+      \begin{align*}
+        11 &amp;=242 - (7)33\\
+        11 &amp;=242 - (7)(275-(1)242) = (8)242-(7)275\\
+        11 &amp;=(8)(792-(2)275)-(7)275 = (8)792 - (23)275\\
+      \end{align*}
+      We have found that $x=8$ and $y=-23$.
+    </li>
+    <li>
+    ... Use any computer program to do this if you feel like you understand the algorithm. Coding your own algorithm can even be a great way to understand it. (cf. 0.2.9)
+    </li>
+</ol>
+</html>

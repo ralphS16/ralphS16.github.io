@@ -1,0 +1,32 @@
+<html>
+<h1>Preliminaries: #0.2.8</h1>
+<p>
+Denote $f_p(n)$ the greatest integer $k$ such that $p^k \mid n!$ and start by computing for some values of $p$ and $n$ to better understand what we are trying to prove.
+</p>
+<table style="margin:auto;font-family:cms;">
+<tr><th>$n$</th><th>$f_2(n)$</th><th>$f_3(n)$</th><th>$f_5(n)$</th></tr>
+    <tr><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+    <tr><td>2</td><td>1</td><td>0</td><td>0</td></tr>
+    <tr><td>3</td><td>1</td><td>1</td><td>0</td></tr>
+    <tr><td>4</td><td>3</td><td>1</td><td>0</td></tr>
+    <tr><td>5</td><td>3</td><td>1</td><td>1</td></tr>
+    <tr><td>6</td><td>4</td><td>2</td><td>1</td></tr>
+    <tr><td>7</td><td>4</td><td>2</td><td>1</td></tr>
+    <tr><td>8</td><td>7</td><td>2</td><td>1</td></tr>
+    <tr><td>9</td><td>7</td><td>4</td><td>1</td></tr>
+    <tr><td>10</td><td>8</td><td>4</td><td>2</td></tr>
+    <tr><td>11</td><td>8</td><td>4</td><td>2</td></tr>
+    <tr><td>12</td><td>10</td><td>5</td><td>2</td></tr>
+</table>
+<p>
+Observe from the table or from the mechanism of the factorial that $f_p(n) = f_p(n-1) + j$ where $j$ is the greatest integer such that $p^j \mid n$. For instance, because
+$2^3 \mid 8$, we have $f_2(8) = f_2(7)+3$. This gives the following formula.
+\begin{align*}
+  f_p(n) &amp;= \sum_{i=p}^n \begin{cases}1 &amp; \mbox{ if } p \mid i \mbox{ and } p^2 \not\mid i\\\vdots \\j &amp; \mbox{ if } p^j \mid i \mbox{ and } p^{j+1} \not\mid i \end{cases}
+\end{align*}
+Since $p^i \mid n$ implies $p^j \mid n$ for $j < i$, we can simplify the formula by considering the number of integer $k < n$ such that $p^i \mid k$ for any $i \in \mathbb{N}$.
+Pedantically, this is exactly the number of times $p^i$ goes in $n$.
+$$f_p(n) = \sum_{i=1}^{\infty} \left\lfloor \frac{n}{p^i} \right\rfloor$$
+</p>
+
+</html>

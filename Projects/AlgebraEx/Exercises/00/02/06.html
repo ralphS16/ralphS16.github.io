@@ -1,0 +1,11 @@
+<html>
+<h1>Preliminaries: #0.2.6</h1>
+<p>
+We will use induction on the size of the subset. If $|A| = 1$, then $A$ only has one element, and it is clearly a minimal element since it is equal (therefore smaller or equal) to all the elements of $A$.
+Assume that every subset of size $n-1$ has a minimal element and let $A$ be any subset of size $n$. Take any subset $A' \subset A$ of size $n-1$. Clearly, $A'$ is also a subset of $\mathbb{Z}^+$, so it has a minimal element.
+Call it $x$ and denote $y$ to be the only element in $A \setminus A'$. If $x\leq y$ then $x$ is a minimal element of $A$, if $y \leq x$, then $y$ is a minimal element of $A$ since $y \leq x \leq a$ for all $a \in A$.
+</p>
+<p>
+Now, if $x$ and $y$ are both minimal elements, then, by definition, we have $x\leq y$ and $y \leq x$ so $x=y$, thus the minimal element is unique.
+</p>
+</html>

@@ -1,0 +1,11 @@
+<html>
+<h1>Chapter 1: #1.6.14</h1>
+<p> If $x,y \in \ker(\varphi)$, then since $$\varphi(x^{-1}) = \varphi(x)^{-1} = 1^{-1} = 1$$ and $$\varphi(xy) = \varphi(x)\varphi(y) = 1\cdot 1 = 1,$$
+we get that both $x^{-1}$ and $xy$ are in the kernel. By 1.1.26, $\ker(\varphi)$ is a subgroup of $G$.
+</p>
+<p>($\Rightarrow$)Suppose $\varphi$ is injecitve, we already know that $1 \in \ker(\varphi)$, suppose $x \neq 1 \in \ker(\varphi)$, then $\varphi(x) = \varphi(1)$ 
+which contradicts the injectiveness of $\varphi$. ($\Leftarrow$) Suppose $\ker(\varphi) = \{1\}$ and there exists $x,y \in G$ such that 
+$\varphi(x) = \varphi(y)$. We can rearrange to get $\varphi(xy^{-1}) = 1$. By our hypothesis, $xy^{-1} = 1$ and by uniqueness of the inverse,
+we must have $x = y$, implying $\varphi$ is injective.
+</p>
+</html>

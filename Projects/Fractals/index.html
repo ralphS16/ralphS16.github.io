@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>3D Fractal</title>
+		<link rel="stylesheet" href="style3df.css" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+	</head>
+	<body>
+		<main>
+			<header>
+				<nav>
+					<ul>
+						<li><a href="index.html" class="active">The Fractal</a></li>
+						<li><a href="3drep.html">3D Representation</a></li>
+						<li><a href="defcalculations.html">Definite Calculations</a></li>
+						<li><a href="infcalc.html">Infinite Calculations</a></li>
+						<li><a href="conclusion.html">Conclusion</a></li>
+					</ul>
+				</nav>
+			</header> 
+			<section>
+				<p>
+					Our fractal is named Trypopopopopophobia it starts with a sphere with a certain radius <i>r</i> where \(r \in \mathbb{R}\).
+				</p>
+				<p>
+					<img style="float:left;" alt="Iteration 0" src="frac32_0.PNG" width="227" height="200" />
+					<img style="float:left; margin: 0px 5px;" alt="Iteration 1" src="frac32_1.PNG" width="227" height="200" />
+					Basically, in each iteration, we add two spheres on each 3D axis (X, Y and Z) that is slightly touching the sphere of the previous iteration. The length of the radius of every sphere of the new iteration is half the length of the sphere of the previous one.
+				</p>
+				<p>
+					We do the same process at every iteration but the only difference that change between the first iteration and all the others is that we ‘‘can’t‘‘ add 6 spheres (2 on each 3D axis) because there is already a sphere of the previous iteration on one of the axis. In short, except the first iteration where we add 6 spheres, we always center the 3d axis in the center of each sphere produced by the iteration and add 5 spheres on the 3D axis where it is possible. 
+					</br>
+					<img alt="Iteration 2" src="frac32_2.PNG" width="227" height="200">
+					<img alt="Iteration 3" src="frac32_3.PNG" width="227" height="200"/>
+					<img alt="Iteration 4" src="frac32_4.PNG" width="227" height="200"/>
+				</p>
+				
+				<p>
+					To conclude, our rule is to add 5 spheres based on the three-dimensional cartesian plane of each new spheres created by every iteration (except the first iteration with 6 spheres) and the sphere’s radius of each iteration is half the length of the radius of the sphere of the previous step.
+				</p>
+			</section>
+			<footer>
+				Integral Calculs / 3D Fractal Project / Arnaud Déziel-Richer &amp; Ralph Gabriel Sarkis
+			</footer>
+		</main>
+	</body>
+</html>

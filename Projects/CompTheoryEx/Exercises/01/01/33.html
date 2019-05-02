@@ -1,0 +1,24 @@
+<html>
+<h1>Chapter 1: #1.33</h1>
+<p>Let $M= (Q,\Sigma, \delta, q_0, F)$ be a DFA recognizing $A$, we create an NFA $M'$ that recognizes $DROP-OUT(A)$. 
+Pictorially, we have two copies of $M$ and we add an $\varepsilon$-transition from every state in the first copy to the 
+second copy of the states they can reach normally. More formally, 
+we have $M' = (Q\times \{0,1\},\Sigma, \delta', (q_0,0), F\times \{1\})$ with $\delta'$ defined as follows: 
+<ol>
+<li>For all $q \in Q$, $x \in \Sigma$, $n \in \{0,1\}$, we let $\delta'((q,n),x) = (\delta(q,x),n)$.
+</li>
+<li>For all pairs of states $q,r \in Q$ such that there exists a character $x \in \Sigma$ 
+such that $\delta(q,x) = r$, we let $\delta'((q,0),\varepsilon) = (r,1)$.
+</li>
+</ol>
+</p>
+<p>If $w \in DROP-OUT(A)$, we can write it as $xz$ where $x,z \in \Sigma^*$ and there exists $y \in \Sigma$ such that $xyz \in A$.
+Therefore, there is a branch of computation of $M'$ that reads the whole string $x$ without taking any $\varepsilon$-transition and then takes 
+the $\varepsilon$-transition corresponding to reading $y$ before reading the whole string $z$. After all this computation, $M'$ is in 
+the same state as $M$ after reading $xyz$ so it accepts $w$.
+</p>
+<p>If $M'$ accepts $w$, then we can look at the branch of computation that accepts to write $w$ as $xz$ where $x,z \in \Sigma^*$ and there 
+exists $y \in \Sigma$ such that $xyz \in A$. We conclude that $M'$ indeed recognizes $DROP-OUT(A)$. 
+</p>
+
+</html>

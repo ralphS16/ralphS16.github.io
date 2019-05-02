@@ -1,0 +1,46 @@
+<html>
+<h1>Chapter 1: #1.13</h1>
+<p>We sketched below the DFA recognizing the complement of the language, here is a simple explaination of why it works. 
+When the DFA first encounters a $\texttt{1}$, there are two options for the next $\texttt{1}$ it will encounter. If there is 
+an odd number of $\texttt{0}$'s in between, then the DFA will accept. If there is an even number of $\texttt{0}$'s, then the DFA 
+will accept if it encounters another $\texttt{1}$ because either there are an odd number of symbols between this $\texttt{1}$ and 
+the first one or there is an odd number of symbols between this $\texttt{1}$ and the second one.
+</p>
+<svg width="500" height="400" version="1.1" xmlns="http://www.w3.org/2000/svg">
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="60.5" cy="103.5" rx="30" ry="30"/>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="186.5" cy="103.5" rx="30" ry="30"/>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="186.5" cy="223.5" rx="30" ry="30"/>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="329.5" cy="223.5" rx="30" ry="30"/>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="329.5" cy="223.5" rx="24" ry="24"/>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="329.5" cy="103.5" rx="30" ry="30"/>
+	<polygon stroke="black" stroke-width="1" points="9.5,103.5 30.5,103.5"/>
+	<polygon fill="black" stroke-width="1" points="30.5,103.5 22.5,98.5 22.5,108.5"/>
+	<polygon stroke="black" stroke-width="1" points="90.5,103.5 156.5,103.5"/>
+	<polygon fill="black" stroke-width="1" points="156.5,103.5 148.5,98.5 148.5,108.5"/>
+	<text x="117.5" y="94.5" font-family="Courier New" font-size="20">1</text>
+	<path stroke="black" stroke-width="1" fill="none" d="M 47.275,76.703 A 22.5,22.5 0 1 1 73.725,76.703"/>
+	<text x="54.5" y="27.5" font-family="Courier New" font-size="20">0</text>
+	<polygon fill="black" stroke-width="1" points="73.725,76.703 82.473,73.17 74.382,67.292"/>
+	<path stroke="black" stroke-width="1" fill="none" d="M 216.219,99.452 A 419.965,419.965 0 0 1 299.781,99.452"/>
+	<polygon fill="black" stroke-width="1" points="299.781,99.452 292.318,93.681 291.323,103.631"/>
+	<text x="252.5" y="88.5" font-family="Courier New" font-size="20">0</text>
+	<path stroke="black" stroke-width="1" fill="none" d="M 300.103,109.414 A 288.393,288.393 0 0 1 215.897,109.414"/>
+	<polygon fill="black" stroke-width="1" points="215.897,109.414 223.082,115.528 224.542,105.636"/>
+	<text x="252.5" y="133.5" font-family="Courier New" font-size="20">0</text>
+	<polygon stroke="black" stroke-width="1" points="186.5,133.5 186.5,193.5"/>
+	<polygon fill="black" stroke-width="1" points="186.5,193.5 191.5,185.5 181.5,185.5"/>
+	<text x="169.5" y="169.5" font-family="Courier New" font-size="20">1</text>
+	<path stroke="black" stroke-width="1" fill="none" d="M 159.703,236.725 A 22.5,22.5 0 1 1 159.703,210.275"/>
+	<text x="102.5" y="229.5" font-family="Courier New" font-size="20">0</text>
+	<polygon fill="black" stroke-width="1" points="159.703,210.275 156.17,201.527 150.292,209.618"/>
+	<polygon stroke="black" stroke-width="1" points="216.5,223.5 299.5,223.5"/>
+	<polygon fill="black" stroke-width="1" points="299.5,223.5 291.5,218.5 291.5,228.5"/>
+	<text x="252.5" y="214.5" font-family="Courier New" font-size="20">1</text>
+	<polygon stroke="black" stroke-width="1" points="329.5,133.5 329.5,193.5"/>
+	<polygon fill="black" stroke-width="1" points="329.5,193.5 334.5,185.5 324.5,185.5"/>
+	<text x="312.5" y="169.5" font-family="Courier New" font-size="20">1</text>
+	<path stroke="black" stroke-width="1" fill="none" d="M 356.297,210.275 A 22.5,22.5 0 1 1 356.297,236.725"/>
+	<text x="402.5" y="229.5" font-family="Courier New" font-size="20">0,1</text>
+	<polygon fill="black" stroke-width="1" points="356.297,236.725 359.83,245.473 365.708,237.382"/>
+</svg>
+</html>

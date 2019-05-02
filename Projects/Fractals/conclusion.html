@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Conclusion</title>
+		<link rel="stylesheet" href="style3df.css" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+	</head>
+	<body>
+		<main>
+			<header>
+				<nav>
+					<ul>
+						<li><a href="index.html">The Fractal</a></li>
+						<li><a href="3drep.html">3D Representation</a></li>
+						<li><a href="defcalculations.html">Definite Calculations</a></li>
+						<li><a href="infcalc.html">Infinite Calculations</a></li>
+						<li><a href="conclusion.html" class="active">Conclusion</a></li>
+					</ul>
+				</nav>
+			</header>
+			<section>
+				<img src="http://upload.wikimedia.org/wikipedia/commons/9/9b/Planets_everywhere_%28artist%E2%80%99s_impression%29.jpg" alt="Multiplanetary System" style="float:right;padding-left:10px;" width="378" height="250"/>
+				<img src="http://upload.wikimedia.org/wikipedia/commons/2/27/Octahedron.jpg" alt="Octahedron" style="float:right;padding-left:10px;" width="250" height="250"/>
+				<p>&nbsp To conclude, our fractal is named Trypopopopopophobia. At every iteration, we add 5 spheres based on the three-dimensional cartesian plan and the radius of each new spheres is half the length of the previous ones. To find the volume of our fractal until an iteration <i>i</i>, we need use this formula : \(\frac{4\pi \cdot R^{3}}{3} + \sum_{n=1}^{i} \frac{24\pi \cdot 5^{n-1} \cdot R^{3}}{3\cdot2^{3n}}\)and we found out the the volume always converges to a certain value based on the radius of the initial sphere : \(\frac{4\pi \cdot R^{3}}{3} + \pi \cdot R^{3} \cdot \frac{8}{3}\). For the surface area, to find it at a specific iteration we use the formula : \(4\pi \cdot R^{2} + \sum_{n=1}^{i} 24\pi \cdot 5^{n-1} \cdot \frac{R^{2}}{2^{2n}}\). Unlike the volume, the surface area converges to infinity regardless of the radius of the initial sphere.</p>
+				<p>&nbsp If we were to complete further research, it would be interesting to find the volume of the octahedron that contains our fractals and define a formula for it to find its convergence. We could also change the shape of our fractal by reversing the ratio of radius a each iteration or add spheres between the 3d axis in addition to our fractal. Because we learned that fractals are really common in nature - even more common than euclidian shapes - it would be interesting if there is some similarities with our fractal and our solar system or other multiplanetary system.	</p>
+			</section>
+			<footer>
+				Integral Calculs / 3D Fractal Project / Arnaud Déziel-Richer &amp; Ralph Gabriel Sarkis
+			</footer>
+		</main>
+	</body>
+</html>

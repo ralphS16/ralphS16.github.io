@@ -1,0 +1,13 @@
+<html>
+<h1>Preliminaries: #0.2.10</h1>
+<p>
+If we consider the prime factorisation of $n$, we have $n = p_1^{a_1}p_2^{a_2}\cdots p_r^{a_r}$ where $\forall 1 \leq i \leq r, a_i \geq 1$. We also know that $\varphi(n) = p_1^{a_1-1}(p_1-1)p_2^{a_2-1}(p_2-1)\cdots p_r^{a_r-1}(p_r-1)$.
+Thus, for any $N$, the $p_i$'s can only be chosen from the set of primes smaller or equal to = $N+1$ or we would have $\varphi(n) > N$. Moreover, each $a_i$ cannot be bigger than
+$\log_2{N} + 1$ because 2 is the smallest prime and $2^{a_i-1} \leq N \implies a_i \leq \log_2{N} + 1$. Since there is only a finite number of $p_i$'s and $a_i$'s to choose from,
+there can only be a finite number of combination of these such that $\varphi(n) = N$.
+</p>
+<p>
+In other words, we have shown that for any $N \in \mathbb{N}$, there is an integer $s$ such that $n \geq s \implies \varphi(n) \neq N$. Since we can always find a prime
+number such that $\varphi(p) > N$, we can conclude that $\varphi(n) \rightarrow \infty$ as $n \rightarrow \infty$.
+</p>
+</html>

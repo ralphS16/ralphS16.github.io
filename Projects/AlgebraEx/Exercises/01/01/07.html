@@ -1,0 +1,17 @@
+<html>
+<h1>Chapter 1: #1.1.7</h1>
+<p>
+By the axioms of the real numbers we know that $x+y$ and $\lfloor x+y \rfloor$ have only one value each, so $x \star y$ also has one value. Moreover,
+the definiton of the floor function says that $x+y-1 < \lfloor x+y \rfloor \leq x+y$ and this implies $x\star y \in G$. Thus, $\star$ is a well defined binary
+operation on $G$. The identity is 0 because we have $x+0 -[x+0] = x - 0 = x$ for $0\leq x < 1$. Our argument above for $x \star y \in G$ holds for any real numbers $x$ and $y$,
+in particular, it holds for elements of the group, so $G$ is closed under addition. Let $x \in G$, then $1-x \in G$ and $x+1-x = 1 \implies x \star (1-x) = 0$. Since
+addition is commutative in $\R$, $\star$ must also be commutative. Finally, we show associativity using $\lfloor a + \lfloor b\rfloor \rfloor = \lfloor a \rfloor + \lfloor b \rfloor$.
+\begin{align*}
+  (x\star y) \star z  &amp;= \left( x+y - \lfloor x + y \rfloor\right) \star z\\
+                      &amp;= \left( x+y - \lfloor x + y \rfloor\right) + z - \left( \lfloor x+y - \lfloor x + y\rfloor + z \rfloor \right)\\
+                      &amp;= x+y+z + \lfloor x+y+z \rfloor\\
+                      &amp;= x+\left( y+z - \lfloor y+z \rfloor\right) - \left( \lfloor x+ y+z - \lfloor y+z \rfloor \rfloor \right)\\
+                      &amp;= x\star (y \star z)
+\end{align*}
+</p>
+</html>

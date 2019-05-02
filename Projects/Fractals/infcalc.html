@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Infinite Calculations</title>
+		<link rel="stylesheet" href="style3df.css" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+	</head>
+	<body>
+		<main>
+			<header>
+				<nav>
+					<ul>
+						<li><a href="index.html">The Fractal</a></li>
+						<li><a href="3drep.html">3D Representation</a></li>
+						<li><a href="defcalculations.html">Definite Calculations</a></li>
+						<li><a href="infcalc.html" class="active">Infinite Calculations</a></li>
+						<li><a href="conclusion.html">Conclusion</a></li>
+					</ul>
+				</nav>
+			</header> 
+			<section>
+				<table style="margin:5px auto;">
+				  <tr>
+					<th>Find the volume at \(i=\infty\)</th>
+					<th></th>
+					<th>Find the surface area at \(i=\infty\)</th>
+					<th></th>
+				  </tr>
+				  <tr>
+					<td>$$\frac{4\pi \cdot R^{3}}{3} + \sum_{n=1}^{i} \frac{24\pi \cdot 5^{n-1} \cdot R^{3}}{3\cdot2^{3n}}$$</td>
+					<td class="sideproof">:Initial Rule</td>
+					<td>$$4\pi \cdot R^{2} + \sum_{n=1}^{i} 24\pi \cdot 5^{n-1} \cdot \frac{R^{2}}{2^{2n}}$$</td>
+					<td  class="sideproof">:Initial Rule</td>
+				  </tr>
+				  <tr>
+					<td>$$\frac{4\pi \cdot R^{3}}{3} + \frac{24\pi \cdot R^{3}}{3} \cdot \sum_{n=1}^{i} \frac{5^{n-1}}{2^{3n}}$$</td>
+					<td  class="sideproof">$$\sum_{k=1}^{n}C \cdot k  = a \cdot \sum_{k=1}^{n}k $$</td>
+					<td>$$4\pi \cdot R^{2} + 24\pi \cdot R^{2} \cdot \sum_{n=1}^{i} \frac{5^{n-1}}{2^{2n}}$$</td>
+					<td  class="sideproof">$$\sum_{k=1}^{n}C \cdot k  = a \cdot \sum_{k=1}^{n}k $$</td>
+				  </tr>
+				  <tr>
+					<td>$$\frac{4\pi \cdot R^{3}}{3} + \frac{24\pi \cdot R^{3}}{3} \cdot \sum_{n=1}^{i} \frac{5^{n-1}}{8^{n}}$$</td>
+					<td  class="sideproof">$$(a^{b})^{c} = a^{b \cdot c}$$</td>
+					<td>$$4\pi \cdot R^{2} + 24\pi \cdot R^{2} \cdot \sum_{n=1}^{i} \frac{5^{n-1}}{4^{n}}$$</td>
+					<td  class="sideproof">$$(a^{b})^{c} = a^{b \cdot c}$$</td>
+				  </tr>
+				  <tr>
+					<td>$$\frac{4\pi \cdot R^{3}}{3} + \pi \cdot R^{3} \cdot \sum_{n=1}^{i} (\frac{5}{8})^{n-1}$$</td>
+					<td  class="sideproof">$$\sum_{k=1}^{n}C \cdot k  = a \cdot \sum_{k=1}^{n}k $$</td>
+					<td>$$4\pi \cdot R^{2} + 6\pi \cdot R^{2} \cdot \sum_{n=1}^{i} (\frac{5}{4})^{n-1}$$</td>
+					<td  class="sideproof">$$\sum_{k=1}^{n}C \cdot k  = a \cdot \sum_{k=1}^{n}k $$</td>
+				  </tr>
+				  <tr>
+					<td>$$\frac{4\pi \cdot R^{3}}{3} + \pi \cdot R^{3} \cdot \lim_{i \to \infty}\sum_{n=1}^{i} (\frac{5}{8})^{n-1} = \frac{4\pi \cdot R^{3}}{3} + \pi \cdot R^{3} \cdot \lim_{i \to \infty}\frac{(\frac{5}{8})^{i}-1}{\frac{5}{8}-1}$$</td>
+					<td  class="sideproof">: Geometric Series</td>
+					<td>$$4\pi \cdot R^{2} + 6\pi \cdot R^{2} \cdot \lim_{i \to \infty}\sum_{n=1}^{i} (\frac{5}{4})^{n-1} = 4\pi \cdot R^{2} + 6\pi \cdot R^{2} \cdot \lim_{i \to \infty}\frac{(\frac{5}{4})^{i}-1}{\frac{5}{4}-1}$$</td>
+					<td  class="sideproof">: Geometric Series</td>
+				  </tr>
+				  <tr>
+					<td>$$\frac{4\pi \cdot R^{3}}{3} + \pi \cdot R^{3} \cdot \frac{0-1}{\frac{5}{8}-1}$$</td>
+					<td  class="sideproof">: Simplify</td>
+					<td>$$4\pi \cdot R^{2} + 6\pi \cdot R^{2} \cdot \frac{\infty-1}{\frac{5}{4}-1}$$</td>
+					<td  class="sideproof">: Simplify</td>
+				  </tr>
+				  <tr>
+					<td>$$\frac{4\pi \cdot R^{3}}{3} + \pi \cdot R^{3} \cdot \frac{8}{3}$$</td>
+					<td  class="sideproof">: Calculations QED</td>
+					<td>$$\infty$$</td>
+					<td  class="sideproof">: Calculations QED</td>
+				  </tr>
+				</table>
+			</section>
+			<footer>
+				Integral Calculs / 3D Fractal Project / Arnaud Déziel-Richer &amp; Ralph Gabriel Sarkis
+			</footer>
+		</main>
+	</body>
+</html>

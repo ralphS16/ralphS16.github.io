@@ -1,0 +1,20 @@
+<html>
+<h1>Chapter 1: #1.29</h1>
+<p><ol type="a">
+<li>Suppose that $A_1$ is regular with pumping length $p\geq 1$. Then, take the string $w=\texttt{0}^p\texttt{1}^p\texttt{2}^p$ in the 
+language. For any decomposition $w=xyz$ such that $|y|>0$ and $|xy| \leq p$,  
+$y$ can only contain $\texttt{0}$'s and hence $xyyz$ cannot be in the language. We obtain a contradiction, meaning $A_1$ cannot be 
+regular.
+</li>
+<li>Suppose that $A_2$ is regular with pumping length $p\geq 1$. Then, take the string $w = \texttt{a}^p\texttt{b}\texttt{a}^p\texttt{b}\texttt{a}^p\texttt{b}$ in 
+the language. For any decomposition $w = xyz$ such that $|y| > 0$ and $|xy| \leq p$, 
+$y$ can only contain $\texttt{a}$'s in the first copy of the word and hence $xyyz$ will not be in the language. We obtain a contradiction, 
+meaning $A_2$ is not regular.
+</li>
+<li>Suppose that $A_3$ is regular with pumping length $p \geq 1$. Then, take the string $w = \texttt{a}^{2^p}$ in the language. 
+For any decomposition $w = xyz$ such that $|y| > 0$ and $|xy| \leq p$, we have $0 < |y| < 2^p$ so $2^p < |xyyz|< 2^{p+1}$ implying 
+$xyyz$ is not in $A_3$. We obtain a contradiction meaning $A_3$ is not regular.  
+</li>
+</ol>
+</p>
+</html>

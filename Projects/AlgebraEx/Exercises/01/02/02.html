@@ -1,0 +1,26 @@
+<html>
+<h1>Chapter 1: #1.2.2</h1>
+
+<p>First, we prove a lemma that we will also use in the next exercise.</p>
+<p>
+<b>Lemma.</b> <i>In $D_{2n}$, every element is of the form $r^p$ or $r^ps$ for some $p \in \Z$.</i>
+</p>
+<p>
+<i>Proof.</i> Let an element $x \in D_{2n}$ be represented as $x = \prod_{i = 1}^{m}r^{p_i}s^{q_i}$ where $m, p_i\in \Z$ and $q_i \in \{0,1\}$.
+This is possible because $r$ and $s$ are the generators for $D_{2n}$.
+When $m=1$, we are done. Let $m > 1$, then we can write the following:
+\begin{align*}
+x &amp;= \prod_{i = 1}^{m}r^{p_i}s^{q_i}\\
+x &amp;= \left(\prod_{i = 1}^{m-2}r^{p_i}s^{q_i}\right)r^{p_{m-1}}s^{q_{m-1}}r^{p_m}s^{q_m}\\
+x &amp;= \left(\prod_{i = 1}^{m-2}r^{p_i}s^{q_i}\right)r^{p_{m-1}}s^{q_{m-1}}s^{q_m}r^{-p_m}\\
+x &amp;= \left(\prod_{i = 1}^{m-2}r^{p_i}s^{q_i}\right)r^{p_{m-1}}s^{q_{m-1}+q_m}r^{-p_m}\\
+x &amp;= \left(\prod_{i = 1}^{m-2}r^{p_i}s^{q_i}\right)r^{p_{m-1}}r^{p_m}s^{q_{m-1}+q_m}\\
+x &amp;= \left(\prod_{i = 1}^{m-2}r^{p_i}s^{q_i}\right)r^{p_{m-1}+p_m}s^{q_{m-1}+q_m}\\
+x &amp;= \prod_{i = 1}^{m-1}r^{p'_i}s^{q'_i}\\
+\end{align*}
+We can decrement the upper bound of the product like so until we have $m=1$, and we are left with an expression of the form $r^ps^q$.
+</p>
+<p>
+We can now finish the exercise, we can write $x = r^ps$ with $p \in \Z$. Then, we have $$rx = r^{p+1}s = r^prs = r^psr^{-1} = xr^{-1}$$
+</p>
+</html>

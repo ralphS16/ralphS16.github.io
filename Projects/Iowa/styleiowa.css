@@ -1,0 +1,37 @@
+#grid {
+	margin:0px auto;
+	background-color:#000;
+	border-radius: 5px;
+	display:table;
+	padding:4px;
+	border-collapse:separate;
+	border-spacing:4px;
+}
+
+.grid-row{
+	display:table-row;
+}
+.grid-cell {
+	/*width: 125px;
+	height:125px;*/
+	margin:2px;
+	display:table-cell;
+	border-radius: 15px;
+	text-align: center;
+	vertical-align: middle;
+	background-color:#C7C7C7;
+	font-size: 20pt;
+}
+
+.grid-cell.empty {
+	background-color: #000;
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

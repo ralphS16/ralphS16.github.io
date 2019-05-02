@@ -1,0 +1,17 @@
+<html>
+<h1>Chapter 1: #1.6.1</h1>
+<p><ol type="a">
+<li>We use induction. For $n = 0$, it is obvious because $\varphi(x^0) = \varphi(1) = 1 = \varphi(x)^0$. Suppose it holds for some 
+$n$, then $$\varphi(x^{n+1}) = \varphi(x^n\cdot x) = \varphi(x^n)\varphi(x) = \varphi(x)^n\varphi(x) = \varphi(x)^{n+1},$$
+so the result follows by induction.
+</li>
+<li>
+We have the following:
+$$ 1 = \varphi(1) = \varphi(x\cdot x^{-1}) = \varphi(x)\varphi(x^{-1})$$
+By uniqueness of the inverse, we must have $\varphi(x^{-1}) = \varphi(x)^{-1}$. Now, for all $n \in \Z^{-1}$, using part a., 
+we have $\varphi(x^{-n}) = \varphi(x)^{-n}$, so we also have $\varphi((x^{-n})^{-1}) = \left(\varphi(x)^{-n}\right)^{-1}$ which 
+implies $\varphi(x^n) = \varphi(x)^n$ and we are done.
+</li>
+</ol>
+</p>
+</html>

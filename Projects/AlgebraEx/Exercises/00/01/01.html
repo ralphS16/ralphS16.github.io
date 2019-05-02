@@ -1,0 +1,15 @@
+<html>
+<h1>Preliminaries: #0.1.1</h1>
+<p>
+We will mutliply each matrix in the list with $M$ on both sides and compare the results.
+\begin{align*}
+  \begin{bmatrix}1&amp;1\\0&amp;1\end{bmatrix}\begin{bmatrix}1&amp;1\\0&amp;1\end{bmatrix} = \begin{bmatrix}1&amp;2\\0&amp;1\end{bmatrix} &amp;= \begin{bmatrix}1&amp;1\\0&amp;1\end{bmatrix}\begin{bmatrix}1&amp;1\\0&amp;1\end{bmatrix} = \begin{bmatrix}1&amp;2\\0&amp;1\end{bmatrix}\\\\
+  \begin{bmatrix}1&amp;1\\1&amp;1\end{bmatrix}\begin{bmatrix}1&amp;1\\0&amp;1\end{bmatrix} = \begin{bmatrix}1&amp;2\\1&amp;2\end{bmatrix} &amp;\neq \begin{bmatrix}1&amp;1\\0&amp;1\end{bmatrix}\begin{bmatrix}1&amp;1\\1&amp;1\end{bmatrix} = \begin{bmatrix}2&amp;2\\1&amp;1\end{bmatrix}\\\\
+  \begin{bmatrix}0&amp;0\\0&amp;0\end{bmatrix}\begin{bmatrix}1&amp;1\\0&amp;1\end{bmatrix} = \begin{bmatrix}0&amp;0\\0&amp;0\end{bmatrix} &amp;= \begin{bmatrix}1&amp;1\\0&amp;1\end{bmatrix}\begin{bmatrix}0&amp;0\\0&amp;0\end{bmatrix} = \begin{bmatrix}0&amp;0\\0&amp;0\end{bmatrix}\\\\
+  \begin{bmatrix}1&amp;1\\1&amp;0\end{bmatrix}\begin{bmatrix}1&amp;1\\0&amp;1\end{bmatrix} = \begin{bmatrix}1&amp;2\\1&amp;1\end{bmatrix} &amp;\neq \begin{bmatrix}1&amp;1\\0&amp;1\end{bmatrix}\begin{bmatrix}1&amp;1\\1&amp;0\end{bmatrix} = \begin{bmatrix}2&amp;1\\1&amp;0\end{bmatrix}\\\\
+  \begin{bmatrix}1&amp;0\\0&amp;1\end{bmatrix}\begin{bmatrix}1&amp;1\\0&amp;1\end{bmatrix} = \begin{bmatrix}1&amp;1\\0&amp;1\end{bmatrix} &amp;= \begin{bmatrix}1&amp;1\\0&amp;1\end{bmatrix}\begin{bmatrix}1&amp;0\\0&amp;1\end{bmatrix} = \begin{bmatrix}1&amp;1\\0&amp;1\end{bmatrix}\\\\
+  \begin{bmatrix}0&amp;1\\1&amp;0\end{bmatrix}\begin{bmatrix}1&amp;1\\0&amp;1\end{bmatrix} = \begin{bmatrix}0&amp;1\\1&amp;1\end{bmatrix} &amp;\neq \begin{bmatrix}1&amp;1\\0&amp;1\end{bmatrix}\begin{bmatrix}0&amp;1\\1&amp;0\end{bmatrix} = \begin{bmatrix}1&amp;1\\1&amp;0\end{bmatrix}\\\\
+\end{align*}
+We see that the first, third and fifth matrix are in $\mathcal{B}$ because they satisfy the equation $MX = XM$.
+</p>
+</html>

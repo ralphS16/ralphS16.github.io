@@ -1,0 +1,45 @@
+<html>
+<h1>Chapter 1: #1.4.11</h1>
+<p>
+<ol type="a">
+<li>
+$$ XY = \begin{bmatrix}1& d+a& e+af+b\\0&1&f+c\\0&0&1 \end{bmatrix} $$
+Observe that if $af \neq dc$, then $XY \neq YX$, so for a counter-example, one could take $a = f= 0$ and $d = c = 1$.
+</li>
+<li>
+Using the computations above, we get a system of three equations.
+\begin{align*}
+d+a &amp;= 0\\
+e+af+b &amp; = 0\\
+f+c &amp; = 0\\
+\end{align*}
+It is solved by $d = -a$, $f = -c$ and $e = ac - b$. We get that $X$ inverse is indeed in $H(F)$, so the set is closed under inverse.
+</li>
+<li>
+This is just tedious computations.
+\begin{align*}
+\left(\begin{bmatrix}1& x_1& x_2\\0&1&x_3\\0&0&1\end{bmatrix}\begin{bmatrix}1& y_1& y_2\\0&1&y_3\\0&0&1\end{bmatrix}\right)\begin{bmatrix}1& z_1& z_2\\0&1&z_3\\0&0&1\end{bmatrix} &amp;=
+\begin{bmatrix}1& x_1 + y_1& x_2 + y_2 + x_1y_3\\0&1&x_3+y_3\\0&0&1 \end{bmatrix}\begin{bmatrix}1& z_1& z_2\\0&1&z_3\\0&0&1\end{bmatrix}\\
+&amp;= \begin{bmatrix}1& x_1+y_1+z_1& x_2 + y_2 + x_1y_3 + z_2 + (x_1+y_1)z_3\\0&1&x_3+y_3+z_3\\0&0&1\end{bmatrix}\\
+&amp;= \begin{bmatrix}1& x_1+y_1+z_1& x_2 + y_2 + z_2 + x_1(y_3+z_3) + y_1z_3\\0&1&x_3+y_3+z_3\\0&0&1\end{bmatrix}\\
+&amp;= \begin{bmatrix}1& x_1& x_2\\0&1&x_3\\0&0&1\end{bmatrix}\begin{bmatrix}1& y_1+z_1& y_2 + z_2 + y_1z_3\\0&1&y_3+z_3\\0&0&1\end{bmatrix}\\
+&amp;= \begin{bmatrix}1& x_1& x_2\\0&1&x_3\\0&0&1\end{bmatrix}\left(\begin{bmatrix}1& y_1& y_2\\0&1&y_3\\0&0&1\end{bmatrix}\begin{bmatrix}1& z_1& z_2\\0&1&z_3\\0&0&1\end{bmatrix}\right)
+\end{align*}
+To conclude, just note the identity matrix in $\text{GL}_3(F)$ is also the identity in $H(F)$, so $H(F)$ is indeed a group. 
+We can compute its order by looking at the definition (3 choices in $F$ will yield $|F|^3$ possibilities).
+</li>
+<li>
+Look at $X^2$ with $X$ defined in a.:
+$$ X^2 = \begin{bmatrix}1& a+a& b+ac+b\\0&1&c+c\\0&0&1 \end{bmatrix} $$
+We see that in $\Z/2\Z$, $X^2$ is the identity if and only if $ac = 0$. Thus, we only have two matrices that do not have order 2. 
+Moreover, if $X$ is one of those matrices, $X^2$ is not. Therefore, $X^4$ is the identity and $X$ must have order 4, it cannot 
+have order 3 because it would imply $X$ is the inverse of $X^2$ but we know that $X^2$ is its own inverse.
+</li>
+<li>
+We still consider the matrix $X$, let $n \in \N$. Suppose $a$ or $c$ is non-zero, then the upper diagonal entries of $X^n$ will be $(na, nc) \neq (0,0)$, 
+so $X^n$ is not the identity. If $a= c=0$, then we must have $b\neq 0$ (otherwise $X$ is the identity) and the corner entry of $X^n$ will be $nb \neq 0$, 
+so $X^n$ is not the identity. Since, there is no integer $n$ such that $X^n$ is the identity, $X$ has infinite order.
+</li>
+</ol>
+</p>
+</html>

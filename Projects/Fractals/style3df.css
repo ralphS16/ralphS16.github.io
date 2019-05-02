@@ -1,0 +1,106 @@
+@font-face {
+    font-family: 'aaarghnormal';
+    src: url('Aaargh-webfont.eot');
+    src: url('Aaargh-webfont.eot?#iefix') format('embedded-opentype'),
+         url('Aaargh-webfont.woff') format('woff'),
+         url('Aaargh-webfont.ttf') format('truetype'),
+         url('Aaargh-webfont.svg#aaarghnormal') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face { /*This font is used without copyrights*/
+    font-family: 'gentil';
+    src: url('GenBkBasR-webfont.eot');
+    src: url('GenBkBasR-webfont.eot?#iefix') format('embedded-opentype'),
+         url('GenBkBasR-webfont.woff2') format('woff2'),
+         url('GenBkBasR-webfont.woff') format('woff'),
+         url('GenBkBasR-webfont.ttf') format('truetype'),
+         url('GenBkBasR-webfont.svg#gentium_book_basicregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+body{
+	padding: 0px;
+	margin: 0px;
+}
+
+main {
+	background-color: #e5e5e5;
+	width: 1500px;
+	margin: 0px auto;
+	padding: 0px;
+}
+main p {
+	text-align: justify;
+	width: auto;
+	font-size: 18px; 
+	font-family: 'gentil';
+	padding: 0px 60px;
+}
+
+header nav {
+	background-color: #000000;
+	font-size: 1.2em;
+	font-family: 'aaarghnormal', "Trebuchet MS", sans-serif;
+	height: 40px;
+	line-height: 30px;
+	margin:0;
+	padding: 0;
+	text-align: center;
+}
+
+header nav ul {
+	list-style: none;
+	margin: 0;
+	width: 100%;
+	border: 1px;
+	padding: 0px;
+}
+header nav li {
+	float: left; 
+	display: inline; 
+	margin: 0;
+}
+
+header nav a:link, nav a:visited {
+
+	display: inline-block;
+	height: 30px;
+	padding: 5px 1.5em;
+	text-decoration: none;
+}
+header nav a:hover, nav a:active,
+header nav .active a:link, nav .active a:visited {
+	background-color: #e5e5e5;
+	text-decoration: none;
+	color: #000000;
+}
+
+header nav .active {
+	background-color: #e5e5e5;
+	font-weight: bold;
+}
+
+nav ul a
+{
+	color: white;
+}
+
+footer
+{
+	text-align: right;
+}
+
+iframe {
+	margin:2px 18%;
+}
+.sideproof{padding:0px 50px 0px 20px; font-family:'gentil'; border-right-style:solid;}
+.tg  {border-collapse:collapse;border-spacing:0;border-width:0px; margin: 10px auto;}
+.tg td{font-family:Arial, sans-serif;font-size:20px;padding:10px 5px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:20px;font-weight:normal;padding:10px 5px;;overflow:hidden;word-break:normal;}
+.tg .tg-by3v{font-weight:bold;font-size:20px;text-align:center;}
+.tg .tg-kr94{font-size:20px;text-align:center;}
+.bup th{border-top-width:1px;border-top-style:solid;}
+.bdown{border-bottom-width:1px;border-bottom-style:solid;}
+.shade {background-color: #b3b3b3;}
+.bold {font-style:bold;}

@@ -1,0 +1,15 @@
+<html>
+<h1>Preliminaries: #0.2.11</h1>
+<p>
+We have that $n = kd$ for some integer $k$. If $\gcd{(k,d)} = 1$, this is straightforward because we have $\varphi(n) = \varphi(k)\varphi(d)$. Suppose that this is not the case
+and write the primary decomposition of both $k$ and $d$.
+$$k= p_1^{a_1}p_2^{a_2}\cdots p_r^{a_r} \quad\quad d= q_1^{b_1}q_2^{b_2}\cdots q_s^{b_s}$$
+Since $\gcd{(k,d)} \neq 1$, we can assume, without loss of generality, that $\forall 1 \leq i \leq t, p_i = q_i$ for some $t \leq \min{\{r,s\}}$
+(note that it is not necessary that $a_i = b_i$). Then, we have the following factorization for $kd$:
+$$kd = q_1^{c_1}q_2^{c_2}\cdots q_t^{c_t}p_{t+1}^{a_{t+1}}\cdots p_r^{a_r}q_{t+1}^{b_{t+1}}\cdots q_s^{b_s}$$
+where $c_i = a_i + b_i$. Now, we can easily find $\varphi(kd)$.
+$$\varphi(kd) = q_1^{c_1-1}(q_1-1)p_2^{c_2-1}(q_2-1)\cdots q_t^{c_t-1}(q_t-1)p_{t+1}^{a_{t+1}-1}(p_{t+1}-1)\cdots p_r^{a_r-1}(p_r-1)q_{t+1}^{b_{t+1}-1}(q_{t+1}-1)\cdots q_s^{b_s-1}(q_s-1)$$
+Recall that we also had $\varphi(d) = q_1^{b_1-1}(q_1-1)q_2^{b_2-1}(q_2-1)\cdots q_s^{b_s-1}(q_s-1)$ and since $c_i-1 > b_i -1$, we see that all the terms in $\varphi(d)$ are in $\varphi(n)$.
+Indeed, this means $\varphi(d) \mid \varphi(n)$.
+</p>
+</html>

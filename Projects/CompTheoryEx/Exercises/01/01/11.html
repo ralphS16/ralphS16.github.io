@@ -1,0 +1,14 @@
+<html>
+<h1>Chapter 1: #1.11</h1>
+<p>Let $M$ be a NFA deciding a language $L$. We construct the NFA $M'$ by adding a new state $q_{\text{accept}}$ that is 
+now the only accept state, and from every former accept state we add an $\varepsilon$ transition to $q_{\text{accept}}$. 
+We claim that $M'$ also decides $L$.
+</p>
+<p> If $x \in L$, then there is a valid sequence of transitions in $M$ that ends in an accept state. This sequence is also 
+valid in $M'$ and if we add the $\varepsilon$ transition to $q_{\text{accept}}$, we get that $M'$ accepts $x$. If $M'$ accepts 
+$x$, then there is a valid sequence of transitions in $M'$ that ends in $q_{\text{accept}}$. Note also that no other state 
+of the sequence is $q_{\text{accept}}$ because there is no transitions from $q_{\text{accept}}$ to other states. Therefore, 
+if we remove the last transisition of the sequence, we get a valid sequence in $M$ and since the last transition must be 
+from an accept state, we get that $M$ also accepts $x$. We conclude that $x \in L \Leftrightarrow M' \text{ accepts } x$.
+</p>
+</html>

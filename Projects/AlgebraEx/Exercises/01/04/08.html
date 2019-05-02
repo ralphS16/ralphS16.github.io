@@ -1,0 +1,16 @@
+<html>
+<h1>Chapter 1: #1.4.8</h1>
+<p style="display:none;">\(\newcommand\udots{\mathinner{
+  \kern1mu\raise1pt{.}
+  \kern2mu\raise4pt{.}
+  \kern2mu\raise7pt{\Rule{0pt}{7pt}{0pt}.}
+  \kern1mu
+}}\)</p>
+<p> Define the following matrices:
+$$ I = \begin{bmatrix}1& & \\ &\ddots &\\ & & 1 \end{bmatrix} \quad \quad D = \begin{bmatrix}& & 1\\ &\udots &\\ 1& &  \end{bmatrix} \quad \quad A = \begin{bmatrix}& & 1\\ & &\\ & &  \end{bmatrix}$$
+Then, we compute $DA$ and  $AD$:
+$$ DA = \begin{bmatrix}& & \\ & &\\ & & 1 \end{bmatrix} \quad \quad AD = \begin{bmatrix}1& & \\ & & \\ & &  \end{bmatrix}$$
+We can conclude that $(I+A)D \neq D(I+A)$ and it is clear that both $I+A$ and $D$ are invertible, so they are matrices of 
+$\text{GL}_n(F)$ that do not commute.
+</p>
+</html>

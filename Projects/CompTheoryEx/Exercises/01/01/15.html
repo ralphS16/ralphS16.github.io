@@ -1,0 +1,37 @@
+<html>
+<h1>Chapter 1: #1.15</h1>
+<p>The language $\texttt{a*b}$ is a counterexample. It is recognized by the following NFA:</br>
+<svg width="300" height="200" version="1.1" xmlns="http://www.w3.org/2000/svg">
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="60.5" cy="103.5" rx="30" ry="30"/>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="186.5" cy="103.5" rx="30" ry="30"/>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="186.5" cy="103.5" rx="24" ry="24"/>
+	<polygon stroke="black" stroke-width="1" points="9.5,103.5 30.5,103.5"/>
+	<polygon fill="black" stroke-width="1" points="30.5,103.5 22.5,98.5 22.5,108.5"/>
+	<polygon stroke="black" stroke-width="1" points="90.5,103.5 156.5,103.5"/>
+	<polygon fill="black" stroke-width="1" points="156.5,103.5 148.5,98.5 148.5,108.5"/>
+	<text x="117.5" y="94.5" font-family="Courier New" font-size="20">b</text>
+	<path stroke="black" stroke-width="1" fill="none" d="M 47.275,76.703 A 22.5,22.5 0 1 1 73.725,76.703"/>
+	<text x="54.5" y="27.5" font-family="Courier New" font-size="20">a</text>
+	<polygon fill="black" stroke-width="1" points="73.725,76.703 82.473,73.17 74.382,67.292"/>
+</svg></br>
+But the NFA resulting from the described construction accepts $\texttt{a}$ which is not in $\texttt{(a*b)*}$.
+</br>
+<svg width="300" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg">
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="60.5" cy="103.5" rx="30" ry="30"/>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="60.5" cy="103.5" rx="24" ry="24"/>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="186.5" cy="103.5" rx="30" ry="30"/>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="186.5" cy="103.5" rx="24" ry="24"/>
+	<polygon stroke="black" stroke-width="1" points="9.5,103.5 30.5,103.5"/>
+	<polygon fill="black" stroke-width="1" points="30.5,103.5 22.5,98.5 22.5,108.5"/>
+	<polygon stroke="black" stroke-width="1" points="90.5,103.5 156.5,103.5"/>
+	<polygon fill="black" stroke-width="1" points="156.5,103.5 148.5,98.5 148.5,108.5"/>
+	<text x="117.5" y="94.5" font-family="Courier New" font-size="20">b</text>
+	<path stroke="black" stroke-width="1" fill="none" d="M 47.275,76.703 A 22.5,22.5 0 1 1 73.725,76.703"/>
+	<text x="54.5" y="27.5" font-family="Courier New" font-size="20">a</text>
+	<polygon fill="black" stroke-width="1" points="73.725,76.703 82.473,73.17 74.382,67.292"/>
+	<path stroke="black" stroke-width="1" fill="none" d="M 162.625,121.415 A 86.377,86.377 0 0 1 84.375,121.415"/>
+	<polygon fill="black" stroke-width="1" points="84.375,121.415 89.243,129.496 93.772,120.581"/>
+	<text x="117.5" y="151.5" font-family="Courier New" font-size="20">&#949;</text>
+</svg>
+</p>
+</html>

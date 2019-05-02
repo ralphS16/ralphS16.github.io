@@ -1,0 +1,18 @@
+<html>
+<h1>Preliminaries: #0.1.4</h1>
+<p>
+We write the mutliplication explicitly:
+\begin{align*}
+  \begin{bmatrix}p&amp;q\\r&amp;s\end{bmatrix}\begin{bmatrix}1&amp;1\\0&amp;1\end{bmatrix} &amp;= \begin{bmatrix}p&amp;p+q\\r&amp;r+s\end{bmatrix}\\
+  \begin{bmatrix}1&amp;1\\0&amp;1\end{bmatrix}\begin{bmatrix}p&amp;q\\r&amp;s\end{bmatrix} &amp;= \begin{bmatrix}p+r&amp;q+s\\r&amp;s\end{bmatrix}\\
+\end{align*}
+In order for these matrices to be equal, the entries must satisfy the following equations.
+\begin{align*}
+  p = p + r\\
+  p+q = q+s\\
+  r = r\\
+  r+s =s\\
+\end{align*}
+Which can be reduced to $r = 0$ and $p = s$. Hence, a matrix in $\mathcal{B}$ must have the form $\begin{bmatrix}p&amp;q\\0&amp;p\end{bmatrix}$.
+</p>
+</html>

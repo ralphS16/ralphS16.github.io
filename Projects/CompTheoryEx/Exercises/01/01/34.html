@@ -1,0 +1,30 @@
+<html>
+<h1>Chapter 1: #1.34</h1>
+<p>Let $ONE(C) = \{w \in \Sigma^* \mid \exists y \in C, \mbox{ $w$ and $y$ have the same number of $\texttt{1}$'s}\}$. 
+If we show that $ONE(C)$ is regular, then it will imply $B \stackrel{\texttt{1}}{\leftarrow} C$ is regular (and hence 
+the class is closed under this operation) because $B \stackrel{\texttt{1}}{\leftarrow} C= ONE(C) \cap B$ and the class is 
+closed under intersection.
+</p>
+<p>Let $M = (Q, \Sigma, \delta, q_0, F)$ be a DFA that recognizes $C$, we will construct an NFA $M'$ that recognizes $ONE(C)$. 
+The idea is that $M'$ will simulate $M$ without taking into account the $\texttt{0}$'s of the input and bypassing the $\texttt{0}$ 
+transitions in $M$. This will recognize $ONE(C)$ because we only care about the $\texttt{1}$'s in this language. 
+Formally, we have $M' = (Q, \Sigma, \delta', q_0, F)$, where $\delta'$ is defined as follows:
+<ol>
+<li>For all $q \in Q$, $\delta'(q,1) = \delta(q,1)$.
+</li>
+<li>For all $q \in Q$, $\delta'(q,0) = \{\delta(q,0),q\}$.
+</li>
+<li>For all pairs $q,r \in Q$ such that there exists $x \in \Sigma$ such that $\delta(q,x) = r$, we have $\delta'(q,\varepsilon) = r$.
+</li>
+</ol>
+</p>
+<p>If $w \in ONE(C)$, then there exists $y \in C$ with the same number of $\texttt{1}$'s and on input $w$, there is a branch of 
+computation of $M'$ that does the exact same changes of states as $M$ on $y$ (except maybe some transition from a state to itself that 
+on character $\texttt{0}$), hence this branch accepts $w$.
+</p>
+<p>If $M'$ accepts $w$, we will transform $w$ to a word $w'$ in $C$ without adding any $\texttt{1}$'s. Consider the accepting branch of computation, 
+for each transition arrow taken that was not in $M$, do the following: if the arrow is a 
+$\varepsilon$-transition, add a $\texttt{0}$ to $w$ in this place, otherwise, remove the $\texttt{0}$ that was consumed for the transition. 
+After these transformations, $w'$ will be accepted by $M$, so $w \in ONE(C)$.
+</p>
+</html>
