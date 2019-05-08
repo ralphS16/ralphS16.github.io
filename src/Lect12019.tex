@@ -114,8 +114,9 @@ Before diving into this topic, we discuss the necessary distinction between sets
 \end{defn}
 The notation indicating the direction of the path does not correspond to the usual notation in graph theory. The motivation for this divergence will come shortly as the composition of arrows in a category is defined, the main point is that the morphisms will be more related to functions between two objects than arrows between two nodes.
 \begin{defn}[Category]
-	An oriented graph $C$ along with a composition map $\circ: C_2 \rightarrow C_1$ is a \textbf{category} if it satisfies the following two properties.
+	An oriented graph $C$ along with a composition map $\circ: C_2 \rightarrow C_1$ is a \textbf{category} if it satisfies the following properties.
 	\begin{enumerate}
+		\item For any $(f, g) \in C_1$, $s(f \circ g) = s(g)$ and $t(f \circ g) = t(g)$.
 		\item For any $(f,g,h) \in C_3$, $f\circ(g\circ h) = (f\circ g)\circ h$, namely, composition is associative.
 		\item For any $A \in C_0$, there exists an \textbf{identity} morphism $u_C(A) \in C_1$ with $A$ as its source and target that satisfies $u_C(A) \circ f = f$ and $g \circ u_C(A) = g$, for any $f,g \in C_1$ where $t(f) = A$ and $s(g) = A$.
 	\end{enumerate}
