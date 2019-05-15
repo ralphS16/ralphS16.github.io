@@ -8,6 +8,7 @@
 \usepackage{mathpazo}
 \usepackage{amsmath,amsthm,amssymb}
 \usepackage{subcaption}
+\usepackage{enumerate}
 \usetikzlibrary{shapes}
 \usetikzlibrary{positioning}
 % Set up the images/graphics package
@@ -92,31 +93,38 @@
 \end{abstract}
 \setcounter{section}{-1}
 \section{Introduction}
-This is the first lecture of a series exploring the basic concepts in category theory. The aim is to teach undergrad about these topics by considering their application in various subfields of mathematics as well as the theory on its own. The in-person lecture will only assume knowledge of U1 courses in mathematics, such as abstract algebra, analysis and basics of set theory (what is usually taught in the aforementioned classes). New objects will be defined during the lectures, but if you are reading these notes without attending the lectures, you may have to look up definitions online.
+This is the first lecture of a series exploring the basic concepts in category theory. The aim is to teach undergraduate students about these topics by considering their application in various subfields of mathematics as well as the theory on its own. The in-person lectures will only assume knowledge of U1 courses in mathematics, such as abstract algebra, analysis and basics of set theory (what is usually taught in the aforementioned classes). New objects will be defined during the lectures but if you are reading these notes without attending the lectures, you may have to look up definitions online.
 
-Before diving into this topic, we discuss the necessary distinction between sets and classes. Several times in our coverage of category theory, we will need to use the concept of a class. It is very similar to that of a set and has one simple difference. While a set can contain another set, classes cannot contain other classes. This difference is indispensable because some collections of objects can simply not form a set. Famous examples include the class of ordinal numbers which, by the Burali-Forti paradox, cannot be a set and the class of all sets that do not contain themselves which, by the Russel paradox, cannot be a set. In addition, we will soon talk about the class of all sets and the class of all groups (among others) and these classes are \textbf{proper}, that is, they are not sets. For the former, it is easy to see this because of cardinality issues ($|S| < |\mP(S)|$). 
-%Talk about collection vs class. (mention proper)
-%Balance between applied and theory of category
+Before diving into this topic, we discuss the necessary distinction between sets and classes. Several times in our coverage of category theory, we will need to use the concept of a class. It is very similar to that of a set and has one simple difference. While a set \textit{can} contain another set, classes \textit{cannot} contain other classes.
+
+This difference is indispensable because some collections of objects can simply not form a set. Famous examples include the class of ordinal numbers which, by the Burali-Forti paradox, cannot be a set and the class of all sets that do not contain themselves which, by the Russel paradox, cannot be a set. In addition, we will soon talk about the class of all sets and the class of all groups (among others) and these classes are \textbf{proper}, that is, they are not sets. For the former, it is easy to see because if $S$ is the set of all sets, then it contains all its subsets and hence $\mP(S) \subseteq S$, this leads to the contradiction $|\mP(S)| \leq |S| < |\mP(S)|$.
+
+Fortunately, these lectures will not require a profound understanding of this distinction as we will essentially use classes as if they were sets. Thus, to avoid confusion, one could replace the word ``class`` with ``collection`` and still follow the theory we present.
 \section{Categories}
 \begin{defn}[Oriented graph]
-	An \textbf{oriented graph} $G$ consists of a collection of \textbf{nodes/objects} denoted $G_0$ and a collection of \textbf{arrows/morphisms} denoted $G_1$ along with two maps $s,t: G_1 \rightarrow G_0$, so that each arrow $f \in G_1$ has a \textbf{source} $s(f)$ and a \textbf{target} $t(f)$. 
+	An \textbf{oriented graph} $G$ consists of a class of \textbf{nodes/objects} denoted $G_0$ and a class of \textbf{arrows/morphisms} denoted $G_1$ along with two maps $s,t: G_1 \rightarrow G_0$, so that each arrow $f \in G_1$ has a \textbf{source} $s(f)$ and a \textbf{target} $t(f)$. 
 \end{defn}
 \begin{defn}[Paths]
-	A \textbf{path} in an oriented graph $G$ is a sequence of arrows $(f_1, \dots, f_k)$ that are \textbf{composable} in the sense that $t(f_i) = s(f_{i-1})$ for $i=2,\dots, k$ as seen in this diagram.
-	\begin{figure}[h]
+	A \textbf{path} in an oriented graph $G$ is a sequence of arrows $(f_1, \dots, f_k)$ that are \textbf{composable} in the sense that $t(f_i) = s(f_{i-1})$ for $i=2,\dots, k$ as seen below. The class of paths of length $k$ will be denoted $G_k$.
+	\begin{figure}[h!]
 		\centering
 		\begin{tikzcd}
 			\bullet \arrow[r, "f_k"] & \bullet \arrow[r, "f_{k-1}"] & \bullet\cdots\bullet \arrow[r, "f_2"] & \bullet \arrow[r, "f_1"] & \bullet
 		\end{tikzcd}
+		\caption*{Representation of path $(f_1, \dots, f_k)$.}
 	\end{figure}
-
-	The class of paths of length $k$ will be denoted $G_k$.
 \end{defn}
-The notation indicating the direction of the path does not correspond to the usual notation in graph theory. The motivation for this divergence will come shortly as the composition of arrows in a category is defined, the main point is that the morphisms will be more related to functions between two objects than arrows between two nodes.
+Observe that the notation indicating the direction of the path does not correspond to the usual notation in graph theory. The motivation for this divergence will come shortly as the composition of arrows in a category is defined, the main idea is that the morphisms will correspond to functions between mathematical objects rather than arrows between nodes of a graph.
 \begin{defn}[Category]
 	An oriented graph $C$ along with a composition map $\circ: C_2 \rightarrow C_1$ is a \textbf{category} if it satisfies the following properties.
 	\begin{enumerate}
-		\item For any $(f, g) \in C_1$, $s(f \circ g) = s(g)$ and $t(f \circ g) = t(g)$.
+		\item For any $(f, g) \in C_2$, $s(f \circ g) = s(g)$ and $t(f \circ g) = t(f)$. This is more naturally understood in the diagram below.
+		\begin{figure}[h]
+			\centering
+			\begin{tikzcd}
+				\bullet \arrow[r, "g"'] \arrow[rr, "f \circ g", bend left] & \bullet \arrow[r, "f"'] & \bullet
+			\end{tikzcd}
+		\end{figure}
 		\item For any $(f,g,h) \in C_3$, $f\circ(g\circ h) = (f\circ g)\circ h$, namely, composition is associative.
 		\item For any $A \in C_0$, there exists an \textbf{identity} morphism $u_C(A) \in C_1$ with $A$ as its source and target that satisfies $u_C(A) \circ f = f$ and $g \circ u_C(A) = g$, for any $f,g \in C_1$ where $t(f) = A$ and $s(g) = A$.
 	\end{enumerate}
@@ -124,7 +132,9 @@ The notation indicating the direction of the path does not correspond to the usu
 \begin{rem}[Notation]
 	In general, we will denote categories with $C$ or $D$, their objects with uppercase letters ($A$, $B$, $X$, $Y$, $Z$, etc.) and their morphisms with lowercase letters ($f$, $g$, $h$, etc.). When the category is clear from the context, we denote the identity morphism $\id_A$ instead of $u_C(A)$.
 \end{rem}
-If the second property is not satisfied, $C$ is referred to as a \textbf{semicategory}. Some authors choose to explicit when a category \textit{does} satisfy the second property, qualifying it as \textbf{unital}, but this term also has other meanings, hence our preference for the first convention.
+If the third property is not satisfied, $C$ is referred to as a \textbf{semicategory}. Some authors choose to explicit when a category \textit{does} satisfy the second property, qualifying it as \textbf{unital}, but this term also has other meanings, hence our preference for the first convention.
+
+Moreover, since $\circ$ is associative, it induces a unique composition map on paths of any finite lengths. This lets us write $f_1 \circ f_2 \circ \cdots \circ f_k$ with no parentheses as well as abuse notation and write $\circ: C_k \rightarrow C_1$. Occasionally, we will mention the composition of a path to mean the image of the path under this map.
 \begin{exmps}[Boring examples]
 	It is really easy to construct a category by drawing the oriented graph and inferring the definition of the composition from it. For instance, diagram (a) below corresponds to the category with objects $\{A, B\}$ and morphisms $\{\id_A, \id_B, f\}$. The composition map is then completely determined by the properties of identity morphisms.
 	\begin{figure}[h]
@@ -153,23 +163,34 @@ If the second property is not satisfied, $C$ is referred to as a \textbf{semicat
 			\caption*{(c) Commutative square.}
 		\endminipage
 	\end{figure}
-	The identity morphisms are omitted from the diagrams for clarity reasons (i.e.: it would hinder readability without adding more information).
+
+	The identity morphisms are omitted from the diagrams for clarity reasons (i.e.: they would hinder readability without adding information). However, if two distinct morphisms have the same source and target, they must be explicitly drawn and the ambiguity in the composition must be removed. For instance, diagram (b) has two distinct paths of length two starting at the top-left corner and ending at the bottom-right corner. Since the composition of the bottom left path can correspond to any of the two distinct morphisms between these corners, and similarly for the top right path, the category is ambiguous.
 	
-	However, if two distinct morphisms have the same source and target, they must be explicitly drawn and the ambiguity in the composition must be removed. For instance, diagram (b) has two morphisms from the top-left corner to the bottom-right corner. Since the composition of the bottom left path can correspond to one of them and similarly for the top right path, the category is ambiguous.
-	
-	Diagram (c) shows a very important example of a simple category that handles the ambiguity in diagram (b). It is implicitly stating that the bottom and top path compose to the same morphism, the latter is absent of the diagram. The term 'commutative' can also be generalized to larger diagrams, it means that for any two objects connected by a directed path, there is a unique arrow connecting the two objects. In other words, if two paths have the same source and target, then the compositions of both paths yield the same arrow.
+	Diagram (c) shows a very important example of a simple category that handles this problem. It is implicitly stating that the bottom and top path compose to the same morphism, the latter is thus absent of the diagram. The term ``commutative`` can also be generalized to larger diagrams, it means that for any two objects connected by a directed path, there is a unique arrow connecting the two objects. In other words, if two paths have the same source and target, then the compositions of both paths yield the same arrow.
 \end{exmps}
-Before moving on to more interesting examples, we mention a notation that is frequently used.
+Before moving on to more interesting examples, we mention a notation that we will frequently use.
 \begin{defn}
 	Let $C$ be a category and $A,B \in C_0$ be objects, the collection of all morphisms going from $A$ to $B$ is 
 	\[\Hom_{C}(A,B) = \{f \in C_1 \mid s(f) = A \text{ and } t(f) = B\}.\]
-	In a locally small category (see definition below), it is referred to as a \textbf{Hom-set}. This leads to an alternative way of defining the morphisms of $C$, namely, one can describe $\Hom_C(A,B)$ for all $A, B \in C_0$ instead of describing all of $C_1$ at once. 
+	This leads to an alternative way of defining the morphisms of $C$, namely, one can describe $\Hom_C(A,B)$ for all $A, B \in C_0$ instead of describing all of $C_1$ at once. 
 \end{defn}
 \begin{defn}[Smallness]
-	A category $C$ is called \textbf{small} if the classes of objects and morphisms are not proper, that is, they are sets. If for all objects $A,B \in C_0$, $\Hom_C(A,B)$ is a set, $C$ is said to be \textbf{locally small}. 
+	A category $C$ is called \textbf{small} if the classes of objects and morphisms are not proper, that is, they are sets. If for all objects $A,B \in C_0$, $\Hom_C(A,B)$ is a set, $C$ is said to be \textbf{locally small} and $\Hom_C(A,B)$ is called a \textbf{Hom-set}.
 \end{defn}
 \begin{exmp}[\textbf{\textbf{Set}}]
 	The category \textbf{Set} has the class of sets as its objects and for any sets $X$ and $Y$, $\Hom_{\textbf{Set}}(X,Y)$ contains all the functions from $X$ to $Y$. The composition map is the usual one, the associativity follows from the definition and the identity maps serve as the identity morphisms. This category is locally small but not small.
+\end{exmp}
+\begin{exmp}
+	Let $(X, \leq)$ be a partially ordered set, then $X$ can be viewed as a category with elements of $X$ as its objects. For any $x,y \in X$, the Hom-set $\Hom_X(x,y)$ contains a single morphism if $x \leq y$ and is empty otherwise. Since every Hom-set contains at most one element and $\leq$ is transitive, the composition map is completely determined and well-defined. The identity morphisms arise from the reflexivity of $\leq$.
+	
+	Let $(X, \tau)$ be a topological space, note that the inclusion of open sets is a partial order on $\tau$, thus $X$ has a corresponding category as above. More explicitly, the objects are open sets and for any $U, V \in \tau$, the Hom-set $\Hom_X(U,V)$ contains the inclusion map $i_{UV}$ if $U\subseteq V$ and is empty otherwise.
+	\begin{figure}[h]
+		\centering
+		\begin{tikzcd}
+			\stackrel{0}{\bullet} \arrow[r] & \stackrel{1}{\bullet} \arrow[r] & \stackrel{2}{\bullet} \arrow[r] & \cdots
+		\end{tikzcd}
+		\caption*{Category associated to the natural numbers $(\N, \leq)$.}
+	\end{figure}
 \end{exmp}
 \begin{exmp}[Single object categories]
 	If a category $C$ has a single object $\ast$, then the only morphisms go from $\ast$ to $\ast$. In particular, $C_1 = \Hom_C(\ast, \ast)$ and $C_2 = C_1 \times C_1$. Then, the associativity of $\circ$ and existence of $\id_{\ast}$ makes $(C_1, \circ)$ into a monoid.
@@ -203,22 +224,10 @@ Before moving on to more interesting examples, we mention a notation that is fre
 			\fill [black] (40.11,-24.44) -- (41.01,-24.72) -- (40.75,-23.75);
 			\end{tikzpicture}
 		\end{center}
-		\caption*{Category corresponding to the group $S_3$.}
+		\caption*{Category corresponding to the symmetric group $S_3$.}
 	\end{figure}
 \end{exmp}
-\begin{exmp}
-	Let $(X, \leq)$ be a partially ordered set, then $X$ can be viewed as a category with elements of $X$ as its objects. For any $x,y \in X$, the Hom-set $\Hom_X(x,y)$ contains a single morphism if $x \leq y$ and is empty otherwise. Since every Hom-set contains at most one element and $\leq$ is transitive, the composition map is completely determined and well-defined. The identity morphisms arise from the reflexivity of $\leq$.
-	
-	Let $(X, \tau)$ be a topological space, note that the inclusion of open sets is a partial order on $\tau$, thus $X$ has a corresponding category as above. More explicitly, the objects are open sets and for any $U, V \in \tau$, the Hom-set $\Hom_X(U,V)$ contains the inclusion map $i_{UV}$ if $U\subseteq V$ and is empty otherwise.
-	\begin{figure}[h]
-		\centering
-		\begin{tikzcd}
-			\stackrel{0}{\bullet} \arrow[r] & \stackrel{1}{\bullet} \arrow[r] & \stackrel{2}{\bullet} \arrow[r] & \cdots
-		\end{tikzcd}
-		\caption*{Category associated to the natural numbers $(\N, \leq)$.}
-	\end{figure}
-\end{exmp}
-A lot of simple examples of "large" categories arise as subcategories of \textbf{Set}.
+A lot of simple examples of ``large`` categories arise as subcategories of \textbf{Set}.
 \begin{defn}[Subcategory]
 	Let $C$ be a category, a category $C'$ is a \textbf{subcategory} of $C$ if, the following intuitive properties are satisfied.
 	\begin{enumerate}
@@ -235,7 +244,7 @@ A lot of simple examples of "large" categories arise as subcategories of \textbf
 	One can view most of the theory studied in the first year of a typical mathematics curriculum through the lens of category theory as witnessed by the following list.
 	\begin{enumerate}
 		\item Since the composition of injective functions is again injective, the restriction of morphisms to injective functions yields a wide subcategory of \textbf{Set}, denoted \textbf{SetsInj}. Unsurprisingly, \textbf{SetsSurj} can be constructed similarly.
-		\item The full subcategory of finite sets is denoted \textbf{FinSets}.
+		\item The full subcategory of finite sets is denoted \textbf{FinSet}.
 		\item The category of groups (resp\,rings or fields) where the morphisms are group (resp\,ring or field) homomorphisms is denoted \textbf{Grp}/\textbf{Ring}/\textbf{Field}.
 		\item Let $k$ be a fixed field, the category of vector spaces over $k$ where the morphisms are linear maps is denoted $\textbf{Vsp}_k$.
 		\item The category of partially ordered sets where morphisms are order-preserving functions is denoted \textbf{Poset}.
@@ -244,7 +253,7 @@ A lot of simple examples of "large" categories arise as subcategories of \textbf
 \end{exmps}
 
 \section{Functors}
-The above list is far from being exhaustive; there are many more mathematical objects that can fit in a category and this is a main reason for studying this subject. Indeed, categories encapsulate a natural structure that accurately represents the heart of several mathematical theories from a global perspective. Furthermore, a category is almost never studied on its own and we will probably see in later lectures that some surprising links can arise between seemingly unrelated subjects (e.g.: Stone duality). The central tool for exhibiting these relations is a functor.
+The above list is far from being exhaustive; there are many more mathematical objects that can fit in a category and this is a main reason for studying this subject. Indeed, categories encapsulate a natural structure that accurately represents the heart of several mathematical theories from a global and abstract perspective. Still, a category is almost never studied on its own and we will probably see in later lectures that some surprising links can arise between seemingly unrelated subjects (e.g.: Stone duality). The central tool for exhibiting these relations is a functor.
 \begin{defn}[Functor]
 	Let $C$ and $D$ be categories, a \textbf{functor} $F: C \rightsquigarrow D$ is a pair of maps $F_0:C_0 \rightarrow D_0$ and $F_1:C_1 \rightarrow D_1$ such that the following diagrams commute (where $F_2$ is induced by the definition of $F_1$ with $(f,g) \mapsto (F_1(f), F_1(g))$).
 	\begin{figure}[h]
@@ -269,7 +278,7 @@ The above list is far from being exhaustive; there are many more mathematical ob
 	Commutative diagrams will be heavily employed to make clearer and more compact arguments (especially on the board). However, it is an acquired skill to quickly grasp their meaning and make effective use of their advantages. Unpacking the above definition will help to understand it as well as getting better with manipulating diagrams.
 	
 	A functor $F:C\rightsquigarrow D$ must satisfy the following properties.
-	\begin{enumerate}
+	\begin{enumerate}[i.]
 		\item For any $A, B \in C_0$, if $f \in \Hom_C(A,B)$ then $F(f) \in \Hom_D(F(A), F(B))$.
 		\item If $f,g \in C_1$ are composable, then $F(f\circ g) = F(f) \circ F(g)$.
 		\item If $A \in C_0$, then $u_D(F(A)) = F(u_C(A))$.
@@ -299,30 +308,30 @@ Throughout these lectures, the goal will be essentially to grow this list with m
 		\item The power set functor $\mP: \textbf{Set} \rightsquigarrow \textbf{Set}$ sends a set $X$ to its power set $\mP(X)$ and a function $f: X\rightarrow Y$ to the image map $\mP(f):\mP(X)\rightarrow \mP(Y)$, the latter sends a subset $S\subseteq X$ to \[f(S) = \{f(s) \mid s \in S\} \subseteq Y.\]
 		The power set functor is faithful because the same image map cannot arise from two different functions, it is not full because lots of functions $\mP(X) \rightarrow \mP(Y)$ are not image maps. One can also argue by cardinality because (when $|X|, |Y| \geq 2$)
 		\[|\Hom_{\textbf{Set}}(X,Y)| = |Y|^{|X|} < |\mP(Y)|^{|\mP(X)|} = |\Hom_{\textbf{Set}}(\mP(X), \mP(Y))|.\]
-		\item While in general the inclusion functor of a subcategory is not interesting, there are some distinguished cases. For instance, when considering subcategories of \textbf{Set} such as those mentioned earlier, this functor gets a fancier denomination, namely, the \textbf{forgetful} functor. This is because, morally, the functor is forgetting about the inner structure of the objects and morphisms and outputs the underlying sets and functions.
+		\item While in general the inclusion functor of a subcategory is not interesting, there are some distinguished cases. For instance, when considering subcategories of \textbf{Set} such as those mentioned earlier, this functor gets a fancier denomination, namely, the \textbf{forgetful} functor. This is because, morally, the functor is forgetting about the inner structure of the objects and morphisms and it outputs the underlying sets and functions.
 		
 		\item It is also sometimes useful to consider "intermediate" forgetful functors. For instance, $\Phi: \textbf{Ring} \rightsquigarrow \textbf{AbGrp}$ sends a ring $(R, +, \cdot)$ to the abelian group $(R, +)$. It does not need to affect morphisms because part of the requirements for ring homomorphisms is to preserve the underlying additive group structure.
 		
-		\item There is a non-trivial way to go in the opposite direction of the forgetful functor, that is, the \textbf{free} functor. For \textbf{Grp}, the free functor $F: \textbf{Set} \rightsquigarrow \textbf{Grp}$ sends a set to the free group generated by this set and a function $f: X\rightarrow Y$ to the unique group homomorphism $F(X) \rightarrow F(Y)$ that restricts to $f$ on the set of generators.
+		\item In some cases, there is a non-trivial way to go in the opposite direction of the forgetful functor, that is, the \textbf{free} functor. For \textbf{Grp}, the free functor $F: \textbf{Set} \rightsquigarrow \textbf{Grp}$ sends a set to the free group generated by this set and a function $f: X\rightarrow Y$ to the unique group homomorphism $F(X) \rightarrow F(Y)$ that restricts to $f$ on the set of generators.
 		
 		Later in the notes, when covering adjunctions, we will study a strong relation between the forgetful functor $\Phi: \textbf{Grp} \rightsquigarrow \textbf{Set}$ and $F$ that will generalize to other algebraic structures.
 		
-		\item Let $(X, \leq)$ and $(Y, \subseteq)$ be posets, and $F$ be a functor $X \rightsquigarrow Y$. For any $a, b \in X$, if $a\leq b$, then $\Hom_X(a,b)$ contains a single element, thus $\Hom_Y(F(a), F(b))$ must contain a morphism as well, or equivalently $F(a) \subseteq F(b)$. In other words, $F$ is an order-preserving function on the objects.
+		\item Let $(X, \leq)$ and $(Y, \subseteq)$ be posets, and $F:X\rightsquigarrow Y$ be a functor. For any $a, b \in X$, if $a\leq b$, then $\Hom_X(a,b)$ contains a single element, thus $\Hom_Y(F(a), F(b))$ must contain a morphism as well, or equivalently $F(a) \subseteq F(b)$. In other words, $F$ is an order-preserving function on the objects.
 		
 		Conversely, any order-preserving functions between $X$ and $Y$ will correspond to a unique functor since there is only one morphism in all the Hom-sets.
 				
 		\item Let $G$ and $H$ be groups and $G\ast$ and $H\ast$ be the single object categories they are associated to, then the functors $F: G\ast \rightsquigarrow H\ast$ are exactly the group homomorphisms from $G$ to $H$.
 		
-		\item For any group $G$, the functors $F:G\ast \rightsquigarrow \textbf{Set}$ are in correspondence with group actions of $G$ on $S$. Indeed, if $S = F(\ast)$, then \[F_1: G = \Hom_{G\ast}(\ast, \ast) \rightarrow \Hom_{\textbf{Set}}(S, S)\]
+		\item For any group $G$, the functors $F:G\ast \rightsquigarrow \textbf{Set}$ are in correspondence with group actions of $G$. Indeed, if $S = F(\ast)$, then \[F_1: G = \Hom_{G\ast}(\ast, \ast) \rightarrow \Hom_{\textbf{Set}}(S, S)\]
 		is such that $F(gh) = F(g) \circ F(h)$ for any $g,h \in G$ and $F(1) = \id_S$. Moreover, since for any $g \in G$,
 		\[\id_S = F(1) = F(gg^{-1}) = F(g) \circ F(g^{-1}),\]
 		the function $F(g)$ is a bijection and we conclude $F_1$ is the permutation representation of the group action.
 	\end{enumerate}
 \end{exmps}
 %Functoriality is useful to prove stuff. If you know about the fundamental group. One can show brouwer fixed point theorem using this.
-A clear similarity between categories like \textbf{Set}, \textbf{Grp}, \textbf{Ring} or \textbf{Top} is that all the objects have a minimum of structure that the morphisms preserve. In this lecture, we introduced a novel structure, namely categories, that functors preserve. Hence it is reasonable to wonder if categories are also part of a category. In fact, the only missing ingredient is the composition of functors. After proving the following proposition, we end up with the category \textbf{Cat} where objects are categories and morphisms are functors.
+A clear similarity between categories like \textbf{Set}, \textbf{Grp}, \textbf{Ring} or \textbf{Top} is that all the objects have a minimum of structure that the morphisms preserve. In this lecture, we introduced a novel structure, namely categories, that functors preserve. Hence it is reasonable to wonder if categories are also part of a category. In fact, the only missing ingredient is the composition of functors (we already know what the source and target of a functor is and every category has an identity functor). After proving the following proposition, we end up with the category \textbf{Cat} where objects are categories and morphisms are functors. In order to avoid paradoxes of the Russel kind, it is essential to restrict \textbf{Cat} to contain only small categories.
 \begin{prop}
-	Let $F:C\rightsquigarrow D$ and $G: D\rightsquigarrow E$ be functors and $G \circ F:C \rightsquigarrow E$ be their composition defined (naturally) by $G_0 \circ F_0$ on objects and $G_1 \circ F_1$ on morphisms. Then $G \circ F$ is a functor.
+	Let $F:C\rightsquigarrow D$ and $G: D\rightsquigarrow E$ be functors and $G \circ F:C \rightsquigarrow E$ be their composition defined (naturally) by $G_0 \circ F_0$ on objects and $G_1 \circ F_1$ on morphisms. Then, $G \circ F$ is a functor.
 \end{prop}
 \begin{proof}
 	One could proceed with a really hands-on proof and show that $G \circ F$ satisfies the three necessary properties in a straightforward manner. While this should not be too hard, the proof will end up involving objects, morphisms and the composition from all three different categories. This can easily lead to confusion or worse, boredom.
@@ -350,11 +359,14 @@ A clear similarity between categories like \textbf{Set}, \textbf{Grp}, \textbf{R
 
 	Almost no argument is needed here as the commutativity of the smaller diagrams clearly implies the commutativity of the combined diagrams. One information that is not shown above is the fact that $(G\circ F)_2 = G_2 \circ F_2$, but it would be pedantic to prove this.
 \end{proof}
+Since functors are also a new structure, one might expect that there are transformations between functors that preserve it. It is indeed the case as we will see later when presenting natural transformations. Moreover, although we might not cover it, there is a whole tower of abstraction that one could build in this way and it is the subject of study of higher category theory.
+
 \section{Exercises (very optional)}
 \begin{enumerate}
-	\item Come up with your own "interesting" category. (Do not draw a simple diagram, look for examples from your previous classes.)
+	\item Come up with your own ``interesting`` category. (Do not draw a simple diagram, look for examples from your previous classes.)
 	\item Among the functors that were mentioned above, which ones are full? faithful?
 	\item Pick your favorite functor that was mentioned and rigorously show that it is a functor.
+	\item Convince yourself or prove rigorously that combining two commutative diagrams yields a commutative diagram.
 	\item Show the last proposition following the sketch in the first paragraph of the proof.
 \end{enumerate}
 %Talk about more basic stuff in the theory of category in first part and in second part. go one level of abstraction higher to nat transformation and add more examples.

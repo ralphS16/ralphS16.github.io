@@ -1,0 +1,12 @@
+<html>
+<h1>Chapter 2: #2.1.16</h1>
+<p>Let $U, V$ be upper triangular matrices. Denote the rows of $U$ with $U_1, \dots, U_n$ and note that the first nonzero 
+entry of $U_i$ is always at the $i$-th position. Denote the columns of $V$ with $V_1, \dots, V_n$ and note that the last nonzero 
+entry of $V_j$ is always at the $j$-th position. Now, observe that $$U_iV_j = \begin{bmatrix}0&\cdots &0&\ast &\cdots &\ast\end{bmatrix}
+\begin{bmatrix}\ast\\\vdots\\\ast\\0\\\vdots\\0\end{bmatrix}$$ can be nonzero only if the first nonzero entry of $U_i$ is before the 
+last nonzero entry of $V_j$, in other words $i \leq j$. We conclude that $UV = (U_iV_j)$ is upper triangular.
+
+Also, one can easily compute the inverse of an upper triangular matrix in $\text{GL}_n(F)$ and find that it is upper triangular. 
+Finally, since $\text{id}$ is upper triangular and invertible, we conclude that this subset is a subgroup.
+</p>
+</html>
