@@ -1,0 +1,353 @@
+\documentclass{article}
+
+\newcommand{\bra}[1]{\left(#1\right)}
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+\microtypecontext{spacing=nonfrench}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{mathpazo}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{subcaption}
+\usepackage{enumerate}
+\usetikzlibrary{shapes}
+\usetikzlibrary{positioning}
+% Set up the images/graphics package
+\usepackage{graphicx,float}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{.}}
+
+
+% Small sections of multiple columns
+\usepackage{multicol}
+\usepackage[margin=1.6in]{geometry}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{fact}[thm]{Fact}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{quest}[thm]{Question}
+\newtheorem{claim}{Claim}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{defns}[thm]{Definitions}
+\newtheorem{con}[thm]{Construction}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{jk}[thm]{Joke}
+\newtheorem{exmps}[thm]{Examples}
+\newtheorem{notn}[thm]{Notation}
+\newtheorem{notns}[thm]{Notations}
+\newtheorem{addm}[thm]{Addendum}
+\newtheorem{exer}[thm]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{ans}[thm]{Answer}
+\newtheorem{rems}[thm]{Remarks}
+\newtheorem{warn}[thm]{Warning}
+\newtheorem{sch}[thm]{Scholium}
+
+% MACROS
+\newcommand{\Mod}[1]{\ (\text{mod}\ #1)}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\mC}{\mathcal{C}}
+\newcommand{\mG}{\mathcal{G}}
+\newcommand{\mP}{\mathcal{P}}
+\newcommand{\one}{\mathbb{1}}
+\renewcommand{\P}{\mathbb{P}}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\aut}{Aut}
+\DeclareMathOperator{\gal}{Gal}
+\DeclareMathOperator{\orb}{Orb}
+\DeclareMathOperator{\stab}{Stab}
+\DeclareMathOperator{\inn}{Inn}
+\DeclareMathOperator{\spn}{Span}
+\DeclareMathOperator{\out}{Out}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\arr}{Arr}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\rcf}{rcf}
+\DeclareMathOperator{\tors}{Tors}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\ann}{Ann}
+\DeclareMathOperator{\syl}{Syl}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\inp}[2]{\left\langle #1, #2 \right\rangle}
+\newcommand{\id}{\text{id}}
+\newcommand{\gln}{\text{GL}_n}
+\newcommand{\op}[1]{#1^{\text{op}}}
+
+\title{Lecture 5 - Natural Transformations\vspace{-10pt}}
+\author{Ralph Sarkis}
+\date{\vspace{-10pt}June 5, 2019\vspace{-15pt}}  % if the \date{} command is left out, the current date will be used
+\begin{document}
+\maketitle
+\begin{abstract} In this lecture, we climb one more level of the tower of abstraction mentioned in the last paragraph of the first lecture. After introducing natural transformations, we discuss 2-categories and equivalences.
+\end{abstract}
+\section{Natural Transformations}
+Natural transformations are admittedly what made mathematicians want to study category theory in the first place. In short, they are morphisms between functors, that is transformations that preserve the structure of functors.
+
+The abstract structure of a category is very familiar because it resembles what is found in algebraic structures such as groups, rings or vectors spaces. That is, it has one or more sets with one or more operations satisfying one or more properties. In contrast, the definition of a functor is more opaque and by itself, the structure of a functor is not obvious. For this reason, it helps to fix two categories $C$ and $D$. 
+
+Let $F,G: C\rightsquigarrow D$ be functors. Morally, the structure of $F$ and $G$ is encapsulated in the following diagrams for every arrow, $f \in \Hom_C(A,B)$.
+\begin{figure}[h]
+	\centering
+	\begin{tikzcd}
+		A \arrow[d, "f"'] \arrow[r, "F_0"] & F(A) \arrow[d, "F_1(f)"] \\
+		B \arrow[r, "F_0"']                & F(B)                 
+	\end{tikzcd}\quad\quad
+	\begin{tikzcd}
+		A \arrow[d, "f"'] \arrow[r, "G_0"] & G(A) \arrow[d, "G_1(f)"] \\
+		B \arrow[r, "G_0"']                & G(B)                 
+	\end{tikzcd}
+\end{figure}
+Thus, a morphism between $F$ and $G$ should fit in this picture by sending the diagram on the left to the diagram on the right in a commutative way.
+\begin{defn}[Natural transformation]\label{defnattran}
+	Let $F,G : C \rightsquigarrow D$ be two (covariant) functors, a \textbf{natural transformation} $\phi: F \Rightarrow G$ is a map $\phi: C_0 \rightarrow D_1$ that satisfies $\phi(A) \in \Hom_D(F(A), G(A))$ for all $A \in C_0$ and makes the following diagram commute for any $f \in \Hom_C(A,B)$:
+	\begin{figure}[H]
+		\centering
+		\begin{tikzcd}
+			F(A) \arrow[d, "F(f)"'] \arrow[r, "\phi(A)"] & G(A) \arrow[d, "G(f)"] \\
+			F(B) \arrow[r, "\phi(B)"'] & G(B)
+		\end{tikzcd}
+	\end{figure}
+\end{defn}
+As usual, there are trivial examples of natural transformation such has the identity transformation $\one_F:F \Rightarrow F$ that sends every object $A$ to the identity map $\id_{F(A)}$, but let us go right away to a more interesting one.
+\begin{exmp}
+	Here, \textbf{CRing} will denote the category of commutative rings and \textbf{Grp} the category of groups. Fix some $n \in \N$, define the functor $\gln:\textbf{CRing} \rightsquigarrow \textbf{Grp}$ by 
+	\begin{align*}
+	R &\mapsto \gln(R) \mbox{ for any commutative ring $R$ and} \\
+	f &\mapsto \gln(f) \mbox{ for any ring homomorphism $f$}
+	\end{align*}
+	The map $\gln(f)$ is just the extension of $f$ on $\gln(R)$ by applying $f$ to every element of the matrices. The second functor is $(-)^{\times}:\textbf{CRing} \rightsquigarrow \textbf{Grp}$ which sends a commutative ring $R$ to its group of units $R^{\times}$ under multiplication and a ring homomorphism $f$ to $f^{\times}$, its restriction on $R^{\times}$. Checking these mappings define two covariant functors is left as an (simple) exercise, but one might expect these to be functors as they play nicely with the structure of the objects involved.
+	
+	A natural transformation between these two functors is $\det:\gln \Rightarrow (-)^{\times}$ which maps a commutative ring $R$ to $\det_R$, the function calculating the determinant of a matrix in $\gln(R)$. The first thing to check is that $\det_R \in \Hom_{\textbf{Grp}}(\gln(R), R^{\times})$ which is clearly the case because the determinant of an invertible matrix is always a unit and the determinant is a multiplicative map. The second thing is to verify that the following diagram commutes for any $f\in \Hom_{\textbf{CRing}}(R,S)$:
+	\begin{figure}[H]
+		\centering
+		\begin{tikzcd}
+			\text{GL}_n(R) \arrow[r, "\det_R"] \arrow[d, "\text{GL}_n(f)"'] & R^{\times} \arrow[d, "f^{\times} = f\mid_{R^{\times}}"] \\
+			\text{GL}_n(S) \arrow[r, "\det_S"'] & S^{\times}
+		\end{tikzcd}
+	\end{figure}
+	We will check the claim for $n=2$, but the general proof should only involve more notation to write the bigger expressions. Let $\begin{bmatrix}a&b\\c&d\end{bmatrix} \in \text{GL}_2(R)$, we have 
+	\begin{align*}
+	(\det{}_S \circ \text{GL}_2(f))\left( \begin{bmatrix}a&b\\c&d\end{bmatrix} \right)&= 
+	\det{}_S\left(\begin{bmatrix}f(a)&f(b)\\f(c)&f(d)\end{bmatrix}\right)\\
+	&= f(a)f(d)-f(b)f(c)\\
+	&= f(ad-bc)\\
+	&= f^{\times}(ad-bc)\\
+	&= (f^{\times}\circ \det{}_R)\left( \begin{bmatrix}a&b\\c&d\end{bmatrix}\right).
+	\end{align*}
+	We conclude that the diagram commutes and that $\det$ is indeed a natural transformation.
+\end{exmp}
+Now, in order to talk about a category of functors, it remains to describe the composition of natural transformations.
+\begin{defn}[Vertical composition]
+	Let $F,G,H: C\rightsquigarrow D$ be parallel functors and $\phi:F\Rightarrow G$ and $\eta:G\Rightarrow H$ be two natural transformations. Then the \textbf{vertical composition} of $\phi$ and $\eta$, denoted $\eta\cdot \phi:F\Rightarrow H$ is defined by $(\eta \cdot \phi)(A) = \eta(A) \circ \phi(A)$ for all $A \in C_0$. If $f: A\rightarrow B$ is a morphism in $C$, then the following diagram commutes by naturality of $\phi$ and $\eta$:
+	\begin{figure}[h]
+		\centering
+		\begin{tikzcd}
+			F(A) \arrow[r, "\phi(A)"] \arrow[d, "F(f)"'] & G(A) \arrow[r, "\eta(A)"] \arrow[d, "G(f)"'] & H(A) \arrow[d, "H(f)"'] \\
+			F(B) \arrow[r, "\phi(B)"'] & G(B) \arrow[r, "\eta(B)"'] & H(B)
+		\end{tikzcd}
+	\end{figure}
+	
+	This shows that $\eta \cdot \phi$ is a natural transformation from $F$ to $H$. The term vertical will make more sense when horizontal compositions are introduced in a bit.
+\end{defn}
+\begin{defn}[Functor categories]
+	For any two categories $C$ and $D$, there is a \textbf{fuctor category}, denoted $D^{C}$ or $[C,D]$. Its objects are functors from $C$ to $D$, the morphisms are natural transformations between such functors and the composition is the one defined above. Associativity follows from associativity of composition in $D$ and the identity morphism for a functor $F$ is $\one_F$.
+\end{defn}
+\begin{exmp}
+	Recall that a left action of a group $A$ on a set $S$ is just a functor $A\ast \rightsquigarrow \textbf{Set}$. Now, between two such functors $F,F' \in \textbf{Set}^{A\ast}$, a natural transformation is a map $\sigma: F(\ast) \rightarrow F'(\ast)$ such that $\sigma \circ F(a) = F'(a) \circ \sigma$ for any $a \in A$. In other words, denoting $\cdot$ for both the group action on $F(\ast)$ and on $F'(\ast)$, $\sigma$ satisfies $\sigma(a\cdot x) = a\cdot(\sigma(x))$ for any $a \in A$ and $x \in F(\ast)$. In group theory, such a map is called $A$-equivariant.
+	
+	Therefore, the category $\textbf{Set}^{A\ast}$ can be identified as the category of $A$-sets (sets on which $A$ acts) with $A$-equivariant maps as the morphisms.
+\end{exmp}
+\begin{rem}
+	Isomorphisms in a functor category are called \textbf{natural isomorphisms}, it is easy to show that they are natural transformations that map every objects to isomorphisms. Functors that are naturally isomorphic are essentially the same functor; they send the same object to isomorphic objects and the same morphism to morphisms that are well-behaved under composition with isomorphisms between the source and targets.
+\end{rem}
+
+%%%%%%%%%%%%%%%Maybe not here.
+%Before giving another example, we present a very nice result using limits. It is essentially saying that constructions inside the functor category $D^C$ are usually as simple as inside $C$.
+%\begin{prop}
+%	Let $C$, $D$ and $J$ be categories. If all limits of shape $J$ exist in $C$, then all such limits also exist in $D^C$.
+%\end{prop}
+%\begin{proof}
+%	
+%\end{proof}
+
+It is now time to build intution for the horizontal composition of natural transformation which will ultimately lead to the notion of a 2-category.
+\begin{defn}[The left action of functors]
+	Let $F,F':C\rightsquigarrow D$, $G:D\rightsquigarrow E$ be functors and $\phi:F\Rightarrow F'$ a natural transformation. The functor $G$ acts on $\phi$ by sending it to $G\phi = A \mapsto G(\phi(A)) : C_0 \rightarrow E_1$. Showing that the diagram below commutes for any $f \in \Hom_C(A,B)$ will imply that $G\phi$ is a natural transformation from $G\circ F$ to $G\circ F'$ .
+	\begin{figure}[H]
+		\centering
+		\begin{tikzcd}
+			(G\circ F)(A) \arrow[d, "(G\circ F)(f)"'] \arrow[r, "G\phi(A)"] & (G\circ F')(A) \arrow[d, "(G\circ F')(f)"] \\
+			(G\circ F)(B) \arrow[r, "G\phi(B)"] & (G\circ F')(B)
+		\end{tikzcd}
+	\end{figure}
+	
+	Consider this diagram after removing all applications of $G$, by naturality of $\phi$, it is commutative. Since functors preserve commuting diagrams, the diagram still commutes after applying $G$ and $G\phi$ is indeed a natural transformation.
+	
+	It is also trivial to check that this constitutes a left action, namely, for any $G:D\rightsquigarrow D'$, $G':D' \rightsquigarrow D''$ and $\phi:F\Rightarrow F'$, \[\id_D\phi = \phi \text{ and } G'(G\phi)= (G' \circ G)\phi.\]
+\end{defn}
+
+\begin{defn}[The right action of functors]
+	Let $F,F':C\rightsquigarrow D$, $H:E\rightsquigarrow C$ be functors and $\phi:F\Rightarrow F'$ a natural transformation. The functor $H$ acts on $\phi$ by sending it to $\phi H = A \mapsto \phi(H(A)) : E_0 \rightarrow D_1$. Showing that the diagram below commutes for any $f \in \Hom_E(A,B)$ will imply that $\phi H$ is a natural transformation from $F\circ H$ to $F'\circ H$.
+	\begin{figure}[h]
+		\centering
+		\begin{tikzcd}
+			(F\circ H)(A) \arrow[d, "(F\circ H)(f)"'] \arrow[r, "\phi H(A)"] & (F'\circ H)(A) \arrow[d, "(F'\circ H)(f)"] \\
+			(F\circ H)(B) \arrow[r, "\phi H(B)"] & (F'\circ H)(B)
+		\end{tikzcd}
+	\end{figure}
+
+	Commutativity follows by naturality of $\phi$: change $f$ in the diagram of definition \ref{defnattran} with the morphism $H(f):H(A) \rightarrow H(B)$.
+	
+	It is also trivial to show this constitutes a right action, namely, for any $H:C'\rightsquigarrow C$, $H':C''\rightsquigarrow C'$ and $\phi:F\Rightarrow F'$,
+	\[\phi \id_C = \phi \text{ and } (\phi H)H' = \phi(H \circ H').\]
+\end{defn}
+
+\begin{prop}
+	The two actions commute. Namely, if $F,F':C\rightsquigarrow D$, $G: D\rightsquigarrow E$, $H: E'\rightsquigarrow C$ are functors and $\phi:F \Rightarrow F'$ is a natural transformation, then $G(\phi H) = (G\phi) H$.
+\end{prop}
+\begin{proof}
+In both the L.H.S and the R.H.S., an object $A \in E_0$ is sent to $G(\phi(H(A)))$.
+\end{proof}
+We will refer to these two actions as the biaction of functors on natural transformations and they will motivate the definition of another way to compose natural transformations.
+
+Let $C$, $D$ and $E$ be categories, $H,H': C\rightsquigarrow D$ and $G,G':D \rightsquigarrow E$ be functors and $\phi:H\Rightarrow H'$ and $\eta:G\Rightarrow G'$ be natural transformations. These objects are summarized in the diagram below.
+\begin{figure}[h]
+	\centering
+	\begin{tikzcd}
+		C \arrow[rr, "H", bend left] \arrow[rr, "H'"', bend right] & \ \Big\Downarrow \phi & D \arrow[rr, "G", bend left] \arrow[rr, "G'"', bend right] & \ \Big\Downarrow \eta & E
+	\end{tikzcd}
+\end{figure}
+
+The ultimate goal is to obtain some new composition of $\phi$ and $\eta$ that is a natural transformation $G\circ H \Rightarrow G'\circ H'$. Note that the actions defined above yields four other natural transformation.
+\begin{align*}
+	G\phi&: G\circ H \Rightarrow G\circ H' &&\eta H: G\circ H \Rightarrow G'\circ H \\
+	G'\phi&: G'\circ H \Rightarrow G'\circ H'&&\eta H': G\circ H' \Rightarrow G'\circ H'
+\end{align*}
+All of the functors involved go from $C$ to $E$, so all four natural transformations fit in a diagram in $E^C$.
+\begin{figure}[h]
+	\centering
+	\begin{tikzcd}
+		G\circ H \arrow[r, "G\phi"] \arrow[d, "\eta H"'] & G\circ H' \arrow[d, "\eta H'"] \\
+		G'\circ H \arrow[r, "G'\phi"']                   & G'\circ H'                    
+	\end{tikzcd}
+\end{figure}
+
+At first glance, this suggests two different definitions for the horizontal composition, that is, the composition of the top path $(\eta H' \cdot G\phi)$ or the composition of the bottom path $(G'\phi \cdot \eta H)$. Surprisingly, both definitions coincide as shown in the next result.
+
+\begin{lem}
+	The diagram above commutes.
+\end{lem}
+\begin{proof}
+Fix an object $A \in C_0$. Under $\eta H' \cdot G\phi$, it is sent to $\eta(H'(A)) \circ G(\phi(A))$ and under $G'\phi \cdot \eta H$, it is sent to $G'(\phi(A)) \circ \eta(H(A))$. Thus, the proposition is equivalent to saying this diagram is commutative (in $E$).
+\begin{figure}[h]
+	\centering
+	\begin{tikzcd}
+		(G\circ H)(A) \arrow[r, "G(\phi(A))"] \arrow[d, "\eta(H(A))"'] & (G\circ H')(A) \arrow[d, "\eta(H'(A))"] \\
+		(G'\circ H)(A) \arrow[r, "G'(\phi(A))"']                       & (G'\circ H')(A)                        
+	\end{tikzcd}
+\end{figure}
+
+The fact that it commutes follows from the naturality of $\eta$ (in definition \ref{defnattran}, replace $A$ with $H(A)$, $B$ with $H'(A)$, $f$ with $\phi(A)$, $F$ with $G$ and $G$ with $G'$).
+\end{proof}
+
+\begin{defn}[Horizontal composition]\label{horizcomp}
+	In the setting described above, we define the \textbf{horizontal composition} of $\eta$ and $\phi$ by $\eta \diamond \phi = \eta H' \cdot G\phi = G'\phi\cdot \eta H$. This is sometimes called the \textbf{Godement product}.
+\end{defn}
+As is expected from the terminology, the composition $\diamond$ is associative.
+\begin{prop}
+	In the setting of the diagram below, $\psi \diamond (\eta \diamond \phi)= (\psi \diamond \eta)\diamond \phi$.
+	\begin{figure}[h]
+		\centering
+		\begin{tikzcd}
+			C \arrow[rr, "H", bend left] \arrow[rr, "H'"', bend right] & \ \Big\Downarrow \phi & D \arrow[rr, "G", bend left] \arrow[rr, "G'"', bend right] & \ \Big\Downarrow \eta & E \arrow[rr, "K", bend left] \arrow[rr, "K'"', bend right] & \ \Big \Downarrow \psi & F
+		\end{tikzcd}
+	\end{figure}
+\end{prop}
+\begin{proof}
+	Similarly to how we constructed the diagram in $E^C$ previously, we can use the biaction of functors on natural transformations and composition of functors to obtain the following diagram in $F^C$ (the $\circ$'s are left out for simplicity).
+	\begin{figure}[H]
+		\centering
+		\begin{tikzcd}
+			& K'GH \arrow[dd, "K'\eta H"' near start] \arrow[rr, "K'G\phi"] &                                                    & K'GH' \arrow[dd, "K'\eta H'"] \\
+			KGH \arrow[rr, crossing over, "KG\phi" near end] \arrow[dd, "K\eta H"'] \arrow[ru, "\psi GH"] &                                                    & KGH'  \arrow[ru, "\psi GH'"] &                               \\
+			& K'G'H \arrow[rr, "K'G'\phi" near start]                       &                                                    & K'G'H'                        \\
+			KG'H \arrow[rr, "KG'\phi"'] \arrow[ru, "\psi G'H"]                    &                                                    & KG'H'\arrow[uu, <-, crossing over, "K\eta H'"' near start] \arrow[ru, "\psi G'H'"']                     &                              
+		\end{tikzcd}
+	\end{figure}
+	%%CODE TO PARSE IN TIKZCD :\begin{tikzcd}
+%	& K'GH \arrow[dd, "K'\eta H"'] \arrow[rr, "K'G\phi"] &                                                    & K'GH' \arrow[dd, "K'\eta H'"] \\
+%	KGH \arrow[rr, "KG\phi"] \arrow[dd, "K\eta H"'] \arrow[ru, "\psi GH"] &                                                    & KGH' \arrow[dd, "K\eta H'"] \arrow[ru, "\psi GH'"] &                               \\
+%	& K'G'H \arrow[rr, "K'G'\phi"]                       &                                                    & K'G'H'                        \\
+%	KG'H \arrow[rr, "KG'\phi"'] \arrow[ru, "\psi G'H"]                    &                                                    & KG'H' \arrow[ru, "\psi G'H'"']                     &                              
+%\end{tikzcd}
+	
+	This diagram commutes because combining commutative diagrams yields commutative diagrams and functors preserve commutative diagrams. Then it follows easily that $\diamond$ is associative.
+\end{proof}
+
+There is one last thing to conclude that \textbf{Cat} is a 2-category, namely, that the vertical and horizontal compositions interact nicely.
+\begin{prop}[Interchange identity]
+	In the setting of the diagram below, the \textbf{interchange identity} holds:
+	\[(\eta' \cdot \eta) \diamond (\phi' \cdot \phi) = (\eta' \diamond \phi') \cdot (\eta \diamond \phi).\]
+	\begin{figure}[h]
+		\centering
+		\begin{tikzcd}
+			C \arrow[rr, "H", bend left=49] \arrow[rr, "H''"', bend right=49] \arrow[rr, "H'" near end] & \begin{matrix}\big\Downarrow \phi\\ \\\big\Downarrow \phi'\end{matrix} & D \arrow[rr, "G", bend left=49] \arrow[rr, "G''"', bend right=49] \arrow[rr, "G'" near end] & \begin{matrix}\big\Downarrow \eta\\ \\\big\Downarrow \eta'\end{matrix} & E
+		\end{tikzcd}
+	\end{figure}
+\end{prop}
+\begin{proof}
+	Again, this is proof is just a matter of combining the right diagrams. After combining the diagrams in $E^C$ corresponding to $\eta \diamond \phi$ and $\eta'\diamond \phi'$, it is easy to see that the R.H.S. of the identity is the morphism going from $G\circ H$ to $G''\circ H''$ in the combination.
+	\begin{figure}[H]
+		\centering
+		\begin{tikzcd}
+			G\circ H \arrow[r, "G\phi"] \arrow[d, "\eta H"'] & G\circ H' \arrow[d, "\eta H'"]                       &                                  \\
+			G'\circ H \arrow[r, "G'\phi"']                   & G'\circ H' \arrow[d, "\eta'H'"'] \arrow[r, "G'\phi'"] & G'\circ H'' \arrow[d, "\eta'H''"] \\
+			& G''\circ H' \arrow[r, "G''\phi'"']                   & G''\circ H''                    
+		\end{tikzcd}
+	\end{figure}
+
+	Moreover, observe that the diagram corresponding to the L.H.S. can be factored using the facts that \begin{align*}
+	(\eta'\cdot \eta)H = \eta'H\cdot \eta H && (\eta'\cdot \eta)H'' = \eta'H''\cdot \eta H''\\
+	G(\phi'\cdot \phi) = G\phi'\cdot G\phi && G''(\phi'\cdot \phi) = G''\phi'\cdot G''\phi.
+	\end{align*}
+	Combining the factored diagram with the previous one, we obtain a diagram from which the interchange identity follows immediately.
+	\begin{figure}[h]
+		\centering
+		\begin{tikzcd}
+			G\circ H \arrow[r, "G\phi"] \arrow[d, "\eta H"']    & G\circ H' \arrow[d, "\eta H'"] \arrow[r, "G\phi'"]    & G\circ H'' \arrow[d, "\eta H''"]  \\
+			G'\circ H \arrow[r, "G'\phi"'] \arrow[d, "\eta'H"'] & G'\circ H' \arrow[d, "\eta'H'"'] \arrow[r, "G'\phi'"] & G'\circ H'' \arrow[d, "\eta'H''"] \\
+			G''\circ H \arrow[r, "G''\phi"]                     & G''\circ H' \arrow[r, "G''\phi'"']                    & G''\circ H''                     
+		\end{tikzcd}
+	\end{figure}
+\end{proof}
+
+\begin{defn}[2-cateory]
+	A \textbf{2-category} consists of
+	\begin{itemize}
+		\item a category $C$,
+		\item for every $A,B \in C_0$ a category $C(A,B)$ where objects are $\Hom_C(A,B)$ (composition is denoted $\cdot$ and identities $\one$),
+		\item a category where the objects are $C_0$, the morphisms are pairs of parallel morphisms of $C$ along with a morphism between them (called a \textbf{2-cell}) and the identity is $C_0 \ni A \mapsto \id_A \stackrel{\one_{\id_A}}{\Rightarrow}\id_A$ (composition is denoted $\diamond$),
+	\end{itemize} 
+	such that the interchange identity holds.
+\end{defn}
+We will probably not cover it but there are notions of morphisms between 2-categories called a 2-functors and of 3-categories as well as n-categories for any $n$, these are more deeply studied in higher category theory.
+
+\section{Equivalences}
+
+
+
+
+\end{document}
+
