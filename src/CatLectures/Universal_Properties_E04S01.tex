@@ -1,0 +1,417 @@
+\documentclass{article}
+
+\newcommand{\bra}[1]{\left(#1\right)}
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+\microtypecontext{spacing=nonfrench}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{mathpazo}
+\usepackage{stmaryrd}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{subcaption}
+\usepackage{enumerate}
+\usetikzlibrary{shapes}
+\usetikzlibrary{positioning}
+\usetikzlibrary{decorations.pathmorphing}
+% Set up the images/graphics package
+\usepackage{graphicx,float}
+
+
+% Small sections of multiple columns
+\usepackage{multicol}
+\usepackage[margin=1.6in]{geometry}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{fact}[thm]{Fact}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{quest}[thm]{Question}
+\newtheorem{claim}{Claim}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{defns}[thm]{Definitions}
+\newtheorem{con}[thm]{Construction}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{jk}[thm]{Joke}
+\newtheorem{exmps}[thm]{Examples}
+\newtheorem{notn}[thm]{Notation}
+\newtheorem{notns}[thm]{Notations}
+\newtheorem{addm}[thm]{Addendum}
+\newtheorem{exer}[thm]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{ans}[thm]{Answer}
+\newtheorem{rems}[thm]{Remarks}
+\newtheorem{warn}[thm]{Warning}
+\newtheorem{sch}[thm]{Scholium}
+
+% MACROS
+\newcommand{\Mod}[1]{\ (\text{mod}\ #1)}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\mC}{\mathcal{C}}
+\newcommand{\mG}{\mathcal{G}}
+\newcommand{\mP}{\mathcal{P}}
+\newcommand{\one}{\mathbb{1}}
+\renewcommand{\P}{\mathbb{P}}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\aut}{Aut}
+\DeclareMathOperator{\gal}{Gal}
+\DeclareMathOperator{\orb}{Orb}
+\DeclareMathOperator{\stab}{Stab}
+\DeclareMathOperator{\inn}{Inn}
+\DeclareMathOperator{\spn}{Span}
+\DeclareMathOperator{\out}{Out}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\arr}{Arr}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\rcf}{rcf}
+\DeclareMathOperator{\tors}{Tors}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\ann}{Ann}
+\DeclareMathOperator{\syl}{Syl}
+\DeclareMathOperator*{\colim}{co{\lim}}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\inp}[2]{\left\langle #1, #2 \right\rangle}
+\newcommand{\id}{\text{id}}
+\newcommand{\gln}{\text{GL}_n}
+\newcommand{\op}[1]{#1^{\text{op}}}
+\newcommand{\pullback}{\mbox{\LARGE$\lrcorner$}}
+\newcommand{\pushout}{\mbox{\LARGE$\ulcorner$}}
+\newcommand{\comcat}[2]{#1\downarrow #2}
+\newcommand{\ev}{\textsf{ev}}
+
+
+\title{Lecture 4 - Universal Properties\vspace{-10pt}}
+\date{\vspace{-30pt}\today\vspace{-15pt}}  % if the \date{} command is left out, the current date will be used
+\begin{document}
+\maketitle
+\begin{abstract} The exploration of universal properties continues. This time, we focus on results about (co)limits, introduce diagram chasing proofs and discuss examples of universal constructions which are not limits nor colimits.
+\end{abstract}
+\section{Diagram chasing}
+%Paragraph on diagram chasing.
+%Proofs are really different on the board since it is easier to simply reuse work and add different colors instead of making cleaner diagrams.
+We show four results in increasing order of complexity to demonstrate diagram chasing through examples.
+
+\begin{thm}
+    Consider the pullback square in \eqref{diag-pullmono}.
+    \begin{equation}\label{diag-pullmono}
+        \begin{tikzcd}
+            A \times_C B \arrow[r, "p_B"] \arrow[d, "p_A"'] \arrow[dr, phantom, "\pullback", very near start] & B \arrow[d, "g"] \\
+            A \arrow[r, "f"'] & C 
+        \end{tikzcd}
+    \end{equation}
+    If $g$ is monic, then $p_A$ also is. Symmetrically, if $f$ is monic, then $p_B$ also is. This is commonly stated simply as: ``The pullback of a monomorphism is a monomorphism.''
+\end{thm}
+\begin{proof}
+    Let $h_1, h_2: X \rightarrow A \times_C B$ be such that $p_A \circ h_1 = p_A \circ h_2$, we need to show that $h_1 = h_2$. First, observe that $h_1$ and $h_2$ yield two cones over the span $f:A \rightarrow C \leftarrow B: g$ as depicted in \eqref{diag-twopulls}.
+    \begin{equation}\label{diag-twopulls}
+        \begin{tikzcd}
+            X \arrow[rd, "h_1"', shift right] \arrow[rd, "h_2", shift left] \arrow[rrd, "p_B \circ h_1", shift left=3] \arrow[rrd, "p_B \circ h_2", bend left=49, shift left] \arrow[rdd, "p_A \circ h_1 = p_A \circ h_2"', bend right=39]  & & \\
+            & A \times_C B \arrow[r, "p_B"] \arrow[d, "p_A"'] \arrow[rd, "\pullback", phantom, very near start] & B \arrow[d, "g"] \\ & A \arrow[r, "f"'] & C
+        \end{tikzcd}
+    \end{equation}
+    Furthermore, $h_1$ and $h_2$ are cone morphisms between $X$ and $A \times_C B$ and since the pullback is the terminal cone over this cospan, they are unique. Now, we already have that the projections onto $A$ is the same for both new cones, but we claim this is also true for the projections onto $B$. Indeed, because $g$ is monic, and the square commutes, we have the following implications.
+    \begin{align*}
+        p_A \circ h_1 = p_A \circ h_2 &\implies f \circ p_A \circ h_1 = f \circ p_A \circ h_2\\
+        &\implies g \circ p_B \circ h_1 = g \circ p_B \circ h_2\\
+        &\implies p_B \circ h_1 = p_b \circ h_2
+    \end{align*}
+    In other words, the two new cones are in fact the same cones, hence $h_1$ and $h_2$ are the same morphisms by uniqueness, which concludes our proof.
+\end{proof}
+\begin{cor}
+    The pushout of an epimorphism is an epimorphism.
+\end{cor}
+
+\begin{thm}[Pasting Lemma]
+    Consider diagram \eqref{diag-pasting}, where the right square is a pullback.
+    \begin{equation}\label{diag-pasting}
+        \begin{tikzcd}
+            A \arrow[r, "f"] \arrow[d, "\alpha"'] & B \arrow[r, "g"] \arrow[d, "\beta"'] \arrow[rd, phantom ,"\pullback", very near start] & C \arrow[d, "\gamma"] \\
+            A' \arrow[r, "f'"']                   & B' \arrow[r, "g'"']                                                      & C'                   
+        \end{tikzcd}       
+    \end{equation}
+    If \eqref{diag-pasting} commutes, the left square is a pullback if and only if the rectangle is.
+\end{thm}
+\begin{proof}
+    ($\Rightarrow$) Explicitly, we have to show that $\alpha : A' \leftarrow A \rightarrow C : g \circ f$ is the pullback of $g' \circ f' : A' \rightarrow C' \leftarrow C:\gamma$. The commutativity $g'\circ f' \circ \alpha = \gamma \circ g \circ f$ implies this is already a cone over the cospan we just described. Now, suppose there is another cone over this cospan, namely, there exists morphisms $p_{A'}: X \rightarrow A'$ and $p_C: X \rightarrow C$ satisfying $g'\circ f' \circ p_{A'} = \gamma \circ p_C$ as depicted in \eqref{diag-pastingproof}.
+    \begin{equation}\label{diag-pastingproof}
+        \begin{tikzcd}
+            X \arrow[rrrd, "p_C", bend left] \arrow[rdd, "p_{A'}"', bend right] \arrow[rrd, "!_B", dashed, shift left] \arrow[rd, "!_A"', dashed] & & & \\
+            & A \arrow[r, near start, "f"] \arrow[d, "\alpha"'] \arrow[rd, "\pullback", phantom, very near start] & B \arrow[r, "g"] \arrow[d, "\beta"'] \arrow[rd, "\pullback", phantom, very near start] & C \arrow[d, "\gamma"] \\
+            & A' \arrow[r, "f'"'] & B' \arrow[r, "g'"'] & C'
+        \end{tikzcd}
+    \end{equation}
+    Notice that composing $p_{A'}$ with $f'$, we obtain a cone over the cospan in the right square and by universality of $B$, this yields a unique morphism $!_B: X \rightarrow B$ satisfying $g \circ !_B = p_C$ and $\beta \circ !_B = f' \circ p_{A'}$. This second equality yields cone over the cospan in the left square, thus we get a unique morphism $!_A : X \rightarrow A$ satisfying $\alpha \circ !_A = p_{A'}$ and $f \circ !_A = !_B$. Composing the last equality with $g$, we get
+    \[g \circ f \circ !_A = g \circ !_B = p_C,\]
+    showing that $!_A$ is a morphism of cones over the cospan in the rectangle.
+
+    What is more, any other morphism $m: X \rightarrow A$ of cones over this cospan must satisfy
+    \[g \circ f \circ m = p_C \text{ and } \beta \circ f \circ m = f' \circ \alpha \circ m = f' \circ p_{A'},\]
+    and thus, $f\circ m$ is a morphism of cones over the cospan in the right rectangle. By uniqueness, $f\circ m = !_B$, so $m$ is also a morphism of cones over the cospan in the left square, and by universality of $A$, $m = !_A$.
+    
+    ($\Rightarrow$) Explicitly, we have to show that $\alpha: A' \leftarrow A \rightarrow B: f$ is the pullback of $f': A' \rightarrow B \leftarrow B: \beta$. 
+    \begin{equation}
+    \begin{tikzcd}
+X \arrow[rdd, "p_{A'}"', bend right] \arrow[rd, "!_A"', dashed] \arrow[rrd, "p_B", bend left] &                     &                                            &            \\
+                                               & A \arrow[r, "f", near start] \arrow[d, "\alpha"'] & B \arrow[r, "g"] \arrow[d, "\beta"'] \arrow[rd, "\pullback", phantom, very near start] & C \arrow[d, "\gamma"] \\
+                                               & A' \arrow[r, "f'"']                & B' \arrow[r, "g'"']                                  & C'          
+\end{tikzcd}
+    \end{equation}
+    Let $p_{A'} : A' \leftarrow X \rightarrow B: p_B$ be a cone over the cospan of the left square (i.e.: $\beta \circ p_B = f' \circ p_{A'}$). The commutativity of \eqref{diag-pasting} implies $p_{A'}: A' \leftarrow X \rightarrow C: g \circ p_B$ is a cone over the rectangle cospan, then by universality of $A$, there exists a unique $!_A: X \rightarrow A$ such that $g \circ f \circ !_A =  g \circ p_B$ and $\alpha \circ !_A = p_A$. Moreover, with the commutativity of the left square, we find that $f \circ !_A$ is a morphism of cones over the right cospan satisfying $\beta \circ f \circ !_A$ and $g \circ f \circ !_A = g \circ p_B$. But since our hypothesis on $p_{A'}$ and $p_B$ implies $p_B$ is a morphism of cones satisfying the same equations, by universality of $B$, $p_B = f \circ !_A$. Therefore, $!_A$ is a morphism of cone over the left cospan.
+    
+    Finally, if $m: X \rightarrow A$ also satisfies $\alpha \circ m = p_{A'}$ and $f \circ m = p_B$. We find in particular that $m$ is a morphism of cones over the rectangle cospan, hence by universality of $A$, $m = !_A$.
+\end{proof}
+
+
+\begin{cor}
+    In diagram \eqref{diag-pasting} where the right square is not necessarily a pullback but the left square is a pushout, the right square is a pushout if and only if the rectangle is.
+\end{cor}
+
+\begin{defn}[(Co)completeness]
+    A category is said to be \textbf{(co)complete} (resp. \textbf{finitely} (co)complete) if any small\footnote{Recall that small here means that the objects and morphisms in the diagram form of a set.} (resp. finite) diagram has a (co)limit.
+\end{defn}
+
+\begin{thm}
+    Suppose that a category $\mathbf{C}$ has arbitrary products and equalizers then $\mathbf{C}$ has arbitrary limits.
+\end{thm}
+\begin{proof}
+    Let $F: J\rightsquigarrow \mathbf{C}$ be a diagram, we will show that the limit of $F$ is obtained from the equalizer of two arrows\footnote{Recall that $s$ and $t$ denote the source and targets of morphisms.}
+    \[u_1, u_2: \prod_{X \in J_0} F(X) \rightarrow \prod_{a \in J_1} F(t(a)),\]
+    which are defined below. The equalizer and the products it involves exist by hypothesis.
+    
+    Recall that for any $X \in J_0$ and $a \in J_1$, we have two  canonical projections \[\pi_X:\prod_{X \in J_0}F(X)\rightarrow F(X) \quad \text{ and }\quad \pi_a:\prod_{a \in J_1} F(t(a)) \rightarrow F(t(a)).\]
+    The first family of projections makes $\prod_{X \in J_0}$ into a cone over $\{F(t(a)) \mid a \in J_1\}$ with projections $\pi_{t(a)}$. Hence, there is a unique morphism $u_1:\prod_{X \in J_0} F(X) \rightarrow \prod_{a \in J_1}F(t(a))s$ that satisfies $\pi_a \circ u_1 = \pi_{t(a)}$. What is more, there is another way to project from $\prod_{X \in J_0}$ to $F(t(a))$, namely, via $F(a) \circ \pi_{s(a)}$, thus we get a unique morphism $u_2:\prod_{X \in J_0} F(X) \rightarrow \prod_{a \in J_1}F(t(a))$ that satisfies $\pi_a \circ u_2 = F(a) \circ \pi_{s(a)}$. The situation is summarized in \eqref{diag-twocones}.
+    \begin{equation}\label{diag-twocones}
+        \begin{tikzcd}
+            \prod_{X \in J_0} F(X) \arrow[rdd, "\pi_{t(a)}"', bend right] \arrow[rd, "u_1", dashed] \arrow[rr, equal] & & \prod_{X \in J_0} F(X) \arrow[ldd, "F(a) \circ \pi_{s(a)}", bend left] \arrow[ld, "u_2"', dashed] \\& \prod_{a \in J_1} F(t(a)) \arrow[d, "\pi_{a}"] &\\ & F(t(a)) &         
+            \end{tikzcd}
+    \end{equation}
+    
+    Let $e:E\rightarrow \prod_{X\in J_0} F(X)$ be the equalizer of $u_1$ and $u_2$ and for any $X \in J_0$, let $\psi_X = \pi_X \circ e$. For any $f: Y \rightarrow Z$ in $J$, we have 
+    \begin{align*}
+        F(f) \circ \psi_Y &= F(f) \circ \pi_Y \circ e &&\mbox{(def. of $\psi_Y$)}\\ 
+        &= \pi_f \circ u_2 \circ e &&\mbox{(def. of $u_2$)}\\ 
+        &= \pi_f \circ u_1 \circ e &&\mbox{(def. of $e$)}\\
+        &= \pi_Z \circ e = \psi_Z, &&\mbox{(def. of $u_1$ and $\psi_Z$)}
+    \end{align*}
+    so we indeed obtain a cone from $E$ to $F$, depicted in \eqref{diag-limitcone}.
+    \begin{equation}\label{diag-limitcone}
+        \begin{tikzcd}
+            & E \arrow[ld, "\pi_X \circ e"'] \arrow[rd, "\pi_Y \circ e"] &      \\
+            F(X) \arrow[rr, "F(f)"] & & F(Y)
+        \end{tikzcd}
+    \end{equation}
+    Next, any other cone $\{U_X: O \rightarrow F(X)\}_{X \in J_0}$ over $F$ can also be viewed as a cone over the discrete diagram $\{F(t(a))\}_{a \in J_1}$ with projections $\{U_{t(a)}\}_{a \in J_1}$. Moreover, the universality of the product yields a unique morphism $p: O\rightarrow \prod_{X \in J_0} F(X)$ such that $\pi_X \circ p = U_X$. We claim that both $u_1 \circ p$ and $u_2 \circ p$ make \eqref{diag-conemorphisms} commute for all $a \in J_1$.
+    \begin{equation}\label{diag-conemorphisms}
+        \begin{tikzcd}
+            O \arrow[r, "p"] \arrow[rrd, "U_{t(a)}"'] &\prod_{X \in J_0} F(X) \arrow[r, "u_i"] & \prod_{a \in J_1} F(t(a)) \arrow[d, "\pi_a"] \\
+             & & F(t(a))
+            \end{tikzcd}
+    \end{equation}
+    This follows from two simple derivations.\\
+    \begin{minipage}{0.45\textwidth}
+    \begin{align*}
+        \pi_a \circ u_1 \circ p &= \pi_{t(a)} \circ p\\
+        &= U_{t(a)}
+    \end{align*}
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}
+    \begin{align*}
+        \pi_a \circ u_2 \circ p &= F(a) \circ \pi_{s(a)} \circ p\\
+        &= F(a) \circ U_{s(a)}\\
+        &= U_{t(a)}
+    \end{align*}
+    \end{minipage}\vspace{1em}
+    \\ 
+    Hence, $u_1 \circ p = u_2 \circ p$ as they are both morphisms of cone to the terminal cone $\prod_{a \in J_1} F(t(a))$. Now, by universality of the equalizer, we get a unique morphism $n: O\rightarrow E$ such that $e \circ n = p$. Furthermore, for any $X \in J_0$, we have \[\psi_X \circ n = \pi_X \circ e \circ n = \pi_X \circ p = U_X,\]
+    so $n$ is also a morphism of cones $(O, U_X)\rightarrow (E, \psi_X)$. Since any other morphism of cones $m$ needs to satisfy $e \circ m = p$, we see that $n$ is unique and conclude that $E$ is $\lim F$.
+
+    Just for fun, here is what the whole diagram would look like if it were drawn at once (on the board or on paper).
+    \begin{equation*}
+        \begin{tikzcd}
+            & E \arrow[ld, "e"'] \arrow[rd, "e"] \arrow[rrr, "n", dashed] &   &   & O \arrow[ld, "U_X"] \arrow[lllddd, "U_{t(a)}", bend left=49] \arrow[lld, "p"', dashed] \arrow[lllld, "p"', dashed] \\
+\prod_{X \in J_0} F(X) \arrow[rdd, "\pi_{t(a)}"', bend right] \arrow[rd, "u_1", dashed] \arrow[rr, equal] &  & \prod_{X \in J_0} F(X) \arrow[ldd, "F(a) \circ \pi_{s(a)}", bend left] \arrow[ld, "u_2"', dashed] \arrow[r, "\pi_X"] & F(X) &  \\
+            & \prod_{a \in J_1} F(t(a)) \arrow[d, "\pi_{a}"] &  & &\\
+            & F(t(a))& & &     
+\end{tikzcd}
+    \end{equation*}
+%    \begin{equation}\label{diag-firstcone}
+%        \begin{tikzcd}
+%            \prod_{X \in J_0} F(X) \arrow[rd, "\pi_{t(a)}"'] \arrow[rr, "u_1", dashed] &         & \prod_{a \in J_1} F(t(a)) \arrow[ld, "\pi_{a}"] \\ & F(t(a)) &
+%        \end{tikzcd}
+%    \end{equation}
+\end{proof}
+\begin{rem}
+    The same proof yields a more general statement: For any cardinal $\kappa$, if a category $\mathbf{C}$ has products of size $\kappa$ and equalizers, then it has limits of any diagram with at most $\kappa$ objects and morphisms. 
+\end{rem}
+
+\begin{defn}
+    A functor $\mathbf{C} \rightsquigarrow \mathbf{D}$ is said to be (\textbf{finitely}) (\textbf{co})\textbf{continuous} if it preserves all (finite) (co)limits.
+\end{defn}
+\begin{rem}
+    Recall that we defined diagrams as functors with domain begin usually small or finite. In this definition, we must ensure that (co)limits are \textbf{small} if we want this notion to make sense. In fact, one can show (c.f. Exercise \ref{exer-complete}) that if a category has limits of all sizes, then $\Hom_{\mathbf{C}}(X,Y)$ has at most one element for all $X,Y \in \mathbf{C}_0$.
+\end{rem}
+
+\section{Other Universal constructions}
+
+\subsection{Free Monoid}
+The construction of a \textit{free} object is common throughout mathematics and the example we will carry out in \textbf{Mon} can be carried out in many other categories like \textbf{Grp}, \textbf{Ab}, \textbf{Ring}, $\textbf{Mod}_R$ (we will do this one in the next section). In fact, one way to view this construction comes from the forgetful functor $U$ to \textbf{Set} that all these categories have in common. In Episode 7, we will cover adjoints and recover the free constructions from $U$.
+
+We choose $\textbf{Mon}$ because the concrete characterization of a free monoid is the simplest.
+\begin{defn}[Classical]
+    A monoid $M$ is said to be \textbf{free} if it can be presented by a set of generators without any relations, i.e. $M = \langle A \mid \emptyset \rangle$. In this case, $M$ is called the \textbf{free monoid on $A$} and denoted $A^*$.
+\end{defn}
+It is easy to check that $A^*$ is the set of finite words with symbols in $A$ with the operation being composition and identity being the empty word (denoted $\varepsilon$). In order to give a categorical characterization, we need to look at homomorphisms from or into the free monoid. Notice that any homomorphism $h^*:A^* \rightarrow M$ is completely determined by where $h^*$ sends elements of $A$. Indeed, in order to satisfy the homomorphism property, we must have for any $a_1, a_2 \in A$, \[h^*(a_1a_2) = h^*(a_1)\cdot h^*(a_2) \text{ and } h^*(\varepsilon) = 1_M.\] In general, the unique homomorphism sending $a \in A$ to $h(a)$ can be defined recursively:
+\[h^*(w) = \begin{cases}
+    h(a)\cdot h^*(w') &a \in A, w \in A^*, w = aw'\\
+    1_M &w = \varepsilon\end{cases}.\]
+Now, suppose that a monoid $N$ contains $A$ and satisfies the same property, that is for any (set-theoretic) function $h:A \rightarrow M$, there is a unique morphism $h^*:N \rightarrow M$ with $h^*(a) = h(a)$. 
+
+%TODO: put subscripts to
+If we take $M = A^*$, and $h: A \rightarrow A^* = a \mapsto a$, then we get a homomorphism $h_N^*: N \rightarrow A^*$. Moreover, taking $M = N$ and $i: A \hookrightarrow N$ be the inclusion, the property of $A^*$ means there is a unique homomorphism $i^*: A^* \rightarrow N$. Note that $h_N^* \circ i^* : A^* \rightarrow A^*$ is a homomorphism satisfying $a \mapsto a$, so it must be the identity by uniqueness. We conclude that $N$ and $A^*$ are isomorphic.
+\begin{defn}[Categorical]
+    The free monoid of a set $A$ is an object $A^*$ in \textbf{Mon} along with a \textit{canonical inclusion} $i: A \rightarrow U(A^*)$ that satsifies the following universal property: for any monoid $M$ and function $h:A \rightarrow U(M)$, there exists a unique homomorphism $h^*: A^* \rightarrow M$ such that $U(h^*) \circ i = h$, namely, $h^*(i(a)) = h(a)$. This is summarized in \eqref{diag-freemon}, where we omit the $U$ as the underlying set of a monoid is often denoted with the same symbol as the monoid.
+    \begin{equation}\label{diag-freemon}
+        \begin{tikzcd}
+            A \arrow[r, "i"] \arrow[rd, "h"'] \arrow[r, phantom, "\text{in } \textbf{Set}", shift left=6] & A^* \arrow[d, "h^*", dashed] & {} \arrow[rr, phantom, "\text{in } \textbf{Mon}", shift left=6] & A^* \arrow[d, "h^*", dashed] \arrow[ll, squiggly, shift left=5] & {} \\ & M & & M &   
+            \end{tikzcd}
+    \end{equation}
+\end{defn}
+
+\subsection{Abelianization}
+\begin{defn}[Classical]
+    Let $G$ be a group, the \textbf{abelianization} of $G$, denoted $G^{\text{ab}}$, is the quotient of $G$ with $G' := \{xyx^{-1}y^{-1} \mid x, y \in G\} \leq G$, called the \textbf{commutator subgroup}, that is $G^{\text{ab}} := G/G'$.
+\end{defn}
+Let us get insight into this definition. The abelianization is supposed to be the \textit{biggest} abelian quotient of $G$. To see why, note that if $A$ is an abelian group, any homomorphism $h:G \rightarrow A$ must satisfy $h(xyx^{-1}y^{-1}) = 1_A$ for any $x,y\in G$. Hence, $G'$ is contained in the kernel of $h$. This yields a factorization $h = G \stackrel{\pi}{\rightarrow} G/G' \stackrel{h^*}{\rightarrow} A$ with $h^*$ unique, where $\pi$ is the canonical quotient map.
+
+Moreover, since \textbf{Ab} is a full subcategory of \textbf{Grp}, $h^*$ is also unique as a morphism in $\textbf{Ab}$. Using the fact that $G/G'$ is abelian, we conclude the following categorical definition of $G^{\text{ab}}$.
+\begin{defn}[Categorical]
+    Let $G$ be a group, the abelianization of $G$ is an abelian group $G^{\text{ab}}$ with quotient map $\pi: G \rightarrow G^{\text{ab}}$ satisfying the following universal property: for any homomorphism $h:G \rightarrow A$ where $A$ is abelian, there is a unique homomorphism $h^*: G^{\text{ab}} \rightarrow A$ such that $h^* \circ \pi = h$. This is summarized in \eqref{diag-abelianization}.
+    \begin{equation}\label{diag-abelianization}
+        \begin{tikzcd}
+            G \arrow[r, "\pi"] \arrow[rd, "h"'] \arrow[r, phantom, "\text{in } \textbf{Grp}", shift left=6] & G^{\text{ab}} \arrow[d, "h^*", dashed] & {} \arrow[rr, phantom, "\text{in } \textbf{Ab}", shift left=6] & G^{\text{ab}} \arrow[d, "h^*", dashed] \arrow[ll, squiggly, shift left=5] & {} \\ & A & & A &   
+        \end{tikzcd}
+    \end{equation}
+\end{defn}
+\subsection{Vector Space Basis}
+\begin{defn}[Classical]
+    Let $V$ be a vector space over a field $k$, a \textbf{basis} for $V$ is a subset $S \subseteq V$ that is \textbf{linearly independent} and \textbf{generates} $V$, namely, any $v \in V$ can be expressed as a linear combination of elements in $S$ and any $s \in S$ cannot be expressed as a linear combination of elements in $S - s$.
+\end{defn}
+Again, we would like to get rid of the content of this definition talking about elements, so we focus on what this means for linear maps coming out of $V$. Let $S$ be a basis of $V$, $W$ be another vector space over $k$ and $T: V \rightarrow W$ be a linear map. By linearity, $T$ is completely determined by where it sends the elements of $S$. Indeed, for any $v \in V$, write $v$ as a linear combination $\sum_{s \in S} \lambda_s s$ with $\lambda_s \in k$ (only finitely many of the coefficients are non-zero), then $T(v) = \sum_{s \in S} \lambda_s T(s)$. We conclude that any set-theoretic function $t: S \rightarrow W$ extends to a unique linear map $T: V \rightarrow  W$.
+
+We claim that this property completely characterizes bases of $V$. Indeed, let $S \subseteq V$ be such that for any $t: S \rightarrow W$, there is a unique linear map $T: V \rightarrow  W$ extending $t$. We will show that $S$ is generating and linearly independent.
+\begin{enumerate}
+    \item Assume towards a contradiction that $S$ is not generating, that is, there exists $v \in V$ that is not a linear combination of vectors in $S$. Equivalently, if $U$ is the subspace generated by $S$, then $V/U$ is not $0$. Now, let $t: S \rightarrow V/U$ be the $0$ map, both the quotient map $\pi: V \rightarrow V/U$ and the $0$ map $0: V \rightarrow V/U$ extend $t$, and since $V/U$ is not trivial, they are different maps.
+    \item Assume towards a contradiction that $S$ is not linearly dependent, that is, there exists $v \in S$ is such that $v = \sum_{s \in S-v} \lambda_s s$. Consider the function \[t: S \rightarrow V \oplus V  = \begin{cases}(s,0) & s\neq v\\ (0,v) & s = v\end{cases}.\]
+    There cannot exist a linear map $T: V \rightarrow V\oplus V$ extending $t$ because by linearity, we can show
+    \[(0,v) = t(v) = T(v) = T(\sum_{s \in S-v} \lambda_s s) = \sum_{s \in S-v} \lambda_s T(s) = \sum_{s \in S-v} \lambda_s (s,0),\]
+    which is absurd.
+\end{enumerate}
+In conclusion, we have the following alternate definition of a vector space basis.
+\begin{defn}[Categorical]
+    Let $V$ be a vector space, a basis of $V$ is a set $S$ along with an inclusion $i: S \rightarrow V$ satisfying the following universal property: for any function $t: S \rightarrow W$ where $W$ is a vector space, there is a unique linear map $T: V \rightarrow W$ such that $T \circ i = t$. This is summarized in \eqref{diag-basis}.
+    \begin{equation}\label{diag-basis}
+        \begin{tikzcd}
+            S \arrow[r, "i"] \arrow[rd, "t"'] \arrow[r, phantom, "\text{in } \textbf{Set}", shift left=6] & V \arrow[d, "T", dashed] & {} \arrow[rr, phantom, "\text{in } \textbf{Vsp}_k", shift left=6] & V \arrow[d, "T", dashed] \arrow[ll, squiggly, shift left=5] & {} \\ & W & & W &   
+        \end{tikzcd}
+    \end{equation}
+\end{defn}
+
+\subsection{Exponential Objects}
+Let $A$ and $X$ be sets and denote $A^X$ the set of functions $X \rightarrow A$. In hope to generalize this construction to other categories, let us study morphisms into $A^X$. Given a set $B$ and a morphism $f: B \rightarrow A^X$, there is a natural operation called \textbf{uncurrying} that takes $f$ to $f':B \times X \rightarrow A$ which basically evaluates both $f$ and its output at the same time. Namely, $f'(b,x) = f(b)(x)$.
+
+As a particular case, we consider the identity function $A^X \rightarrow A^X$. Uncurrying yields the \textbf{evaluation} function $\ev: A^X \times X \rightarrow A$ that evaluates the function in the first coordinate at the second coordinate: $\ev(f,x) = f(x)$.
+
+Now, as the name suggests, uncurrying has an inverse operation called \textbf{currying} which takes $g : B\times X \rightarrow A$ to $\lambda g: B \rightarrow A^X$. Morally $\lambda g$ delays the evaluation of $g$ to later (for computer scientists, this is also related to the concept of \textit{continuations}). Moreover, notice that if we are given $b \in B$ and $x \in X$, then we obtain an element of $\ev(\lambda g(b), x) = g(b,x) \in A$. This along with the fact that currying and uncurrying are bijective operations leads to a universal property that $\ev$ satisfies. It is summarized in \eqref{diag-exponent}.
+
+\begin{equation}\label{diag-exponent}
+ \begin{tikzcd}
+ A \arrow[r, "\text{in } \textbf{Set}", phantom, shift left=6] & A^X\times X \arrow[l, "\ev"'] & {} \arrow[rr, "\text{in } \textbf{Set}", phantom, shift left=6] & A^X \arrow[ll, squiggly, shift left=4] & {} \\
+ & B\times X \arrow[lu, "g"] \arrow[u, "\lambda g \times \id_X"', dashed] & & B \arrow[u, "\lambda g"', dashed] & 
+ \end{tikzcd}
+\end{equation}
+This is entirely categorical, so we can define an \textbf{exponential object} in an arbitrary category $\mathbf{C}$ (with binary products) as an object $A^X$ along with a morphism $\ev: A^X \times X \rightarrow A$ such that for all $g: B\times X \rightarrow A$, there is a unique $\lambda g:B \rightarrow A^X$ making \eqref{diag-exponent} commute.
+ 
+%\subsection{Metric Completion}
+%\begin{defn}[Classical]
+%    Let $(M, d)$ be a metric space, the \textbf{completion} of $M$, denoted $(\widehat{M}, D)$ is the space consisting of all Cauchy sequences in $M$ quotiented by the equivalence relation \[\{a_n\} \sim \{b_n\} \Leftrightarrow \lim_{n \rightarrow \infty} d(a_n,b_n) = 0,\]
+%    where $D(\{a_n\}, \{b_n\}) = \lim_{n \rightarrow \infty} d(a_n, b_n)$. One can show that $(\widehat{M}, D)$ is a complete metric space.
+%\end{defn}
+
+
+%TODO: These example have two things in common, they all arise from a forgetful functor and they are all in the same direction.
+\section{Generalization}
+\begin{defn}[Comma category]\label{defn-comma}
+    Given two functors \begin{tikzcd}\mathbf{D} \arrow[r, squiggly, "F"] & \mathbf{C} & \mathbf{E} \arrow[l, squiggly, "G"']\end{tikzcd}, there is a category $\comcat{F}{G}$, called the \textbf{comma category}, whose objects are triples $(X, Y, \alpha)$ with $X \in \mathbf{D}_0$, $Y \in \mathbf{E}_0$ and $\alpha : F(X) \rightarrow G(Y)$ (in $\mathbf{C}$) and morphisms between $(X_1, Y_1, \alpha)$ and $(X_2, Y_2, \beta)$ are pairs of morphisms $(f,g) \in \Hom_{\mathbf{D}}(X_1,X_2) \times \Hom_{\mathbf{E}}(Y_1,Y_2)$ yielding a commutative square as in \eqref{diag-morphicomcat}.
+    \begin{equation}\label{diag-morphicomcat}
+    \begin{tikzcd}
+        F(X_1) \arrow[d, "\alpha"'] \arrow[r, "F(f)"] & F(X_2) \arrow[d, "\beta"] \\
+        G(Y_1) \arrow[r, "G(g)"'] & G(Y_2)
+    \end{tikzcd}
+    \end{equation}
+\end{defn}
+%We mention them here because it is the perfect time, but not related to universal properties.
+\begin{defn}[Arrow category]
+    In the setting of Definition \ref{defn-comma}, if $F = G = \id_{\mathbf{C}}$, then $\comcat{\id_{\mathbf{C}}}{\id_{\mathbf{C}}}$ is called the \textbf{arrow category} of $\mathbf{C}$ and denoted $\mathbf{C}^{\rightarrow}$. Its objects are morphisms in $\mathbf{C}$ and its morphisms are commutative squares in $\mathbf{C}$.
+\end{defn}
+\begin{defn}[Slice category]
+    In the setting of Definition \ref{defn-comma}, if $F = \id_{\mathbf{C}}$ and $G:= X: \ast \rightsquigarrow \mathbf{C}$ is a constant functor selecting one object $G(\ast) = X \in \mathbf{C}_0$, then $\comcat{\id_{\mathbf{C}}}{X}$ is called the \textbf{slice category over} $X$ and denoted $\mathbf{C}/X$ (also called $\mathbf{C}$ over $X$). Its objects are morphisms in $\mathbf{C}$ with target $X$ and its morphisms are commutative triangle with $X$ as a tip as in \eqref{diag-slice}.
+    \begin{equation}\label{diag-slice}
+        \begin{tikzcd}
+            A \arrow[rr] \arrow[rd] & & B \arrow[ld]\\
+            & X &
+        \end{tikzcd}
+    \end{equation}
+\end{defn}
+\begin{defn}[Coslice category]
+    In the setting of Definition \ref{defn-comma}, if $G = \id_{\mathbf{C}}$ and $F:= X: \ast \rightsquigarrow \mathbf{C}$ is a constant functor selecting one object $F(\ast) = X \in \mathbf{C}_0$, then $\comcat{X}{\id_{\mathbf{C}}}$ is called the \textbf{coslice category under} $X$ and denoted $X/\mathbf{C}$ (also called $\mathbf{C}$ under $X$). Its objects are morphisms in $\mathbf{C}$ with source $X$ and its morphisms are commutative triangle with $X$ as a tip as in \eqref{diag-slice}.
+    \begin{equation}\label{diag-slice}
+        \begin{tikzcd}
+            & X \arrow[ld] \arrow[rd] &\\
+            A \arrow[rr]  & & B 
+        \end{tikzcd}
+    \end{equation}
+\end{defn}
+
+Back to universal properties.
+\begin{defn}[Universal morphism]
+    If $F: \mathbf{D} \rightsquigarrow \mathbf{C}$ is a functor and $X \in \mathbf{C}_0$. A \textbf{universal morphism} from $X$ to $F$ is an intial object in $\comcat{X}{F}$. Namely, it is a morphism $a : X \rightarrow F(A)$ such that for any other morphism $b: X \rightarrow F(B)$, there is unique commutative triangle as in \eqref{diag-univmorph}.
+    \begin{equation}\label{diag-univmorph}
+        \begin{tikzcd}
+            & X \arrow[ld, "a"'] \arrow[rd, "b"] &\\
+            F(A) \arrow[rr, dashed, "F(f)"']  & & F(B) 
+        \end{tikzcd}
+    \end{equation}
+    Notice that equivalently, one could say that for any $b: X \rightarrow F(B)$, there is a unique morphism $f: A \rightarrow B$ in $\mathbf{D}$ such that $F(f) \circ a = b$, which is summarized in \eqref{diag-univmorphalt}.
+    \begin{equation}\label{diag-univmorphalt}
+        \begin{tikzcd}
+            X \arrow[r, "a"] \arrow[rd, "b"'] \arrow[r, phantom, "\text{in } \mathbf{C}", shift left=6] & F(A) \arrow[d, "F(f)", dashed] & {} \arrow[rr, phantom, "\text{in } \mathbf{D}", shift left=6] & A \arrow[d, "f", dashed] \arrow[ll, squiggly, shift left=5] & {} \\ & F(B) & & B &   
+        \end{tikzcd}
+    \end{equation}
+    
+    The dual notion is a \textbf{universal morphism} from $F$ to $X$, it is a terminal object in $\comcat{F}{X}$. The dual of \eqref{diag-univmorphalt} is depicted below.
+    \begin{equation}\label{diag-univmorphaltdual}
+        \begin{tikzcd}
+            X \arrow[r, "\text{in } \mathbf{C}", phantom, shift left=6] & F(A) \arrow[l, "a"'] & {} \arrow[rr, "\text{in } \mathbf{D}", phantom, shift left=6] & A \arrow[ll, shift left=5, squiggly] & {}\\
+            & F(B) \arrow[lu, "b"] \arrow[u, "F(f)"', dashed] & & B \arrow[u, "f"', dashed]  &
+        \end{tikzcd}
+    \end{equation} 
+\end{defn}
+\begin{defn}[Universal property]
+    A \textbf{universal property} is the property of being a universal morphism. %TODO: meh
+\end{defn}
+
+We will not bother applying this general definition anymore because the formalism is not crucial to the study of universal properties. Recall that we claimed that (co)limits satisfied some universal properties, and indeed, you can show this very formally, but notice that our definition of universal property also uses a special case of limits, that is, initial and terminal objects. What is more, in the following lectures, we will introduce a couple  more concepts which often coincide\footnote{By \textit{coincide}, we mean that one is a special case of the other or vice-versa or both directions.} with the concepts of (co)limits and universal properties.
+
+\end{document}
+

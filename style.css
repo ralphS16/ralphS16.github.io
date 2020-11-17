@@ -1,8 +1,22 @@
+@font-face {
+    font-family: 'tgPagella';
+    src: url('src/Fonts/texgyrepagella-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'tgPagellaBold';
+    src: url('src/Fonts/texgyrepagella-bold-webfont.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
 body {
-	font-family: 'Roboto', 'sans-serif';
-	color: #222f3e;
+	font-family: 'tgPagella', Sans-Serif;
+	font-size: 14pt;
+	color: #000000;
 	padding:0px;
-	background-color: #c8d6e5;
+	background-color: #afafaf;
 }
 
 .content {
@@ -10,7 +24,7 @@ body {
 	width: 60%;
 	margin-left: auto;
 	margin-right: auto;
-	background-color: #c8d6e5;
+	background-color: #afafaf;
 	margin-top: 0px;
 	border-radius: 2px;
 }
@@ -23,25 +37,33 @@ body {
 
 .section-card {
 	display:block;
-	background-color: #c8d6e5;
+	background-color: #afafaf;
 	border-radius: 2px;
 	margin:2px;
 	padding: 0.1em 0.1em 0.1em 0.1em;
 }
 
-h1, h2, h3 {
-	font-family: 'Segoe UI', 'sans-serif';
+h1, h2 {
+	font-family: 'tgPagellaBold', 'Segoe UI', Sans-Serif;
 	font-weight: normal;
 	margin: 0.1em 0.1em 0.2em 0.1em;
-	color: #222f3e;
+	color: #000000;
 }
+
+h3 {
+	font-family: 'tgPagellaBold', 'Segoe UI', Sans-Serif;
+	font-size: large;
+	text-decoration: underline;
+	color: #000000;
+}
+
 h4 {
 	margin-bottom: 0.3em;
 	font-weight: normal;
-	color: #222f3e;
+	color: #000000;
 }
 a {
-	color: #0abde3;
+	color: #158faa;
 }
 a:visited {
 	color: #341f97;
@@ -57,7 +79,7 @@ table, tr, td {
 	border-collapse: collapse;
 	border-style: solid none;
 	border-width: 1px;
-	border-color: #8395a7;
+	border-color: #3c3c3c;
 	padding: 0.2em;
 }
 
@@ -67,8 +89,27 @@ ul {
 	list-style-type: circle;
 }
 
+ul.twocolumns {
+    display: inline-block;
+}
+
+ul.twocolumns li {
+    float: left;
+    list-style: outside none none;
+    width: 50%;
+}
+@media (min-resolution: 200dpi){
+	ul.twocolumns li {
+		width: 100%;
+	}
+}
+
+
+td.project-title {
+	font-family: 'tgPagellaBold';
+}
 td.project-title:hover {
-	background-color: #d8e6f5;
+	background-color: #dadada;
 }
 
 tr.project-card {

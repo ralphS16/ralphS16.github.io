@@ -1,0 +1,297 @@
+\documentclass{article}
+
+\newcommand{\bra}[1]{\left(#1\right)}
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+\microtypecontext{spacing=nonfrench}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{mathpazo}
+\usepackage{stmaryrd}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{subcaption}
+\usepackage{enumerate}
+\usetikzlibrary{shapes}
+\usetikzlibrary{positioning}
+\usetikzlibrary{decorations.pathmorphing}
+% Set up the images/graphics package
+\usepackage{graphicx,float}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{.}}
+
+
+% Small sections of multiple columns
+\usepackage{multicol}
+\usepackage[margin=1.6in]{geometry}
+
+%--------Theorem Environments--------
+%theoremstyle{plain} --- default
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{fact}[thm]{Fact}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{quest}[thm]{Question}
+\newtheorem{claim}{Claim}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{defns}[thm]{Definitions}
+\newtheorem{con}[thm]{Construction}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{jk}[thm]{Joke}
+\newtheorem{exmps}[thm]{Examples}
+\newtheorem{notn}[thm]{Notation}
+\newtheorem{notns}[thm]{Notations}
+\newtheorem{addm}[thm]{Addendum}
+\newtheorem{exer}[thm]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{ans}[thm]{Answer}
+\newtheorem{rems}[thm]{Remarks}
+\newtheorem{warn}[thm]{Warning}
+\newtheorem{sch}[thm]{Scholium}
+
+% MACROS
+\newcommand{\Mod}[1]{\ (\text{mod}\ #1)}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\mC}{\mathcal{C}}
+\newcommand{\mG}{\mathcal{G}}
+\newcommand{\mP}{\mathcal{P}}
+\newcommand{\one}{\mathbb{1}}
+\renewcommand{\P}{\mathbb{P}}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\aut}{Aut}
+\DeclareMathOperator{\gal}{Gal}
+\DeclareMathOperator{\orb}{Orb}
+\DeclareMathOperator{\stab}{Stab}
+\DeclareMathOperator{\inn}{Inn}
+\DeclareMathOperator{\spn}{Span}
+\DeclareMathOperator{\out}{Out}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\arr}{Arr}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\rcf}{rcf}
+\DeclareMathOperator{\tors}{Tors}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\ann}{Ann}
+\DeclareMathOperator{\Nat}{Nat}
+\DeclareMathOperator*{\colim}{co{\lim}}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\inp}[2]{\left\langle #1, #2 \right\rangle}
+\newcommand{\id}{\text{id}}
+\newcommand{\gln}{\text{GL}_n}
+\newcommand{\op}[1]{#1^{\text{op}}}
+\newcommand{\pullback}{\mbox{\LARGE$\lrcorner$}}
+\newcommand{\pushout}{\mbox{\LARGE$\ulcorner$}}
+\newcommand{\comcat}[2]{#1\downarrow #2}
+
+
+\title{Episode 6 - Yoneda Lemma\vspace{-10pt}}
+\author{Ralph Sarkis}
+\date{\vspace{-10pt}\today\vspace{-15pt}}  % if the \date{} command is left out, the current date will be used
+\begin{document}
+\maketitle
+\begin{abstract} This lecture covers the main philosophical idea of category theory: that a mathematical object is completely determined by how it sees other objects or by how it is seen by other objects.
+\end{abstract}
+\setcounter{section}{-1}
+\section{Author's note}
+Unfortunately, at the time of writing this, I do not yet have enough familiarity with the Yoneda lemma and its applications to teach it with as much enthusiasm as I would like to. This result is considered by many mathematicians as the most important theorem of category theory, but it takes a lot of practice with it to fully grasp its meaning.
+
+For this reason, before starting to read these notes, I suggest trying to follow either chapter four of \textit{Basic Category Theory} by Tom Leinster or chapter two of \textit{Category Theory in Context} by Emily Riehl. Both chapters cover what is covered here with lots of examples (some of them assume you know about adjoints, so you can either read the content of the next two lecture or ignore those examples) and, in my opinion, communicate the importance of this result way better than my notes.
+
+If you continue reading, you should know that I am only writing this set of notes to help me understand this result better, so it might lack in motivational paragraphs. However, I still suggest you read the other resources I mentioned and find other resources until you think you fully understand the Yoneda lemma. It will take some time.
+\section{Representable Functors}
+Throughout, let $\mathbf{C}$ be a locally small category. Recall that for an object $A \in \mathbf{C}_0$, there are two Hom functors from $\mathbf{C}$ to \textbf{Set}. The covariant one, $\Hom_{\mathbf{C}}(A, -)$, sends an object $B \in \mathbf{C}_0$ to $\Hom_{\mathbf{C}}(A,B)$ and a morphism $f:B\rightarrow B'$ to $f \circ (-)$. The contravariant one, $\Hom_{\mathbf{C}}(-,A)$, sends an object $B \in \mathbf{C}_0$ to $\Hom_{\mathbf{C}}(B,A)$ and a morphism $f: B\rightarrow B'$ to $(-) \circ f$. In order to lighten the notation, we denote these functors $H^A$ and $H_A$ respectively.\footnote{It might seem like this contradicts the notation used so far because $H^A$ is covariant and $H_A$ contravariant. However, this is not their ``variance'' in the parameter $A$, and we will show that in fact, the ``variances'' in $A$ are opposites.}
+
+Although these functors are sometimes interesting on their own, their full power is unleashed when they are related to other functors through natural transformations. For instance, some of these Hom functors can be described in simpler terms.
+\begin{exmps}
+	\begin{enumerate}
+		\item[]
+		\item Let $\mathbf{1} = \{*\}$ be the terminal object in \textbf{Set}, then what is the action of $H^{\mathbf{1}}$? For any object $B$, \[H^{\mathbf{1}}(B) = \Hom_{\textbf{Set}}(\mathbf{1}, B)\]
+		is easy to describe because for any element $b \in B$, there is a unique function $f: \mathbf{1} \rightarrow B = * \mapsto b$. Hence, there is an isomorphism from $H^{\mathbf{1}}(B)$ to $B$ for any $B \in \mathbf{C}_0$, it sends $f$ to $f(*)$ and its inverse sends $b\in B$ to the map $*\mapsto b$. Moreover, these isomorphisms are natural in $B$ because the following diagram clearly commutes for any $f:B\rightarrow B'$, yielding a natural isomorphism $H^{\mathbf{1}} \cong \id_{\mathbf{C}}$.
+		\begin{figure}[h]
+			\centering
+			\begin{tikzcd}
+				H^{\mathbf{1}}(B) \arrow[d] \arrow[r, "f\circ (-)"] & H^{\mathbf{1}}(B') \arrow[d] \\
+				B \arrow[u] \arrow[r, "f"']               & B' \arrow[u]     
+			\end{tikzcd}
+		\end{figure}
+		\item Consider again a terminal object in the category \textbf{Grp}, namely, the group $\mathbf{1}$ only containing an identity. Then, for any group $G$, the set $H^{\mathbf{1}}(G)$ is a singleton because any homomorphism $f:\mathbf{1}\rightarrow G$ must send the identity to the identity and no other choice can be made. Therefore, unlike in \textbf{Set} $H^{\mathbf{1}}$ is very uninteresting and acts like the constant functor $\mathbf{1}:\textbf{Grp} \rightsquigarrow \textbf{Set}$.
+		
+		\item A better choice of object to mimic the behavior of $\id_{\textbf{Grp}}$ is the additive group $\Z$. Indeed, for any $g\in G$, there is a unique morphism $f:\Z \rightarrow G$ sending $0$ to the identity and $1$ to $g$. A very similar argument as above yields a natural isomorphism $H^{\Z} \cong \id_{\textbf{Grp}}$.
+		\item The terminal object in \textbf{Cat} is the category $\one$ with a single object and no morphism other than the identity. Observe that for any category $\mathbf{C}$, a functor $\one \rightsquigarrow C$ is just a choice of object. Therefore, the same argument will show that $H^{\one} \cong (-)_0$, where $(-)_0$ sends a category to its set of objects and a functor to its action restricted on objects.
+		
+	 	In order to obtain a similar way to extract morphisms, consider the category $\mathbf{2}$ with two objects and a single morphism between them. One obtains a natural isomorphism $H^{\mathbf{2}} \cong (-)_1$.
+	\end{enumerate}
+\end{exmps}
+These examples suggest that functors that are naturally isomorphic to Hom functors have nice properties, they are said to be representable.
+
+\begin{defn}[Representable functor]
+	 A covariant functor $F: C\rightarrow \textbf{Set}$ is \textbf{representable} if there is an object $X \in \mathbf{C}_0$ such that $F$ is naturally isomorphic to $\Hom_{\mathbf{C}}(X,-)$. If $F$ is contravariant, then it is representable if it is naturally isomorphic to $\Hom_{\mathbf{C}}(-,X)$.
+\end{defn}
+\begin{exmps}
+	Let us give examples of the contravariant kind.
+	\begin{enumerate}
+		\item The contravariant power set functor $\mP: \textbf{Set} \rightsquigarrow \textbf{Set}$ sends a set $X$ to its power set $\mP(X)$ and a function $f:X\rightarrow Y$ to the inverse image $f^{-1}:\mP(Y) \rightarrow \mP(X)$. It is common to identify subsets of a given set with functions from this set into $\mathbf{2} = \{0,1\}$. Formally, this is an isomorphism $\mP(X) \cong H_{\mathbf{2}}(X) = \mathbf{2}^X$ for any $X$, it maps $S \subseteq X$ to the characteristic function $\chi_S$ (it sends $x \in X$ to $1$ if $x \in S$ and to $0$ otherwise). In the reverse direction, it sends a function $g:X\rightarrow \{0,1\}$ to $g^{-1}(1)$. It is easy to check that for any $f:X\rightarrow Y$, the isomorphisms make this diagram commute, so $\mP \cong H_{\mathbf{2}}$.
+		\begin{figure}[h]
+			\centering
+			\begin{tikzcd}
+				H_{\mathbf{2}}(X) \arrow[d] \arrow[r, "f\circ (-)"] & H_{\mathbf{2}}(Y) \arrow[d] \\
+				\mP(X) \arrow[u] \arrow[r, "f^{-1}"]                & \mP(Y) \arrow[u]           
+			\end{tikzcd}
+		\end{figure}
+		\item In functional programming, it is often useful to transform a function taking multiple arguments so that it ends up taking a single argument but outputs another function. For instance, the multiplication function $\textsf{mult}: \textsf{int} \times \textsf{int} \rightarrow \textsf{int}$ that takes two numbers as inputs and outputs their product can be rewritten as $\textsf{multc} : \textsf{int} \rightarrow (\textsf{int} \rightarrow \textsf{int})$. The function $\textsf{multc}$ takes a number as input and outputs a function that outputs the product of its input and the initial input of $\textsf{multc}$. For example $\textsf{multc}(3)$ is a function that outputs $3\cdot n$ when $n$ is the input. This new function $\textsf{multc}$ is said to be the \textbf{curried} version of $\textsf{mult}$ in honor of Haskell Curry. This leads to a more general argument in \textbf{Set}.
+		
+		Fix two sets $A$ and $B$. The functor $\Hom(-\times A,B)$ maps a set $X$ to $\Hom(X\times A, B)$ and a function $f:X\rightarrow Y$ to the function $(-) \circ (f \times \id_A)$. As suggested by the currying process for \textsf{mult}, for any set $X$, there is an isomorphism $\Hom(X\times A,B) \cong \Hom(X, B^A)$. The image of $f:X\times A \rightarrow B$ is denoted $f^c$ and it satisfies $f(x,a) = f^c(x)(a)$ for any $x \in X$ and $a \in A$. It is easy to check that this is an isomorphism and also that it is natural in $X$ because the following diagram commutes for any $f:X\rightarrow Y$, so $\Hom(-\times A,B) \cong \Hom(-,B^A)$.
+		\begin{figure}[h]
+			\centering
+			\begin{tikzcd}
+				{\Hom(X\times A,B)} \arrow[d] \arrow[rr, "(-)\circ (f\times \id_A)"] & & {\Hom(Y\times A,B)} \arrow[d] \\
+				{\Hom(X, B^A)} \arrow[u] \arrow[rr, "(-)\circ f"]           & & {\Hom(Y,B^A)} \arrow[u]      
+			\end{tikzcd}
+		\end{figure}
+	\end{enumerate}
+\end{exmps}
+In the first item of both lists of examples, we made an arbitrary choice of set. That is, we could have taken any singleton in the first case and any set with two elements in the second. More generally, it is not hard to show that if $A \cong B$, then $H_A \cong H_B$ and $H^A \cong H^B$. Surprisingly, the converse is also true and it will follow from the Yoneda lemma, but we prove it on its own first as a warm-up for the proof of the lemma.
+\begin{prop}
+	Let $A,B \in \mathbf{C}_0$ be such that $H^A \cong H^B$, then $A \cong B$.
+\end{prop}
+\begin{proof}
+	The natural isomorphism gives two natural transformations $\phi: H^A \Rightarrow H^B$ and $\eta: H^B \Rightarrow H^A$ such that for any object $X \in \mathbf{C}_0$, \[\eta_X \circ \phi_X:H^A(X)\rightarrow H^A(X) \text{  and  } \phi_X \circ \eta_X:H^B(X) \rightarrow H^B(X)\] are identities. In order to show $A \cong B$, we will find two morphisms $f:B\rightarrow A$ and $g:A\rightarrow B$ such that $f\circ g = \id_A$ and $g\circ f = \id_B$.
+	
+	First, note that putting $X$ equal to $A$, we get $\eta_A(\phi_A(\id_A)) = \id_A$ and we claim that \[\eta_A(\phi_A(\id_A)) =\phi_A(\id_A) \circ \eta_B(\id_B).\]
+	Since $\phi_A(\id_A)$ is a morphism from $B$ to $A$, the following diagram commutes by naturality of $\eta$. The equality then follows, starting with $\id_B \in H_B(B)$.
+	\begin{figure}[h]
+		\centering
+		\begin{tikzcd}
+			H_B(A) \arrow[r, "\eta_A"]                                      & H_A(A)                                       \\
+			H_B(B) \arrow[r, "\eta_B"'] \arrow[u, "\phi_A(\id_A)\circ (-)"] & H_A(B) \arrow[u, "\phi_A(\id_A) \circ (-)"']
+		\end{tikzcd}
+	\end{figure}
+
+	A dual argument shows that \[\id_B = \phi_B(\eta_B(\id_B)) =  \eta_B(\id_B) \circ \phi_A(\id_A),\]
+	so we can conclude, letting $f = \phi_A(\id_A)$ and $g= \eta_B(\id_B)$, that $A \cong B$.
+\end{proof}
+
+For every $A \in \mathbf{C}_0$, there are two functors $H^A$ and $H_A$, they are objects of $[C, \textbf{Set}]$ and $[\op{C}, \textbf{Set}]$ respectively. It is then reasonable to expect that the assignments $A \mapsto H^A$ and $A \mapsto H_A$ are functorial.
+
+\begin{defn}[\textbf{Yoneda embeddings}]
+	The contravariant embedding $H^{(-)}: \op{C} \rightsquigarrow [C, \textbf{Set}]$ sends $A \in \mathbf{C}_0$ to the Hom functor $H^A$ and a morphism $f: A'\rightarrow A$ to the natural transformation $H^f: H^{A} \Rightarrow H^{A'}$ defined by $H^f_B := \Hom_{\mathbf{C}}(f,B) = (-) \circ f$ for every $B \in \mathbf{C}_0$. The naturality of $H^f$ follows because the following diagram clearly commutes (by associativity) for any $g: B\rightarrow B'$.
+	\begin{figure}[h]
+		\centering
+		\begin{tikzcd}
+			H^A(B) \arrow[r, "(-)\circ f"] \arrow[d, "g \circ (-)"'] & H^{A'}(B) \arrow[d, "g\circ (-)"] \\
+			H^A(B') \arrow[r, "(-)\circ f"']                         & H^{A'}(B')                       
+		\end{tikzcd}
+	\end{figure}
+	
+	The covariant embedding $H_{(-)}:C \rightsquigarrow [\op{C}, \textbf{Set}]$ sends $B \in \mathbf{C}_0$ to the Hom functor $H_B$ and a morphism $f:B\rightarrow B'$ to the natural transformation $H_f:H_B \rightarrow H_{B'}$ defined by $H_f^A = \Hom_{\mathbf{C}}(A,f) = f\circ (-)$ for any $A \in \mathbf{C}_0$. Naturality follows from a similar argument.
+\end{defn}
+Functoriality is left for the reader to check. The embeddings are called like that because both functors are fully faithful as will follow trivially from the Yoneda lemma.
+
+
+\section{Yoneda lemma}
+We have understood how an object $A \in \mathbf{C}_0$ sees the category $\mathbf{C}$ through representables, but since a representable is an object of another category, it is daring to study what representables see and how it relates to the object it represents. More formally, what is the functor $\Hom_{[C, \textbf{Set}]}(H^A, -)$ describing. For simplicity, we denote it $\Nat(H^A,-)$ because, for a functor $F:C \rightsquigarrow \textbf{Set}$, $\Nat(H^A,F)$ is the set of natural transformations from $H^A$ to $F$. %TODO: not really the set yet.
+
+The surprising relation that the Yoneda lemma describes is that $\Nat(H^A,F)$ is isomorphic to $F(A)$ naturally in $F$ and $A$. We first show the isomorphism and then explain the naturality.
+
+\begin{lem}[Yoneda lemma I]
+	For any $A \in \mathbf{C}_0$ and $F: C\rightsquigarrow \textbf{Set}$,
+	\[\Nat(H^A, F) \cong F(A).\]
+\end{lem} 
+\begin{proof}
+	Fix $A$ and $F$, let $\phi_{A,F}: \Nat(H^A, F) \rightarrow F(A)$ be defined by $\alpha \mapsto \alpha_A(\id_A)$ (check that the types match). Let $\eta_{A,F}: F(A) \rightarrow \Nat(H^A,F)$ send an element $a \in F(A)$ to the natural transformation that has components $\eta_{A,F}(a)_B: f \mapsto F(f)(a): \Hom_{\mathbf{C}}(A,B) \rightarrow F(B)$ for any $B \in \mathbf{C}_0$. Checking the following diagram commutes for any $g:B\rightarrow B'$ shows that $\eta_{A,F}(a)$ is a natural transformation.
+	\begin{figure}[h]
+		\centering
+		\begin{tikzcd}
+			H^A(B) \arrow[d, "g\circ (-)"'] \arrow[r, "F(-)(a)"] & F(B) \arrow[d, "F(g)"] \\
+			H^A(B') \arrow[r, "F(-)(a)"']                        & F(B')                 
+		\end{tikzcd}
+	\end{figure}
+
+	We now check that $\phi_{A,F}$ and $\eta_{A,F}$ are inverses. First,
+	$(\eta \circ \phi)_{A,F}$ sends $\alpha\in \Nat(H^A,F)$ to $\eta_{A,F}(\alpha_A(\id_A))$, and at any $B \in \mathbf{C}_0$, we have 
+	\begin{align*}
+		\eta_{A,F}(\alpha_A(\id_A))_B(f) &= F(f)(\alpha_A(\id_A)&&\mbox{def of $\eta$}\\
+		&= \alpha_B(f \circ \id_A) &&\mbox{naturality of $\alpha$}\\
+		&= \alpha_B(f),
+	\end{align*}
+	thus $\alpha = (\eta \circ \phi)_{A,F}(\alpha)$.
+	
+	Conversely, $(\phi\circ \eta)_{A,F}$ sends $a \in F(A)$ to $\eta_{A,F}(a)_A(\id_A) = F(\id_A)(a) = a$.
+	
+	We conclude that $\eta_{A,F}$ and $\phi_{A,F}$ are inverses.
+\end{proof}
+What this results first tells us is that $\Nat(H^A, F)$ is a set (because it is isomorphic to $F(A)$. This is new information because if $\mathbf{C}$ is not a small category, $\Nat(F,G)$ for two non-representable functors can form a proper class. This lets us define two new functors to understand the second part of the Yoneda lemma.
+
+The assignment $(A,F) \mapsto \Nat(H^A,F)$ is a functor $C \times [C,\textbf{Set}] \rightsquigarrow \textbf{Set}$. We denote it $\Nat(H^{(-)}, -)$, it sends a morphism $(g,\mu): (A,F) \rightarrow (A',F')$ to $\mu \cdot (-) \cdot H^g:\Nat(H^A,F) \rightarrow \Nat(H^{A'},F')$.
+
+The assignment $(A,F) \mapsto F(A)$ is another functor of the same type. We denote it $Ev$ (for evaluation), it sends a morphism $(g,\mu): (A,F) \rightarrow (A',F')$ to $F'(g) \circ \mu_A :F(A) \rightarrow F'(A')$.
+
+\begin{lem}[Yoneda lemma II]
+	There is a natural isomorphism $\Nat(H^{(-)}, -) \cong Ev$.
+\end{lem}
+\begin{proof}
+	The components of this isomorphism are the ones described in the first part of the result. It remains to show that $\phi$ is natural in $(A,F)$. For any $(g, \mu): (A,F) \rightarrow (A',F')$, we need to show the following square commutes.
+	\begin{figure}[H]
+		\centering
+		\begin{tikzcd}
+			{\Nat(H^A,F)} \arrow[d, "\mu \cdot (-) \cdot H^g"'] \arrow[r, "{\phi_{A,F}}"] & F(A) \arrow[d, "F'(g) \circ \mu_A"] \\
+			{\Nat(H^{A'}, F')} \arrow[r, "{\phi_{A',F'}}"']                                  & F'(A')                            
+		\end{tikzcd}
+	\end{figure}
+
+	Starting with a natural transformation $\alpha \in \Nat(H^A,F)$ the lower path sends it to $(\mu\cdot \alpha \cdot H^g)_{A'}(\id_{A'})$ and the upper path sends it to $(F'(g) \circ \mu_A)(\alpha_A(\id_A))$. The following derivation shows they are equal.
+	\begin{align*}
+		(\mu\cdot \alpha \cdot H^g)_{A'}(\id_{A'}) &= (\mu_{A'}\circ \alpha_{A'})(H^g_{A'}(\id_{A'}))&&\mbox{def of composition}\\
+		&= (\mu_{A'}\circ \alpha_{A'})(g)&&\mbox{def of $H^g_{A'}$}\\
+		&= (\mu_{A'}\circ \alpha_{A'})(H^A_g(\id_A))&&\mbox{def of $H^A_g$}\\
+		&= (\mu_{A'}\circ \alpha_{A'} \circ H^A_g)(\id_A)\\
+		&= (\mu_{A'} \circ F(g) \circ \alpha_A)(\id_A)&&\mbox{naturality of $\alpha$}\\
+		&=(F'(g) \circ \mu_A)(\alpha_A(\id_A)) &&\mbox{naturality of $\mu$}
+	\end{align*}
+\end{proof}
+
+\begin{cor}
+	The Yoneda embeddings $H^{(-)}$ and $H_{(-)}$ are fully faithful.
+\end{cor}
+\begin{proof}
+	Left as an exercise.
+\end{proof}
+
+\begin{exmp}[Cayley's theorem with the Yoneda Lemma]
+	Cayley's theorem states that any group is isomorphic to the subgroup of a permutation group. We will use the Yoneda lemma to show that.
+	
+	Recall the first part of the Yoneda lemma which states that for a category $\mathbf{C}$, a functor $F:C \rightsquigarrow \textbf{Sets}$ and an object $A$. We have $$\text{Nat}(\Hom(A, -), F) \cong F(A).$$Moreover, we know the explicit maps, namely, a natural transformation $\varphi$ in the L.H.S. is mapped to $\varphi_A(\id_A)$ and an element $u \in F(A)$ is mapped to the natural transformation $\{\varphi_B = f \mapsto F(f)(u) \mid B \in \mathbf{C}_0\}$.
+	
+	Let us apply this to $\mathbf{C}$ being the category associated to a group $G$ (i.e.: there is one object $\star$, $\Hom(\star, \star) = G$ and the composition law follows the group operation). Note that any functor $F: C\rightsquigarrow \textbf{Sets}$ sends $\star$ to a set $S$ and any $g \in G$ to a permutation of $S$, otherwise $g\circ g^{-1} = 1$ cannot be satisfied.
+	
+	To use the Yoneda lemma, our only choice for $A$ is $\star$ and we will choose $F = \Hom(\star, -)$. The Yoneda correspondence becomes
+	$$ \text{Nat}(\Hom(\star, -), \Hom(\star,-)) \cong \Hom(\star, \star).$$
+	We already know what the R.H.S. is $G$, but we have to do a bit of work to understand the L.H.S. First, observe that a natural transformation $\varphi: \Hom(\star, -) \Rightarrow \Hom(\star, -)$ is just one morphism $\varphi_{\star}: \Hom(\star, \star) \rightarrow \Hom(\star, \star)$. Namely, it is a map from $G$ to $G$. Second, recalling that $\Hom(\star, g) = g \circ (-)$ and that $\star$ is the only object in $\mathbf{C}_0$, we get that $\varphi_{\star}$ must only satisfy one diagram.
+	\begin{figure}[H]
+		\centering
+		\begin{tikzcd}
+			G \arrow[d, "g \circ(-)"'] \arrow[r, "\varphi_{\star}"] & G \arrow[d, "g\circ (-)"] \\
+			G \arrow[r, "\varphi_{\star}"'] & G
+		\end{tikzcd}
+	\end{figure}
+	This is equivalent to $\varphi_{\star}(g \cdot h) = g \cdot \varphi_{\star}(h)$, and we get that each $\varphi_{\star}$ is a $G$-equivariant map, denote these maps $\Hom_G(G,G)$. We obtain
+	$$\Hom_G(G,G) \cong G.$$
+	Now, it is easy to check that $\Hom_G(G,G)$ is a subgroup of $\Sigma_G$ (the group of permutations of the set $G$) and that the correspondence is in fact an isomorphism of groups. Cayley's theorem follows.
+	
+	Let us check that $\Hom_G(G,G) < \Sigma_G$. Let $f$ be a $G$-equivariant map. For any $g\in G$, we have $f(g) = f(g\cdot 1) = g \cdot f(1)$. Thus, $f$ is determined only by where it sends the identity. Additionally, since $g \cdot f(1)$ ranges over $G$ when $g$ ranges over $G$, for any choice of $f(1)$, $f$ is bijective. Finally, if $f$ and $f'$ are both $G$-equivariant map, then $$(f\circ f')(g\cdot h) = f(f'(g\cdot h)) = f(g \cdot f'(h)) = g\cdot (f\circ f')(h),$$
+	hence $f\circ g$ is $G$-equivariant. With the facts that $f^{-1}$ is just the $G$-equivariant map sending $1$ to $f(1)^{-1}$ and $\id$ is $G$-equivariant, it follows that $\Hom_G(G,G)$ is a subgroup of $\Sigma_G$.
+	
+	The final check is that the Yoneda correspondence $G\rightarrow \Hom_G(G,G)$ sending $g$ to $(-)\cdot g$ is a group homomorphism (isomorphism follows because it is a bijection). It is clear that it sends the identity to the identity and for any $g, h \in G$
+	$$(-)\cdot gh = ((-) \cdot g)\cdot h = ((-)\cdot h) \circ ((-)\cdot g),$$ so this is a group homomorphism. 
+\end{exmp}
+
+\end{document}
+
