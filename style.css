@@ -43,13 +43,12 @@ body {
 	padding: 0.1em 0.1em 0.1em 0.1em;
 }
 
-h1 {font-size: 2em+2vw;}
-h2 {font-size: 1em+1.2vw;}
-h3 {font-size: 1em+1vw;}
-h4 {font-size: 1em+1vw;}
-p {font-size: 1em+0.8vw;}
-ul {font-size: 1em+0.8vw;}
-td {font-size: 1em+1.1vw;}
+h1 {font-size: 2.4em;}
+h2 {font-size: 1.6em;}
+h3 {font-size: 1.4em;}
+h4 {font-size: 1.1em;}
+p {font-size:  1em;}
+ul {font-size: 1em;}
 h1, h2 {
 	font-family: 'tgPagellaBold', 'Segoe UI', Sans-Serif;
 	font-weight: normal;
@@ -113,6 +112,7 @@ ul.twocolumns li {
 
 td.project-title {
 	font-family: 'tgPagellaBold';
+	font-size: 1.3em;
 }
 td.project-title:hover {
 	background-color: #dadada;
