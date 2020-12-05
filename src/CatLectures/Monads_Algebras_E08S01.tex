@@ -110,7 +110,7 @@
 \end{abstract}
 \section{POV: Category Theory}
 %Composition of adjunctions
-We will start from the concept of an adjunction which, as we hope was made clear in the previous lecture, is ubiquitous and powerful throughout mathematics. However, we will start with a great oversimplification, we will assume the categories concerned are posetal.
+We will start from the concept of an adjunction which, as we hope was made clear in the previous lecture, is ubiquitous and powerful throughout mathematics. However, we will start with a great oversimplification; we will assume the categories concerned are posetal.
 
 An adjunction between posets is more commonly called a Galois connection.
 \begin{defn}[Galois connection]
@@ -122,7 +122,7 @@ We are now interested in the composition $R\circ L$. It is also a monotonic func
     Let $(P, \leq)$ be a poset, a \textbf{closure operator} on $P$ is a monotone extensive and idempotent function $c: P \rightarrow P$.
 \end{defn}
 \begin{exmp}
-    We can give a very simple example hinting at the origins of the terminology. Consider the real numbers $\R$ with the standard topology. We know that $(\mathcal{P}(\R), \subseteq)$ is a poset and we can define $c: \mathcal{P}(\R) \rightarrow \mathcal{P}(\R)$ sending $U\subseteq \R$ to its closure $c(U)$ in the topological sense as in $c(U)$ is the set of limit points of $U$. Then, you probably have seen that for any $U,V\subseteq \R$, $U\leq V \implies c(U) \subseteq c(V)$, $U \subseteq c(U)$ and $c(U) = c(c(U))$, thus operation of closure is a closure operator.
+    We can give a very simple example hinting at the origins of the terminology. Consider the real numbers $\R$ with the standard topology. We know that $(\mathcal{P}(\R), \subseteq)$ is a poset and we can define $c: \mathcal{P}(\R) \rightarrow \mathcal{P}(\R)$ sending $U\subseteq \R$ to its closure $c(U)$ in the topological sense as in $c(U)$ is the set of limit points of $U$. Then, you probably have seen that for any $U,V\subseteq \R$, $U\subseteq V \implies c(U) \subseteq c(V)$, $U \subseteq c(U)$ and $c(U) = c(c(U))$, thus operation of closure is a closure operator.
 \end{exmp}
 
 We will generalize this discussion to arbitrary categories now. Let $L:\begin{tikzcd}[cramped,sep=small]
@@ -185,7 +185,7 @@ With a bit of tinkering, we can make these diagrams all about the functor we are
     \end{minipage}
 \end{defn}
 \begin{exmps}\label{exmp-monads}
-    Our discussion above tells us that any adjoint pair $L\dashv R$ corresponds to a monad $(RL, \eta, R\varepsilon L)$, so all the examples of adjunctions you have seen are suitable examples of monads. For instance, all closure operators are monads. Here, we describe three simple yet very useful examples and let you ponder on the adjunctions they might or might not originate from.
+    Our discussion above tells us that any adjoint pair $L\dashv R$ corresponds to a monad $(RL, \eta, R\varepsilon L)$, so all the examples of adjunctions you have seen correspond to suitable examples of monads. For instance, all closure operators are monads. Here, we describe three simple yet very useful examples and let you ponder on the adjunctions they might or might not originate from.
     \begin{enumerate}
         \item Suppose $\mathbf{C}$ has (binary) coproducts and a terminal object $\mathbf{1}$, then $(\cdot + \mathbf{1}): \mathbf{C} \rightsquigarrow \mathbf{C}$ is a monad. We write $\inl^{X+Y}$ (resp. $\inr^{X+Y}$) for the injection of $X$ (resp. $Y$) into $X+Y$. First, note that for a morphism $f: X \rightarrow Y$, \[f+\mathbf{1} = [\inl^{Y+\mathbf{1}} \circ f, \inr^{Y+\mathbf{1}}]: X+ \mathbf{1} \rightarrow Y + \mathbf{1}.\]
         The components of the unit are given by the coprojections, i.e.: $\eta_X = \inl^{X+\mathbf{1}} : X \rightarrow X+ \mathbf{1}$, and the components of the multiplication are \[\mu_X = [\inl^{X+\mathbf{1}}, \inr^{X+\mathbf{1}}, \inr^{X+\mathbf{1}}]: X+ \mathbf{1} + \mathbf{1} \rightarrow X + \mathbf{1}.\]
@@ -239,7 +239,7 @@ With a bit of tinkering, we can make these diagrams all about the functor we are
 \end{exmps}
 
 %Monad -> adjunctions
-After looking long enough for adjunctions giving rise to the monads in Example \ref{exmp-monads} (even if you found one), a natural question can be asked. Does every monad arise from an adjunction? If yes, is that adjunction unique?
+After looking long enough for adjunctions giving rise to the monads in Example \ref{exmp-monads}, two questions dare to be asked. Does every monad arise from an adjunction? If yes, is that adjunction unique?
 
 The second question might not be as natural to novices in category theory but it is almost as important as the first one. Indeed, uniqueness is a very strong property and if every monad had a unique corresponding adjunction, one might expect it to be fairly easy to find. This is part of the beauty of category theory. We are working with very little data $M$, $\eta$ and $\mu$ so if it completely determined an adjunction $L$, $R$ and $\Hom(L(-), -) \cong \Hom(-,R(-))$, it could not do so in a very convoluted way merely because there is not that many ways to manipulated the original data.
 
@@ -255,7 +255,7 @@ With an arbitrary functor $F$, you might have a hard time to come up with a way 
 \begin{defn}[$\mathbf{C}_M$]
     Let $\mathbf{C}$ be a category and $(M,\eta, \mu)$ a monad on $\mathbf{C}$. The \textbf{Kleisli category} of $M$, denoted $\mathbf{C}_M$ has objects $\mathbf{C}_0$ and morphisms $f: A \rightarrow MB \in \mathbf{C}_1$. The identity for $A$ is $\eta_A:A \rightarrow MA$ and composition is given by \[g \circ_M f = \mu_C \circ Mg \circ f: A \nrightarrow C,\] where $f: A \nrightarrow B$ and $g: B \nrightarrow C$.
 \end{defn}
-Checking that this is indeed a category is left as an exercise and you should remark tha it requires using all the properties $M$, $\eta$ and $\mu$ satisfy.
+Checking that this is indeed a category is left as an exercise and you should remark that it requires using all the properties $M$, $\eta$ and $\mu$ satisfy.
 
 As we have constructed $\mathbf{C}_M$ with objects and morphisms in $\mathbf{C}$, we would like to describe a forgetful functor $U_M: \mathbf{C}_M \rightsquigarrow \mathbf{C}$. A first guess to send objects $A$ to themselves will fail when it is time to defining the action of $U_M$ on morphisms for $f: A \nrightarrow B$ can send some stuff into generalized elements of $B$, and we have no way to get this back into $B$. Instead, we need to generalize everything before going into $\mathbf{C}$, namely, $U_M(A) = MA$ and $U_Mf = \mu_B \circ Mf : MA \rightarrow MB$.
 
@@ -321,7 +321,7 @@ Recall that we claimed $(F_M,U_M)$ was special in some way and that this was the
         \end{tikzcd}
     \end{equation}
 \end{defn}
-Let us first check that $(F_M,U_M)$ induces $(M, \eta, \mu)$, we already know that $U_MF_M = M$, but it remains to find the unit and counit of this adjunction. We will need to use the correspondence between the definitions of adjoint pairs seen in the last lecture. Recall that the natural isomorphism $\Hom_{\mathbf{C}_M}(F_M-,-) \cong \Hom_{\mathbf{C}}(-,U_M-)$ is simply the identity function between these two sets. Hence, the unit of the adjunction is $\mathbf{C}_0 \ni A \mapsto \id(u_{\mathbf{C}_M}(A)) = \eta_A$ and the counit is $(\mathbf{C}_M)_0 \ni A \mapsto \id(u_{\mathbf{C}}(U_MA)) =: \varepsilon_A$. Note that $\varepsilon_A$ has type $MA \nrightarrow B$. We check that $U_M(\varepsilon_{F_MA}) = \mu_A$:
+Let us first check that $(F_M,U_M)$ induces $(M, \eta, \mu)$, we already know that $U_MF_M = M$, but it remains to find the unit and counit of this adjunction. We will need to use the correspondence between the definitions of adjoint pairs seen in the last lecture. Recall that the natural isomorphism $\Hom_{\mathbf{C}_M}(F_M-,-) \cong \Hom_{\mathbf{C}}(-,U_M-)$ is simply the identity function between these two sets. Hence, the unit of the adjunction is $\mathbf{C}_0 \ni A \mapsto \id(u_{\mathbf{C}_M}(F_MA)) = \eta_A$ and the counit is $(\mathbf{C}_M)_0 \ni A \mapsto \id(u_{\mathbf{C}}(U_MA)) =: \varepsilon_A$. Note that $\varepsilon_A$ has type $MA \nrightarrow B$. We check that $U_M(\varepsilon_{F_MA}) = \mu_A$:
 \[U_M(\varepsilon_{F_MA}) = \mu_A \circ \varepsilon_{F_MA} = \mu_A \circ u_{\mathbf{C}}(MA) = \mu_A.\]
 \begin{prop}\label{prop-initKleisli}
     The adjunction $(F_M,U_M)$ is initial in $\mathrm{Adj}_M$.
@@ -332,7 +332,7 @@ Let us first check that $(F_M,U_M)$ induces $(M, \eta, \mu)$, we already know th
         \begin{tikzcd}
             {\mathbf{C}_M} && {\mathbf{D}} \\
             & {\mathbf{C}}
-            \arrow["{K}", from=1-1, to=1-3]
+            \arrow["{K}", dashed, from=1-1, to=1-3]
             \arrow["{F_M}"{name=0}, from=2-2, to=1-1, shift left=2]
             \arrow["{L}"{name=1}, from=2-2, to=1-3, shift left=2]
             \arrow["{U_M}"{name=2}, from=1-1, to=2-2, shift left=2]
@@ -401,7 +401,7 @@ We will often denote an $M$--algebra using only its underlying set or morphism.
         \end{tikzcd}
     \end{equation}
 \end{defn}
-For a monad $M$, the category of $M$--algebras is called the \textbf{Eilenberg-Moore} category of $M$ and denoted $\mathbf{C}^M$, composition and identities are induced by the composition and identities in $\mathbf{C}$. Again, since $\mathbf{C}^M$ was built from objects and morphisms in $\mathbf{C}$, there is an obvious candidate for a forgetful functor $U^M: \mathbf{C}^M \rightsquigarrow \mathbf{C}$ sending an $M$--algebra $(A,\alpha)$ to its underlying object $A$ and a homomorphism to its underlying morphism. Next, we need a left adjoint to $U^M$, $F^M: \mathbf{C} \rightsquigarrow \mathbf{C}^M$. Since we want $U^MF^M = M$ to hold, $F^M$ must send $A\in \mathbf{C}_0$ to an $M$--algebra over $MA$ and $h \in \mathbf{C}_1$ to $Mh$. There is only one choice given to us by the data of $M$, that is, $F^MA= (MA, \mu_A))$ and it turns out naturality of $\mu_A$ yields 
+For a monad $M$, the category of $M$--algebras is called the \textbf{Eilenberg-Moore} category of $M$ and denoted $\mathbf{C}^M$, composition and identities are induced by the composition and identities in $\mathbf{C}$. Again, since $\mathbf{C}^M$ was built from objects and morphisms in $\mathbf{C}$, there is an obvious candidate for a forgetful functor $U^M: \mathbf{C}^M \rightsquigarrow \mathbf{C}$ sending an $M$--algebra $(A,\alpha)$ to its underlying object $A$ and a homomorphism to its underlying morphism. Next, we need a left adjoint to $U^M$, $F^M: \mathbf{C} \rightsquigarrow \mathbf{C}^M$. Since we want $U^MF^M = M$ to hold, $F^M$ must send $A\in \mathbf{C}_0$ to an $M$--algebra over $MA$ and $h \in \mathbf{C}_1$ to $Mh$. There is only one choice given to us by the data of $M$, that is, $F^MA= (MA, \mu_A)$ and it turns out naturality of $\mu_A$ yields 
 \begin{equation}
     \begin{tikzcd}
         M^2A \arrow[d, "\mu_A"'] \arrow[r, "M^2h"] & M^2B \arrow[d, "\mu_B"] \\
@@ -410,7 +410,7 @@ For a monad $M$, the category of $M$--algebras is called the \textbf{Eilenberg-M
 \end{equation}
 which implies $Mh$ is indeed an $M$--algbera homomorphism. Let us now show that $F^M \dashv U^M$ with unit $\eta$ and counit $\varepsilon$ satisfying $U^M\varepsilon F^M = \mu$.
 
-We want to exhibit an isomorphism $\Hom_{\mathbf{C}^M}(\mu_A, \beta) \cong \Hom_{\mathbf{C}}(A,B)$ natural in $A$ and $\beta: MB \rightarrow B$. In the forward direction, we send $h:MA \rightarrow B$ to $h \circ \eta_A: A \rightarrow B$ which ensure the unit of this adjunction is $\eta$. In the backwards direction, we send $h:A \rightarrow B$ to $\beta \circ Mh$ which is a homomorphism by the following diagram where (a) commutes by naturality of $\mu$ and (b) by $\beta$ being an $M$--algebra.
+We want to exhibit an isomorphism $\Hom_{\mathbf{C}^M}(\mu_A, \beta) \cong \Hom_{\mathbf{C}}(A,B)$ natural in $A$ and $\beta: MB \rightarrow B$. In the forward direction, we send $h:MA \rightarrow B$ to $h \circ \eta_A: A \rightarrow B$ which ensures the unit of this adjunction is $\eta$. In the backwards direction, we send $h:A \rightarrow B$ to $\beta \circ Mh$ which is a homomorphism by the following diagram where (a) commutes by naturality of $\mu$ and (b) by $\beta$ being an $M$--algebra.
 \begin{equation}
     % https://q.uiver.app/?q=WzAsNixbMCwwLCJNXjJBIl0sWzEsMCwiTV4yQiJdLFsyLDAsIk1CIl0sWzIsMSwiQiJdLFsxLDEsIk1CIl0sWzAsMSwiTUEiXSxbMCwxLCJNXjJmIl0sWzEsMiwiTVxcYmV0YSJdLFsyLDMsIlxcYmV0YSJdLFsxLDQsIlxcbXVfQiJdLFs0LDMsIlxcYmV0YSIsMV0sWzAsNSwiXFxtdV9BIiwyXSxbNSw0LCJNZiIsMl0sWzAsNCwiXFx0ZXh0eygxKX0iLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJub25lIn0sImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMSwzLCJcXHRleHR7KDIpfSIsMSx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6Im5vbmUifSwiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
 \begin{tikzcd}
@@ -453,7 +453,7 @@ Dually to Proposition \ref{prop-initKleisli}, we show that this adjunction is sp
         \begin{tikzcd}
             {\mathbf{D}} && {\mathbf{C}^M} \\
             & {\mathbf{C}}
-            \arrow["{K}", from=1-1, to=1-3]
+            \arrow["{K}", dashed, from=1-1, to=1-3]
             \arrow["{L}"{name=0}, from=2-2, to=1-1, shift left=2]
             \arrow["{F^M}"{name=1}, from=2-2, to=1-3, shift left=2]
             \arrow["{R}"{name=2}, from=1-1, to=2-2, shift left=2]
@@ -473,7 +473,7 @@ Dually to Proposition \ref{prop-initKleisli}, we show that this adjunction is sp
         \arrow["{Rf}"', from=2-1, to=2-2]
     \end{tikzcd}
     \end{equation}
-    Replacing $M$ with $RL$, we recognize this as the naturality diagram for $\varepsilon$ acted on by $R(\cdot)$. Hence, we find $KA = (RA, R\varepsilon_A)$ is a suitable candidate after showing it is indeed an $M$--algebra. For the unit diagram, we have $R\varepsilon_A \circ \eta_A = \id_A$ by the zig-zag identities. For the multiplication diagram, we have 
+    Replacing $M$ with $RL$, we recognize this as the naturality diagram for $\varepsilon$ acted on by $R(\cdot)$. Hence, we find $KA = (RA, R\varepsilon_A)$ is a suitable candidate after showing it is indeed an $M$--algebra. For the unit diagram, we have $R\varepsilon_A \circ \eta_A = \id_A$ by a zig-zag identity. For the multiplication diagram, we have 
     \[R\varepsilon_A \circ \mu_A = R\varepsilon_A \circ R\varepsilon_{LA} = R(\varepsilon_A \circ \varepsilon_{LA}) = R(\varepsilon_A \circ LR(\varepsilon_A)) = R\varepsilon_A \circ MR\varepsilon_A.\]
     
     As $K$ acts like $R$ on morphisms, it is obviously functorial. We leave the proof that $K$ is unique as an exercise as the argument should be somewhat similar to what we have done in the dual proposition. %TODO: fix this at some point, probably show that K commutes with the natural isomorphisms way before.
@@ -532,7 +532,7 @@ In this section, we will highlight the link between algebraic structures as you 
     For the latter, we have 
     \[x \oplus_{\alpha_{\oplus}} y = \alpha_{\oplus}\{x,y\} = x \oplus y.\]
 \end{exmp}
-A set equipped with an idempotent, commutative and associative binary operation is called a \textbf{(join)-semilattice} and we have shown above that $\mPne$--algebras are in correspondence with semilattices. Through the introduction of basic notions in universal algebra, we will explain how this correspondence is functorial and generalize the core idea behind it.
+A set equipped with an idempotent, commutative and associative binary operation is called a \textbf{(join/meet)-semilattice} and we have shown above that $\mPne$--algebras are in correspondence with semilattices. Through the introduction of basic notions in universal algebra, we will explain how this correspondence is functorial and generalize the core idea behind it.
 %Universal algebra
 \begin{defn}[Algebraic theory]
     An \textbf{algebraic signature} is a set $\Sigma$ of operation symbols along with arities in $\N$, we denote $f:n \in \Sigma$ for an $n$--ary operation $f$ in $\Sigma$. Given a set $X$, one constructs the set of $\Sigma$--\textbf{terms} with variables in $X$, denoted $T_{\Sigma}(X)$ by iterating operations symbols:
@@ -543,7 +543,7 @@ A set equipped with an idempotent, commutative and associative binary operation 
     An \textbf{equation} (sometimes \textbf{axiom}) $E$ over $\Sigma$ is a pair of $\Sigma$--terms over a set of dummy variables. We will call the tuple $(\Sigma, E)$ an \textbf{algebraic theory}.
 \end{defn}
 \begin{defn}[$(\Sigma, E)$--algebras]
-    Given a signature $\Sigma$ and a set of equations $E$ over this signature, a $(\Sigma, E)$--\textbf{algebra} is a set $A$ along with operations $f^A: A^n \rightarrow A$ for all $f:n \in \Sigma$ such that the pair of terms in $E$ are always equal when the dummy variables are quantified over all of $A$. We usually denote $\Sigma^A$ for the set operations $f^A$.
+    Given a signature $\Sigma$ and a set of equations $E$ over this signature, a $(\Sigma, E)$--\textbf{algebra} is a set $A$ along with operations $f^A: A^n \rightarrow A$ for all $f:n \in \Sigma$ such that the pair of terms in $E$ are always equal when the operation symbols and dummy variables are instantiated in $A$. We usually denote $\Sigma^A$ for the set operations $f^A$.
 \end{defn}
 \begin{exmps}\label{exmps-algebras}
     As is suggested by the terminology, the common algebraic structures can be define with simple algebraic theories.
@@ -560,13 +560,13 @@ We also have homomorphisms.
 \end{defn}
 The category of $(\Sigma,E)$--algebras and their homomorphisms (with the obvious composition and identities) is denoted $\Alg(\Sigma,E)$.
 \begin{exmp}[$\Sigma_{\textsf{S}}, E_{\textsf{S}}$]
-    Recall in Example \ref{exmp-pnesem} that $\mPne$--algebras correspond with semilattices. Formally, the theory of semilattices has a single binary operation $\Sigma_{\textsf{S}} = \{\oplus : 2\}$ satisfying the following equations in $E_{\textsf{S}}$:
+    Recall in Example \ref{exmp-pnesem} that $\mPne$--algebras correspond to semilattices. Formally, the theory of semilattices has a single binary operation $\Sigma_{\textsf{S}} = \{\oplus : 2\}$ satisfying the following equations in $E_{\textsf{S}}$:
     \begin{align*}
         x \oplus x &= x &&\text{$I$}\\
         x \oplus y &= y \oplus x &&\text{$C$}\\
         (x\oplus y) \oplus z &= x\oplus (y \oplus z). &&\text{$A$}
     \end{align*}
-    Up to a couple of missing functoriality argument, we have shown that the categories $\textbf{Set}^{\mPne}$ and $\Alg(\Sigma_{\textsf{S}}, E_{\textsf{S}})$ are isomorphic. We say that $(\Sigma_{\textsf{S}}, E_{\textsf{S}})$ is an \textbf{algebraic presentation} of the monad $\mPne$.
+    Up to a couple of missing functoriality arguments, we have shown that the categories $\textbf{Set}^{\mPne}$ and $\Alg(\Sigma_{\textsf{S}}, E_{\textsf{S}})$ are isomorphic. We say that $(\Sigma_{\textsf{S}}, E_{\textsf{S}})$ is an \textbf{algebraic presentation} of the monad $\mPne$.
 \end{exmp}
 %Term Monad
 It turns out all algebraic theories present at least one monad.
@@ -602,7 +602,7 @@ Unfortunately, the terms monads are not very simple to work with and it is often
 \end{exmps}
 %Quickly: Lawvere Theories
 \begin{rem}[Lawvere's way]
-    There is another way to do universal algebra \textit{more categorically} still very much linked to monads: Lawvere theories. Algebras over a Lawvere theory are defined more abstractly using the categorical language and on this account, they enjoy straightforward generalization through enrichment or lifting to higher order categories.
+    There is another way to do universal algebra \textit{more categorically} still very much linked to monads: Lawvere theories. Algebras over a Lawvere theory are defined more abstractly using the categorical language and, on this account, they enjoy straightforward generalization through enrichment or lifting to higher order categories.
 \end{rem}
 \section{POV: Computer Programs}
 %Moggi's idea
