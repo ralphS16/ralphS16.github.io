@@ -146,30 +146,30 @@ We show four results in increasing order of complexity to demonstrate diagram ch
     ($\Rightarrow$) Explicitly, we have to show that $\alpha : A' \leftarrow A \rightarrow C : g \circ f$ is the pullback of $g' \circ f' : A' \rightarrow C' \leftarrow C:\gamma$. The commutativity $g'\circ f' \circ \alpha = \gamma \circ g \circ f$ implies this is already a cone over the cospan we just described. Now, suppose there is another cone over this cospan, namely, there exists morphisms $p_{A'}: X \rightarrow A'$ and $p_C: X \rightarrow C$ satisfying $g'\circ f' \circ p_{A'} = \gamma \circ p_C$ as depicted in \eqref{diag-pastingproof}.
     \begin{equation}\label{diag-pastingproof}
         \begin{tikzcd}
-            X \arrow[rrrd, "p_C", bend left] \arrow[rdd, "p_{A'}"', bend right] \arrow[rrd, "!_B", dashed, shift left] \arrow[rd, "!_A"', dashed] & & & \\
+            X \arrow[rrrd, "p_C", bend left] \arrow[rdd, "p_{A'}"', bend right] \arrow[rrd, "{!}_B", dashed, shift left] \arrow[rd, "{!}_A"', dashed] & & & \\
             & A \arrow[r, near start, "f"] \arrow[d, "\alpha"'] \arrow[rd, "\pullback", phantom, very near start] & B \arrow[r, "g"] \arrow[d, "\beta"'] \arrow[rd, "\pullback", phantom, very near start] & C \arrow[d, "\gamma"] \\
             & A' \arrow[r, "f'"'] & B' \arrow[r, "g'"'] & C'
         \end{tikzcd}
     \end{equation}
-    Notice that composing $p_{A'}$ with $f'$, we obtain a cone over the cospan in the right square and by universality of $B$, this yields a unique morphism $!_B: X \rightarrow B$ satisfying $g \circ !_B = p_C$ and $\beta \circ !_B = f' \circ p_{A'}$. This second equality yields cone over the cospan in the left square, thus we get a unique morphism $!_A : X \rightarrow A$ satisfying $\alpha \circ !_A = p_{A'}$ and $f \circ !_A = !_B$. Composing the last equality with $g$, we get
-    \[g \circ f \circ !_A = g \circ !_B = p_C,\]
-    showing that $!_A$ is a morphism of cones over the cospan in the rectangle.
+    Notice that composing $p_{A'}$ with $f'$, we obtain a cone over the cospan in the right square and by universality of $B$, this yields a unique morphism ${!}_B: X \rightarrow B$ satisfying $g \circ {!}_B = p_C$ and $\beta \circ {!}_B = f' \circ p_{A'}$. This second equality yields cone over the cospan in the left square, thus we get a unique morphism ${!}_A : X \rightarrow A$ satisfying $\alpha \circ {!}_A = p_{A'}$ and $f \circ {!}_A = {!}_B$. Composing the last equality with $g$, we get
+    \[g \circ f \circ {!}_A = g \circ {!}_B = p_C,\]
+    showing that ${!}_A$ is a morphism of cones over the cospan in the rectangle.
 
     What is more, any other morphism $m: X \rightarrow A$ of cones over this cospan must satisfy
     \[g \circ f \circ m = p_C \text{ and } \beta \circ f \circ m = f' \circ \alpha \circ m = f' \circ p_{A'},\]
-    and thus, $f\circ m$ is a morphism of cones over the cospan in the right rectangle. By uniqueness, $f\circ m = !_B$, so $m$ is also a morphism of cones over the cospan in the left square, and by universality of $A$, $m = !_A$.
+    and thus, $f\circ m$ is a morphism of cones over the cospan in the right rectangle. By uniqueness, $f\circ m = {!}_B$, so $m$ is also a morphism of cones over the cospan in the left square, and by universality of $A$, $m = {!}_A$.
     
-    ($\Rightarrow$) Explicitly, we have to show that $\alpha: A' \leftarrow A \rightarrow B: f$ is the pullback of $f': A' \rightarrow B \leftarrow B: \beta$. 
+    ($\Leftarrow$) Explicitly, we have to show that $\alpha: A' \leftarrow A \rightarrow B: f$ is the pullback of $f': A' \rightarrow B \leftarrow B: \beta$. 
     \begin{equation}
     \begin{tikzcd}
-X \arrow[rdd, "p_{A'}"', bend right] \arrow[rd, "!_A"', dashed] \arrow[rrd, "p_B", bend left] &                     &                                            &            \\
+X \arrow[rdd, "p_{A'}"', bend right] \arrow[rd, "{!}_A"', dashed] \arrow[rrd, "p_B", bend left] &                     &                                            &            \\
                                                & A \arrow[r, "f", near start] \arrow[d, "\alpha"'] & B \arrow[r, "g"] \arrow[d, "\beta"'] \arrow[rd, "\pullback", phantom, very near start] & C \arrow[d, "\gamma"] \\
                                                & A' \arrow[r, "f'"']                & B' \arrow[r, "g'"']                                  & C'          
 \end{tikzcd}
     \end{equation}
-    Let $p_{A'} : A' \leftarrow X \rightarrow B: p_B$ be a cone over the cospan of the left square (i.e.: $\beta \circ p_B = f' \circ p_{A'}$). The commutativity of \eqref{diag-pasting} implies $p_{A'}: A' \leftarrow X \rightarrow C: g \circ p_B$ is a cone over the rectangle cospan, then by universality of $A$, there exists a unique $!_A: X \rightarrow A$ such that $g \circ f \circ !_A =  g \circ p_B$ and $\alpha \circ !_A = p_A$. Moreover, with the commutativity of the left square, we find that $f \circ !_A$ is a morphism of cones over the right cospan satisfying $\beta \circ f \circ !_A$ and $g \circ f \circ !_A = g \circ p_B$. But since our hypothesis on $p_{A'}$ and $p_B$ implies $p_B$ is a morphism of cones satisfying the same equations, by universality of $B$, $p_B = f \circ !_A$. Therefore, $!_A$ is a morphism of cone over the left cospan.
+    Let $p_{A'} : A' \leftarrow X \rightarrow B: p_B$ be a cone over the cospan of the left square (i.e.: $\beta \circ p_B = f' \circ p_{A'}$). The commutativity of \eqref{diag-pasting} implies $p_{A'}: A' \leftarrow X \rightarrow C: g \circ p_B$ is a cone over the rectangle cospan, then by universality of $A$, there exists a unique ${!}_A: X \rightarrow A$ such that $g \circ f \circ {!}_A =  g \circ p_B$ and $\alpha \circ {!}_A = p_A$. Moreover, with the commutativity of the left square, we find that $f \circ {!}_A$ is a morphism of cones over the right cospan satisfying $\beta \circ f \circ {!}_A = f' \circ \alpha \circ {!}_A = f'\circ p_{A'} = \beta \circ p_B$ and $g \circ f \circ {!}_A = g \circ p_B$. But since our hypothesis on $p_{A'}$ and $p_B$ implies $p_B$ is a morphism of cones satisfying the same equations, by universality of $B$, $p_B = f \circ {!}_A$. Therefore, ${!}_A$ is a morphism of cone over the left cospan.
     
-    Finally, if $m: X \rightarrow A$ also satisfies $\alpha \circ m = p_{A'}$ and $f \circ m = p_B$. We find in particular that $m$ is a morphism of cones over the rectangle cospan, hence by universality of $A$, $m = !_A$.
+    Finally, if $m: X \rightarrow A$ also satisfies $\alpha \circ m = p_{A'}$ and $f \circ m = p_B$. We find in particular that $m$ is a morphism of cones over the rectangle cospan, hence by universality of $A$, $m = {!}_A$.
 \end{proof}
 
 
