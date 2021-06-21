@@ -114,11 +114,11 @@ ul.twocolumns li {
 td.project-title {
 	font-family: 'tgPagellaBold';
 	font-size: 120%;
+	cursor:pointer;
 }
 td.project-title:hover {
 	background-color: #dadada;
 }
-
 tr.project-card {
 	display: none;
 }
