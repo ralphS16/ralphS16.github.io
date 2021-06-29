@@ -1,18 +1,18 @@
 @font-face {
-    font-family: 'tgPagella';
-    src: url('src/Fonts/texgyrepagella-regular-webfont.woff') format('woff');
+    font-family: 'Libertine';
+    src: url('src/Fonts/LinuxLibertine/LinLibertine_R.otf') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
-    font-family: 'tgPagellaBold';
-    src: url('src/Fonts/texgyrepagella-bold-webfont.woff') format('woff');
+    font-family: 'LibertineBold';
+    src: url('src/Fonts/LinuxLibertine/LinLibertine_RB.otf') format('woff');
     font-weight: bold;
     font-style: normal;
 }
 
 body {
-	font-family: 'tgPagella', Sans-Serif;
+	font-family: 'Libertine', Sans-Serif;
 	font-size: 16pt;
 	color: #000000;
 	padding:0px;
@@ -47,17 +47,17 @@ h1 {font-size: 200%;}
 h2 {font-size: 140%;}
 h3 {font-size: 130%;}
 h4 {font-size: 110%;}
-p {font-size:  100%;}
+p  {font-size: 100%; text-align: justify;}
 ul {font-size: 100%;}
 h1, h2 {
-	font-family: 'tgPagellaBold', 'Segoe UI', Sans-Serif;
+	font-family: 'LibertineBold', 'Segoe UI', Sans-Serif;
 	font-weight: normal;
 	margin: 0.1em 0.1em 0.2em 0.1em;
 	color: #000000;
 }
 
 h3 {
-	font-family: 'tgPagellaBold', 'Segoe UI', Sans-Serif;
+	font-family: 'LibertineBold', 'Segoe UI', Sans-Serif;
 	text-decoration: underline;
 	color: #000000;
 }
@@ -112,7 +112,7 @@ ul.twocolumns li {
 }
 
 td.project-title {
-	font-family: 'tgPagellaBold';
+	font-family: 'LibertineBold';
 	font-size: 120%;
 	cursor:pointer;
 }
