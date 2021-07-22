@@ -8,6 +8,7 @@ function openProject(e){
 		}
 		card.style.display = 'table-row';
 	}
+	window.location.hash = '#'+e.target.id;
 }
 window.onload = function(){
 	for (let proj of document.getElementsByClassName('project-title')){

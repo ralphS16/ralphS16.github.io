@@ -12,9 +12,9 @@
 		<div class="content">
 		<div class="section-card">
 		<h1><a href="src/pic2019.jpg" style="text-decoration:none;color:#222d3e;">Ralph Sarkis</a></h1>
-		<p> I am a PhD student in theoretical computer science at ENS de Lyon working under the supervision of Matteo Mio and Daniela Petrişan. I have a masters in theoretical computer science from ENS de Lyon and a BSc. in Mathematics and Computer Science from McGill University. My main interests are category theory, theory of computation and logic, but I am also an amateur of abstract algebra and algorithm design. My non-academic interests include but are not limited to squash, vegan cooking, programming 
-		(Python and JavaScript mostly), tech news and Spikeball. </p>
-		<p style="font-size:80%;">Contact: firstname.lastname@ens-lyon.fr</br>
+		<p> I am a PhD student in theoretical computer science at <a href="http://www.ens-lyon.fr/LIP/">LIP</a> (ENS de Lyon) working under the supervision of Matteo Mio and Daniela Petrişan. I have a masters in theoretical computer science from ENS de Lyon and a BSc. in Mathematics and Computer Science from McGill University. My main interests are category theory, theory of computation and logic, but I am also an amateur of abstract algebra and algorithm design. My non-academic interests include but are not limited to playing squash, vegan cooking, programming 
+		(Python and JavaScript mostly), watching YouTube and playing Spikeball.</p>
+		<p style="font-size:80%;text-indent: 0em;">Contact: firstname.lastname@ens-lyon.fr</br>
 		CV: <a href="src/CV_Eng_RalphSarkis.pdf">English</a>, <a href="src/CV_Fr_RalphSarkis.pdf">Français</a></br>
 		Pronouns: <a href="http://lgbtmath.org/index.html">he/him</a>
 		</p>
@@ -208,21 +208,66 @@
 		<div class="section-card">
 			<h2>Miscellaneous</h2>
 				<table class="projects">
-					<tr class="project-row"><td class="project-title" id="explain">For Non-Mathematicians</td></tr>
+					<tr class="project-row"><td class="project-title" id="explain">For Nonmathematicians</td></tr>
 					<tr class="project-card" id="explain-card"><td><p>
-						As you might have inferred from the rest of my website, I really enjoy teaching. Unfortunately, my day-to-day activties involve too many levels of abstraction for me to easily describe them to nonexperts. Thanks to years of practice, I was able to find very good (in my opinion) answers to the question "What do you study?" that helps my family and friends better understand what I do.
-						
-						Here are the best relatively short and simple explainations I could come up to describe my favorite fields of study.
+						<p>
+							As you might have inferred from the rest of my website, I really enjoy teaching. Unfortunately, my day-to-day activties involve too many levels of abstraction for me to easily describe them to nonexperts. Thanks to years of practice, I was able to find very good (in my opinion) answers to the question "What do you study?" that help my family and friends better understand what I do. Here are the best relatively short and simple explainations I could come up with to describe my favorite fields of study (in no particular order).
+						</p>
 						
 						<h3>Complexity Theory</h3>
 						<p>
-							This one is heavily inspired from examples in Giorgi Japaridze's <a href="https://doi.org/10.1016/S0168-0072(03)00023-X"><i>Introduction to Computability Logic</i></a>.
+							This one is heavily inspired from examples in <a href="http://www.csc.villanova.edu/~japaridz/">Giorgi Japaridze</a>'s <a href="https://doi.org/10.1016/S0168-0072(03)00023-X"><i>Introduction to Computability Logic</i></a>.
+						</p>
+						<p>
+							The main goal of complexity theory is to answer the question "What makes a problem hard or easy to solve with a computer?". Of course, there are many angles to attack this question, for example, one needs to define what is a computer, what is a problem, and what it means for a problem to be hard or easy. I will save these discussions for later and only demonstrate the difficulty in answering this question. Let me describe three different tasks varying in complexity.
+						</p>
+						<p>
+							Your first task is to win at chess against the best artificial intelligence designed to optimally play chess. To make this easier on you, you can control the white pieces (you play first) and it is considered a win for you if the game resolves in a stalemate (tie). You probably know that this is almost impossible to do; all grandmasters of chess (the best human players) cannot compete even with AI players built decades ago.
+						</p>
+						<p>
+							Your second task is to play two games of chess simultaneously against the best AI and win (or tie) on both boards. To make it slightly fairer, on one board, you control the white pieces, and on the other board, you control the black pieces. I will let you convince yourself that the second task is harder than the first one because the latter is included in the former. Namely, to complete the second task, you must win at chess against the AI and hence complete the first task.
+						</p>
+						<p>
+							Your third task is to play two games of chess simultaneously against the best AI and win (or tie) on <b>at least one</b> board. Again, there is a board where you play whites and a board where you play blacks. At first sight, this task may look harder than the first one (because you are playing on two boards at once) and easier than the second one (because you can lose on one board). In any case, this should still be hopeless.
+						</p>
+						<p>
+							Surprisingly, the third task is the easiest to complete and anyone could do it after being told the strategy. You simply have to copy the moves done by the AI on one board on the other board. That is, you let the AI play its first move on the board where it plays whites and you do the same move on the board where you play whites, then you wait for the AI's answer to that move and you replicate it on the other board. Whatever happens during the game, if the AI wins (or ties) on one board, you automatically win (or tie) on the other board, thus you complete the task.
+						</p>
+						<p>
+							It is very fascinating to me (and I guess to most complexity theorists) how these three tasks with a very similar description have very different intrinsic difficulties. To rephrase the ultimate goal of complexity theory, it would be wonderful if we could tell how hard it is to solve a problem by looking only at its statement.
+						</p>
+						<p>
+							As I have mentioned, there is a lot more to complexity theory that was not advertised in this toy example. Still, I hope this makes you wonder more deeply about the original question as many computer scientists do every day.
 						</p>
 
 						<h3>Semantics</h3>
 						<p>
-
+							My main field of research is called <em>categorical semantics</em>. I have yet to come up with a quick layman explanation for the term 'categorical', but I think I can give you the gist of what studying the semantics of programming languages means. 
 						</p>
+						<p>
+							It is infamously hard to predict the result of executing a computer program by looking at its code. Of course, humans (with programming experience) are exceptionally good at this task; if you ask a programmer to look at some simple code written by another human, they will surely be able to describe what it does. However, this takes time and as the code gets longer and more complex, humans are more likely to make mistakes. This is the main reason why bugs exist — ironically, the origin of the word "bug" suggests that the error is not the programmer's fault. The principal objective of program semantics is to help design programs that can understand how other programs behave by looking at their code.
+						</p>
+						<p>
+							The term <em>semantics</em> comes from a central step in the analysis of programs where we give meaning to each part of the code before bringing it together into information about the whole program. The details vary wildly depending on the method used, how the program is specified (e.g.: what programming language), and the properties of the program that are considered. Anyway, you can basically think of this step as a translation of the code into abstract mathematical objects which themselves have to be interpreted to understand the result.
+						</p>
+						<p>
+							Let me use a cooking analogy to give more intution about the process described above. It is also hard to predict the result of a recipe without following its every step. This time, even a human (with cooking experience) will have a hard time being able to tell with good accuracy what the end result is supposed to look like, if it will taste good to them, etc. — I concede that a very good chef who has seen similar recipes before will fare better, but if they have never seen how, say, puff pastry is made, I doubt they can foresee the transformation from layers of dough and butter into flaky, crusty and light pastries.
+						</p>
+						<p>
+							One could imagine a program that reads a recipe and generates the outcome of each step as a sequence of chemical reactions (these replace the abstract mathematical objects in the programming story) that will happen during the cooking. The program could then extract some useful information to tell us whether there is too much compounds that taste like burnt food, there is not enough chocolate flavor compounds, the Maillard reaction has produced enough brown color, enough water evaporated to get a crispy crust, and so on...
+						</p>
+						<p>
+							It is hard to say with certainty which of analyzing code or recipes is easiest (see my explaination of complexity theory), but I would certainly love it if either are able to do either in my lifetime.
+						</p>
+						<!-- Paragraph on formal verificiation? This helps in the field of formal verification (to name one application) where we often want to know whether a program fits a given specification. As an example, let us consider software that is run on a self-checkout machine in a supermarket, here are some questions we would like to answer to ensure it works well:
+						</p>
+						<ul>
+							<li>Is there a possibility to enter an undesired infinite loop? The execution of this software can be seen as a loop that handles one customer, resets after they payed and welcomes the next customer until . If the machine gets into another infinite loop, the checkout process could not be completed and a </li>
+							<li>Is there always the possibility to reset the checkout process? (This avoid the necessity of restarting the machine when </li>
+							<li>Does it compute the right taxes regardless of what was scanned?</li>
+						</ul>
+						<p> -->
+
 					</td></tr>
 					<tr class="project-row"><td class="project-title" id="ideas">Hodgepodge of Ideas </td></tr>
 					<tr class="project-card" id="ideas-card"><td><p>

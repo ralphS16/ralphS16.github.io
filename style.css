@@ -47,7 +47,11 @@ h1 {font-size: 200%;}
 h2 {font-size: 140%;}
 h3 {font-size: 110%;}
 h4 {font-size: 110%;}
-p  {font-size: 100%; text-align: justify;}
+p  {
+	font-size: 100%;
+	text-align: justify;
+	text-indent: 1em;
+}
 ul {font-size: 100%;}
 h1, h2 {
 	font-family: 'LibertineBold', 'Segoe UI', Sans-Serif;
