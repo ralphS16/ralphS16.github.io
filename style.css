@@ -21,7 +21,7 @@ body {
 
 .content {
 	padding: 0.2em;
-	width: 60%;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	background-color: #afafaf;
@@ -29,11 +29,17 @@ body {
 	border-radius: 2px;
 }
 
-@media (min-resolution: 200dpi){
+@media (min-width: 600px){
 	.content {
-		width: 100%;
+		width: 80%;
 	}
 }
+@media (min-width: 1000px){
+	.content {
+		width: 60%;
+	}
+}
+
 
 .section-card {
 	display:block;
