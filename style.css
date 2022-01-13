@@ -3,12 +3,14 @@
     src: url('src/Fonts/LinuxLibertine/LinLibertine_R.otf') format('woff');
     font-weight: normal;
     font-style: normal;
+	font-display: swap;
 }
 @font-face {
     font-family: 'LibertineBold';
     src: url('src/Fonts/LinuxLibertine/LinLibertine_RB.otf') format('woff');
     font-weight: bold;
     font-style: normal;
+	font-display: swap;
 }
 
 body {
@@ -78,10 +80,10 @@ h4 {
 	color: #000000;
 }
 a {
-	color: #158faa;
+	color: #00758a;
 }
 a:visited {
-	color: #341f97;
+	color: #55038b;
 }
 
 table {
