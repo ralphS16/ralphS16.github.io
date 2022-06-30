@@ -1,0 +1,700 @@
+        html {
+		background:#000;
+		}
+       body {
+		margin:0 16px 2px 16px;
+                font-size: 18px;		
+		}
+	a { color: #11B; text-decoration: none; font-weight:bold; }
+	:link, :visited {
+		color: #11B;
+		text-decoration: none;
+	}
+	:link:active, :visited:active,
+	:link:hover, :visited:hover,
+	a:active, a:hover { color: #A46895;  }
+	a[target]:active,a[target]:hover,a[onclick]:active,a[onclick]:hover {cursor:crosshair;}
+
+	img {border:0}
+
+	h1, h2, h3 {
+		margin: 0px;
+		padding: 0px;
+	        }
+        fieldset {border:0;}
+	input {font-size:.9em;}
+	input[type=button], input[type=submit] {font-size:.8em;}
+	textarea {font-size:1em; line-height: 1.125; resize: both; }
+        input, textarea, select {background:#BBB; color:#000;}
+        input:focus, textarea:focus {background:#FFF;}
+
+
+        #banner {
+                color:#EFEED4;
+                background:#000 url(images/cafeneon.jpg) no-repeat;
+                background-position:center left;
+                padding:10px 15px;
+		margin: 0;
+		border-bottom:10px solid #22E;
+                }
+        #banner h1 {
+                color:#EFEED4;
+                font-family: Titillium title, trebuchet ms, comic sans ms, verdana, sans-serif;
+                font-size: 1.8em; 
+                font-size-adjust: 0.49; 
+                font-weight:normal;
+                text-align:center;
+                }
+
+	#banner a,
+        #banner a:link,
+        #banner a:visited,
+        #banner a:active,
+        #banner a:hover {
+		font-family: Titillium title, trebuchet ms, comic sans ms, verdana, sans-serif;
+		font-size: 1.8em;
+		font-size-adjust: 0.49;
+                font-weight:normal;
+		color: #EFEED4;
+		text-decoration: none;
+		}
+
+	.description {
+		font-family:verdana, arial, sans-serif;
+		color:#EFEED4;
+		font-size: .9em;
+  		text-transform:none;
+		text-align:center;
+		}
+	.skip {
+		position: absolute;
+		left: -500em;
+		}
+	
+	.frame{
+		max-width:45em;
+		margin: 0 auto;
+		position:relative;
+		}
+	#links {
+		float:right;
+ 		margin: 0 0 20px 20px;
+  		position:relative;
+		width:300px;
+		padding:50px 5px 0 5px;
+		border-top: 10px solid #222;
+		background: #222 url(images/cafe2B.jpg) no-repeat;
+		background-position: top left;
+		}
+	#links h2 {
+		font-family:STIX Two Text, georgia, times, verdana, arial, sans-serif;
+		color:#FFF;
+		background: #222;
+		font-size: .9em;
+		font-weight:normal;
+  		padding:2px;
+  		margin-top:10px;
+		letter-spacing: .1em;
+		border-bottom:1px dotted #FFF;
+		text-align:center;
+		margin-bottom:5px;
+		}
+	.linksfooter {
+		margin: 10px -5px 0 -5px;
+		padding-bottom:64px;
+		border-bottom: 10px solid #222;
+		background: url(images/cafe2.jpg) no-repeat;
+		background-position: bottom center;
+		}
+
+	#pane {
+		float:right;
+		margin:10px 50px 10px 10px;
+ 		position:relative;
+		width:40%;
+		background:#EEE;
+		padding:0;
+		}
+	
+	.search {
+		font-family:verdana, arial, sans-serif;
+		color:#333;
+		font-size:.85em;
+		font-weight:normal;
+  		background:#999;
+  		text-align:center;
+  		border:medium ridge #666;
+  		line-height:140%;
+  		padding:5px;
+		}
+
+	.blog {
+  		padding-top:20px;
+   		padding-bottom:20px;
+		background:#EEE; 
+		color:#000;
+		}
+
+	.blogbody {
+		font-family:STIX Two Text, georgia, times, verdana, arial, serif;
+		font-size: .9em;
+		font-weight:normal;
+  		background:#EEE;
+                margin-left:50px;
+                margin-right:50px;
+  		line-height:1.5;
+ 		}
+
+	.blogbody a {text-decoration: none;}
+	#menu:hover a,
+	#footer:hover a,
+	.extended:hover a,
+	.posted:hover a,
+	.comments-post:hover a,
+	.newpost:hover a,
+	.mathblurb:hover a,
+	.blogbody p:hover a,
+	.blogbody dt:hover a,
+	.blogbody dd:hover a,
+	.blogbody li:hover a  {
+		text-decoration: underline;
+		}
+	.blogbody a:link,
+	.blogbody a:visited,
+	.blogbody a:active,
+	.blogbody a:hover {
+		font-weight: bold;
+		}
+
+	.mathblurb {margin:5px 0px;border-bottom:1px dotted #FFF;}
+	p.mathblurb {font-size:.7em;}
+
+        pre, code {font-size: 1em;}
+        pre {overflow:auto;}
+        .extendedcharset {font-family: STIX Two Text, times, lucida grande, georgia, verdana, arial, serif;}
+
+         #more {padding-top: 20px; border-top: 2px solid #5C6500;}
+
+	h2.title{
+		font-family:STIX Two Text, georgia, times, verdana, arial, serif;
+		font-size: 1.25em;
+		margin-bottom: -5px;
+		margin-left:25px;
+		}
+	h3.title {
+		font-family:STIX Two Text, georgia, times, verdana, arial, serif;
+		color:#004D08;
+		font-weight:normal;
+		font-size: 1.375em;
+		}			
+
+	#menu {
+		font-family:STIX Two Text, georgia, times, verdana, arial, serif;
+		font-size: .9em; 
+		font-weight:bold;
+  		margin-bottom:15px;
+		text-align:center;
+		padding: 0 5px;
+		}		
+
+	.date	{ 
+		font-family: STIX Two Text, georgia, times, serif; 
+		font-size: 23px; 
+		background: url(images/tinycup-new.jpg) no-repeat;
+		background-position:center left;
+		color: #A43374; 
+		padding-left:28px;
+		margin:0 50px 20px 50px;
+		}			
+		
+	.posted	{ 
+		font-family:verdana, arial, sans-serif; 
+		font-size: .8em;
+                font-weight:bold;
+		color: #000000; 
+		margin-bottom:25px;
+		}
+	h4.posted {
+		font-family:STIX Two Text, georgia, times, serif;
+		font-size:.9em;
+		color:#004D08;
+		font-weight:normal;
+		margin:.5em 0;
+		}
+	
+		
+	.calendar {
+		font-family:verdana, arial, sans-serif;
+		color:#EEE;
+		font-size: .85em;
+		font-weight:normal;
+  		background:#222;
+  		line-height:140%;
+  		padding:2px;
+   		text-align:center;	
+		}
+	.calendar a {color: #55F;}
+	.calendar a:active, .calendar a:hover { color: #FFD9F6;  }
+        .calendar th, .calendar td {
+                font-weight:normal;
+                font-size: .85em;
+		color:#EEE;
+  		background:#222;
+                padding:3px;
+                line-height:140%; 
+                }
+	 div.calendar {margin-left:30px; overflow:auto;}
+        .today {border: 2px solid #55F;}
+	
+	.calendarhead {	
+		font-family:verdana, arial, sans-serif;
+		color:#EEE;
+		font-size: .85em;
+		font-weight:bold;
+  		line-height:140%;
+  		padding:2px;					
+		}	
+	
+	.side {
+		font-family:verdana, arial, sans-serif;
+		color:#EFEED4;
+		font-size: .75em;
+		font-weight:normal;
+  		background:#222;
+  		line-height:140%;
+  		padding:2px;				
+		}	
+	.side a {color: #55F; font-weight: normal;}
+	.side a:active, .side a:hover { color: #FFD9F6;  }
+		
+        blockquote.side {
+                font-family:STIX Two Text, georgia, times, verdana, arial, serif;
+                margin:10px;
+                }
+
+        .authors img{margin:5px;vertical-align:middle;}
+        .authors li{list-style-type:none;}
+
+	.syndicate {
+		font-family:verdana, arial, sans-serif;
+		font-size:.675em;
+		font-weight:bold;		
+  		line-height:200%;
+  		text-align:center;
+  		}	
+	.syndicate a { color: #FFF;}
+		
+	   .powered {
+		position: relative;
+                font-family:verdana, arial, sans-serif;
+                font-weight:bold;
+                color:#666;
+                font-size: 10px;
+                background-image: url(images/MTpowered.gif);
+                background-repeat: no-repeat;
+                width: 128px; height: 36px;  
+                left: 86px; text-align: center;
+                margin:10px 0 5px 0;
+		}
+           .powered a {display: block; color: #666; padding: 20px 0 0 36px;}
+
+           .itemdate {text-align: center;background:#229; color:#FFF;}
+           .archiveyear {font-weight:bold; display:block}
+           .archives {width: 15em; max-width: 300px;}
+
+           ul.blogroll {margin: 0; padding: 0; width: 295px;}
+           .blogroll li, li.sub2 li {list-style-type: none; position: relative;}
+           .blogroll li.sub2 {list-style-type: circle;}
+           ul.blogroll ul {display: none; width: 200px;}
+           .blogroll li:hover ul.sub2, li.sub2:hover ul {
+                   display: block;
+                   position: absolute;
+                   z-index:1;
+                   top: -5px;
+                   left: 100%; margin-left: -520px;
+		   padding: 5px 5px 5px 20px;
+		   background: #222; color:#EEE;
+                   }
+            .blogroll li.sub2:hover ul {
+                   margin-left: -435px; top: -10px;
+                   padding: 5px;
+                   border: 2px red solid;
+                    }
+            .blogroll li.sub a {font-weight: bold;}
+            .blogroll a,.blogroll li.sub2 a {display: block; font-weight: normal;}
+            .blogroll li.sub:hover  a {color: red;}
+            .blogroll li.sub:hover li a {color: #55F;}
+            .blogroll li.sub a:hover, .blogroll li.sub li a:hover {color: #FFD9F6;}
+
+            ul.recentposts, ul.recentcomments {margin: 0; padding: 0; width: 295px;}
+            ol.recentposts li {list-style-position: inside; position: relative;}
+            ul.recentposts li, ul.recentcomments li {list-style-type: none; position: relative;}
+            ol.recentposts ul,ul.recentposts ul {display: none; width: 250px;}
+            .recentposts li:hover ul {
+                   display: block;
+                   list-style-type: none;
+                   position: absolute;
+                   z-index:1;
+                   top: -10px;
+                   left: 100%; margin-left: -570px;
+                   background: #222; color:#EEE;
+		   padding: 5px;
+                   border: 2px #CFF3FF solid;
+                   }
+	ul.recentposts a {display: block;}
+	ul.recentcomments ul {margin-left:10px;}
+	li.recentcomments:before {content: '\0000B7 ' }
+	li.recentcomments {display:inline;}
+	ul.recentcomments  li li a {display:inline; font-size:.85em;}
+	.recentposts li.recentcomments:hover ul {margin-left: -500px;}
+ 
+	.comments-body {
+		font-family:STIX Two Text, georgia, times, verdana, arial, sans-serif;
+		color:#000;
+		font-weight:normal;
+  		background:#EEE;
+  		line-height:140%;
+ 		padding:10px 0 10px 0;
+  		border-bottom:1px dotted #5C6500; 					
+		}
+	fieldset.blogbody {line-height:25px;border-bottom:0;}
+	.allowed {
+                font-family:verdana, arial, sans-serif;
+		font-size:.85em;
+		font-weight:normal;
+  		line-height:110%;
+                }
+        .allowed code{color:#630;}
+        .allowed dl{margin-top: -10px;}
+        .allowed dt{color: #A30;}
+
+        .comments-nest-box {
+		margin-top:3px;
+		padding:2px 0 1px 10px;
+		border-left:3px solid #004D08;
+	        }		
+
+	.comments-post {
+		font-family:verdana, arial, sans-serif;
+		color:#000;
+		font-size: .8em;
+		font-weight:bold;
+  		background:#EEE;
+		}	
+	a.comments-post {
+		color:#11B
+		}
+	
+	.trackback-url {
+		font-family:STIX Two Text, georgia, times, verdana, arial, sans-serif;
+		color:#666;
+		font-size:.9em;
+		font-weight:normal;
+  		background:#EEE;
+  		line-height:140%;
+ 		padding:5px;
+                margin:20px 50px 10px 50px;		
+ 		border:1px dotted #5C6500; 					
+		}
+
+
+	.trackback {
+		font-family:STIX Two Text, georgia, times, verdana, arial, sans-serif;
+		color:#000;
+		font-weight:normal;
+  		background:#DDD;
+  		line-height:140%;
+ 		padding:10px;	
+ 		border-bottom:1px dotted #5C6500; 					
+		}		
+		
+	.comments-head	{ 
+		font-family:STIX Two Text, georgia, times, verdana, arial, sans-serif; 
+		color: #A43374; 
+		border-bottom:1px solid #5C6500;
+		font-weight:bold;
+		font-size: 1em;
+  		background:#EEE;
+                margin:10px 50px 0 50px;
+		clear:both;
+		}
+	.newpost a {margin-left:50px; font-weight: bold;}
+	
+
+	#banner-commentspop {
+  		color:#EFEED4;
+  		background:#000 url(images/cafeneon_small.jpg) no-repeat;
+  		background-position:center left;
+  		padding:5px 15px 5px 100px;
+  		border-bottom:5px solid #22E;  		  		
+		}
+	#banner-commentspop h1 {
+		font-family: Titillium title, palatino, STIX Two Text, georgia, times, verdana, arial, sans-serif;
+		font-size: 35px;
+		font-size-adjust: 0.49;
+		font-weight: normal;
+		}
+
+	ul.related {padding:0;}
+	.related li {list-style-type: none;}
+
+        .rssbutton {
+                color: #FFF;
+                border-color: #FF6600;
+                border-style: outset;
+                text-decoration: none;
+                padding: 1px 5px 1px 5px;
+                border-width: thin;
+                }
+        .rssbutton:link, .rssbutton:visited{
+                color: #FFF;
+                background-color: #FF6600;
+                }
+        .rssbutton:hover {
+                color: #FFF;
+                background-color: #FF9900;
+                border-color: #FF9900;
+                }
+        .rssbutton:active {
+                color: #FFF;
+                background-color: #FF6600;
+                border-style: inset;
+                }
+        .feedtype {
+                color: #000;
+                background-color: #FFF;
+                margin: 0 -4px 0 0;
+                padding: 0 5px 0 2px;
+                font-weight:normal;
+                }
+        .rssbutton:hover span {
+                color: #666;
+                }
+        .rssbutton:active span {
+                color: #000;
+                }
+
+	table.plaintable {border-collapse:collapse; margin-left:30px;}
+	.plaintable td {border:1px solid #000; padding: 3px;}
+	.plaintable th {padding: 3px;}
+	.plaintable caption {
+		font-weight: bold;
+		font-size:1.1em;
+		text-align:center;
+		margin-left:30px;
+		}
+
+	.figurecaption {color:#630;}
+
+	abbr[title],acronym[title] {border-bottom: 1px dotted black;cursor: help;}
+	span.abbr {border-bottom: 1px dotted black;cursor: help;}
+	*:lang(es),*:lang(de),*:lang(fr),*:lang(el),*:lang(it),*:lang(la) {font-style:italic;}
+	.spellingerror {border-bottom: 1px dotted red;}
+	#footer{
+		padding:5px 10px;
+		background:#EEE;
+		color:#333;
+		line-height:200%;
+		font-size:.7em; font-family:verdana, arial, sans-serif;
+		border-top:1px solid #5C6500;
+		border-bottom:1px solid #5C6500;
+		clear:both;
+		}
+	#footer h2 {display:inline;font-size:1em}
+	#footer dl,#footer dt,#footer dd, #accesscontent dt {
+		display:inline;
+		}
+	#footer dt, .keyboard, #accesscontent dt {
+		background: #CCC;
+		color: #000;
+		border: outset 2px;
+		font-family:verdana, arial, sans-serif;
+		margin-left:5px;
+		padding:1px 2px;
+		}
+	.keyboard, #accesscontent dt {font-size: .7em;}
+	#footer dd {
+		margin-left: 2px;
+		}
+	#accesscontent dd {margin-top: -1.5em;}
+	#accesscontent dl {margin-left: 3em;}
+	#footer dd:before {
+		content: "=";
+		}
+	.inline dt,.inline dd {display:inline}
+	.footnote {font-size: .9em}
+
+	.infopop {
+		margin:-5px 0 0 0;padding:0;
+		background-color:#EEB;
+	}
+	.infopop h1 {
+		text-align:center;
+		font-family:verdana, arial, sans-serif;
+		font-size:.6875em;
+		padding-top:10px;
+	}
+	.infopop p {
+		font-family:verdana, arial, sans-serif;
+		font-size:.6875em;
+		line-height:130%;
+		margin:5px;padding:0;
+	}
+	.infopop fieldset {
+		text-align:right;margin:-15px 15px 0 0;
+	}
+	img.mathlogo {
+		width:65px;height:36px;
+		float:right;
+		padding:5px 0 0 5px;
+		vertical-align:bottom;
+	}
+	img.mathblurb {
+		width:65px;height:36px;
+		float:left;
+		padding:0 5px 0 0;
+		border:none;
+		vertical-align:baseline;
+	}
+	img.validate {
+		width:88px;height:31px
+	}
+	h4.caption {
+		text-align: center;
+		margin: 0px;
+		padding: 0px;
+	}
+	.ve {
+		padding:0 2em 0 2em;
+		font-size: .9em;
+	}
+	li.validation_error {
+		padding-bottom: 1em;
+	}
+	.helpwanted {
+		margin-top: -1.5em;
+		font-size: .7em;
+		text-align: right;
+	}
+	.helpwanted a {font-weight:normal}
+	.numberedEq  > span, .eqno {float:right}
+	img.svglogo {
+		width:47px;height:36px;
+		float:right;
+		padding:5px 0 0 5px;
+	}
+	.side input {max-width:290px;}
+	math[display=block] {overflow:auto;}
+	math { white-space: nowrap }
+	.eqno {float:right}
+	merror {display:inline;font-size:1em;}
+	.blockquotesource {margin-left:1em;}
+	#dethread, #dethread2 {
+		margin-left: 1em;
+		position:absolute;
+		right:50px;
+	}
+	.centeredfigure {
+		margin:auto;
+		text-align:center;
+		overflow: auto;
+	}
+	svg\:svg { display:none; } /* hack to hide SVG content from IE */
+/* Hack for Mozilla bug 449396 */
+[mathvariant="bold"] *  {
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+}
+[mathvariant="italic"] *  {
+  font-style: italic;
+  font-variant: normal;
+  font-weight: normal;
+}
+[mathvariant="bold-italic"] *  {
+  font-style: italic;
+  font-variant: normal;
+  font-weight: bold;
+}
+[mathvariant="sans-serif"] *  {
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+}
+[mathvariant="bold-sans-serif"] *  {
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+}
+[mathvariant="sans-serif-italic"] *  {
+  font-style: italic;
+  font-variant: normal;
+  font-weight: normal;
+}
+[mathvariant="sans-serif-bold-italic"] *  {
+  font-style: italic;
+  font-variant: normal;
+  font-weight: bold;
+}
+/* The STIX Two fonts are licensed under the SIL Open Font License, Version 1.1, http://scripts.sil.org/OFL */
+
+math {font-family: STIX Two Math;}
+mtext {font-family: STIX Two Text;}
+.mathscript {
+    font-variant-alternates: styleset(ss01); /* Recommended syntax */
+    font-feature-settings: "ss01" on;        /* For browsers which don't support the above */
+}
+
+@font-face {
+    font-family: STIX Two Text;
+    src: local('STIX Two Text'), local('STIX2Text-Regular'),
+         url('../fonts/STIX2/STIX2Text-Regular.woff2'), url('../fonts/STIX2/STIX2Text-Regular.woff');
+}
+@font-face {
+    font-family: STIX Two Text;
+    src: local('STIX Two Text Bold'), local('STIX2Text-Bold'),
+         url('../fonts/STIX2/STIX2Text-Bold.woff2'), url('../fonts/STIX2/STIX2Text-Bold.woff');
+    font-weight: bold;
+}
+@font-face {
+    font-family: STIX Two Text;
+    src: local('STIX Two Text Italic'), local('STIX2Text-Italic'),
+         url('../fonts/STIX2/STIX2Text-Italic.woff2'), url('../fonts/STIX2/STIX2Text-Italic.woff');
+    font-style: italic;
+}
+@font-face {
+    font-family: STIX Two Text;
+    src: local('STIX Two Text Bold Italic'), local('STIX2Text-BoldItalic'),
+         url('../fonts/STIX2/STIX2Text-BoldItalic.woff2'), url('../fonts/STIX2/STIX2Text-BoldItalic.woff');
+    font-weight: bold;
+    font-style: italic;
+}
+@font-face {
+    font-family: STIX Two Math;
+    src: local('STIX Two Math'), local('STIX2Math'),
+         url('../fonts/STIX2/STIX2Math.woff2'), url('../fonts/STIX2/STIX2Math.woff');
+}
+
+@font-face {
+  font-family: "Titillium title";
+  src: url(../fonts/Titillium/Titillium_title03.eot);
+  src: local('Titillium title'),
+       url(../fonts/Titillium/Titillium_title03.otf) format("opentype");
+}
+[actiontype="toggle"]:hover {color:red;text-shadow: #ccc 2px 2px 5px;}
+
+@media only screen and (max-device-width: 480px) {
+      body {margin:2px; padding: 2px;}
+      #banner {padding:10px 5px 15px 60px;}
+      #banner h1, #banner a, #banner a:link, #banner a:visited,
+          #banner a:active, #banner a:hover {font-size: 35px}
+      .description {font-size: .55em; margin-top: 20px; }
+      .frame, .side, .recentposts  {width: 100%; max-width: 100%;}
+      #links {width: 97%; max-width:97%;}
+      .blogbody {margin-left: 20px; margin-right: 20px}
+      .date {margin:0 20px 20px 20px;}
+      .comments-nest-box {padding:2px 0 1px 5px; }
+      .comments-head {margin: 10px 10px 20px 10px;}
+      #pane {margin:10px; width: 95%}
+      #dethread, #dethread2 {right: 5px; position: relative;}
+    }
