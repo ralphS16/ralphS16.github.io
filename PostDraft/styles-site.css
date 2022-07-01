@@ -648,38 +648,38 @@ mtext {font-family: STIX Two Text;}
 @font-face {
     font-family: STIX Two Text;
     src: local('STIX Two Text'), local('STIX2Text-Regular'),
-         url('../fonts/STIX2/STIX2Text-Regular.woff2'), url('../fonts/STIX2/STIX2Text-Regular.woff');
+         url('./fonts/STIX2/STIX2Text-Regular.woff2'), url('./fonts/STIX2/STIX2Text-Regular.woff');
 }
 @font-face {
     font-family: STIX Two Text;
     src: local('STIX Two Text Bold'), local('STIX2Text-Bold'),
-         url('../fonts/STIX2/STIX2Text-Bold.woff2'), url('../fonts/STIX2/STIX2Text-Bold.woff');
+         url('./fonts/STIX2/STIX2Text-Bold.woff2'), url('./fonts/STIX2/STIX2Text-Bold.woff');
     font-weight: bold;
 }
 @font-face {
     font-family: STIX Two Text;
     src: local('STIX Two Text Italic'), local('STIX2Text-Italic'),
-         url('../fonts/STIX2/STIX2Text-Italic.woff2'), url('../fonts/STIX2/STIX2Text-Italic.woff');
+         url('./fonts/STIX2/STIX2Text-Italic.woff2'), url('./fonts/STIX2/STIX2Text-Italic.woff');
     font-style: italic;
 }
 @font-face {
     font-family: STIX Two Text;
     src: local('STIX Two Text Bold Italic'), local('STIX2Text-BoldItalic'),
-         url('../fonts/STIX2/STIX2Text-BoldItalic.woff2'), url('../fonts/STIX2/STIX2Text-BoldItalic.woff');
+         url('./fonts/STIX2/STIX2Text-BoldItalic.woff2'), url('./fonts/STIX2/STIX2Text-BoldItalic.woff');
     font-weight: bold;
     font-style: italic;
 }
 @font-face {
     font-family: STIX Two Math;
     src: local('STIX Two Math'), local('STIX2Math'),
-         url('../fonts/STIX2/STIX2Math.woff2'), url('../fonts/STIX2/STIX2Math.woff');
+         url('./fonts/STIX2/STIX2Math.woff2'), url('./fonts/STIX2/STIX2Math.woff');
 }
 
 @font-face {
   font-family: "Titillium title";
-  src: url(../fonts/Titillium/Titillium_title03.eot);
+  src: url(./fonts/Titillium/Titillium_title03.eot);
   src: local('Titillium title'),
-       url(../fonts/Titillium/Titillium_title03.otf) format("opentype");
+       url(./fonts/Titillium/Titillium_title03.otf) format("opentype");
 }
 [actiontype="toggle"]:hover {color:red;text-shadow: #ccc 2px 2px 5px;}
 
