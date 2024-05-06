@@ -65,7 +65,24 @@ const videos = [
 	'sMKoNBRZM1M',
 	'OQW5Zms6Y5E',
 	'iRThyHhhTdg',
-	'cknUxBJPE88'
+	'cknUxBJPE88',
+	'VMD8ZHAkk3I',
+	'BJtChhpMYn8',
+	'qZxBqIUlduc',
+	'blcKeLDDzSM',
+	'o54sGWJd8tg',
+	'SIZdSPM0So8',
+	'izbzvEksKhY',
+	'NPsPX9XScag',
+	'c6T6suvnhco',
+	'x9RKbJNBbG4',
+	'wgQdkstTNg8',
+	'HQMefVlBi9o',
+	'b42GY8mLBxA',
+	'M_wvL0wiWRw',
+	'fktzwbXmd9g',
+	'ne6tB2KiZuk',
+	'FqtcNyKg_o4'
 ];
 
 function openProject(e){
