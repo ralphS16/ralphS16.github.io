@@ -82,7 +82,9 @@ const videos = [
 	'M_wvL0wiWRw',
 	'fktzwbXmd9g',
 	'ne6tB2KiZuk',
-	'FqtcNyKg_o4'
+	'FqtcNyKg_o4',
+	'6nqNqAD9wuk',
+	'OCBgDmRXRKs'
 ];
 
 function openProject(e){

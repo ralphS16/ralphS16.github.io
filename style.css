@@ -13,8 +13,17 @@
 	font-display: swap;
 }
 
+@font-face {
+    font-family: 'Darwin';
+    src: url('src/Fonts/Darwin/DarwinSerif-Regular.otf') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+	font-display: swap;
+}
+
+
 body {
-	font-family: 'Libertine', Georgia, serif;
+	font-family: 'Darwin', Georgia, serif;
 	font-size: 16pt;
 	color: #000000;
 	padding:0px;
@@ -62,14 +71,14 @@ p  {
 }
 ul {font-size: 100%;}
 h1, h2 {
-	font-family: 'BiolinumBold', 'Segoe UI', Sans-Serif;
+	font-family: 'Darwin', 'Segoe UI', Sans-Serif;
 	font-weight: normal;
 	margin: 0.1em 0.1em 0.2em 0.1em;
 	color: #000000;
 }
 
 h3 {
-	font-family: 'BiolinumBold', 'Segoe UI', Sans-Serif;
+	font-family: 'Darwin', 'Segoe UI', Sans-Serif;
 	text-decoration: underline;
 	color: #000000;
 }
@@ -124,7 +133,7 @@ ul.twocolumns li {
 }
 
 td.project-title {
-	font-family: 'BiolinumBold', 'Segoe UI', sans-serif;
+	font-family: 'Darwin', 'Segoe UI', sans-serif;
 	font-size: 120%;
 	cursor:pointer;
 }
