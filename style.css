@@ -23,7 +23,7 @@
 
 
 body {
-	font-family: 'Darwin', Georgia, serif;
+	font-family: 'Libertine', Georgia, serif;
 	font-size: 16pt;
 	color: #000000;
 	padding:0px;
@@ -71,14 +71,14 @@ p  {
 }
 ul {font-size: 100%;}
 h1, h2 {
-	font-family: 'Darwin', 'Segoe UI', Sans-Serif;
+	font-family: 'BiolinumBold', 'Segoe UI', Sans-Serif;
 	font-weight: normal;
 	margin: 0.1em 0.1em 0.2em 0.1em;
 	color: #000000;
 }
 
 h3 {
-	font-family: 'Darwin', 'Segoe UI', Sans-Serif;
+	font-family: 'BiolinumBold', 'Segoe UI', Sans-Serif;
 	text-decoration: underline;
 	color: #000000;
 }
@@ -133,7 +133,7 @@ ul.twocolumns li {
 }
 
 td.project-title {
-	font-family: 'Darwin', 'Segoe UI', sans-serif;
+	font-family: 'BiolinumBold', 'Segoe UI', sans-serif;
 	font-size: 120%;
 	cursor:pointer;
 }
