@@ -13,6 +13,7 @@
 	font-display: swap;
 }
 
+
 /* @font-face {
     font-family: 'Darwin';
     src: url('src/Fonts/Darwin/DarwinSerif-Regular.otf') format('woff2');
@@ -30,27 +31,21 @@ body {
 	background-color: #afafaf;
 }
 
+:root {
+	--content-max-width: 1200px;
+	--content-padding: 0.2rem;
+  }
+
 .content {
-	padding: 0.2em;
-	width: 100%;
+	max-width: var(--content-max-width);
+	padding: 0 var(--content-padding);
 	margin-left: auto;
 	margin-right: auto;
 	background-color: #afafaf;
 	margin-top: 0px;
 	border-radius: 2px;
+	width: clamp(100%, 60vw, 80%);
 }
-
-@media (min-width: 600px){
-	.content {
-		width: 80%;
-	}
-}
-@media (min-width: 1000px){
-	.content {
-		width: 60%;
-	}
-}
-
 
 .section-card {
 	display:block;
