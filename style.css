@@ -112,20 +112,22 @@ ul {
 }
 
 ul.twocolumns {
-    display: inline-block;
-}
-
-ul.twocolumns li {
-    float: left;
-    list-style: outside none none;
-    width: 50%;
-}
-@media (min-resolution: 200dpi){
-	ul.twocolumns li {
-		width: 100%;
+	column-width: 300px;
+	column-gap: 2rem;
+	list-style: none;
+	padding: 0 0 1rem 0;
+	margin: 0 3rem 0 3rem;
+  }
+  
+  ul.twocolumns li {
+	break-inside: avoid;
+  }
+  
+  @media (max-width: 600px) {
+	ul.twocolumns {
+	  column-count: 1;
 	}
-	
-}
+  }
 
 td.project-title {
 	font-family: 'BiolinumBold', 'Segoe UI', sans-serif;
