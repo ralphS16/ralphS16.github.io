@@ -118,6 +118,7 @@ summary {
 	font-family: 'BiolinumBold', 'Segoe UI', Sans-Serif;
 	font-weight: normal;
 	color: #000;
+	cursor:pointer;
 }
 
 details:last-child {
