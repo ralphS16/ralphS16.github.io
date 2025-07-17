@@ -1,15 +1,16 @@
 @font-face {
-    font-family: 'Libertine';
-    src: url('src/Fonts/LinuxLibertine/LinLibertine_R.otf') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+	font-family: 'Libertine';
+	src: url('src/Fonts/LinuxLibertine/LinLibertine_R.otf') format('woff2');
+	font-weight: normal;
+	font-style: normal;
 	font-display: swap;
 }
+
 @font-face {
-    font-family: 'BiolinumBold';
-    src: url('src/Fonts/linux-biolinum/LinBiolinum_RB.otf') format('woff2');
-    font-weight: bold;
-    font-style: normal;
+	font-family: 'BiolinumBold';
+	src: url('src/Fonts/linux-biolinum/LinBiolinum_RB.otf') format('woff2');
+	font-weight: bold;
+	font-style: normal;
 	font-display: swap;
 }
 
@@ -27,14 +28,14 @@ body {
 	font-family: 'Libertine', Georgia, serif;
 	font-size: 16pt;
 	color: #000000;
-	padding:0px;
+	padding: 0px;
 	background-color: #afafaf;
 }
 
 :root {
 	--content-max-width: 1200px;
 	--content-padding: 0.2rem;
-  }
+}
 
 .content {
 	max-width: var(--content-max-width);
@@ -48,28 +49,45 @@ body {
 }
 
 .section-card {
-	display:block;
+	display: block;
 	background-color: #afafaf;
 	border-radius: 2px;
-	margin:2px;
+	margin: 2px;
 	padding: 0.1em 0.1em 0.1em 0.1em;
 }
 
-h1 {font-size: 200%;}
-h2 {font-size: 140%;}
-h3 {font-size: 110%;}
-h4 {font-size: 110%;}
-p  {
+h1 {
+	font-size: 200%;
+}
+
+h2 {
+	font-size: 140%;
+}
+
+h3 {
+	font-size: 110%;
+}
+
+h4 {
+	font-size: 110%;
+}
+
+p {
 	font-size: 100%;
 	text-align: justify;
 	text-indent: 1em;
 }
-ul {font-size: 100%;}
-h1, h2 {
+
+ul {
+	font-size: 100%;
+}
+
+h1,
+h2 {
 	font-family: 'BiolinumBold', 'Segoe UI', Sans-Serif;
 	font-weight: normal;
 	margin: 0.1em 0.1em 0.2em 0.1em;
-	color: #000000;
+	color: #333;
 }
 
 h3 {
@@ -83,26 +101,51 @@ h4 {
 	font-weight: normal;
 	color: #000000;
 }
+
 a {
 	color: #00758a;
 }
+
 a:visited {
 	color: #55038b;
 }
 
-table {
-	width: 96%;
-	margin-left: 2%;
-	margin-right: auto;
-	margin-bottom: 0.2em;
+summary {
+	list-style: none;
+	padding: 0.2em;
+	user-select: none;
+	margin: 0px;
+	font-family: 'BiolinumBold', 'Segoe UI', Sans-Serif;
+	font-weight: normal;
+	color: #000;
 }
 
-table, tr, td {
-	border-collapse: collapse;
+details:last-child {
+	border-bottom: solid 1px #3c3c3c;
+}
+
+details {
+	margin: 0px 0px 0px min(2vw,1em);
+	padding: 0px;
 	border-style: solid none;
 	border-width: 1px;
 	border-color: #3c3c3c;
-	padding: 0.2em;
+	border-bottom: none;
+}
+
+details:open>summary {
+	background-color: #bbb;
+	border-bottom: solid;
+	border-width: 1px;
+	border-color: #3c3c3c;
+}
+
+summary::-webkit-details-marker {
+	display: none;
+}
+
+summary:hover {
+	background-color: #dadada;
 }
 
 ul {
@@ -117,26 +160,14 @@ ul.twocolumns {
 	list-style: none;
 	padding: 0 0 1rem 0;
 	margin: 0 3rem 0 3rem;
-  }
-  
-  ul.twocolumns li {
-	break-inside: avoid;
-  }
-  
-  @media (max-width: 600px) {
-	ul.twocolumns {
-	  column-count: 1;
-	}
-  }
+}
 
-td.project-title {
-	font-family: 'BiolinumBold', 'Segoe UI', sans-serif;
-	font-size: 120%;
-	cursor:pointer;
+ul.twocolumns li {
+	break-inside: avoid;
 }
-td.project-title:hover {
-	background-color: #dadada;
-}
-tr.project-card {
-	display: none;
+
+@media (max-width: 600px) {
+	ul.twocolumns {
+		column-count: 1;
+	}
 }
