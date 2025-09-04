@@ -134,20 +134,26 @@ details {
 	border-bottom: none;
 }
 
+summary:hover {
+	background-color: #dadada;
+}
+
 details:open>summary {
 	background-color: #bbb;
 	border-bottom: solid;
 	border-width: 1px;
-	border-color: #3c3c3c;
+	border-color: #3c3c3c;	
+}
+
+details:open>summary:hover {
+	background-color: #dadada;
 }
 
 summary::-webkit-details-marker {
 	display: none;
 }
 
-summary:hover {
-	background-color: #dadada;
-}
+
 
 ul {
 	margin-top: 0.4em;

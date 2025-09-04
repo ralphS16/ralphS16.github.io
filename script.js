@@ -29,7 +29,7 @@ const videos = [
 	'b-IEVMwBEfo',
 	'MoS8CmLP4go',
 	'hF14kFP19PM',
-	'sxnX5_LbBDU',
+	// 'sxnX5_LbBDU', #This was ViHart's Gauss Christmas Special
 	'jUibsIUxcg0',
 	'T0YeE50sAvQ',
 	'KjmRoVZKx6U',
