@@ -32,7 +32,7 @@ const videos = [
 	// 'sxnX5_LbBDU', #This was ViHart's Gauss Christmas Special
 	'jUibsIUxcg0',
 	'T0YeE50sAvQ',
-	'KjmRoVZKx6U',
+	// 'KjmRoVZKx6U', #This was arte's documentary "Les Bonnes Conditions"
 	'7l5giVFNKbc',
 	'BzWqGNe5Cwo',
 	'JL-MiACXUCE',
@@ -94,7 +94,8 @@ const videos = [
 	'6dkDepLX0rk',
 	'CG3XDu8aAf8',
 	'kBA8H9cu9Ho',
-	'8kAcmqoQE_U'
+	'8kAcmqoQE_U',
+	'q-twcxsWHmk'
 ];
 
 
