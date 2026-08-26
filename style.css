@@ -45,7 +45,7 @@ body {
 	background-color: #afafaf;
 	margin-top: 0px;
 	border-radius: 2px;
-	width: clamp(100%, 60vw, 80%);
+	width: clamp(20rem, 45vw, 50rem);
 }
 
 .section-card {
